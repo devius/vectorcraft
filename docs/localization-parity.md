@@ -1,6 +1,6 @@
 # Localization parity
 
-> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-10 · **Change:** major (first per-language table, measured from the catalogs) · **Target:** Adobe Illustrator 2026 (30.x)
+> **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-12 · **Change:** minor (Georgian catalog) · **Target:** Adobe Illustrator 2026 (30.x)
 
 Per-language status of VectorCraft's interface. How the catalogs work and how to add a language:
 [`development.md` › Localisation](development.md#localisation). Part of
@@ -49,8 +49,9 @@ plus review. Native-speaker review is human work and isn't in the hours.
 | Russian | `ru` | 4,009 / 4,020 | full |
 | Ukrainian | `uk` | 4,009 / 4,020 (one/few/many plurals) | full |
 | Czech | `cs` | 679 / 4,020 (17%): every menu label | menus only |
+| Georgian | `ka` | 4,392 rows: menus, panels, dialogs, plurals (one count-neutral form) and messages, tested complete; Georgian UI glyphs from an installed font (SF Georgian, Sylfaen, Noto Sans Georgian, DejaVu Sans; none on the web yet); not yet reviewed by a native speaker (doubtful terms queued for review) | full |
 
-Eleven non-English catalogs in all. Illustrator, as its public documentation lists, ships around two dozen
+Twelve non-English catalogs in all. Illustrator, as its public documentation lists, ships around two dozen
 interface languages (including Korean, Polish, Dutch, Turkish, the Nordic languages, Hungarian, and Middle East
 editions with Arabic and Hebrew); it doesn't ship Hindi, Indonesian or Vietnamese.
 
@@ -63,4 +64,5 @@ font for the web build.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-12 | minor | Georgian (`ka`) catalog, complete |
 | 2026-10-10 | major | First per-language table, measured from the catalog row counts against the complete French catalog |
