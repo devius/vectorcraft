@@ -795,6 +795,23 @@ fn change_case_variants() {
     assert!(s.execute("type.changeCase", &json!({"case": "weird"})).is_err());
 }
 
+/// Georgian has no word capitals: title and sentence case leave Mkhedruli lower case (and bring
+/// Mtavruli back to it) instead of capitalizing it; upper case still gives Mtavruli.
+#[test]
+fn change_case_leaves_georgian_uncapitalized() {
+    let mut s = session();
+    let t = text(&mut s, "ფენის სახელი. ახალი Layer");
+    sel(&mut s, &[t]);
+    s.execute("type.changeCase", &json!({"case": "title"})).unwrap();
+    assert_eq!(plain(&s, t), "ფენის სახელი. ახალი Layer");
+    s.execute("type.changeCase", &json!({"case": "sentence"})).unwrap();
+    assert_eq!(plain(&s, t), "ფენის სახელი. ახალი layer");
+    s.execute("type.changeCase", &json!({"case": "upper"})).unwrap();
+    assert_eq!(plain(&s, t), "ᲤᲔᲜᲘᲡ ᲡᲐᲮᲔᲚᲘ. ᲐᲮᲐᲚᲘ LAYER");
+    s.execute("type.changeCase", &json!({"case": "title"})).unwrap();
+    assert_eq!(plain(&s, t), "ფენის სახელი. ახალი Layer");
+}
+
 #[test]
 fn smart_punctuation_quotes_dashes_ellipsis() {
     let mut s = session();
