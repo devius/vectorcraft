@@ -49,7 +49,7 @@
 	Export As…	ექსპორტირება ფორმატში…
 	Export As SVG…	SVG-ად ექსპორტირება…
 	Export As PNG…	PNG-ად ექსპორტირება…
-	Save for Web (Legacy)…	ვებისთვის შენახვა (ძველი)…
+	Save for Web (Legacy)…	ვებისთვის შენახვა (მოძველებული)…
 	Export Selection…	მონიშნულის ექსპორტირება…
 	Package…	შეფუთვა…
 	Scripts	სკრიპტები
@@ -135,7 +135,7 @@
 	Other Layers	სხვა ფენები
 	Unlock All	ყველაფრის განბლოკვა
 	Hide	დამალვა
-	Show All	ყველაფრის ჩვენება
+	Show All	ყველას ჩვენება
 	Expand…	დაშლა…
 	Expand Appearance	იერსახის დაშლა
 	Crop Image	გამოსახულების ჩამოჭრა
@@ -240,7 +240,7 @@
 	Ellipsis	მრავალწერტილი
 	Paragraph Symbol	აბზაცის სიმბოლო
 	Registered Trademark Symbol	რეგისტრირებული სავაჭრო ნიშნის სიმბოლო
-	Section Symbol	პარაგრაფის სიმბოლო
+	Section Symbol	პარაგრაფის ნიშანი
 	Trademark Symbol	სავაჭრო ნიშნის სიმბოლო
 	Em Dash	გრძელი ტირე
 	En Dash	მოკლე ტირე
@@ -284,7 +284,7 @@
 	UPPERCASE	მთავრული
 	lowercase	პატარა ასოები
 	Title Case	ყოველი სიტყვა მთავრულით
-	Sentence case	წინადადება მთავრულით
+	Sentence case	წინადადების რეგისტრი
 	Smart Punctuation…	ჭკვიანი პუნქტუაცია…
 	Create Outlines	კონტურებად გარდაქმნა
 	Optical Margin Alignment	ოპტიკური არშიის სწორება
@@ -411,7 +411,7 @@
 	Screen Mode	ეკრანის რეჟიმი
 	Normal Screen Mode	ჩვეულებრივი ეკრანის რეჟიმი
 	Full Screen Mode with Menu Bar	სრული ეკრანის რეჟიმი მენიუს ზოლით
-	Full Screen Mode	სრული ეკრანის რეჟიმი
+	Full Screen Mode	სრულეკრანიანი რეჟიმი
 	Proof Setup	საცდელი ჩვენების პარამეტრები
 	Working CMYK	სამუშაო CMYK
 	Legacy Macintosh RGB (Gamma 1.8)	ძველი Macintosh RGB (გამა 1.8)
@@ -420,7 +420,7 @@
 	Color blindness – Protanopia-type	დალტონიზმი – პროტანოპიის ტიპი
 	Color blindness – Deuteranopia-type	დალტონიზმი – დეიტერანოპიის ტიპი
 	Customize…	მორგება…
-	Proof Colors	საცდელი ფერები
+	Proof Colors	ფერების საცდელი ჩვენება
 	Zoom In	გადიდება
 	Zoom Out	დაპატარავება
 	Fit Artboard in Window	სამუშაო დაფის ფანჯარაში მორგება
@@ -670,7 +670,7 @@
 	Perspective Distort	პერსპექტიული დეფორმაცია
 	Radial Blur…	რადიალური გაბუნდოვნება…
 	Smart Blur…	ჭკვიანი გაბუნდოვნება…
-	Sharpen	სიმკვეთრის გაზრდა
+	Sharpen	გამკვეთრება
 	Unsharp Mask…	არამკვეთრი ნიღაბი…
 	Pixelate	პიქსელიზაცია
 	Color Halftone…	ფერადი რასტრი…
@@ -699,9 +699,9 @@
 	Rename Data Set	მონაცემთა ნაკრების გადარქმევა
 	Rename Variable	ცვლადის გადარქმევა
 	Activate Panel	პანელის გააქტიურება
-	Change Panel Layout	პანელის განლაგების შეცვლა
+	Change Panel Layout	პანელების განლაგების შეცვლა
 	Close Panel	პანელის დახურვა
-	Move Panel	პანელის გადატანა
+	Move Panel	პანელის გადაადგილება
 	Group with	ერთად დაჯგუფება
 	Resize panels	პანელების ზომის შეცვლა
 	Resize panel window	პანელის ფანჯრის ზომის შეცვლა
@@ -715,7 +715,7 @@
 	Direction	მიმართულება
 	Elevation	სიმაღლე
 	Intensity	ინტენსივობა
-	Ambient	გაბნეული განათება
+	Ambient	გარემოს განათება
 	Segments	სეგმენტები
 	Show axis	ღერძის ჩვენება
 	Reset all	ყველაფრის გადაყენება
@@ -742,7 +742,7 @@ lighting	Light	სინათლე
 	Sumi-e…	სუმი-ე…
 	Vertical Guide	ვერტიკალური დამხმარე ხაზი
 	Horizontal Guide	ჰორიზონტალური დამხმარე ხაზი
-	Align center	ცენტრზე სწორება
+	Align center	ცენტრში სწორება
 	Align left	მარცხნივ სწორება
 	Align right	მარჯვნივ სწორება
 	Browser	ბრაუზერი
@@ -783,7 +783,7 @@ lighting	Light	სინათლე
 	Merge Graphic Styles…	გრაფიკული სტილების შერწყმა…
 	New Color Group…	ახალი ფერთა ჯგუფი…
 	New Layer Options…	ახალი ფენის პარამეტრები…
-	New Swatch…	ახალი ფერის ნიმუში…
+	New Swatch…	ფერის ახალი ნიმუში…
 	No saved views (View → New View…)	შენახული ხედები არ არის (ჩვენება → ახალი ხედი…)
 	One Point Perspective Preset 1	ერთწერტილიანი პერსპექტივის მზა ვარიანტი 1
 	One Point Perspective Preset 2	ერთწერტილიანი პერსპექტივის მზა ვარიანტი 2
@@ -946,7 +946,7 @@ lighting	Light	სინათლე
 	Enter	Enter
 	Esc	Esc
 	Fit All	ყველას ჩატევა
-	Fit on Screen	ეკრანზე ჩატევა
+	Fit on Screen	ეკრანზე მორგება
 	Help › Search Commands…	დახმარება › ბრძანებების ძებნა…
 	Name* @ 66.67 % (RGB/Preview)	სახელი* @ 66.67 % (RGB/წინასწარი ნახვა)
 	Name* @ 66.67% (RGB/Preview)	სახელი* @ 66.67% (RGB/წინასწარი ნახვა)
@@ -1152,7 +1152,7 @@ lighting	Light	სინათლე
 	Add New Effect	ახალი ეფექტის დამატება
 	Click to choose a swatch, Shift-click to mix a colour	დააწკაპუნეთ ფერის ნიმუშის ასარჩევად, Shift-დაწკაპუნებით — ფერის შესარევად
 	Click to toggle visibility	დააწკაპუნეთ ხილვადობის გადასართავად
-	Dashed	წყვეტილი
+	Dashed	შტრიხიანი
 	Delete Selected Item	მონიშნული ელემენტის წაშლა
 	Double-click to edit the characters' paint	ორჯერ დააწკაპუნეთ სიმბოლოების შეღებვის რედაქტირებისთვის
 	Double-click to target the contents	ორჯერ დააწკაპუნეთ შიგთავსის ასარჩევად
@@ -1163,7 +1163,7 @@ lighting	Light	სინათლე
 	Mixed Appearances	შერეული იერსახეები
 	Mixed Objects	შერეული ობიექტები
 	No options	პარამეტრები არ არის
-	No Selection	არაფერია მონიშნული
+	No Selection	მონიშნული არაფერია
 	Offset X	X-წანაცვლება
 	Opacity: 50% Multiply	გაუმჭვირვალობა: 50% გამრავლება
 	Opacity: Default	გაუმჭვირვალობა: ნაგულისხმევი
@@ -1406,7 +1406,7 @@ lighting	Light	სინათლე
 	New Group…	ახალი ჯგუფი…
 	Move to Group	ჯგუფში გადატანა
 	No Group	ჯგუფის გარეშე
-	Rename Group…	ჯგუფის სახელის გადარქმევა…
+	Rename Group…	ჯგუფის გადარქმევა…
 	Delete Group	ჯგუფის წაშლა
 	Import Library…	ბიბლიოთეკის იმპორტირება…
 	Export Library…	ბიბლიოთეკის ექსპორტირება…
@@ -1459,7 +1459,7 @@ lighting	Light	სინათლე
 	Figure:	ციფრები:
 	Fractions	წილადები
 	Ligatures are off while the text is tracked.	ტექსტზე ტრეკინგის დროს ლიგატურები გამორთულია.
-	Ordinals	რიგობითები
+	Ordinals	რიგობითი რიცხვები
 	Proportional Oldstyle	პროპორციული ძველებური
 	Reset OpenType Features	OpenType შესაძლებლობების გადაყენება
 	Select text to set its OpenType features.	OpenType შესაძლებლობების დასაყენებლად მონიშნეთ ტექსტი.
@@ -1633,9 +1633,9 @@ lighting	Light	სინათლე
 	Delete Tab	ტაბულაციის წაშლა
 	Leader:	შემავსებელი:
 	Left-Justified Tab	მარცხნივ სწორებული ტაბულაცია
-	No text selected	ტაბულაციის გამეორება
-	Repeat Tab	მარჯვნივ სწორებული ტაბულაცია
-	Right-Justified Tab	ტექსტი მონიშნული არ არის
+	No text selected	ტექსტი მონიშნული არ არის
+	Repeat Tab	ტაბულაციის გამეორება
+	Right-Justified Tab	მარჯვნივ სწორებული ტაბულაცია
 	Select a text object to set its tab stops.	ტაბულაციის დასაყენებლად მონიშნეთ ტექსტური ობიექტი.
 	Select text	მონიშნეთ ტექსტი
 	+ Add Scale	+ მასშტაბის დამატება
@@ -1647,7 +1647,7 @@ lighting	Light	სინათლე
 	Absolute Position	აბსოლუტური პოზიცია
 	Export All…	ყველაფრის ექსპორტირება…
 	Export Selected CSS…	მონიშნულის CSS-ის ექსპორტირება…
-	No selection	არაფერია მონიშნული
+	No selection	მონიშნული არაფერია
 	Rasterize Unsupported Art	მხარდაუჭერელი ნახატის რასტრირება
 	Unnamed Objects	უსახელო ობიექტები
 	Width and Height	სიგანე და სიმაღლე
@@ -1926,7 +1926,7 @@ lighting	Light	სინათლე
 	Rings	რგოლები
 	Brightness:	სიკაშკაშე:
 	Growth:	ზრდა:
-	Fuzziness:	გაბნევა:
+	Fuzziness:	გაბნეულობა:
 	Number:	რაოდენობა:
 	Longest:	უგრძესი:
 	Path:	კონტური:
@@ -2254,7 +2254,7 @@ lighting	Light	სინათლე
 	Needs the desktop app	საჭიროა სამაგიდო აპი
 	Optimized	ოპტიმიზებული
 	Order:	რიგი:
-	Original	საწყისი
+	Original	ორიგინალი
 	Output:	გამოტანა:
 	Percent:	პროცენტი:
 	Preview in Browser needs the desktop app (the web downloads files instead)	ბრაუზერში წინასწარ ნახვას სამაგიდო აპი სჭირდება (ვებ-ვერსია ფაილებს ჩამოტვირთავს)
@@ -2471,13 +2471,13 @@ lighting	Light	სინათლე
 	Pressure	დაწოლა
 	Random	შემთხვევითი
 	Scatter	გაბნევა
-	Color Burn	ფერის ჩამუქება
-	Color Dodge	ფერის გაღიავება
+	Color Burn	ფერით ჩამუქება
+	Color Dodge	ფერით გაღიავება
 	Darken	ჩამუქება
 	Exclusion	გამორიცხვა
 	Hard Light	მკვეთრი სინათლე
 	Lighten	გაღიავება
-	Luminosity	სიკაშკაშე
+	Luminosity	ნათება
 	Overlay	გადაფარვა
 	Soft Light	რბილი სინათლე
 	Crosshatch	ჯვარედინი დაშტრიხვა
@@ -2635,7 +2635,7 @@ theme	Appearance	იერსახე
 	Move Guide to Layer	დამხმარე ხაზის ფენაზე გადატანა
 	Blob Brush	ლაქის ფუნჯი
 	Convert Anchor Point	საყრდენი წერტილის გარდაქმნა
-	Curvature	მრუდი
+	Curvature	სიმრუდე
 	Delete Anchor Point	საყრდენი წერტილის წაშლა
 	Eraser	საშლელი
 	Knife	დანა
@@ -3027,7 +3027,7 @@ theme	Appearance	იერსახე
 	Snapping Tolerance	მიბმის დაშვება
 	Spacing Guides	შუალედის დამხმარე ხაზები
 	Spanish	ესპანური
-	Subdivisions	ქვედაყოფები
+	Subdivisions	ქვედანაყოფები
 	Templates Folder	შაბლონების საქაღალდე
 	Tile Edge Color	ფილის კიდის ფერი
 	Tolerance	დაშვება
@@ -3155,7 +3155,7 @@ effect	Points	წერტილები
 	above	ზემოთ
 	Square	კვადრატი
 	Update Links	ბმულების განახლება
-	Liquify	გადნობა
+	Liquify	გათხევადება
 	Corner Radius	კუთხის რადიუსი
 	Move Guide	დამხმარე ხაზის გადაადგილება
 axis	Both	ორივე
@@ -3177,7 +3177,7 @@ axis	Both	ორივე
 	Print as Bitmap	ბიტმაპად ბეჭდვა
 	Draft	შავი ვარიანტი
 	Default	ნაგულისხმევი
-	Magenta	მაჯენტა
+	Magenta	მეწამული
 	Page	გვერდი
 	Print Tiling	ბეჭდვის ფილები
 	Edit Color Group	ფერების ჯგუფის რედაქტირება
@@ -3202,8 +3202,8 @@ axis	Both	ორივე
 	Copy Width Point	სიგანის წერტილის კოპირება
 	Duplicate Artboard	სამუშაო დაფის დუბლირება
 	Area / Path Type	არის / კონტურის ტექსტი
-	Decrease Font Size	შრიფტის ზომის შემცირება
-	Increase Font Size	შრიფტის ზომის გაზრდა
+	Decrease Font Size	შრიფტის შემცირება
+	Increase Font Size	შრიფტის გაზრდა
 	Step Type	ტექსტის ბიჯი
 	Get Text Range	ტექსტის დიაპაზონის მიღება
 	Punctuation	პუნქტუაცია
@@ -3243,7 +3243,7 @@ axis	Both	ორივე
 	Bottom	ქვემოთ
 	Bounds	საზღვრები
 	Colors	ფერები
-	Cyan	ციანი
+	Cyan	ცისფერი
 	Discard	უგულებელყოფა
 	Document	დოკუმენტი
 	Encoding	კოდირება
@@ -3329,7 +3329,7 @@ effect	Regular	ჩვეულებრივი
 	Saving	შენახვა
 	Saving {}	ინახება: {}
 	Search commands and tools…	ბრძანებებისა და ხელსაწყოების ძებნა…
-	Dashed Line	წყვეტილი ხაზი
+	Dashed Line	შტრიხიანი ხაზი
 	Panel menu	პანელის მენიუ
 	Unembed…	ჩაშენების მოხსნა…
 	Applies the next time VectorCraft starts.	ძალაში შევა VectorCraft-ის მომდევნო გაშვებისას.
@@ -3447,7 +3447,7 @@ effect	Regular	ჩვეულებრივი
 	Mojikumi	მოჯიკუმი
 	N pt per	N pt თითოზე
 	New Character Style	ასო-ნიშნის ახალი სტილი
-	New Paragraph Style	ახალი აბზაცის სტილი
+	New Paragraph Style	აბზაცის ახალი სტილი
 	Paragraph Style Options	აბზაცის სტილის პარამეტრები
 	Redefine Character Style	ასო-ნიშნის სტილის ხელახლა განსაზღვრა
 	Redefine Paragraph Style	აბზაცის სტილის ხელახლა განსაზღვრა
@@ -3486,7 +3486,7 @@ effect	Regular	ჩვეულებრივი
 	Glow Amount	ნათების რაოდენობა
 	Clear Amount	სისუფთავე
 	Ripple Size	ტალღის ზომა
-	Ripple Magnitude	ტალღის სიძლიერე
+	Ripple Magnitude	ტალღის სიდიდე
 	Accented Edges	გამოკვეთილი კიდეები
 	Angled Strokes	დახრილი შტრიხები
 	Dark Strokes	მუქი შტრიხები
@@ -3504,7 +3504,7 @@ effect	Regular	ჩვეულებრივი
 	Dark Intensity	მუქის ინტენსივობა
 	Spray Radius	შესხურების რადიუსი
 	Stroke Direction	შტრიხის მიმართულება
-	Stroke Width	შტრიხის სიგანე
+	Stroke Width	შემოხაზვის სისქე
 	Stroke Pressure	შტრიხის დაწოლა
 @plural	{n} item|{n} items	ელემენტი: {n}
 @plural	Color Table ({n} color)|Color Table ({n} colors)	ფერების ცხრილი (ფერი: {n})
@@ -3812,7 +3812,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no such action	ასეთი მოქმედება არ არის
 @msg	no such anchor	ასეთი საყრდენი წერტილი არ არის
 @msg	no such artboard	ასეთი სამუშაო დაფა არ არის
-@msg	no such document	ასეთი დოკუმენტი არ არის
+@msg	no such document	ასეთი დოკუმენტი არ არსებობს
 @msg	no such layer or object	ასეთი ფენა ან ობიექტი არ არის
 @msg	no such object {0}	ასეთი ობიექტი {0} არ არის
 @msg	no such perspective grid preset	პერსპექტივის ბადის ასეთი მზა ვარიანტი არ არის
@@ -4361,8 +4361,8 @@ effect	Regular	ჩვეულებრივი
 	Scallop	დაკბილვა
 	Wrinkle	დანაოჭება
 	Unknown	უცნობი
-	Copyrighted	საავტორო უფლებით დაცული
-	Public Domain	საჯარო საკუთრება
+	Copyrighted	დაცულია საავტორო უფლებით
+	Public Domain	საზოგადოებრივი საკუთრება
 	None (Color Preview)	არცერთი (ფერის გადახედვა)
 	Rasterized Complex Regions	რასტრირებული რთული არეები
 	Transparent Objects	გამჭვირვალე ობიექტები
