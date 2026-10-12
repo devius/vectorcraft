@@ -621,8 +621,8 @@ fn georgian_reads_as_georgian() {
     for (en, want) in [
         ("Artboard Tool", "სამუშაო დაფის ხელსაწყო"),
         ("Swatches", "ფერის ნიმუშები"),
-        ("Pathfinder", "კონტურების ოპერაციები"),
-        ("Stroke", "შემოხაზვა"),
+        ("Pathfinder", "ტრაექტორიების ოპერაციები"),
+        ("Stroke", "კონტური"),
         ("Fill", "შევსება"),
         ("Direct Selection Tool", "პირდაპირი მონიშვნის ხელსაწყო"),
         ("Save As…", "შენახვა სხვა სახელით…"),
