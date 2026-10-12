@@ -65,12 +65,12 @@
 	Redo	ხელახლა შესრულება
 	Cut	ამოჭრა
 	Copy	კოპირება
-	Paste	ჩაწებება
-	Paste in Front	წინ ჩაწებება
-	Paste in Back	უკან ჩაწებება
-	Paste in Place	ადგილზე ჩაწებება
-	Paste on All Artboards	ყველა სამუშაო დაფაზე ჩაწებება
-	Paste without Formatting	ფორმატირების გარეშე ჩაწებება
+	Paste	ჩასმა
+	Paste in Front	წინ ჩასმა
+	Paste in Back	უკან ჩასმა
+	Paste in Place	ადგილზე ჩასმა
+	Paste on All Artboards	ყველა სამუშაო დაფაზე ჩასმა
+	Paste without Formatting	ფორმატირების გარეშე ჩასმა
 	Clear	გასუფთავება
 	Find and Replace…	ძებნა და ჩანაცვლება…
 	Find Next	შემდეგის ძებნა
@@ -170,7 +170,7 @@
 	Remove Anchor Points	საყრდენი წერტილების მოცილება
 	Divide Objects Below	ქვედა ობიექტების დაყოფა
 	Split Into Grid…	ბადედ გაყოფა…
-	Clean Up…	გასუფთავება…
+	Clean Up…	ზედმეტის მოცილება…
 	Shape	ფიგურა
 	Convert to Shape	ფიგურად გარდაქმნა
 	Expand Shape	ფიგურის გაშლა
@@ -250,17 +250,17 @@
 	Double Right Quotation Marks	ორმაგი მარჯვენა ბრჭყალი
 	Single Left Quotation Mark	ერთმაგი მარცხენა ბრჭყალი
 	Single Right Quotation Mark	ერთმაგი მარჯვენა ბრჭყალი
-	Insert Whitespace Character	ცარიელი სივრცის სიმბოლოს ჩასმა
+	Insert Whitespace Character	შორისის სიმბოლოს ჩასმა
 	Em Space	გრძელი შორისი
 	En Space	მოკლე შორისი
-	Hair Space	თმისებრი სივრცე
-	Sixth Space	მეექვსედი სივრცე
-	Thin Space	ვიწრო სივრცე
+	Hair Space	თმისებრი შორისი
+	Sixth Space	მეექვსედი შორისი
+	Thin Space	ვიწრო შორისი
 	Nonbreaking Space	უწყვეტი შორისი
-	Figure Space	ციფრის სივრცე
-	Punctuation Space	პუნქტუაციის სივრცე
-	Third Space	მესამედი სივრცე
-	Quarter Space	მეოთხედი სივრცე
+	Figure Space	ციფრის შორისი
+	Punctuation Space	პუნქტუაციის შორისი
+	Third Space	მესამედი შორისი
+	Quarter Space	მეოთხედი შორისი
 	Insert Break Character	გამყოფი სიმბოლოს ჩასმა
 	Forced Line Break	სტრიქონის იძულებითი წყვეტა
 	Tab	ტაბულაცია
@@ -767,7 +767,7 @@ lighting	Light	სინათლე
 	File Info Dialog	ფაილის ინფორმაციის დიალოგი
 	Go to Artboard	სამუშაო დაფაზე გადასვლა
 	Graphic Style Options…	გრაფიკული სტილის პარამეტრები…
-	Home	მთავარი
+	Home	საწყისი ეკრანი
 	Import Keyboard Shortcuts…	კლავიატურის მალსახმობების იმპორტირება…
 	Justify all lines	ყველა სტრიქონის ორმხრივი სწორება
 	Justify with last line aligned left	ორმხრივი სწორება, ბოლო სტრიქონი მარცხნივ
@@ -1050,7 +1050,7 @@ lighting	Light	სინათლე
 	Ellipse Tool	ელიფსის ხელსაწყო
 	Eraser Tool	საშლელის ხელსაწყო
 	Eyedropper Tool	პიპეტის ხელსაწყო
-	Flare Tool	ლინზის ანათების ხელსაწყო
+	Flare Tool	ბლიკის ხელსაწყო
 	Free Transform Tool	თავისუფალი გარდაქმნის ხელსაწყო
 	Gradient Tool	გრადიენტის ხელსაწყო
 	Group Selection Tool	ჯგუფის მონიშვნის ხელსაწყო
@@ -1629,7 +1629,7 @@ lighting	Light	სინათლე
 	Above Text	ტექსტის ზემოთ
 	Position Panel Above Text	პანელის ტექსტის ზემოთ განთავსება
 	Click to add a tab stop, drag to move it, drag it off the ruler to delete it	დააწკაპუნეთ ტაბულაციის დასამატებლად, ჩაავლეთ გადასაადგილებლად, სახაზავიდან გაიტანეთ წასაშლელად
-	Decimal-Justified Tab	ათწილადით სწორებული ტაბულაცია
+	Decimal-Justified Tab	ათწილადი მძიმით სწორებული ტაბულაცია
 	Delete Tab	ტაბულაციის წაშლა
 	Leader:	მიმთითებელი:
 	Left-Justified Tab	მარცხნივ სწორებული ტაბულაცია
@@ -1842,7 +1842,7 @@ lighting	Light	სინათლე
 	Edit the applied effect, or add another one?	გამოყენებული ეფექტის რედაქტირება თუ კიდევ ერთის დამატება?
 	Input White	შემავალი თეთრი
 	Output Black	გამომავალი შავი
-	Preserve Lightness	სიღიის შენარჩუნება
+	Preserve Lightness	სიღიავის შენარჩუნება
 	Ridges per segment:	ქედები სეგმენტზე:
 	Temperature	ტემპერატურა
 	{effect} is already applied	{effect} უკვე გამოყენებულია
@@ -2385,7 +2385,7 @@ lighting	Light	სინათლე
 	Show and separate through the working CMYK space, as in older documents.	ჩვენება და სეპარაცია სამუშაო CMYK სივრცით, როგორც ძველ დოკუმენტებში.
 	CMYK Equivalents	CMYK ეკვივალენტები
 	Convert To Outlines	კონტურებად გარდაქმნა
-	Decimal:	ათწილადი:
+	Decimal:	ათწილადი ნიშნები მძიმის შემდეგ:
 	Embed Fonts (Glyphs Used)	შრიფტების ჩაშენება (გამოყენებული გლიფები)
 	Fewer <tspan> Elements	ნაკლები <tspan> ელემენტი
 	Font:	შრიფტი:
@@ -2410,9 +2410,9 @@ lighting	Light	სინათლე
 	Unique	უნიკალური
 	Conflict {n} of {count}	კონფლიქტი {n} / {count}
 	Keep the pasted color as a new swatch with a numbered name.	ჩასმული ფერის ახალ ფერის ნიმუშად შენახვა დანომრილი სახელით.
-	Pasted	ჩაწებებული
+	Pasted	ჩასმული
 	This document already has a swatch named “{name}” with another color.	ამ დოკუმენტს უკვე აქვს ფერის ნიმუში „{name}“ სხვა ფერით.
-	Use the document's swatch: pasted colors take its color.	დოკუმენტის ფერის ნიმუშის გამოყენება: ჩაწებებული ფერები მის ფერს იღებს.
+	Use the document's swatch: pasted colors take its color.	დოკუმენტის ფერის ნიმუშის გამოყენება: ჩასმული ფერები მის ფერს იღებს.
 	Color Type:	ფერის ტიპი:
 	Swatch Name:	ფერის ნიმუშის სახელი:
 	Diameter:	დიამეტრი:
@@ -2517,7 +2517,7 @@ effect	Soft	რბილი
 	Left Diagonal	მარცხენა დიაგონალი
 effect	Horizontal	ჰორიზონტალური
 effect	Vertical	ვერტიკალური
-	Diamond	რომბი
+	Diamond	ბრილიანტი
 	Ellipse	ელიფსი
 	Add Effect	ეფექტის დამატება
 	Add New Fill	ახალი შევსების დამატება
@@ -2728,7 +2728,7 @@ theme	Appearance	იერსახე
 	New Artboard	ახალი სამუშაო დაფა
 	New Layer…	ახალი ფენა…
 	New Sublayer…	ახალი ქვეფენა…
-	Paste Remembers Layers	ჩაწებებისას ფენების დამახსოვრება
+	Paste Remembers Layers	ჩასმისას ფენების დამახსოვრება
 	Reorder	გადალაგება
 	Select Art	ნახატის მონიშვნა
 	Set Current Layer	მიმდინარე ფენად დაყენება
@@ -2989,14 +2989,14 @@ theme	Appearance	იერსახე
 	Object Name	ობიექტის სახელი
 	Object Selection by Path Only	ობიექტის მონიშვნა მხოლოდ ტრაექტორიით
 	On Copy	კოპირებისას
-	On Paste	ჩაწებებისას
+	On Paste	ჩასმისას
 	On Screen	ეკრანზე
 	Open Documents As Tabs	დოკუმენტების ჩანართებად გახსნა
 	Options	პარამეტრები
 	Output All Blacks Accurately	ყველა შავის ზუსტად გამოტანა
 	Output All Blacks as Rich Black	ყველა შავის მდიდარ შავად გამოტანა
 	Override Character Color	სიმბოლოს ფერის უგულებელყოფა
-	Paste Offset	ჩაწებების წანაცვლება
+	Paste Offset	ჩასმის წანაცვლება
 	Pattern Editing	პატერნის რედაქტირება
 	Pen Tool	კალმის ხელსაწყო
 	Picas	პიკები
@@ -3024,7 +3024,7 @@ theme	Appearance	იერსახე
 	Show The Home Screen When No Documents Are Open	საწყისი ეკრანის ჩვენება, როცა დოკუმენტი არ არის გახსნილი
 	Show Tool Tips	მინიშნებების ჩვენება
 	Size/Leading	ზომა/სტრიქონთა დაშორება
-	Snapping Tolerance	მიბმის ზღვარი
+	Snapping Tolerance	მიბმის დაშვება
 	Spacing Guides	შუალედის დამხმარე ხაზები
 	Spanish	ესპანური
 	Subdivisions	ქვედანაყოფები
@@ -3043,7 +3043,7 @@ theme	Appearance	იერსახე
 	Use Low Resolution Proxy for Linked EPS	დაბალი გარჩევადობის პროქსის გამოყენება დაკავშირებული EPS-ისთვის
 	Use Precise Cursors	ზუსტი კურსორების გამოყენება
 	Use Preview Bounds	გადახედვის საზღვრების გამოყენება
-	When pasting text	ტექსტის ჩაწებებისას
+	When pasting text	ტექსტის ჩასმისას
 	XML ID	XML ID
 	Yards	იარდები
 	Zoom to Selection	მონიშნულის მასშტაბირება
@@ -3119,7 +3119,7 @@ theme	Appearance	იერსახე
 	Clear All Tabs	ყველა ტაბულაციის გასუფთავება
 	Set Tab Stops	ტაბულაციის პოზიციების დაყენება
 	Tab Stops	ტაბულაციის პოზიციები
-	Flare	ანარეკლი
+	Flare	ბლიკი
 	Rays	სხივები
 	Rectangle	მართკუთხედი
 	Paintbrush	ფუნჯი
@@ -3352,7 +3352,7 @@ effect	Regular	ჩვეულებრივი
 	Ctrl	Ctrl
 	Shift	Shift
 	Couldn't copy to the system clipboard: {e}	სისტემის გაცვლის ბუფერში კოპირება ვერ მოხერხდა: {e}
-	Couldn't paste from the clipboard: {e}	გაცვლის ბუფერიდან ჩაწებება ვერ მოხერხდა: {e}
+	Couldn't paste from the clipboard: {e}	გაცვლის ბუფერიდან ჩასმა ვერ მოხერხდა: {e}
 	Channel	არხი
 	Circle	წრე
 	Clip to Art	ნახატზე მოჭრა
@@ -3361,7 +3361,7 @@ effect	Regular	ჩვეულებრივი
 	Hue	ფერის ტონი
 	Input Black	შემავალი შავი
 	Keep Original	ორიგინალის შენარჩუნება
-	Lightness	სინათლე
+	Lightness	სიღიავე
 	Mono	მონო
 	Output White	გამომავალი თეთრი
 	Saturation	გაჯერება
@@ -3703,7 +3703,7 @@ effect	Regular	ჩვეულებრივი
 @msg	compound paths can only contain paths	შედგენილი ტრაექტორია მხოლოდ ტრაექტორიებს შეიძლება შეიცავდეს
 @msg	compressed (RLE) bitmaps can't be read yet	შეკუმშული (RLE) ბიტმაპების წაკითხვა ჯერ არ ხერხდება
 @msg	damaged	დაზიანებულია
-@msg	decimals must be {_1}–{_2} (got {_3})	ათწილადი ნიშნები უნდა იყოს {_1}–{_2} (მიღებულია {_3})
+@msg	decimals must be {_1}–{_2} (got {_3})	მძიმის შემდეგ ათწილადი ნიშნები უნდა იყოს {_1}–{_2} (მიღებულია {_3})
 @msg	divide into 1 to {MAX_PIECES} slices	დაყავით 1-დან {MAX_PIECES}-მდე ნაჭრად
 @msg	effect {k} is `{_1}`, not `{id}`	ეფექტი {k} არის `{_1}` და არა `{id}`
 @msg	empty brush stroke	ცარიელი ფუნჯის შტრიხი
@@ -3858,7 +3858,7 @@ effect	Regular	ჩვეულებრივი
 @msg	object {id} is not a selected top-level object	ობიექტი {id} მონიშნული ზედა დონის ობიექტი არ არის
 @msg	page size {w} × {h}	გვერდის ზომა {w} × {h}
 @msg	page {0} does not exist (the PDF has {1})	გვერდი {0} არ არსებობს (PDF-ს აქვს {1})
-@msg	paste unavailable	ჩაწებება მიუწვდომელია
+@msg	paste unavailable	ჩასმა მიუწვდომელია
 @msg	path is already closed	ტრაექტორია უკვე შეკრულია
 @msg	paths contain invalid coordinates	ტრაექტორიებში არასწორი კოორდინატებია
 @msg	paths: give at least one file	paths: მიუთითეთ ერთი ფაილი მაინც
@@ -4034,7 +4034,7 @@ effect	Regular	ჩვეულებრივი
 @msg	{path}: {e}	{path}: {e}
 @msg	{status} ({e})	{status} ({e})
 @msg	Couldn't place {name}: {e}	{name}-ის განთავსება ვერ მოხერხდა: {e}
-@msg	Couldn't paste from the clipboard: {e}	გაცვლის ბუფერიდან ჩაწებება ვერ მოხერხდა: {e}
+@msg	Couldn't paste from the clipboard: {e}	გაცვლის ბუფერიდან ჩასმა ვერ მოხერხდა: {e}
 @msg	Saved {path} with {_1} note(s): {first}	შენახულია {path}, შენიშვნები: {_1}: {first}
 @msg	Exported {what} with {_1} note(s): {first}	ექსპორტირებულია {what}, შენიშვნები: {_1}: {first}
 @msg	Exported {what}	ექსპორტირებულია {what}
@@ -4171,7 +4171,7 @@ effect	Regular	ჩვეულებრივი
 	Web 1366×768	ვები 1366×768
 	Web 1280×800	ვები 1280×800
 	Web 1024×768	ვები 1024×768
-	Legal	Legal
+	Legal	იურიდიული ინფორმაცია
 	Tabloid	Tabloid
 	A3	A3
 	A4	A4
@@ -4223,8 +4223,8 @@ effect	Regular	ჩვეულებრივი
 	Simulate prints overprints as Overprint Preview shows them; separations always keep them. A preset flattens transparency before printing (PostScript files always flatten it).	„სიმულაცია“ ბეჭდავს ზედდაბეჭდვებს ისე, როგორც ზედდაბეჭდვის გადახედვა აჩვენებს; სეპარაცია მათ ყოველთვის ინარჩუნებს. პრესეტი ბეჭდვამდე აბრტყელებს გამჭვირვალობას (PostScript ფაილები მას ყოველთვის აბრტყელებს).
 	Preserve	შენარჩუნება
 	Simulate	სიმულაცია
-	Portrait (flipped)	პორტრეტული (ამოტრიალებული)
-	Landscape (flipped)	ლანდშაფტური (ამოტრიალებული)
+	Portrait (flipped)	ვერტიკალური (ამოტრიალებული)
+	Landscape (flipped)	ჰორიზონტალური (ამოტრიალებული)
 	Visible & Printable Layers	ხილული და დასაბეჭდი ფენები
 	Visible Layers	ხილული ფენები
 	All Layers	ყველა ფენა
@@ -4293,7 +4293,7 @@ effect	Regular	ჩვეულებრივი
 	Drop	წვეთი
 	Slash	დახრილი ხაზი
 	Double Slash	ორმაგი დახრილი ხაზი
-	Diamond (open)	რომბი (ღია)
+	Diamond (open)	ბრილიანტი (ღია)
 	Reverse Triangle	შებრუნებული სამკუთხედი
 	Swallowtail	მერცხლის კუდი
 	Bracket	ფრჩხილი
