@@ -431,6 +431,61 @@ fn remote_forwards_methods() {
 }
 
 #[test]
+fn remote_does_not_replay_when_edit_reply_is_lost() {
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    listener.set_nonblocking(true).unwrap();
+    let addr = listener.local_addr().unwrap().to_string();
+    let h = std::thread::spawn(move || {
+        let timeout = std::time::Duration::from_secs(5);
+        let mut backend = Headless::with_document();
+        let base = backend.call("document.inspect", json!({})).unwrap()["objects"].as_u64().unwrap();
+        for connection in 0..2 {
+            let deadline = std::time::Instant::now() + timeout;
+            let stream = loop {
+                match listener.accept() {
+                    Ok((stream, _)) => break stream,
+                    Err(e) if e.kind() == std::io::ErrorKind::WouldBlock && std::time::Instant::now() < deadline => std::thread::yield_now(),
+                    Err(e) => panic!("accept failed: {e}"),
+                }
+            };
+            stream.set_nonblocking(false).unwrap();
+            stream.set_read_timeout(Some(timeout)).unwrap();
+            stream.set_write_timeout(Some(timeout)).unwrap();
+            let mut out = stream.try_clone().unwrap();
+            let mut reader = BufReader::new(stream);
+            for _ in 0..2 {
+                let mut line = String::new();
+                reader.read_line(&mut line).unwrap();
+                let msg: Value = serde_json::from_str(&line).unwrap();
+                let method = msg["method"].as_str().unwrap();
+                let result = backend.call(method, msg["params"].clone()).unwrap();
+                if connection == 0 {
+                    assert_eq!(method, "engine.execute");
+                    break;
+                }
+                let reply = json!({"id": msg["id"], "ok": true, "result": result});
+                writeln!(out, "{reply}").unwrap();
+                if method == "document.inspect" {
+                    return result["objects"].as_u64().unwrap() - base;
+                }
+                assert_eq!(method, "engine.execute");
+            }
+        }
+        panic!("document.inspect was not received");
+    });
+
+    let mut remote = Remote::connect(&addr).unwrap();
+    let first = remote.call("engine.execute", json!({"command": "shape.rectangle", "params": {"x": 10, "y": 10, "width": 20, "height": 20}}));
+    let next = remote.call("document.inspect", json!({}));
+    let edits = h.join().unwrap();
+
+    assert_eq!(edits, 1, "a lost reply must not duplicate the edit");
+    let error = first.expect_err("the lost reply must report uncertainty");
+    assert!(error.contains("operation may have completed"), "{error}");
+    assert!(next.is_ok(), "the next call must reconnect: {next:?}");
+}
+
+#[test]
 fn remote_connect_fails_fast() {
     // A port this test holds, bound but not listening, so connecting to it is refused. (A port
     // bound and dropped could be taken by another process or test before the connect.)
@@ -672,4 +727,20 @@ fn drawing_gestures_snap_to_smart_guides() {
     assert_eq!(r["isError"], false, "{r}");
     let events = json!([{"kind": "down", "x": 300, "y": 420}, {"kind": "up", "x": 300, "y": 420}, {"kind": "move", "x": 151.5, "y": 431}, {"kind": "down", "x": 151.5, "y": 431}, {"kind": "up", "x": 151.5, "y": 431}]);
     assert_eq!(bounds(&mut s, 6, events, "pen"), [150.0, 420.0, 150.0, 11.0]);
+}
+
+/// #1471: add_text says when the text doesn't fit its frame, and takes area type's `fit`.
+#[test]
+fn add_text_reports_overflow_and_takes_a_fit() {
+    let mut s = server();
+    let made = |r: &Value| serde_json::from_str::<Value>(&text_of(r)).unwrap();
+    let headline = json!({"text": "NEON DRIVE", "x": 0, "y": 20, "width": 400, "height": 60, "size": 60});
+    let low = made(&call(&mut s, 1, "add_text", headline.clone()));
+    assert_eq!(low["overflow"], true, "{low}");
+    let mut auto = headline;
+    auto["fit"] = json!("autoHeight");
+    let auto = made(&call(&mut s, 2, "add_text", auto));
+    assert!(auto["id"].is_u64() && auto.get("overflow").is_none(), "{auto}");
+    let point = made(&call(&mut s, 3, "add_text", json!({"text": "NEON DRIVE", "x": 0, "y": 300, "size": 60})));
+    assert!(point.get("overflow").is_none(), "{point}");
 }

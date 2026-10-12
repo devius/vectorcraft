@@ -45,7 +45,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Flatten Transparency…",
             ["Object"],
             None,
-            "{preset?: \"high\"|\"medium\"|\"low\" or a saved preset's name (see flattener.presets.list; default medium), balance?: 0..100 (raster/vector balance; 0 rasterizes everything), lineArtPpi?: 1..2400, gradientPpi?: 1..2400 (areas only gradients and meshes reach), textToOutlines?, strokesToOutlines?, clipComplexRegions? (clip images to the region outlines, else rectangles), antiAlias?, preserveAlpha? (composite over nothing instead of white), preserveOverprints? (areas showing one paint keep its colour and overprint; false clears overprints), options?: {the same keys}, ids?} overlapping transparent objects become one group of flat-colour regions (CMYK colours composited ink by ink in CMYK documents), plus an image where gradients, patterns, images, masks or raster effects reach; objects without transparency stay → {ids, rasterized: images made, vector: regions made, options}",
+            "{preset?: \"high\"|\"medium\"|\"low\" or a saved preset's name (see flattener.presets.list; default medium), balance?: 0..100 (raster/vector balance; 0 rasterizes everything), lineArtPpi?: 1..2400, gradientPpi?: 1..2400 (areas only gradients and meshes reach), textToOutlines?, strokesToOutlines?, clipComplexRegions? (clip images to the region outlines, else rectangles), antiAlias?, preserveAlpha? (composite over nothing instead of white), preserveOverprints? (areas showing one paint keep its colour and overprint; false clears overprints), options?: {the same keys}, ids?|id?} overlapping transparent objects become one group of flat-colour regions (CMYK colours composited ink by ink in CMYK documents), plus an image where gradients, patterns, images, masks or raster effects reach; objects without transparency stay → {ids, rasterized: images made, vector: regions made, options}",
             has_doc,
             flatten
         ),
@@ -99,7 +99,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Flattener Preview",
             [],
             None,
-            "{highlight?: \"none\"|\"rasterizedRegions\" (areas the raster/vector balance rasterizes whole)|\"transparentObjects\"|\"allAffected\"|\"expandedPatterns\" (pattern art taking part)|\"outlinedStrokes\"|\"outlinedText\"|\"allRasterized\" (default none), overprints?: \"preserve\"|\"simulate\"|\"discard\" (simulate and discard flatten without preserveOverprints), preset?, …options (as object.flattenTransparency), ids?: (default: the whole document)} what flattening would do, without changing anything → {highlight, regions: [{bounds: {x, y, width, height}, id?}] (the highlighted objects, or areas), counts: {transparentObjects, allAffected, expandedPatterns, outlinedStrokes, outlinedText, rasterizedRegions, allRasterized, vectorRegions}, options}",
+            "{highlight?: \"none\"|\"rasterizedRegions\" (areas the raster/vector balance rasterizes whole)|\"transparentObjects\"|\"allAffected\"|\"expandedPatterns\" (pattern art taking part)|\"outlinedStrokes\"|\"outlinedText\"|\"allRasterized\" (default none), overprints?: \"preserve\"|\"simulate\"|\"discard\" (simulate and discard flatten without preserveOverprints), preset?, …options as object.flattenTransparency, ids?|id?: (default: the whole document)} what flattening would do, without changing anything → {highlight, regions: [{bounds: {x, y, width, height}, id?}] (the highlighted objects, or areas), counts: {transparentObjects, allAffected, expandedPatterns, outlinedStrokes, outlinedText, rasterizedRegions, allRasterized, vectorRegions}, options}",
             has_doc,
             preview
         ),
@@ -1093,7 +1093,7 @@ fn raster_node(d: &mut Document, r: Raster) -> Node {
     d.images.insert(key.clone(), ImageBlob::new("image/png", r.png));
     let image = Node::new(
         d.alloc_id(),
-        NodeKind::Image(ImageObject { key, width: r.width, height: r.height, xf: r.xf, link: None, placement: Default::default() }),
+        NodeKind::Image(Box::new(ImageObject { key, width: r.width, height: r.height, xf: r.xf, link: None, placement: Default::default() })),
     );
     let Some(path) = r.clip else { return image };
     super::rasterfx::clip_group(d, path, FillRule::NonZero, image)
@@ -1224,7 +1224,7 @@ fn carry(from: &Node, mut to: Node) -> Node {
     to.blend = from.blend;
     to.isolate = from.isolate;
     to.knockout_shape = from.knockout_shape;
-    to.mask = from.mask.clone();
+    to.extras_mut().mask = from.extras().mask.clone();
     to.appearance.effects = from.appearance.effects.clone();
     to
 }
@@ -1258,7 +1258,7 @@ fn has_effects(n: &Node) -> bool {
 }
 
 fn masked(n: &Node) -> bool {
-    n.mask.as_ref().is_some_and(|m| !m.disabled)
+    n.extras().mask.as_ref().is_some_and(|m| !m.disabled)
 }
 
 /// Where `n` can paint: its visual bounds grown by its effects (and a margin for antialiasing).

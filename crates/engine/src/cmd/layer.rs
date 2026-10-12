@@ -35,7 +35,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "New Sublayer…",
             ["Window", "Layers"],
             None,
-            "{parent?: layer id (default: the highlighted row's layer, else the current layer), name?, options as layer.new} a sublayer on top of the parent's contents → {id}",
+            "{parent?: layer id (default: the highlighted row's layer, else the current layer), name?, …options as layer.new} a sublayer on top of the parent's contents → {id}",
             has_doc,
             new_sublayer
         ),
@@ -89,7 +89,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Collect in New Layer",
             ["Window", "Layers"],
             None,
-            "{ids?} move rows (default: the highlighted rows, else the selected objects) into a new layer where the topmost of them was (a sublayer when they are in a layer) → {id}",
+            "{ids?} move rows (default: the highlighted rows, else the selected objects) into a new layer where the topmost of them was (a sublayer when they are in a layer), deselecting every selected object left hidden or locked (the key object too) → {id}",
             has_doc,
             collect
         ),
@@ -107,7 +107,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Move Rows",
             [],
             None,
-            "{ids, target, place?: \"above\"|\"below\"|\"inside\" (default inside), copy?: bool} drag rows in the Layers panel: above or below the target row (beside it, in its layer or group), or inside a layer or group (on top of its contents). Layers go only in layers or at the top level, objects in layers and groups; an object placed beside a top-level layer goes inside it. A row never goes into itself; a locked layer or group takes nothing. `copy` (Alt-drag) moves copies. One undo step → {ids}",
+            "{ids|id, target, place?: \"above\"|\"below\"|\"inside\" (default inside), copy?: bool} drag rows in the Layers panel: above or below the target row (beside it, in its layer or group), or inside a layer or group (on top of its contents). Layers go only in layers or at the top level, objects in layers and groups; an object placed beside a top-level layer goes inside it. A row never goes into itself; a locked layer or group takes nothing. `copy` (Alt-drag) moves copies. Every selected object left hidden or locked, such as one moved into a hidden layer or group, is deselected (the key object too). One undo step → {ids}",
             has_doc,
             move_rows
         ),
@@ -116,7 +116,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Reorder",
             [],
             None,
-            "{id, parent?: id (null = top level), index} put a row at `index` (0 = bottom) of `parent` (layers only at the top level or in layers)",
+            "{id, parent?: id (null = top level), index} put a row at `index` (0 = bottom) of `parent` (layers only at the top level or in layers), deselecting every selected object left hidden or locked (the key object too)",
             has_doc,
             move_node
         ),
@@ -143,7 +143,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Artboard Options…",
             ["Window", "Artboards"],
             None,
-            "{index, name?, x?, y?, width?, height?, moveArt?: bool (default false; a position-only change moves the contained art with its artboard), scaleArt?: bool (Scale Artwork with Artboard: resized, the artboard takes the art fully inside it (locked and hidden art only with lockedAndHidden?: bool, default prefs moveLockedWithArtboard) and its guides from its old rectangle onto the new one, each side by its own ratio; strokes/corners/patterns as object.scale)} → null, or with scaleArt {scaled: the art scaled}",
+            "{index, name?, x?, y?, width?, height?, moveArt?: bool (default false; a position-only change moves the contained art with its artboard), scaleArt?: bool (Scale Artwork with Artboard: resized, the artboard takes the art fully inside it (locked and hidden art only with lockedAndHidden?: bool, default prefs moveLockedWithArtboard) and its guides from its old rectangle onto the new one, each side by its own ratio; strokes/corners/patterns as object.scale), strokes?: bool, corners?: bool, patterns?: bool (the three as object.scale, for art that moves or scales with the artboard), lockedAndHidden?: bool (locked and hidden art moves along; default: the preference; recorded in the journal so a replay matches)} → null, or with scaleArt {scaled: the art scaled}",
             has_doc,
             artboard_set
         ),
@@ -189,15 +189,16 @@ pub fn specs() -> Vec<CommandSpec> {
 
 /// The rows a panel command acts on: `ids` or `id`, else the highlighted rows, else the current
 /// layer (capped at [`MAX_ROWS`]).
-pub(crate) fn rows_param(s: &Session, p: &Value) -> Result<Vec<NodeId>> {
-    let mut ids = match (ids_param(p, "ids"), id_param(p, "id")) {
-        (Some(ids), _) => ids,
-        (None, Some(id)) => vec![id],
-        (None, None) => {
-            let st = s.doc()?;
-            let rows = st.highlighted_rows();
-            if rows.is_empty() { st.current_layer().into_iter().collect() } else { rows }
-        }
+pub(crate) fn rows_param(s: &Session, p: &Value, command: &str) -> Result<Vec<NodeId>> {
+    // Presence is explicit intent: validate every target before fallback, truncation or edits.
+    let mut ids = if p.get("ids").is_some() {
+        checked_ids_param(s, p, "ids", command)?
+    } else if let Some(id) = p.get("id") {
+        vec![checked_id(s, id, command)?]
+    } else {
+        let st = s.doc()?;
+        let rows = st.highlighted_rows();
+        if rows.is_empty() { st.current_layer().into_iter().collect() } else { rows }
     };
     ids.truncate(MAX_ROWS);
     Ok(ids)
@@ -457,7 +458,7 @@ fn new_sublayer(s: &mut Session, p: &Value) -> Result<Value> {
 }
 
 fn delete_rows(s: &mut Session, p: &Value) -> Result<Value> {
-    let ids = rows_param(s, p)?;
+    let ids = rows_param(s, p, "layer.delete")?;
     let st = s.doc()?;
     let ids = row_roots(&st.doc, &ids);
     if ids.is_empty() {
@@ -484,7 +485,7 @@ fn delete_rows(s: &mut Session, p: &Value) -> Result<Value> {
 }
 
 fn duplicate_rows(s: &mut Session, p: &Value) -> Result<Value> {
-    let ids = rows_param(s, p)?;
+    let ids = rows_param(s, p, "layer.duplicate")?;
     let ids = row_roots(&s.doc()?.doc, &ids);
     if ids.is_empty() {
         return Err(bad("layer.duplicate", "no such rows"));
@@ -551,7 +552,7 @@ fn highlight(s: &mut Session, p: &Value) -> Result<Value> {
 fn set_props(s: &mut Session, p: &Value) -> Result<Value> {
     const C: &str = "layer.setProps";
     check_options(C, p)?;
-    let ids = rows_param(s, p)?;
+    let ids = rows_param(s, p, C)?;
     if ids.is_empty() {
         return Err(bad(C, "no rows"));
     }
@@ -567,12 +568,11 @@ fn set_props(s: &mut Session, p: &Value) -> Result<Value> {
 
 fn collect(s: &mut Session, p: &Value) -> Result<Value> {
     const C: &str = "layer.collectInNew";
-    let ids = match ids_param(p, "ids") {
-        Some(ids) => ids,
-        None => {
-            let rows = s.doc()?.highlighted_rows();
-            if rows.is_empty() { super::edit::selected_roots(s)? } else { rows }
-        }
+    let ids = if p.get("ids").is_some() {
+        checked_ids_param(s, p, "ids", C)?
+    } else {
+        let rows = s.doc()?.highlighted_rows();
+        if rows.is_empty() { super::edit::selected_roots(s)? } else { rows }
     };
     let ids = row_roots(&s.doc()?.doc, &ids);
     let Some(top) = ids.last().copied() else { return Err(bad(C, "select rows or objects to collect")) };
@@ -589,6 +589,7 @@ fn collect(s: &mut Session, p: &Value) -> Result<Value> {
             d.move_node(*id, Some(lid), usize::MAX)?;
         }
         sel.prune(d);
+        sel.deselect_uneditable(d);
         Ok(lid)
     })?;
     let st = s.doc_mut()?;
@@ -713,6 +714,7 @@ fn move_rows(s: &mut Session, p: &Value) -> Result<Value> {
             index += 1;
         }
         sel.prune(d);
+        sel.deselect_uneditable(d);
         Ok(out)
     })?;
     let st = s.doc_mut()?;
@@ -730,7 +732,11 @@ fn move_node(s: &mut Session, p: &Value) -> Result<Value> {
     if !accepts(d, parent, n) {
         return Err(bad(C, "layers go only at the top level or in layers, objects in layers and groups"));
     }
-    s.edit("Reorder", |d, _| Ok(d.move_node(id, parent, index)?))?;
+    s.edit("Reorder", |d, sel| {
+        d.move_node(id, parent, index)?;
+        sel.deselect_uneditable(d);
+        Ok(())
+    })?;
     ok()
 }
 

@@ -75,7 +75,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Transform Each…",
             ["Object", "Transform"],
             Some("Cmd+Alt+Shift+D"),
-            "{scaleH?: % (100), scaleV?: % (100), moveH?: pt, moveV?: pt (down = +), rotate?: deg (counter-clockwise), reflectX?: bool (flip vertically), reflectY?: bool (flip horizontally), random?: bool, seed?: n, reference?: 0..8 (9-point grid, 4 = centre), copy?: bool, strokes?: bool (Scale Strokes & Effects), corners?: bool (Scale Corners; both default to the preferences), patterns?: bool (Transform Patterns; default: prefs transformPatternTiles)} transform every selected object about its own reference point → {ids}",
+            "{scaleH?: % (100), scaleV?: % (100), moveH?: pt, moveV?: pt (down = +), rotate?: deg (counter-clockwise), reflectX?: bool (flip vertically), reflectY?: bool (flip horizontally), random?: bool, seed?: n, reference?: 0..8 (9-point grid, 4 = centre), copy?: bool, strokes?: bool (Scale Strokes & Effects), corners?: bool (Scale Corners; both default to the preferences), objects?: bool (Transform Objects, default true; false: the art stays and, with patterns, only its pattern tiles transform), patterns?: bool (Transform Patterns; default: prefs transformPatternTiles)} transform every selected object about its own reference point → {ids}",
             has_selection,
             transform_each
         ),
@@ -156,7 +156,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Rearrange All Artboards…",
             ["Object", "Artboards"],
             None,
-            "{layout?: gridByRow|gridByColumn|row|column (gridByRow; byColumn?: true is gridByColumn), order?: leftToRight|rightToLeft (leftToRight: right-to-left mirrors the order along the rows), columns?: n (2; the rows for gridByColumn; row and column ignore it), spacing?: pt (20), moveArtwork?: true (locked and hidden art only with prefs moveLockedWithArtboard), patterns?: bool (Transform Patterns: pattern fills and strokes transform with the art; default: prefs transformPatternTiles)} lay the artboards out in their order, the grid's top-left at the first artboard's → {artboards, rows, columns}",
+            "{layout?: gridByRow|gridByColumn|row|column (gridByRow; byColumn?: true is gridByColumn), order?: leftToRight|rightToLeft (leftToRight: right-to-left mirrors the order along the rows), columns?: n (2; the rows for gridByColumn; row and column ignore it), spacing?: pt (20), moveArtwork?: true (locked and hidden art only with prefs moveLockedWithArtboard), patterns?: bool (Transform Patterns: pattern fills and strokes transform with the art; default: prefs transformPatternTiles), byColumn?: bool (an older way to ask for layout gridByColumn)} lay the artboards out in their order, the grid's top-left at the first artboard's → {artboards, rows, columns}",
             has_doc,
             rearrange_artboards
         ),
@@ -180,6 +180,7 @@ pub(crate) fn squash(s: &mut Session, from: usize, label: &str) {
         if h.len() > from {
             h.truncate(from + 1);
             h[from].label = label.to_string();
+            st.history.recost_last(&st.doc);
         }
     }
 }
@@ -306,6 +307,7 @@ fn transform_each(s: &mut Session, p: &Value) -> Result<Value> {
     let random = bool_or(p, "random", false);
     let refi = p.get("reference").and_then(Value::as_u64).unwrap_or(4).min(8) as usize;
     let copy = bool_or(p, "copy", false);
+    let objects = super::object::transforms_objects(p);
     if sh == 0.0 || sv == 0.0 {
         return Err(bad("object.transformEach", "scale must be non-zero"));
     }
@@ -335,7 +337,7 @@ fn transform_each(s: &mut Session, p: &Value) -> Result<Value> {
             let m = Affine::translate((k_mh, k_mv))
                 * about(o, Affine::rotate(-k_rot.to_radians()) * refl * Affine::scale_non_uniform(k_sh / 100.0, k_sv / 100.0));
             if let Some(n) = d.node_mut(*id) {
-                n.transform(m, sc);
+                super::object::transform_node(n, m, sc, objects);
             }
         }
         Ok(targets)
@@ -448,7 +450,8 @@ fn rasterize(s: &mut Session, p: &Value) -> Result<Value> {
         d.images.insert(key.clone(), vectorcraft_doc::ImageBlob::new("image/png", png));
         let id = d.alloc_id();
         let xf = Affine::translate(region.origin().to_vec2()) * Affine::scale(1.0 / scale);
-        let mut node = Node::new(id, NodeKind::Image(ImageObject { key, width: w, height: h, xf, link: None, placement: Default::default() }));
+        let mut node =
+            Node::new(id, NodeKind::Image(Box::new(ImageObject { key, width: w, height: h, xf, link: None, placement: Default::default() })));
         if let Some((path, rule)) = clip {
             node = super::rasterfx::clip_group(d, path, rule, node);
         }
@@ -561,7 +564,7 @@ fn crop_image(s: &mut Session, p: &Value) -> Result<Value> {
     let node = st.doc.node(id).cloned().ok_or(EngineError::NoNode(id))?;
     let NodeKind::Image(im) = &node.kind else { return Err(bad(C, "select an image")) };
     if p.get("trim").and_then(Value::as_bool) == Some(true) {
-        return trim_image(s, id, im.clone());
+        return trim_image(s, id, (**im).clone());
     }
     let ib = node.geometric_bounds().ok_or_else(|| bad(C, "image has no bounds"))?;
     let rect = match p.get("rect").and_then(Value::as_array) {
@@ -602,14 +605,14 @@ fn crop_image(s: &mut Session, p: &Value) -> Result<Value> {
         let key = unique_key(d, "crop");
         d.images.insert(key.clone(), vectorcraft_doc::ImageBlob::new("image/png", png));
         if let Some(n) = d.node_mut(id) {
-            n.kind = NodeKind::Image(ImageObject {
+            n.kind = NodeKind::Image(Box::new(ImageObject {
                 key,
                 width: w,
                 height: h,
                 xf: Affine::translate(region.origin().to_vec2()) * Affine::scale(1.0 / scale),
                 link: None,
                 placement: Default::default(),
-            });
+            }));
         }
         Ok(())
     })?;
@@ -645,14 +648,14 @@ fn trim_image(s: &mut Session, id: NodeId, im: ImageObject) -> Result<Value> {
         let key = unique_key(d, "crop");
         d.images.insert(key.clone(), vectorcraft_doc::ImageBlob::new("image/png", png));
         if let Some(n) = d.node_mut(id) {
-            n.kind = NodeKind::Image(ImageObject {
+            n.kind = NodeKind::Image(Box::new(ImageObject {
                 key,
                 width: cw,
                 height: ch,
                 xf: im.xf * Affine::translate((f64::from(x0), f64::from(y0))),
                 link: None,
                 placement: Default::default(),
-            });
+            }));
         }
         Ok(())
     })?;
@@ -798,7 +801,7 @@ fn convert_to_shape(s: &mut Session, _: &Value) -> Result<Value> {
             }
             if let Some(l) = detect_shape(path) {
                 *path = l.to_path();
-                *live = Some(l);
+                *live = Some(Box::new(l));
                 n += 1;
             }
         }

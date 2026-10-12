@@ -149,7 +149,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Split Into Grid…",
             ["Object", "Path"],
             None,
-            "{rows?: 2, columns?: 2, gutter?: pt (12)} → {ids}",
+            "{rows?: 2, columns?: 2, gutter?: pt (12; rowGutter?, columnGutter?: one of the two), totalHeight?, totalWidth?: pt (the grid's size; the selected paths' when left out), height?, width?: pt (each row's and column's size, which then sets the total), addGuides?: false (ruler guides along the row and column edges)} one grid of rectangles over the selected paths replaces them, painted as the topmost one → {ids, guides: count}",
             has_selection,
             split_into_grid
         ),
@@ -310,12 +310,20 @@ fn run_pf(s: &mut Session, op: PathfinderOp) -> Result<Value> {
         matches!(op, PathfinderOp::Unite | PathfinderOp::MinusFront | PathfinderOp::Intersect | PathfinderOp::Exclude | PathfinderOp::MinusBack);
     let label = pf_label(op);
     let ids = s.edit(label, |d, sel| {
-        // Build the stack (back → front) with a style per entry.
+        // Build the stack (back → front); names are separate from paint/style identity.
         let mut styles: Vec<Style> = vec![];
         let mut shapes: Vec<po::Shape> = vec![];
-        let mut push = |path: PathData, rule: FillRule, st: Style| {
+        let mut names: Vec<Option<String>> = vec![];
+        let mut push = |mut path: PathData, rule: FillRule, st: Style, name: Option<String>| {
             if path.is_empty() {
                 return;
+            }
+            if op == PathfinderOp::Divide && st.appearance.items.iter().any(|i| matches!(i, AppearanceItem::Fill(f) if !f.paint.is_none())) {
+                // Filled open contours keep their implicit closing edge. A zero-area line
+                // stays a cutter; normalised area also catches zero-signed-area self crossings.
+                for sub in path.subpaths.iter_mut().filter(|sp| !sp.closed) {
+                    sub.closed = po::encloses_area(sub) || po::area(&PathData::single(sub.clone()), rule) > 0.0;
+                }
             }
             let key = match styles.iter().position(|x| *x == st) {
                 Some(k) => k,
@@ -325,6 +333,7 @@ fn run_pf(s: &mut Session, op: PathfinderOp) -> Result<Value> {
                 }
             };
             shapes.push(po::Shape::new(path, rule, key as u64));
+            names.push(name);
         };
         for id in &roots {
             let n = d.node(*id).ok_or(EngineError::NoNode(*id))?;
@@ -334,17 +343,20 @@ fn run_pf(s: &mut Session, op: PathfinderOp) -> Result<Value> {
                 continue;
             }
             if shape_mode
+                && roots.len() > 1
                 && lv.len() > 1
                 && let Some(top) = lv.last()
             {
-                // A group acts as one shape (the union of its leaves) with its top leaf's style.
+                // Among other objects, a group acts as one shape (the union of its leaves) with
+                // its top leaf's style. Selected alone, its members are the shapes (#1450).
                 let parts: Vec<(PathData, FillRule)> = lv.iter().filter_map(node_path).collect();
                 let refs: Vec<(&PathData, FillRule)> = parts.iter().map(|(p, r)| (p, *r)).collect();
-                push(po::unite_all(&refs), FillRule::NonZero, style_of(top));
+                let name = n.name.clone().or_else(|| lv.iter().find_map(|l| l.name.clone()));
+                push(po::unite_all(&refs), FillRule::NonZero, style_of(top), name);
             } else {
                 for l in &lv {
                     if let Some((p, r)) = node_path(l) {
-                        push(p, r, style_of(l));
+                        push(p, r, style_of(l), n.name.clone().or_else(|| l.name.clone()));
                     }
                 }
             }
@@ -364,7 +376,14 @@ fn run_pf(s: &mut Session, op: PathfinderOp) -> Result<Value> {
             let r =
                 results.into_iter().find(|r| !r.path.is_empty()).ok_or_else(|| EngineError::Other(format!("{label} produced an empty result")))?;
             let style = styles.get(r.key as usize).ok_or_else(|| EngineError::Other(format!("{label}: lost track of a shape's style")))?;
-            shape_node_styled(d, r.path, style)
+            let mut n = shape_node_styled(d, r.path, style);
+            n.name = match op {
+                // A subtraction keeps its surviving source's identity, even when unnamed.
+                PathfinderOp::MinusFront => names.first().cloned().flatten(),
+                PathfinderOp::MinusBack => names.last().cloned().flatten(),
+                _ => names.into_iter().flatten().next(),
+            };
+            n
         } else {
             let mut children = vec![];
             for r in results {
@@ -558,7 +577,7 @@ pub(crate) fn styled_copy(d: &mut Document, l: &Node, items: Vec<AppearanceItem>
     f.opacity = 1.0;
     f.blend = BlendMode::Normal;
     f.name = None;
-    f.mask = None;
+    f.extras_mut().mask = None;
     if let NodeKind::Path { live, .. } = &mut f.kind {
         *live = None;
     }
@@ -575,7 +594,7 @@ pub(crate) fn assemble(d: &mut Document, l: &Node, mut parts: Vec<Node>) -> Opti
     };
     let mut root = with_transparency(d, root, l.opacity, l.blend);
     root.name = l.name.clone();
-    root.mask = l.mask.clone();
+    root.extras_mut().mask = l.extras().mask.clone();
     root.appearance.effects = l.appearance.effects.clone();
     Some(root)
 }
@@ -643,29 +662,44 @@ fn path_ids(d: &Document, roots: &[NodeId]) -> Vec<NodeId> {
     out
 }
 
+/// Replace each path under the selection ([`path_ids`]) by what `f` makes of it: → (their ids, how
+/// many anchors they have before and after). A path that `f` would empty or returns unchanged is
+/// left as it is, with its live shape and its direct-selected anchors; a replaced path loses both.
 fn edit_paths(s: &mut Session, label: &str, f: impl Fn(&PathData) -> PathData) -> Result<(Vec<NodeId>, usize, usize)> {
     let roots = selected_roots(s)?;
-    s.edit(label, |d, _| {
-        let ids = path_ids(d, &roots);
-        if ids.is_empty() {
-            return Err(EngineError::Other(format!("{label}: select paths")));
+    let d = &s.doc()?.doc;
+    let ids = path_ids(d, &roots);
+    if ids.is_empty() {
+        return Err(EngineError::Other(format!("{label}: select paths")));
+    }
+    let (mut before, mut after, mut changed) = (0, 0, vec![]);
+    for id in &ids {
+        let Some(NodeKind::Path { path, .. }) = d.node(*id).map(|n| &n.kind) else { continue };
+        before += path.anchor_count();
+        let np = f(path);
+        if (np.is_empty() && !path.is_empty()) || np == *path {
+            after += path.anchor_count();
+            continue;
         }
-        let (mut before, mut after) = (0, 0);
-        for id in &ids {
-            if let Some(NodeKind::Path { path, live, .. }) = d.node_mut(*id).map(|n| &mut n.kind) {
-                before += path.anchor_count();
-                let np = f(path);
-                if np.is_empty() && !path.is_empty() {
-                    after += path.anchor_count();
-                    continue;
+        after += np.anchor_count();
+        changed.push((*id, np));
+    }
+    // When no path changes, the document and its undo history stay as they are.
+    if !changed.is_empty() {
+        s.edit(label, |d, sel| {
+            for (id, np) in changed {
+                if let Some(NodeKind::Path { path, live, .. }) = d.node_mut(id).map(|n| &mut n.kind) {
+                    // Refit and subdivision change what the old component indexes refer to.
+                    // Keep the object selected whole so its new points remain editable.
+                    sel.anchors.remove(&id);
+                    *path = np;
+                    *live = None;
                 }
-                after += np.anchor_count();
-                *path = np;
-                *live = None;
             }
-        }
-        Ok((ids, before, after))
-    })
+            Ok(())
+        })?;
+    }
+    Ok((ids, before, after))
 }
 
 fn simplify(s: &mut Session, p: &Value) -> Result<Value> {
@@ -685,40 +719,65 @@ fn add_anchor_points(s: &mut Session, _: &Value) -> Result<Value> {
 
 // ---------- Split Into Grid ----------
 
+/// One direction of the grid: the (gutter, total size) of `n` rows or columns. A `size` for each
+/// makes the total; otherwise it is `total`, or `extent` (the selection's) when neither is given.
+fn grid_axis(p: &Value, n: f64, [size, gutter, total]: [&str; 3], extent: f64) -> (f64, f64) {
+    let gutter = len_param(p, gutter).or_else(|| len_param(p, "gutter")).unwrap_or(12.0).max(0.0);
+    let total = match len_param(p, size) {
+        Some(size) => n * size + (n - 1.0) * gutter,
+        None => len_param(p, total).unwrap_or(extent),
+    };
+    (gutter, total)
+}
+
 fn split_into_grid(s: &mut Session, p: &Value) -> Result<Value> {
     let rows = num_param(p, "rows").unwrap_or(2.0).round();
     let cols = num_param(p, "columns").unwrap_or(2.0).round();
     if !(1.0..=500.0).contains(&rows) || !(1.0..=500.0).contains(&cols) {
         return Err(bad("object.path.splitIntoGrid", "rows and columns must be 1..500"));
     }
-    let gutter = len_param(p, "gutter").unwrap_or(12.0).max(0.0);
+    let too_small = || EngineError::Other("Split Into Grid: select paths large enough for the grid".into());
+    // The selected paths, back to front: one grid over them all replaces them, where the topmost
+    // one was and painted as it is.
+    let d = &s.doc()?.doc;
     let roots = selected_roots(s)?;
+    let paths: Vec<&Node> =
+        roots.iter().filter_map(|id| d.node(*id)).filter(|n| matches!(n.kind, NodeKind::Path { .. } | NodeKind::Compound { .. })).collect();
+    let Some((top, below)) = paths.split_last().map(|(top, below)| (Node::clone(top), below.iter().map(|n| n.id).collect::<Vec<_>>())) else {
+        return Err(too_small());
+    };
+    let Some(b) = paths.iter().filter_map(|n| n.geometric_bounds()).reduce(|a, b| a.union(b)) else { return Err(too_small()) };
+    let (row_gutter, height) = grid_axis(p, rows, ["height", "rowGutter", "totalHeight"], b.height());
+    let (col_gutter, width) = grid_axis(p, cols, ["width", "columnGutter", "totalWidth"], b.width());
+    let (rows, cols) = (rows as usize, cols as usize);
+    let cells = po::split_into_grid(vectorcraft_geom::Rect::new(b.x0, b.y0, b.x0 + width, b.y0 + height), rows, cols, (row_gutter, col_gutter));
+    if cells.is_empty() {
+        return Err(too_small());
+    }
+    let mut edges: Vec<(bool, f64)> = Vec::new();
+    if bool_or(p, "addGuides", false) {
+        // Row-major cells: the first row has the column edges, each row's first cell the row edges.
+        let bounds = cells.iter().filter_map(PathData::bounds);
+        edges.extend(bounds.clone().take(cols).flat_map(|c| [(true, c.x0), (true, c.x1)]));
+        edges.extend(bounds.step_by(cols).flat_map(|c| [(false, c.y0), (false, c.y1)]));
+        // Without a gutter, neighbours share an edge.
+        edges.dedup_by(|a, b| a.0 == b.0 && (a.1 - b.1).abs() < 1e-9);
+    }
     let ids = s.edit("Split Into Grid", |d, sel| {
-        let mut out = vec![];
-        for id in &roots {
-            let Some(n) = d.node(*id).cloned() else { continue };
-            if !matches!(n.kind, NodeKind::Path { .. } | NodeKind::Compound { .. }) {
-                continue;
-            }
-            let Some(b) = n.geometric_bounds() else { continue };
-            let cells = po::split_into_grid(b, rows as usize, cols as usize, gutter);
-            if cells.is_empty() {
-                continue;
-            }
-            let (par, idx, _) = d.position(*id).ok_or(EngineError::NoNode(*id))?;
-            d.remove(*id)?;
-            for (k, c) in cells.into_iter().enumerate() {
-                let node = shape_node(d, c, Some(&n));
-                out.push(d.insert(par, idx + k, node)?);
-            }
+        d.remove_many(&below)?;
+        let (par, idx, _) = d.position(top.id).ok_or(EngineError::NoNode(top.id))?;
+        let layer = d.layer_containing(top.id);
+        d.remove(top.id)?;
+        let mut out = Vec::with_capacity(cells.len());
+        for (k, c) in cells.into_iter().enumerate() {
+            let node = shape_node(d, c, Some(&top));
+            out.push(d.insert(par, idx + k, node)?);
         }
-        if out.is_empty() {
-            return Err(EngineError::Other("Split Into Grid: select paths large enough for the grid".into()));
-        }
+        d.guides.extend(edges.iter().map(|&(vertical, pos)| vectorcraft_doc::Guide { layer, ..vectorcraft_doc::Guide::new(vertical, pos) }));
         sel.set(out.iter().copied());
         Ok(out)
     })?;
-    Ok(ids_json(&ids))
+    Ok(json!({ "ids": ids.iter().map(|i| i.0).collect::<Vec<_>>(), "guides": edges.len() }))
 }
 
 // ---------- Clean Up ----------

@@ -104,6 +104,8 @@ pub fn inspect(app: &VectorcraftApp, ctx: &egui::Context) -> Value {
         "nativeMenuBar": app.services.native_menu.is_some(),
         // Saves and exports still being written in the background (Background Save / Export).
         "background": app.background.jobs.iter().map(|j| j.label.as_str()).collect::<Vec<_>>(),
+        // Documents still being read off the UI thread (File › Open, Open Recent): their paths.
+        "opening": app.opening.pending.iter().map(|p| p.path.as_str()).collect::<Vec<_>>(),
         // A native file dialog open off the UI thread (`open`, `place`, `save`, `folder`), waiting
         // for the person at the computer: what asked for it runs again when it answers.
         "fileDialog": app.picks.waiting_kind(),
@@ -141,6 +143,10 @@ pub fn handle(app: &mut VectorcraftApp, ctx: &egui::Context, req: &ControlReques
             let Some(id) = s("command").or(s("id")) else { return err("missing `command`") };
             let params = p.get("params").cloned().unwrap_or(json!({}));
             let params = if params.is_null() { json!({}) } else { params };
+            // A key the command's description doesn't name is an error, not a default (#1442).
+            if let Err(e) = crate::menus::check_params(id, &params) {
+                return err(e);
+            }
             wrap(app.run(id, params))
         }
         "engine.commands" => ok(all_commands(app)),

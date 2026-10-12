@@ -22,6 +22,7 @@ pub use shared::Shared;
 pub mod links;
 pub mod live;
 pub mod marks;
+mod mem;
 pub mod metadata;
 pub mod node;
 pub mod orient;
@@ -60,6 +61,12 @@ pub(crate) mod skip {
     pub fn is_one(v: &f32) -> bool {
         *v == 1.0
     }
+    pub fn is_empty_vec<T>(v: &[T]) -> bool {
+        v.is_empty()
+    }
+    pub fn is_empty_map(v: &serde_json::Map<String, serde_json::Value>) -> bool {
+        v.is_empty()
+    }
 }
 
 pub use appearance::StrokeGradientMode;
@@ -69,15 +76,18 @@ pub use appearance::{
 };
 pub use assets::ExportAsset;
 pub use corners::LiveCorners;
-pub use graph::{GraphKind, GraphSpec, MAX_GRAPH_CATEGORIES, MAX_GRAPH_SERIES, SeriesPaint, TickLength, ValueAxisSide};
+pub use graph::{
+    GraphDesign, GraphKind, GraphSpec, LabelStyles, MAX_GRAPH_CATEGORIES, MAX_GRAPH_SERIES, PiePosition, PieSort, SeriesPaint, TickLength,
+    ValueAxisSide,
+};
 pub use hit::{Hit, HitKind};
 pub use links::{LinkInfo, PlacementOptions};
 pub use live::{BlendOrientation, BlendSpacing, BlendSpec, EnvelopeKind, GradientMesh, MeshPoint};
 pub use metadata::{CopyrightStatus, DocMetadata};
 pub use node::Knockout;
 pub use node::Scaling;
+pub use node::{Extras, ExtrasMut, ImageObject, LAYER_COLORS, LayerColor, LiveShape, Node, NodeExtras, NodeId, NodeKind, OpacityMask};
 pub use node::{ImageMap, ObjectAttributes};
-pub use node::{ImageObject, LAYER_COLORS, LayerColor, LiveShape, Node, NodeId, NodeKind, OpacityMask};
 pub use orient::OrientedBox;
 pub use pattern::{Overlap, PatternDef, PatternEdit, RepeatKind, RepeatSpec, TileType};
 pub use perspective::PerspectiveAttachment;
@@ -85,7 +95,7 @@ pub use placed_document::PlacedDocument;
 pub use profiles::ColorProfiles;
 pub use puppet::{PuppetPin, PuppetPins};
 pub use rastersettings::{RasterColorModel, RasterEffectsSettings};
-pub use selection::{AnchorRef, Selection};
+pub use selection::{AnchorRef, SegmentRef, Selection};
 pub use setup::{Background, DocSetup, ExportText, GridSize, Quotes};
 pub use slices::{CellAlign, CellVAlign, Slice, SliceArea, SliceKind, SliceOptions, SliceSource};
 pub use style_libs::StyleLibrary;
@@ -541,39 +551,48 @@ pub struct Document {
     pub template: bool,
     #[serde(default)]
     pub units: Unit,
+    /// The rulers' zero point in document coordinates. Moving it changes measurements, never art.
+    #[serde(default, skip_serializing_if = "skip::is_default")]
+    pub ruler_origin: Point,
     #[serde(default)]
     pub color_mode: ColorMode,
     pub artboards: Vec<Artboard>,
     /// Top-level layers, bottom first.
     pub layers: Vec<Arc<Node>>,
+    // The document-wide resources below are [`Shared`]: an edit copies the document (copy-on-write)
+    // and the undo history keeps every version, so what an edit doesn't change stays one copy.
+    // Reads, writes and the saved form are those of the value itself.
     #[serde(default)]
-    pub swatches: Vec<Swatch>,
+    pub swatches: Shared<Vec<Swatch>>,
     #[serde(default)]
-    pub swatch_groups: Vec<SwatchGroup>,
+    pub swatch_groups: Shared<Vec<SwatchGroup>>,
     #[serde(default)]
-    pub graphic_styles: Vec<GraphicStyle>,
+    pub graphic_styles: Shared<Vec<GraphicStyle>>,
     /// Character styles (besides the built-in [Normal Character Style], which may be redefined here).
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub char_styles: Vec<TextStyleDef>,
+    #[serde(default, skip_serializing_if = "skip::is_empty_vec")]
+    pub char_styles: Shared<Vec<TextStyleDef>>,
     /// Paragraph styles (besides the built-in [Normal Paragraph Style]).
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub para_styles: Vec<TextStyleDef>,
+    #[serde(default, skip_serializing_if = "skip::is_empty_vec")]
+    pub para_styles: Shared<Vec<TextStyleDef>>,
     /// Threaded text: area-type frames one story flows through, in order.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub text_threads: Vec<Vec<NodeId>>,
     #[serde(default)]
     pub symbols: Vec<Symbol>,
+    /// Object › Graph › Design…: art graphs can draw as markers.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub graph_designs: Vec<GraphDesign>,
     #[serde(default)]
     pub guides: Vec<Guide>,
     /// View → New View… (up to 25, like Illustrator).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub views: Vec<SavedView>,
     /// Select → Save Selection… (at most [`SavedSelection::MAX`]); saved with the document.
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub saved_selections: Vec<SavedSelection>,
+    #[serde(default, skip_serializing_if = "skip::is_empty_vec")]
+    pub saved_selections: Shared<Vec<SavedSelection>>,
     /// Variables (data merge): named values bound to objects, applied per dataset.
     #[serde(default, skip_serializing_if = "crate::skip::is_default")]
-    pub variables: Variables,
+    pub variables: Shared<Variables>,
     #[serde(default)]
     pub grid: GridPrefs,
     #[serde(default = "ppi72")]
@@ -592,8 +611,8 @@ pub struct Document {
     pub mask_edit: Option<MaskEdit>,
     next_id: u64,
     /// Foreign data preserved on round-trip.
-    #[serde(default, skip_serializing_if = "serde_json::Map::is_empty")]
-    pub unknown: serde_json::Map<String, serde_json::Value>,
+    #[serde(default, skip_serializing_if = "skip::is_empty_map")]
+    pub unknown: Shared<serde_json::Map<String, serde_json::Value>>,
     /// Transparency panel → Page Isolated Blending: the page is an isolated transparency group,
     /// so top-level blend modes don't blend with what lies under the page.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
@@ -674,6 +693,10 @@ fn yes() -> bool {
     true
 }
 
+/// Listed nodes by parent: the parent's index path (empty for the top-level layers), then the index
+/// of each listed child in it, in order, with the child's place in the list.
+type Places = BTreeMap<Vec<usize>, Vec<(usize, usize)>>;
+
 pub const FORMAT_VERSION: u32 = 1;
 
 impl Document {
@@ -690,6 +713,7 @@ impl Document {
             title: "Untitled-1".into(),
             template: false,
             units: Unit::Points,
+            ruler_origin: Point::ZERO,
             color_mode: mode,
             artboards: vec![Artboard {
                 id: 1,
@@ -699,17 +723,18 @@ impl Document {
                 show_cross_hairs: false,
             }],
             layers: vec![],
-            swatches,
-            swatch_groups,
-            graphic_styles: default_graphic_styles(),
-            char_styles: vec![],
-            para_styles: vec![],
+            swatches: swatches.into(),
+            swatch_groups: swatch_groups.into(),
+            graphic_styles: default_graphic_styles().into(),
+            char_styles: Default::default(),
+            para_styles: Default::default(),
             text_threads: vec![],
             symbols: vec![],
+            graph_designs: vec![],
             guides: vec![],
             views: vec![],
-            saved_selections: vec![],
-            variables: Variables::default(),
+            saved_selections: Default::default(),
+            variables: Default::default(),
             grid: GridPrefs::default(),
             raster_effects_ppi: 72.0,
             images: BTreeMap::new(),
@@ -766,6 +791,26 @@ impl Document {
     /// Find a node anywhere in the tree.
     pub fn node(&self, id: NodeId) -> Option<&Node> {
         self.index_path(id).and_then(|p| self.node_at(&p))
+    }
+
+    /// [`Document::node`] without building the lookup cache when there is none: for a look at a
+    /// document kept in the undo history ([`Document::drop_lookup_cache`]).
+    pub fn node_uncached(&self, id: NodeId) -> Option<&Node> {
+        match self.index.is_built() {
+            true => self.node(id),
+            false => self.walk_index_path(id).and_then(|p| self.node_at(&p)),
+        }
+    }
+
+    /// Let go of the lookup cache ([`id_index`]), as a document kept in the undo history does: a
+    /// table per step would add up. Lookups still work; the first one builds the cache again.
+    pub fn drop_lookup_cache(&self) {
+        self.index.clear();
+    }
+
+    /// Whether the lookup cache ([`id_index`]) is built (see [`Document::drop_lookup_cache`]).
+    pub fn has_lookup_cache(&self) -> bool {
+        self.index.is_built()
     }
 
     /// Index path from the top-level layer list to `id` (e.g. `[0, 3, 1]`): the first place in
@@ -980,6 +1025,128 @@ impl Document {
         Some((parent, idx, n))
     }
 
+    /// Remove the nodes `ids` names and return them in the order of `ids`, in one pass over the
+    /// children of each parent. Each id is listed once and none lies inside another listed node, as
+    /// in a list of top-level objects. For an id that is not in the tree, is listed twice or lies
+    /// inside another listed node, it fails with `NoNode` and leaves the document as it was.
+    pub fn remove_many(&mut self, ids: &[NodeId]) -> Result<Vec<Arc<Node>>, DocError> {
+        let places = self.places(ids)?;
+        let removed = self.take(places, ids.len())?;
+        self.index.clear();
+        Ok(removed)
+    }
+
+    /// Remove the nodes `ids` names, as [`Document::remove_many`] does, and put the node that `make`
+    /// builds from them (in the order of `ids`) in the parent of the last of them, at that node's
+    /// index less the number of listed nodes below it there. Returns the new node's id.
+    pub fn wrap(&mut self, ids: &[NodeId], make: impl FnOnce(Vec<Arc<Node>>) -> Node) -> Result<NodeId, DocError> {
+        let places = self.places(ids)?;
+        let last = ids.len().checked_sub(1);
+        let found = places.iter().find_map(|(up, kids)| kids.iter().find(|(_, k)| Some(*k) == last).map(|(i, _)| (up.clone(), *i)));
+        let Some((up, i)) = found else { return Err(DocError::Invalid("nothing to wrap".into())) };
+        // The parent and each node it is in move down by the listed nodes before them.
+        let below = |parent: &[usize], index: usize| places.get(parent).map_or(0, |kids| kids.partition_point(|(j, _)| *j < index));
+        let to: Vec<usize> = up.iter().enumerate().map(|(l, &j)| j.saturating_sub(below(&up[..l], j))).collect();
+        let at = i.saturating_sub(below(&up, i));
+        let node = make(self.take(places, ids.len())?);
+        let id = node.id;
+        let children = self.children_at(&to).ok_or_else(|| DocError::Invalid("the container of the listed objects is gone".into()))?;
+        let at = at.min(children.len());
+        children.insert(at, Arc::new(node));
+        self.index.clear();
+        Ok(id)
+    }
+
+    /// Put each list of nodes in `items` directly above its anchor (`replace`: in its place), in
+    /// list order, in one pass over the children of each parent. Each anchor is listed once and none
+    /// lies inside another. For an anchor that is not in the tree, is listed twice or lies inside
+    /// another listed anchor, it fails with `NoNode` and leaves the document as it was.
+    pub fn insert_beside(&mut self, items: Vec<(NodeId, Vec<Node>)>, replace: bool) -> Result<(), DocError> {
+        let anchors: Vec<NodeId> = items.iter().map(|(id, _)| *id).collect();
+        let places = self.places(&anchors)?;
+        let mut lists: Vec<Vec<Node>> = items.into_iter().map(|(_, nodes)| nodes).collect();
+        self.edit_children(places, |k, anchor, children| {
+            if !replace {
+                children.push(anchor);
+            }
+            let nodes = lists.get_mut(k).map(std::mem::take).unwrap_or_default();
+            children.extend(nodes.into_iter().map(Arc::new));
+        })?;
+        self.index.clear();
+        Ok(())
+    }
+
+    /// Where each of `ids` is ([`Places`]). Fails with `NoNode` for an id that is not in the tree,
+    /// is listed twice or lies inside another listed node.
+    fn places(&self, ids: &[NodeId]) -> Result<Places, DocError> {
+        let paths = self.index_paths(ids.iter().copied());
+        let mut places = Places::new();
+        for (k, id) in ids.iter().enumerate() {
+            let (&i, up) = paths.get(id).and_then(|p| p.split_last()).ok_or(DocError::NoNode(*id))?;
+            match places.get_mut(up) {
+                Some(kids) => kids.push((i, k)),
+                None => {
+                    places.insert(up.to_vec(), vec![(i, k)]);
+                }
+            }
+        }
+        for kids in places.values_mut() {
+            kids.sort_unstable();
+        }
+        // An id listed twice has one path, so its parent lists the same child twice. A listed node
+        // lies inside another when its parent's path, or a part of it from the top, is the path of a
+        // listed node.
+        let twice = places.values().flat_map(|kids| kids.windows(2)).find(|w| w[0].0 == w[1].0).map(|w| w[1].1);
+        let listed = |path: &[usize]| {
+            path.split_last().is_some_and(|(i, up)| places.get(up).is_some_and(|kids| kids.binary_search_by_key(i, |(j, _)| *j).is_ok()))
+        };
+        let nested = places.iter().find(|(up, _)| (1..=up.len()).any(|l| listed(&up[..l])));
+        let inner = nested.and_then(|(_, kids)| kids.first()).map(|(_, k)| *k);
+        if let Some(id) = twice.or(inner).and_then(|k| ids.get(k)) {
+            return Err(DocError::NoNode(*id));
+        }
+        Ok(places)
+    }
+
+    /// Take the nodes `places` lists out of their parents and return them in the order of the list,
+    /// which is `len` long.
+    fn take(&mut self, places: Places, len: usize) -> Result<Vec<Arc<Node>>, DocError> {
+        let mut taken = vec![None; len];
+        self.edit_children(places, |k, node, _| {
+            if let Some(t) = taken.get_mut(k) {
+                *t = Some(node);
+            }
+        })?;
+        Ok(taken.into_iter().flatten().collect())
+    }
+
+    /// Rebuild the children of each parent in `places` once, the parents later in tree order
+    /// first. `each` gets each listed child, its place in the list and the parent's new children,
+    /// onto which it pushes what takes the child's place.
+    fn edit_children(&mut self, places: Places, mut each: impl FnMut(usize, Arc<Node>, &mut Vec<Arc<Node>>)) -> Result<(), DocError> {
+        for (up, kids) in places.into_iter().rev() {
+            let children = self.children_at(&up).ok_or_else(|| DocError::Invalid("a container of the listed objects is gone".into()))?;
+            let old = std::mem::take(children);
+            children.reserve(old.len());
+            let mut kids = kids.into_iter().peekable();
+            for (i, node) in old.into_iter().enumerate() {
+                match kids.next_if(|(j, _)| *j == i) {
+                    Some((_, k)) => each(k, node, children),
+                    None => children.push(node),
+                }
+            }
+        }
+        Ok(())
+    }
+
+    /// The children of the node at index path `path`, or the top-level layers for an empty path.
+    fn children_at(&mut self, path: &[usize]) -> Option<&mut Vec<Arc<Node>>> {
+        match path {
+            [] => Some(&mut self.layers),
+            _ => self.node_mut_at(path)?.children_mut(),
+        }
+    }
+
     /// Default target layer: the topmost visible, unlocked layer.
     pub fn default_layer(&self) -> Option<NodeId> {
         self.layers.iter().rev().find(|l| l.visible && !l.locked).or(self.layers.last()).map(|l| l.id)
@@ -1059,6 +1226,9 @@ impl Document {
     /// `locked_and_hidden` (Selection & Anchor Display › Move Locked and Hidden Artwork with
     /// Artboard).
     pub fn art_on_artboard(&self, rect: Rect, locked_and_hidden: bool) -> Vec<NodeId> {
+        // Art drawn flush with the artboard can end up a rounding error outside it (a background
+        // 3e-14 pt past the top edge, #1295): a millionth of a point is far below anything visible.
+        let rect = rect.inflate(1e-6, 1e-6);
         fn collect(n: &Node, rect: Rect, all: bool, out: &mut Vec<NodeId>) {
             for c in n.children().into_iter().flatten().filter(|c| c.rides_with_artboard(all)) {
                 if c.is_layer() {
@@ -1242,7 +1412,7 @@ impl Document {
             let objects = s.objects.into_iter().filter(|id| ids.contains(id) && seen.insert(*id)).collect();
             kept.push(SavedSelection { name, objects });
         }
-        self.saved_selections = kept;
+        self.saved_selections = kept.into();
     }
 
     /// Leave opacity-mask editing: drop the temporary editing layer, a working copy of art the
@@ -1362,6 +1532,26 @@ mod tests {
         Arc::make_mut(&mut d.layers[0]).locked = true;
         assert!(d.art_on_artboard(wide, false).is_empty());
         assert_eq!(d.art_on_artboard(wide, true), vec![a, b], "a locked layer's art too");
+    }
+
+    #[test]
+    fn art_on_artboard_tolerates_roundoff_at_each_edge() {
+        let (d, a, _) = doc_with_rects();
+        let roundoff = 1e-12;
+        for board in [
+            Rect::new(roundoff, 0.0, 10.0, 10.0),
+            Rect::new(0.0, roundoff, 10.0, 10.0),
+            Rect::new(0.0, 0.0, 10.0 - roundoff, 10.0),
+            Rect::new(0.0, 0.0, 10.0, 10.0 - roundoff),
+        ] {
+            assert_eq!(d.art_on_artboard(board, false), vec![a], "roundoff at {board:?}");
+        }
+        // A real overhang remains outside.
+        for board in
+            [Rect::new(0.001, 0.0, 10.0, 10.0), Rect::new(0.0, 0.001, 10.0, 10.0), Rect::new(0.0, 0.0, 9.999, 10.0), Rect::new(0.0, 0.0, 10.0, 9.999)]
+        {
+            assert!(d.art_on_artboard(board, false).is_empty(), "overhang at {board:?}");
+        }
     }
 
     #[test]

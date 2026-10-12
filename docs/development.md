@@ -78,7 +78,7 @@ By default VectorCraft's own crates log at `info` and everything else at `warn`.
 
 | Variable | Effect |
 |---|---|
-| `VECTORCRAFT_CONTROL_PORT` | Same as `--control <port>` |
+| `VECTORCRAFT_CONTROL_PORT` | Same as `--control <port>`, which overrides it; a value that isn't a port from 1 to 65535 stops the app |
 | `VECTORCRAFT_IN_WINDOW_MENUS` | Any value but empty or `0`: same as `--in-window-menus` (see [macOS: the menu bar](#macos-the-menu-bar)) |
 | `VECTORCRAFT_NO_PREFS` | No preferences read or written, no default Data Recovery folder and no log file (agents' test runs) |
 | `WGPU_POWER_PREF` | Graphics adapter: `low`, `high` or `none` (see [Desktop graphics processor](#desktop-graphics-processor)) |
@@ -171,13 +171,14 @@ always use the English ids and labels, so agents and scripts never see translate
 Languages shipped: English (`en`, the source), Traditional Chinese (`zh-hant`, complete, in the vocabulary used
 in Taiwan; `zh-TW`, `zh-HK`, `zh-MO` and `zh-Hant-*` locales all resolve to it), Simplified Chinese (`zh-hans`,
 complete, in the vocabulary used in mainland China; `zh-CN`, `zh-SG`, `zh-Hans-*` and a bare `zh` resolve to it,
-so the two scripts never mix), Japanese (`ja`, complete), German (`de`, complete; `de-DE`, `de-AT`, `de-CH` and every
+so the two scripts never mix), Japanese (`ja`, complete), Korean (`ko`, complete; every `ko-*` locale resolves to it; a count takes no plural, and Hangul is drawn with an installed system font), German (`de`, complete; `de-DE`, `de-AT`, `de-CH` and every
 other `de-*` locale resolve to it), Spanish (`es`, complete, in neutral
 international Spanish; every `es-*` locale such as `es-ES`, `es-MX`, `es-AR` or `es-419` resolves to it), French (`fr`,
 complete; `fr-FR`, `fr-BE`, `fr-CA`, `fr-CH` and every other `fr-*` locale resolve to it), Italian (`it`,
 complete; `it-IT`, `it-CH` and every other `it-*` locale resolve to it), Russian (`ru`, complete; every `ru-*`
 locale such as `ru-RU`, `ru-BY` or `ru-KZ` resolves to it), Ukrainian (`uk`, complete; `uk-UA`,
-`uk_UA.UTF-8` and every other `uk-*` locale resolve to it; integer plurals use one/few/many), Georgian (`ka`, complete; `ka-GE` and `ka_GE.UTF-8` resolve to it; one count-neutral plural form; Georgian letters come from an installed font, `theme::GEORGIAN_FONTS`), Czech (`cs`, every menu label) and Brazilian Portuguese
+`uk_UA.UTF-8` and every other `uk-*` locale resolve to it; integer plurals use one/few/many), Hungarian (`hu`, complete;
+`hu-HU` and every other `hu-*` locale resolve to it; a count takes the singular, so plurals have one form), Georgian (`ka`, complete; `ka-GE` and `ka_GE.UTF-8` resolve to it; one count-neutral plural form; Georgian letters come from an installed font, `theme::GEORGIAN_FONTS`), Czech (`cs`, every menu label) and Brazilian Portuguese
 (`pt-br`, every menu label and every `tl!` literal). Untranslated text falls back to English until its rows are added.
 
 - `tl!("…")` translates a literal into the language the UI is drawn in; `i18n::t(s)` is the same for a
@@ -205,10 +206,10 @@ locale such as `ru-RU`, `ru-BY` or `ru-KZ` resolves to it), Ukrainian (`uk`, com
   control channel, MCP and tests read them) and are translated only where the status bar draws them
   (`i18n::msg`). `@msg` catalog rows hold a whole message or a template such as
   `Couldn't open {name}: {e}`; `{_1}`, `{_2}` … stand for the format string's `{}`, and the values in the
-  placeholders are translated in turn (the reason after `: {e}` is often a message too). Spanish, French, Georgian, Italian, Japanese, Russian and Ukrainian cover every
+  placeholders are translated in turn (the reason after `: {e}` is often a message too). Spanish, French, Georgian, Hungarian, Italian, Japanese, Russian and Ukrainian cover every
   message literal the test scan finds (`complete_languages_translate_every_message`, languages listed in
   `COMPLETE_MESSAGES`): a new `Err("…")`, `Other(…)`, `#[error(…)]` or `status(…)` message needs an `es.tsv`,
-  a `fr.tsv`, an `it.tsv`, a `ja.tsv`, a `ka.tsv`, a `ru.tsv` and a `uk.tsv` row (`VECTORCRAFT_I18N_DUMP_MESSAGES=messages.txt cargo test -p vectorcraft-ui-egui
+  a `fr.tsv`, a `hu.tsv`, an `it.tsv`, a `ja.tsv`, a `ka.tsv`, a `ru.tsv` and a `uk.tsv` row (`VECTORCRAFT_I18N_DUMP_MESSAGES=messages.txt cargo test -p vectorcraft-ui-egui
   complete_languages_translate_every_message` lists them all). Other languages show messages in English
   until they add `@msg` rows.
 - Not translated on purpose: names that are user data (layers, swatches, fonts, documents), the tab
