@@ -290,7 +290,6 @@ const GEORGIAN_FONTS: &[&str] = &[
 ];
 
 /// The egui name of the installed Georgian fallback face.
-#[cfg_attr(target_arch = "wasm32", allow(dead_code))]
 pub(crate) const GEORGIAN_FALLBACK: &str = "sys-georgian";
 
 /// The UI fonts have no Georgian, and the Georgian interface needs it from the first frame (the
@@ -307,8 +306,23 @@ fn add_georgian_font(fonts: &mut FontDefinitions) {
             stack.push(GEORGIAN_FALLBACK.to_owned());
         }
     }
+    // The web build: the face the page fetched before the app started ([`set_georgian_font`]).
     #[cfg(target_arch = "wasm32")]
-    let _ = fonts;
+    if let Some(bytes) = SUPPLIED_GEORGIAN.get() {
+        fonts.font_data.insert(GEORGIAN_FALLBACK.to_owned(), Arc::new(FontData::from_static(bytes)));
+        for stack in fonts.families.values_mut() {
+            stack.push(GEORGIAN_FALLBACK.to_owned());
+        }
+    }
+}
+
+/// A Georgian face the web shell supplies (fetched from beside the page; the browser lends none).
+static SUPPLIED_GEORGIAN: std::sync::OnceLock<Vec<u8>> = std::sync::OnceLock::new();
+
+/// Use `bytes` (a font file) as the Georgian interface face where no installed one can be read
+/// (the web). Call it before the app starts; only the first call counts.
+pub fn set_georgian_font(bytes: Vec<u8>) {
+    let _ = SUPPLIED_GEORGIAN.set(bytes);
 }
 
 /// The egui name of a craft-fonts face.
