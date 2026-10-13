@@ -52,7 +52,7 @@ plus review. Native-speaker review is human work and isn't in the hours.
 | Hungarian | `hu` | 4,524 rows: menus, `tl!` literals and messages complete (tests); one plural form | full |
 | Polish | `pl` | 4,510 rows (counted 2026-10-13): menus, `tl!` literals and messages complete (tests); one/few/many plurals | full; native review pending |
 | Czech | `cs` | 4,411 catalog entries, including 636 `@msg` rows (measured locally 2026-10-11); menu, literal and message coverage enforced by tests | catalog complete; render-site gaps reduced; native review pending |
-| Georgian | `ka` | 4,392 rows: menus, panels, dialogs, plurals (one count-neutral form) and messages, tested complete; Georgian UI glyphs from an installed font (SF Georgian, Sylfaen, Noto Sans Georgian, DejaVu Sans; none on the web yet); not yet reviewed by a native speaker (doubtful terms queued for review) | full |
+| Georgian | `ka` | 4,646 rows (counted 2026-10-13): menus, panels, dialogs, plurals (one count-neutral form) and messages, tested complete; Georgian UI glyphs from an installed font (SF Georgian, Sylfaen, Noto Sans Georgian, DejaVu Sans; none on the web yet); not yet reviewed by a native speaker (doubtful terms queued for review) | full |
 
 Sixteen non-English catalogs in all. Illustrator, as its public documentation lists, ships around two dozen
 interface languages (including Polish, Dutch, Turkish, the Nordic languages, Hungarian, and Middle East

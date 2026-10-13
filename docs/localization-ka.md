@@ -9,7 +9,7 @@ is `auto`). The catalog code is `ka`; `app.language` with `{"lang":"ka"}` select
 choice is saved as the `interfaceLanguage` preference. Document text, command ids, menu paths used by
 scripts, CLI/MCP/control responses and file paths do not change.
 
-`crates/ui-egui/src/i18n/ka.tsv` has about 4,590 rows: every menu string, command label and `tl!`
+`crates/ui-egui/src/i18n/ka.tsv` has about 4,650 rows: every menu string, command label and `tl!`
 literal (panels, dialogs, tooltips, Preferences), the `@plural` rows and the `@msg` status and error
 messages, held complete by the tests. Left in English on purpose (`MENU_KEEP_AS_IS`): the product name,
 language names, OpenType, the built-in workspace names and the bracketed perspective grid preset names;

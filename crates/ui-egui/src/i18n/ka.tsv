@@ -3436,7 +3436,6 @@ effect	Regular	ჩვეულებრივი
 	Character Style Options	სიმბოლოს სტილის პარამეტრები
 	Flip	არეკვლა
 	Couldn't {} {name}: {e}	ვერ მოხერხდა {}: {name}: {e}
-	Create PDF layers from top-level layers	PDF შრეების შექმნა ზედა დონის შრეებიდან
 	Delete Character Style	სიმბოლოს სტილის წაშლა
 	Delete Layer	შრის წაშლა
 	Delete Paragraph Style	აბზაცის სტილის წაშლა
@@ -3456,7 +3455,6 @@ effect	Regular	ჩვეულებრივი
 	Select All Art on Layer	შრეზე მთელი ნახატის მონიშვნა
 	Settings…	პარამეტრები…
 	Joins	შეერთებები
-	Drag art, colors and text styles here to reuse them across documents. Libraries are stored on this machine — no account required.	გადმოიტანეთ აქ ნახატი, ფერები და ტექსტის სტილები, რომ სხვა დოკუმენტებშიც გამოიყენოთ. ბიბლიოთეკები ინახება ამ კომპიუტერზე — ანგარიში საჭირო არ არის.
 	De-Interlace	სტრიქონგამოტოვების მოცილება
 	Eliminate	აღმოფხვრა
 	Create New Fields by	ახალი ველების შექმნა
@@ -4153,7 +4151,6 @@ effect	Regular	ჩვეულებრივი
 @msg	invalid native panel set	მშობლიური პანელების ნაკრები არასწორია
 @msg	missing panel layout	პანელების განლაგება აკლია
 @msg	unsupported native docking operation	მშობლიური მიმაგრების ოპერაცია მხარდაუჭერელია
-@msg	this kind of brush has no options dialog yet	ამ სახის ფუნჯს ჯერ პარამეტრების დიალოგი არ აქვს
 	Phone 393×852	ტელეფონი 393×852
 	Phone 430×932	ტელეფონი 430×932
 	Phone 360×800	ტელეფონი 360×800
@@ -4602,3 +4599,66 @@ mark-style	Japanese	იაპონური
 	Working RGB	სამუშაო RGB
 	X:	X:
 	Y:	Y:
+	Auto Color	ავტოფერი
+	Check Script	სკრიპტის შემოწმება
+	Check Script…	სკრიპტის შემოწმება…
+	Copy Report	ანგარიშის კოპირება
+	VectorCraft read this script without running it.	VectorCraft-მა ეს სკრიპტი წაიკითხა მისი გაშვების გარეშე.
+	Needs nothing beyond plain JavaScript	საკმარისია ჩვეულებრივი JavaScript
+	Needs the script language's own objects or directives	სჭირდება სკრიპტის ენის საკუთარი ობიექტები ან დირექტივები
+	Needs the document model	სჭირდება დოკუმენტის მოდელი
+	Needs files	სჭირდება ფაილები
+	Needs menu commands	სჭირდება მენიუს ბრძანებები
+	Needs dialogs	სჭირდება დიალოგები
+	Needs features only the reference app has	სჭირდება ფუნქციები, რომლებიც მხოლოდ საორიენტაციო აპს აქვს
+	Outside the document	დოკუმენტის გარეთ
+	Writes, moves or deletes files	ფაილებს წერს, გადააადგილებს ან შლის
+	Opens files in other apps	ფაილებს სხვა აპებში ხსნის
+	Opens network connections	ქსელურ კავშირებს ხსნის
+	Loads native code	ნატიურ კოდს ტვირთავს
+	Sends messages to other apps	სხვა აპებს შეტყობინებებს უგზავნის
+	Reads or sets environment variables	გარემოს ცვლადებს კითხულობს ან აყენებს
+	Runs code the checker can't read	უშვებს კოდს, რომელსაც შემმოწმებელი ვერ კითხულობს
+	Changes the reference app's preferences	ცვლის საორიენტაციო აპის პარამეტრებს
+	Menu commands	მენიუს ბრძანებები
+	Names the script builds as it runs: {count}	სახელები, რომლებსაც სკრიპტი მუშაობისას აგებს: {count}
+	Document model	დოკუმენტის მოდელი
+	Object types: {names}	ობიექტის ტიპები: {names}
+	Directives	დირექტივები
+	Includes	ჩართული ფაილები
+	Checked	შემოწმებულია
+	Not followed: outside the script's folder	გამოტოვებულია: სკრიპტის საქაღალდის გარეთაა
+	Includes itself	საკუთარ თავს რთავს
+	Not read	არ წაკითხულა
+	Not read: a limit was reached	არ წაკითხულა: ზღვარი მიღწეულია
+	Compiled or not text	კომპილირებულია ან ტექსტი არ არის
+	Problems	პრობლემები
+	String not closed	სტრიქონული ლიტერალი არ არის დახურული
+	Comment not closed	კომენტარი არ არის დახურული
+	Regular expression not closed	რეგულარული გამოსახულება არ არის დახურული
+	Template literal not closed	შაბლონური ლიტერალი არ არის დახურული
+	XML literal not closed	XML ლიტერალი არ არის დახურული
+	Bracket never closed	ფრჩხილი არსად იხურება
+	Closing bracket with no opening one	დამხურავი ფრჩხილი გამხსნელის გარეშე
+	Syntax newer than ES3	ES3-ზე ახალი სინტაქსი
+	Unknown directive	უცნობი დირექტივა
+	Not valid UTF-8: unreadable bytes were replaced	არასწორი UTF-8: წაუკითხავი ბაიტები ჩანაცვლდა
+	Mixed line endings	სტრიქონის შერეული დაბოლოებები
+	Nesting too deep to follow	ჩადგმა მისადევნებლად ზედმეტად ღრმაა
+	line {line}	სტრიქონი {line}
+	lines {lines}	სტრიქონები {lines}
+	{file}, line {line}	{file}, სტრიქონი {line}
+	Compiled script: ask its author for the .jsx file	კომპილირებული სკრიპტი: სთხოვეთ ავტორს .jsx ფაილი
+	Too large to check	შესამოწმებლად ზედმეტად დიდია
+	Not a script for the reference app	ეს საორიენტაციო აპის სკრიპტი არ არის
+	Some lists were cut short at their limit.	ზოგიერთი სია ზღვარზე შეიკვეცა.
+	Symbol Options	სიმბოლოს პარამეტრები
+	Symbol Options…	სიმბოლოს პარამეტრები…
+	Auto Grouping	ავტომატური დაჯგუფება
+	Ignore Color	ფერის იგნორირება
+imageTrace	Outline	კონტურები
+@msg	Copied the script report	კოპირებულია სკრიპტის ანგარიში
+@msg	Offset Path: the offset leaves nothing of the selected paths (an inset larger than the shapes)	ტრაექტორიის წანაცვლება: წანაცვლების შემდეგ მონიშნული ტრაექტორიებიდან არაფერი რჩება (შიგნით წანაცვლება ფიგურებზე დიდია)
+@msg	{path}: not a file	{path}: ფაილი არ არის
+	Load EPS into Clipboard	EPS-ის ბუფერში ჩატვირთვა
+@msg	an image of {w} × {h} pixels is too large to draw	{w} × {h} პიქსელის გამოსახულება დასახატად ზედმეტად დიდია
