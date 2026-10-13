@@ -31,8 +31,8 @@
 	New…	ახალი…
 	New from Template…	შაბლონიდან შექმნა…
 	Open…	გახსნა…
-	Open Recent Files	ბოლოდროინდელი ფაილების გახსნა
-	Clear Recent Files	ბოლოდროინდელი ფაილების სიის გასუფთავება
+	Open Recent Files	ბოლოს გახსნილი ფაილების გახსნა
+	Clear Recent Files	ბოლოს გახსნილი ფაილების სიის გასუფთავება
 	Show in Folder	საქაღალდეში ჩვენება
 	Close	დახურვა
 	Close All	ყველას დახურვა
@@ -62,7 +62,7 @@
 	Print…	დაბეჭდვა…
 	Edit	რედაქტირება
 	Undo	დაბრუნება
-	Redo	ხელახლა შესრულება
+	Redo	გამეორება
 	Cut	ამოჭრა
 	Copy	კოპირება
 	Paste	ჩასმა
@@ -402,7 +402,7 @@
 	Raster Effects	რასტრული ეფექტები
 	Blur	გაბუნდოვნება
 	Gaussian Blur…	გაუსის გაბუნდოვნება…
-	View	ჩვენება
+	View	ხედი
 	Preview	წინასწარი ნახვა
 	Overprint Preview	ზედდაბეჭდვის წინასწარი ნახვა
 	Pixel Preview	პიქსელების წინასწარი ნახვა
@@ -423,8 +423,8 @@
 	Proof Colors	ფერების საცდელი ჩვენება
 	Zoom In	გადიდება
 	Zoom Out	დაპატარავება
-	Fit Artboard in Window	სამუშაო დაფის ფანჯარაში მორგება
-	Fit All in Window	ყველაფრის ფანჯარაში მორგება
+	Fit Artboard in Window	სამუშაო დაფის ფანჯარაში ჩატევა
+	Fit All in Window	ყველაფრის ფანჯარაში ჩატევა
 	Actual Size	რეალური ზომა
 	Reset Rotate View	ხედის შემობრუნების ჩამოყრა
 	Hide Edges	კიდეების დამალვა
@@ -497,7 +497,7 @@
 	Reset Essentials	Essentials-ის ჩამოყრა
 	New Workspace…	ახალი სამუშაო სივრცე…
 	Manage Workspaces…	სამუშაო სივრცეების მართვა…
-	Control	მართვის პანელი
+	Control	მართვა
 	Contextual Task Bar	კონტექსტური ამოცანების ზოლი
 	Pin Bar Position	ზოლის პოზიციის ჩამაგრება
 	Reset Bar Position	ზოლის პოზიციის ჩამოყრა
@@ -590,7 +590,7 @@
 	ArtCraft Website	ArtCraft-ის ვებსაიტი
 	VectorCraft on getartcraft.com	VectorCraft getartcraft.com-ზე
 	VectorCraft on GitHub	VectorCraft GitHub-ზე
-	Search Commands…	ბრძანებების ძებნა…
+	Search Commands…	ბრძანებების ძიება…
 	VectorCraft Help…	VectorCraft-ის დახმარება…
 	Automatic	ავტომატური
 	Isolate Selected Group	მონიშნული ჯგუფის იზოლირება
@@ -784,42 +784,42 @@ lighting	Light	სინათლე
 	New Color Group…	ახალი ფერთა ჯგუფი…
 	New Layer Options…	ახალი შრის პარამეტრები…
 	New Swatch…	ფერის ახალი ნიმუში…
-	No saved views (View → New View…)	შენახული ხედები არ არის (ჩვენება → ახალი ხედი…)
+	No saved views (View → New View…)	შენახული ხედები არ არის (ხედი → ახალი ხედი…)
 	One Point Perspective Preset 1	ერთწერტილიანი პერსპექტივის პრესეტი 1
 	One Point Perspective Preset 2	ერთწერტილიანი პერსპექტივის პრესეტი 2
 	One Point Perspective Preset 3	ერთწერტილიანი პერსპექტივის პრესეტი 3
 	One Point Perspective Preset 4	ერთწერტილიანი პერსპექტივის პრესეტი 4
 	One Point Perspective Preset 5	ერთწერტილიანი პერსპექტივის პრესეტი 5
-	Open Recent File 1	ბოლოდროინდელი ფაილის გახსნა 1
-	Open Recent File 10	ბოლოდროინდელი ფაილის გახსნა 10
-	Open Recent File 11	ბოლოდროინდელი ფაილის გახსნა 11
-	Open Recent File 12	ბოლოდროინდელი ფაილის გახსნა 12
-	Open Recent File 13	ბოლოდროინდელი ფაილის გახსნა 13
-	Open Recent File 14	ბოლოდროინდელი ფაილის გახსნა 14
-	Open Recent File 15	ბოლოდროინდელი ფაილის გახსნა 15
-	Open Recent File 16	ბოლოდროინდელი ფაილის გახსნა 16
-	Open Recent File 17	ბოლოდროინდელი ფაილის გახსნა 17
-	Open Recent File 18	ბოლოდროინდელი ფაილის გახსნა 18
-	Open Recent File 19	ბოლოდროინდელი ფაილის გახსნა 19
-	Open Recent File 2	ბოლოდროინდელი ფაილის გახსნა 2
-	Open Recent File 20	ბოლოდროინდელი ფაილის გახსნა 20
-	Open Recent File 21	ბოლოდროინდელი ფაილის გახსნა 21
-	Open Recent File 22	ბოლოდროინდელი ფაილის გახსნა 22
-	Open Recent File 23	ბოლოდროინდელი ფაილის გახსნა 23
-	Open Recent File 24	ბოლოდროინდელი ფაილის გახსნა 24
-	Open Recent File 25	ბოლოდროინდელი ფაილის გახსნა 25
-	Open Recent File 26	ბოლოდროინდელი ფაილის გახსნა 26
-	Open Recent File 27	ბოლოდროინდელი ფაილის გახსნა 27
-	Open Recent File 28	ბოლოდროინდელი ფაილის გახსნა 28
-	Open Recent File 29	ბოლოდროინდელი ფაილის გახსნა 29
-	Open Recent File 3	ბოლოდროინდელი ფაილის გახსნა 3
-	Open Recent File 30	ბოლოდროინდელი ფაილის გახსნა 30
-	Open Recent File 4	ბოლოდროინდელი ფაილის გახსნა 4
-	Open Recent File 5	ბოლოდროინდელი ფაილის გახსნა 5
-	Open Recent File 6	ბოლოდროინდელი ფაილის გახსნა 6
-	Open Recent File 7	ბოლოდროინდელი ფაილის გახსნა 7
-	Open Recent File 8	ბოლოდროინდელი ფაილის გახსნა 8
-	Open Recent File 9	ბოლოდროინდელი ფაილის გახსნა 9
+	Open Recent File 1	ბოლოს გახსნილი ფაილის გახსნა 1
+	Open Recent File 10	ბოლოს გახსნილი ფაილის გახსნა 10
+	Open Recent File 11	ბოლოს გახსნილი ფაილის გახსნა 11
+	Open Recent File 12	ბოლოს გახსნილი ფაილის გახსნა 12
+	Open Recent File 13	ბოლოს გახსნილი ფაილის გახსნა 13
+	Open Recent File 14	ბოლოს გახსნილი ფაილის გახსნა 14
+	Open Recent File 15	ბოლოს გახსნილი ფაილის გახსნა 15
+	Open Recent File 16	ბოლოს გახსნილი ფაილის გახსნა 16
+	Open Recent File 17	ბოლოს გახსნილი ფაილის გახსნა 17
+	Open Recent File 18	ბოლოს გახსნილი ფაილის გახსნა 18
+	Open Recent File 19	ბოლოს გახსნილი ფაილის გახსნა 19
+	Open Recent File 2	ბოლოს გახსნილი ფაილის გახსნა 2
+	Open Recent File 20	ბოლოს გახსნილი ფაილის გახსნა 20
+	Open Recent File 21	ბოლოს გახსნილი ფაილის გახსნა 21
+	Open Recent File 22	ბოლოს გახსნილი ფაილის გახსნა 22
+	Open Recent File 23	ბოლოს გახსნილი ფაილის გახსნა 23
+	Open Recent File 24	ბოლოს გახსნილი ფაილის გახსნა 24
+	Open Recent File 25	ბოლოს გახსნილი ფაილის გახსნა 25
+	Open Recent File 26	ბოლოს გახსნილი ფაილის გახსნა 26
+	Open Recent File 27	ბოლოს გახსნილი ფაილის გახსნა 27
+	Open Recent File 28	ბოლოს გახსნილი ფაილის გახსნა 28
+	Open Recent File 29	ბოლოს გახსნილი ფაილის გახსნა 29
+	Open Recent File 3	ბოლოს გახსნილი ფაილის გახსნა 3
+	Open Recent File 30	ბოლოს გახსნილი ფაილის გახსნა 30
+	Open Recent File 4	ბოლოს გახსნილი ფაილის გახსნა 4
+	Open Recent File 5	ბოლოს გახსნილი ფაილის გახსნა 5
+	Open Recent File 6	ბოლოს გახსნილი ფაილის გახსნა 6
+	Open Recent File 7	ბოლოს გახსნილი ფაილის გახსნა 7
+	Open Recent File 8	ბოლოს გახსნილი ფაილის გახსნა 8
+	Open Recent File 9	ბოლოს გახსნილი ფაილის გახსნა 9
 	Options for Selection…	მონიშნულის პარამეტრები…
 	Panel Options…	პანელის პარამეტრები…
 	Panels	პანელები
@@ -829,7 +829,7 @@ lighting	Light	სინათლე
 	Preview in Browser	ბრაუზერში ნახვა
 	Printer Setup…	პრინტერის დაყენება…
 	Printers	პრინტერები
-	Recent File	ბოლოდროინდელი ფაილი
+	Recent File	ბოლოს გახსნილი ფაილი
 	Recent Font	ბოლოდროინდელი შრიფტი
 	Recent Font 1	ბოლოდროინდელი შრიფტი 1
 	Recent Font 10	ბოლოდროინდელი შრიფტი 10
@@ -846,8 +846,8 @@ lighting	Light	სინათლე
 	Recent Font 7	ბოლოდროინდელი შრიფტი 7
 	Recent Font 8	ბოლოდროინდელი შრიფტი 8
 	Recent Font 9	ბოლოდროინდელი შრიფტი 9
-	Redo {name}	ხელახლა შესრულება: {name}
-	Redo {}	ხელახლა შესრულება: {}
+	Redo {name}	{name}-ის გამეორება
+	Redo {}	{}-ის გამეორება
 	Missing Fonts Dialog	დაკარგული შრიფტების დიალოგი
 	Find Fonts in Folder…	შრიფტების ძებნა საქაღალდეში…
 	Rename Workspace	სამუშაო სივრცის გადარქმევა
@@ -946,13 +946,13 @@ lighting	Light	სინათლე
 	Enter	Enter
 	Esc	Esc
 	Fit All	ყველას ჩატევა
-	Fit on Screen	ეკრანზე მორგება
-	Help › Search Commands…	დახმარება › ბრძანებების ძებნა…
+	Fit on Screen	ეკრანში ჩატევა
+	Help › Search Commands…	დახმარება › ბრძანებების ძიება…
 	Name* @ 66.67 % (RGB/Preview)	სახელი* @ 66.67 % (RGB/წინასწარი ნახვა)
 	Name* @ 66.67% (RGB/Preview)	სახელი* @ 66.67% (RGB/წინასწარი ნახვა)
 	No Document	დოკუმენტი არ არის
 	Press 	დააჭირეთ 
-	Search commands and tools	ბრძანებებისა და ხელსაწყოების ძებნა
+	Search commands and tools	ბრძანებებისა და ხელსაწყოების ძიება
 	Style:	სტილი:
 	Switch workspace	სამუშაო სივრცის გადართვა
 	Show all open documents	ყველა ღია დოკუმენტის ჩვენება
@@ -1062,7 +1062,7 @@ lighting	Light	სინათლე
 	Line Segment Tool	ხაზის სეგმენტის ხელსაწყო
 	Live Paint Selection Tool	ცოცხალი შეღებვის მონიშვნის ხელსაწყო
 	Magic Wand Tool	ჯადოსნური ჯოხის ხელსაწყო
-	Measure Tool	გაზომვის ხელსაწყო
+	Measure Tool	საზომი ხელსაწყო
 	Mesh Tool	გრადიენტული ბადის ხელსაწყო
 	Mirror & Cut Tool	არეკვლით ჭრის ხელსაწყო
 	Paintbrush Tool	ფუნჯის ხელსაწყო
@@ -1159,7 +1159,7 @@ lighting	Light	სინათლე
 	Drag onto art to apply this appearance	ჩაავლეთ ნახატზე ამ იერსახის გამოსაყენებლად
 	Duplicate Selected Item	მონიშნული ელემენტის დუბლირება
 	Fill:	შევსება:
-	Hide Thumbnail	მინიატურის დამალვა
+	Hide Thumbnail	ესკიზის დამალვა
 	Mixed Appearances	შერეული იერსახეები
 	Mixed Objects	შერეული ობიექტები
 	No options	პარამეტრები არ არის
@@ -1170,13 +1170,13 @@ lighting	Light	სინათლე
 	Opacity: {value}	გაუმჭვირვალობა: {value}
 	Rectangle: Sunshine	მართკუთხედი: მზის სხივები
 	Redefine Graphic Style “{name}”	გრაფიკული სტილის „{name}“ ხელახლა განსაზღვრა
-	Show Thumbnail	მინიატურის ჩვენება
+	Show Thumbnail	ესკიზის ჩვენება
 	Artboard Options: edit with the Artboard tool	სამუშაო დაფის პარამეტრები: რედაქტირება სამუშაო დაფის ხელსაწყოთი
 	Delete Artboards	სამუშაო დაფების წაშლა
 	Delete Empty Artboards	ცარიელი სამუშაო დაფების წაშლა
 	Duplicate Artboards	სამუშაო დაფების დუბლირება
-	Move Down	ქვემოთ გადატანა
-	Move Up	ზემოთ გადატანა
+	Move Down	ჩამოწევა
+	Move Up	აწევა
 	Open a document to see its artboards.	გახსენით დოკუმენტი მისი სამუშაო დაფების სანახავად.
 	Rearrange All Artboards	ყველა სამუშაო დაფის გადალაგება
 	Move Artwork with Artboard	ნახატის გადაადგილება სამუშაო დაფასთან ერთად
@@ -1213,7 +1213,7 @@ lighting	Light	სინათლე
 	No brushes	ფუნჯები არ არის
 	Select art and use New Brush to make one.	მონიშნეთ ნახატი და შესაქმნელად გამოიყენეთ „ახალი ფუნჯი“.
 	Show {kind} Brushes	ფუნჯების ჩვენება: {kind}
-	Thumbnail View	მინიატურების ხედი
+	Thumbnail View	ესკიზების ხედი
 	All Caps	მთავრული
 	Character Alignment	სიმბოლოების სწორება
 	Character Rotation	სიმბოლოების შემობრუნება
@@ -1286,7 +1286,7 @@ lighting	Light	სინათლე
 	Copied the CSS of {rules} object(s)	კოპირებულია ობიექტების CSS: {rules}
 	Copy All Styles	ყველა სტილის კოპირება
 	Exported {path}	ექსპორტირებულია: {path}
-	Generate CSS: the whole document's CSS while nothing is selected	CSS-ის გენერირება: სანამ არაფერია მონიშნული — მთელი დოკუმენტის CSS
+	Generate CSS: the whole document's CSS while nothing is selected	CSS-ის გენერაცია: სანამ არაფერია მონიშნული — მთელი დოკუმენტის CSS
 	No CSS	CSS არ არის
 	Select objects to see their CSS, or Generate CSS for the whole document.	მონიშნეთ ობიექტები მათი CSS-ის სანახავად, ან შექმენით CSS მთელი დოკუმენტისთვის.
 	The selected objects have no CSS of their own (see below).	მონიშნულ ობიექტებს საკუთარი CSS არ აქვს (იხ. ქვემოთ).
@@ -1318,15 +1318,15 @@ lighting	Light	სინათლე
 	Select text or click into text with the Type tool to insert glyphs	გლიფების ჩასასმელად მონიშნეთ ტექსტი ან ტექსტის ხელსაწყოთი დაწკაპეთ ტექსტში
 	Show:	ჩვენება:
 	Use the Selected Text's Font	მონიშნული ტექსტის შრიფტის გამოყენება
-	Aspect Ratio	გვერდების თანაფარდობა
+	Aspect Ratio	თანაფარდობა
 	Click the art with the Gradient tool to add or select points.	წერტილების დასამატებლად ან მოსანიშნად დაწკაპეთ ნახატზე გრადიენტის ხელსაწყოთი.
 	Click the ramp or a type button to apply a gradient.	გრადიენტის გამოსაყენებლად დაწკაპეთ შკალაზე ან ტიპის ღილაკზე.
 	Color:	ფერი:
-	Delete Stop	წერტილის წაშლა
+	Delete Stop	გადასვლის წერტილის წაშლა
 	Edit Gradient	გრადიენტის რედაქტირება
 	Edit the selected point's colour in the Color panel	მონიშნული წერტილის ფერის რედაქტირება ფერის პანელში
-	Edit the stop	წერტილის რედაქტირება
-	Eyedropper: click the art to sample the stop's colour	პიპეტი: დაწკაპეთ ნახატზე წერტილის ფერის ასაღებად
+	Edit the stop	გადასვლის წერტილის რედაქტირება
+	Eyedropper: click the art to sample the stop's colour	პიპეტი: დაწკაპეთ ნახატზე გადასვლის წერტილის ფერის ასაღებად
 	Gradient across stroke	გრადიენტი კონტურის განივად
 	Gradient along stroke	გრადიენტი კონტურის სიგრძეზე
 	Gradient Fill: click to apply, drag onto art	გრადიენტული შევსება: დაწკაპეთ გამოსაყენებლად, ჩაავლეთ ნახატზე
@@ -1387,7 +1387,7 @@ lighting	Light	სინათლე
 	<Opacity Mask>	<გაუმჭვირვალობის ნიღაბი>
 	Create New Layer	ახალი შრის შექმნა
 	Create New Sublayer	ახალი ქვეშრის შექმნა
-	Search All	ყველგან ძებნა
+	Search All	ყველგან ძიება
 	Graphics	გრაფიკა
 	Local Libraries	ლოკალური ბიბლიოთეკები
 	Add Content	შიგთავსის დამატება
@@ -1415,7 +1415,7 @@ lighting	Light	სინათლე
 	No matches.	დამთხვევა არ არის.
 	Other Libraries	სხვა ბიბლიოთეკები
 	Previous Library	წინა ბიბლიოთეკა
-	Swatch exchange files keep solid colors only.	ფერის ნიმუშების გაცვლის ფაილები მხოლოდ ერთფეროვან ფერებს ინახავს.
+	Swatch exchange files keep solid colors only.	ფერის ნიმუშების გაცვლის ფაილები მხოლოდ მყარ ფერებს ინახავს.
 	This library is empty.	ეს ბიბლიოთეკა ცარიელია.
 	Color Space	ფერთა სივრცე
 	Created	შექმნილია
@@ -1424,11 +1424,11 @@ lighting	Light	სინათლე
 	Embedded {n} image(s); {missing} missing: relink them first	ჩაშენებულია გამოსახულება: {n}; აკლია: {missing} — ჯერ ხელახლა დააკავშირეთ
 	File › Place… brings in an image, linked or embedded.	ფაილი › განთავსება… შემოაქვს გამოსახულება, დაკავშირებული ან ჩაშენებული.
 	Format	ფორმატი
-	Medium Thumbnails	საშუალო მინიატურები
+	Medium Thumbnails	საშუალო ესკიზები
 	Missing: {path}	აკლია: {path}
 	Modified	შეცვლილია
 	Modified since it was read: {path}	შეიცვალა წაკითხვის შემდეგ: {path}
-	No Thumbnails	მინიატურების გარეშე
+	No Thumbnails	ესკიზების გარეშე
 	Nothing matches the Show filter.	„ჩვენების“ ფილტრს არაფერი შეესაბამება.
 	PPI	PPI
 	Relinked {n} image(s)	ხელახლა დაკავშირებულია გამოსახულება: {n}
@@ -1439,7 +1439,7 @@ lighting	Light	სინათლე
 	Show Embedded	ჩაშენებულის ჩვენება
 	Show Link Info	ბმულის ინფორმაციის ჩვენება
 	Show Modified	შეცვლილის ჩვენება
-	Small Thumbnails	პატარა მინიატურები
+	Small Thumbnails	პატარა ესკიზები
 	Status	სტატუსი
 	Unembedded to {}	ჩაშენება მოხსნილია: {}
 	Update Link	ბმულის განახლება
@@ -1567,7 +1567,7 @@ lighting	Light	სინათლე
 	Align:	სწორება:
 	Arrowheads:	ისრის წვერები:
 	Bevel Join	წაკვეთილი შეერთება
-	Butt Cap	ბლაგვი დაბოლოება
+	Butt Cap	ბრტყელი დაბოლოება
 	Cap:	დაბოლოება:
 	Corner:	კუთხე:
 	End arrowhead	ბოლო ისრის წვერი
@@ -1601,8 +1601,8 @@ lighting	Light	სინათლე
 	Global Process Color	გლობალური პროცესული ფერი
 	Global Process Color, CMYK	გლობალური პროცესული ფერი, CMYK
 	Large List View	დიდი სიის ხედი
-	Large Thumbnail View	დიდი მინიატურების ხედი
-	Medium Thumbnail View	საშუალო მინიატურების ხედი
+	Large Thumbnail View	დიდი ესკიზების ხედი
+	Medium Thumbnail View	საშუალო ესკიზების ხედი
 	Open a document to see its swatches.	გახსენით დოკუმენტი მისი ფერის ნიმუშების სანახავად.
 	Open Swatch Library	ფერის ნიმუშების ბიბლიოთეკის გახსნა
 	Process Color	პროცესული ფერი
@@ -1614,9 +1614,9 @@ lighting	Light	სინათლე
 	Show List View	სიის ხედის ჩვენება
 	Show Pattern Swatches	პატერნის ნიმუშების ჩვენება
 	Show Swatch Kinds	ნიმუშების სახეობების ჩვენება
-	Show Thumbnail View	მინიატურების ხედის ჩვენება
+	Show Thumbnail View	ესკიზების ხედის ჩვენება
 	Small List View	პატარა სიის ხედი
-	Small Thumbnail View	პატარა მინიატურების ხედი
+	Small Thumbnail View	პატარა ესკიზების ხედი
 	Swatch Libraries Menu	ფერის ნიმუშების ბიბლიოთეკების მენიუ
 	User Library	მომხმარებლის ბიბლიოთეკა
 	{kind} Gradient	{kind} გრადიენტი
@@ -1628,7 +1628,7 @@ lighting	Light	სინათლე
 	Center-Justified Tab	ცენტრით სწორებული ტაბულაცია
 	Above Text	ტექსტის ზემოთ
 	Position Panel Above Text	პანელის ტექსტის ზემოთ განთავსება
-	Click to add a tab stop, drag to move it, drag it off the ruler to delete it	დაწკაპეთ ტაბულაციის დასამატებლად, ჩაავლეთ გადასაადგილებლად, სახაზავიდან გაიტანეთ წასაშლელად
+	Click to add a tab stop, drag to move it, drag it off the ruler to delete it	დაწკაპეთ ტაბულაციის გაჩერების დასამატებლად, ჩაავლეთ გადასაადგილებლად, სახაზავიდან გაიტანეთ წასაშლელად
 	Decimal-Justified Tab	ათწილადი მძიმით სწორებული ტაბულაცია
 	Delete Tab	ტაბულაციის წაშლა
 	Leader:	მიმთითებელი:
@@ -1636,7 +1636,7 @@ lighting	Light	სინათლე
 	No text selected	ტექსტი მონიშნული არ არის
 	Repeat Tab	ტაბულაციის გამეორება
 	Right-Justified Tab	მარჯვნივ სწორებული ტაბულაცია
-	Select a text object to set its tab stops.	ტაბულაციის დასაყენებლად მონიშნეთ ტექსტური ობიექტი.
+	Select a text object to set its tab stops.	ტაბულაციის გაჩერებების დასაყენებლად მონიშნეთ ტექსტური ობიექტი.
 	Select text	მონიშნეთ ტექსტი
 	+ Add Scale	+ მასშტაბის დამატება
 	Add Selected Artwork as One Asset	მონიშნული ნახატის დამატება ერთ რესურსად
@@ -1659,7 +1659,7 @@ lighting	Light	სინათლე
 	Effective PPI	ეფექტური PPI
 	Embed Image(s)	გამოსახულებ(ებ)ის ჩაშენება
 	Embedded Image	ჩაშენებული გამოსახულება
-	Large Thumbnails	დიდი მინიატურები
+	Large Thumbnails	დიდი ესკიზები
 	Linked	დაკავშირებული
 	Location	მდებარეობა
 	No images	გამოსახულებები არ არის
@@ -1695,7 +1695,7 @@ lighting	Light	სინათლე
 	Transform Pattern Only	მხოლოდ პატერნის გარდაქმნა
 	Use Registration Point for Symbol	სიმბოლოსთვის მიბმის წერტილის გამოყენება
 	Click to edit the mask; Alt-click to view only the mask; Shift-click to disable or enable it	დაწკაპეთ ნიღბის რედაქტირებისთვის; Alt-დაწკაპუნება — მხოლოდ ნიღბის ნახვა; Shift-დაწკაპუნება — მისი გამორთვა ან ჩართვა
-	Hide Thumbnails	მინიატურების დამალვა
+	Hide Thumbnails	ესკიზების დამალვა
 	Invert Mask	ნიღბის ინვერსია
 	Isolate Blending	შერევის იზოლირება
 	Knockout Group	ჩაკვეთილი ჯგუფი
@@ -1703,7 +1703,7 @@ lighting	Light	სინათლე
 	Make Mask	ნიღბის შექმნა
 	Opacity & Mask Define Knockout Shape	გაუმჭვირვალობა და ნიღაბი განსაზღვრავს ჩაკვეთის ფორმას
 	Select the art (and, on top of it, the mask object)	მონიშნეთ ნახატი (და მის ზემოთ ნიღბის ობიექტი)
-	Show Thumbnails	მინიატურების ჩვენება
+	Show Thumbnails	ესკიზების ჩვენება
 	Stop editing the opacity mask	გაუმჭვირვალობის ნიღბის რედაქტირების დასრულება
 	Unlink the mask	ნიღბის კავშირის გაწყვეტა
 	Data Sets	მონაცემთა ნაკრებები
@@ -1727,8 +1727,8 @@ lighting	Light	სინათლე
 	Rotation relative to:	შემობრუნების ათვლა:
 	Brush Scale Options	ფუნჯის მასშტაბირების პარამეტრები
 	Scale Proportionately	პროპორციული მასშტაბირება
-	Stretch to Fit Stroke Length	კონტურის სიგრძეზე გაჭიმვა
-	Stretch Between Guides	დამხმარე ხაზებს შორის გაჭიმვა
+	Stretch to Fit Stroke Length	კონტურის სიგრძეზე გაწელვა
+	Stretch Between Guides	დამხმარე ხაზებს შორის გაწელვა
 	Start:	დასაწყისი:
 	End:	დასასრული:
 	Left to Right	მარცხნიდან მარჯვნივ
@@ -1741,7 +1741,7 @@ lighting	Light	სინათლე
 	Start Tile	საწყისი ფილა
 	End Tile	ბოლო ფილა
 	Fit	მორგება
-	Stretch to fit	მორგებამდე გაჭიმვა
+	Stretch to fit	მორგებამდე გაწელვა
 	Add space to fit	მორგებამდე დაშორების დამატება
 	Approximate path	მიახლოებითი ტრაექტორია
 	Colorization	შეფერადება
@@ -1822,7 +1822,7 @@ lighting	Light	სინათლე
 	Merge Layers	შრეების შერწყმა
 	Place DXF	DXF-ის განთავსება
 	Scale Lineweights	ხაზის სისქეების მასშტაბირება
-	Scale to Fit Artboard	სამუშაო დაფაზე მორგება
+	Scale to Fit Artboard	სამუშაო დაფაში ჩატევა
 	Scaling	მასშტაბირება
 	Alter Paths for Appearance	ტრაექტორიების შეცვლა იერსახის შესანარჩუნებლად
 	DXF Options	DXF-ის პარამეტრები
@@ -1867,7 +1867,7 @@ lighting	Light	სინათლე
 	Embed Fonts (for other applications)	შრიფტების ჩაშენება (სხვა აპლიკაციებისთვის)
 	EPS Options	EPS-ის პარამეტრები
 	Include CMYK PostScript in RGB Files	CMYK PostScript-ის ჩართვა RGB ფაილებში
-	Include Document Thumbnails	დოკუმენტის მინიატურების ჩართვა
+	Include Document Thumbnails	დოკუმენტის ესკიზების ჩართვა
 	Include Linked Files	დაკავშირებული ფაილების ჩართვა
 	Opaque	გაუმჭვირვალე
 	PostScript:	PostScript:
@@ -1981,7 +1981,7 @@ lighting	Light	სინათლე
 	Layers Panel Options	შრეების პანელის პარამეტრები
 	Row Size:	სტრიქონის ზომა:
 	Show Layers Only	მხოლოდ შრეების ჩვენება
-	Thumbnails:	მინიატურები:
+	Thumbnails:	ესკიზები:
 	Anchor Points	საყრდენი წერტილები
 	Brush Affects:	ფუნჯი მოქმედებს:
 	Complexity:	სირთულე:
@@ -1999,16 +1999,16 @@ lighting	Light	სინათლე
 	{tool} Options	{tool}: პარამეტრები
 	{tool} Tool Options	{tool}: ხელსაწყოს პარამეტრები
 	These fonts aren't available. Their text shows in another font.	ეს შრიფტები მიუწვდომელია. მათი ტექსტი სხვა შრიფტით ჩანს.
-	Search Fonts Folder	შრიფტების საქაღალდეში ძებნა
+	Search Fonts Folder	შრიფტების საქაღალდეში ძიება
 	Add Fonts	შრიფტების დამატება
 	Find Fonts	შრიფტების პოვნა
 	Stop	შეწყვეტა
-	Searching…	ძებნა…
+	Searching…	ძიება…
 	Not found	ვერ მოიძებნა
 	{folders} folder(s) and {files} file(s) searched	მოიძებნა საქაღალდეები: {folders}, ფაილები: {files}
 	{count} folder(s) skipped, such as other apps' and the system's folders and hidden ones	გამოტოვებული საქაღალდეები: {count} — მაგ. სხვა აპლიკაციების, სისტემის და დამალული საქაღალდეები
 	{count} folder(s) or file(s) couldn't be read	ვერ წაიკითხა საქაღალდეები ან ფაილები: {count}
-	The search stopped at its limit: search a smaller folder.	ძებნა ზღვარზე შეჩერდა: მოძებნეთ უფრო პატარა საქაღალდეში.
+	The search stopped at its limit: search a smaller folder.	ძიება ზღვარზე შეჩერდა: მოძებნეთ უფრო პატარა საქაღალდეში.
 	Copy only fonts you own or are licensed to install.	დააკოპირეთ მხოლოდ ის შრიფტები, რომლებიც გეკუთვნით ან რომელთა დაყენების ლიცენზია გაქვთ.
 	VectorCraft copies the fonts to {folder}.	VectorCraft შრიფტებს აკოპირებს აქ: {folder}.
 	Apply to All ({count} more missing)	ყველაზე გამოყენება (კიდევ დაკარგული: {count})
@@ -2041,7 +2041,7 @@ lighting	Light	სინათლე
 	Preset Name	პრესეტის სახელი
 	Preset {}	პრესეტი {}
 	Presets you save with the Save Preset button appear here.	ღილაკით „პრესეტის შენახვა“ შენახული პრესეტები აქ გამოჩნდება.
-	Preview Mode	წინასწარი ნახვის რეჟიმი
+	Preview Mode	გადახედვის რეჟიმი
 	RECENT	ბოლოდროინდელი
 	SAVED	შენახული
 	Templates…	შაბლონები…
@@ -2240,7 +2240,7 @@ lighting	Light	სინათლე
 	Delete this saved preset	ამ შენახული პრესეტის წაშლა
 	Dither:	დიზერინგი:
 	Downloaded {} file(s)	ჩამოტვირთულია ფაილი: {}
-	Fit in View	ხედში მორგება
+	Fit in View	ხედში ჩატევა
 	Format:	ფორმატი:
 	High	მაღალი
 	ICC Profile	ICC პროფილი
@@ -2298,7 +2298,7 @@ lighting	Light	სინათლე
 	Document open password	დოკუმენტის გახსნის პაროლი
 	Document profile	დოკუმენტის პროფილი
 	Edit PDF Preset	PDF პრესეტის რედაქტირება
-	Embed page thumbnails	გვერდების მინიატიურების ჩაშენება
+	Embed page thumbnails	გვერდების ესკიზების ჩაშენება
 	Enable copying of text, images and other content	ტექსტის, გამოსახულებებისა და სხვა შიგთავსის კოპირების დაშვება
 	Enable plaintext metadata	მეტამონაცემების დაუშიფრავად შენახვა
 	Enable text access for screen readers	ეკრანის მკითხველებისთვის ტექსტზე წვდომის დაშვება
@@ -2308,11 +2308,11 @@ lighting	Light	სინათლე
 	Files of a PDF standard can't be password-protected.	PDF სტანდარტის ფაილების პაროლით დაცვა შეუძლებელია.
 	Files of this standard tag their colours with ICC profiles.	ამ სტანდარტის ფაილები ფერებს ICC პროფილებით აღნიშნავს.
 	Flattener preset:	გაბრტყელების პრესეტი:
-	General › Thumbnails	ზოგადი › მინიატიურები
+	General › Thumbnails	ზოგადი › ესკიზები
 	Grayscale images	ნაცრისფერი გამოსახულებები
 	Include non-printing layers	არაბეჭდვადი შრეების ჩართვა
 	Left:	მარცხნივ:
-	Mark as trapped	ტრაპინგის მონიშვნა
+	Mark as trapped	ტრაპინგის მარკირება
 	Marks and Bleeds	ნიშნები და ჭრისპირა არეები
 	Monochrome images	მონოქრომული გამოსახულებები
 	New PDF Preset	ახალი PDF პრესეტი
@@ -2359,7 +2359,7 @@ lighting	Light	სინათლე
 	Save Graphic Style Library	გრაფიკული სტილების ბიბლიოთეკის შენახვა
 	Selected Styles Only	მხოლოდ მონიშნული სტილები
 	A File…	ფაილი…
-	GPL palettes keep solid colours only, as RGB.	GPL პალიტრები მხოლოდ ერთგვაროვან ფერებს ინახავს, RGB-ად.
+	GPL palettes keep solid colours only, as RGB.	GPL პალიტრები მხოლოდ მყარ ფერებს ინახავს, RGB-ად.
 	Save Swatch Library	ფერის ნიმუშების ბიბლიოთეკის შენახვა
 	Save To:	შენახვა:
 	Saved to User Defined: {}	შენახულია მომხმარებლის ბიბლიოთეკებში: {}
@@ -2385,7 +2385,7 @@ lighting	Light	სინათლე
 	Show and separate through the working CMYK space, as in older documents.	ჩვენება და სეპარაცია სამუშაო CMYK სივრცით, როგორც ძველ დოკუმენტებში.
 	CMYK Equivalents	CMYK ეკვივალენტები
 	Convert To Outlines	კონტურებად გარდაქმნა
-	Decimal:	ათწილადი ნიშნები მძიმის შემდეგ:
+	Decimal:	ციფრები მძიმის შემდეგ:
 	Embed Fonts (Glyphs Used)	შრიფტების ჩაშენება (გამოყენებული გლიფები)
 	Fewer <tspan> Elements	ნაკლები <tspan> ელემენტი
 	Font:	შრიფტი:
@@ -2609,7 +2609,7 @@ theme	Appearance	იერსახე
 	Rounded Rectangle	მომრგვალებული მართკუთხედი
 	Spiral	სპირალი
 	Export CSS	CSS-ის ექსპორტირება
-	Generate CSS	CSS-ის გენერირება
+	Generate CSS	CSS-ის გენერაცია
 	Line Cut	ხაზით ჭრა
 	Mirror & Cut	არეკვლა და ჭრა
 	Rectangle Cut	მართკუთხედით ჭრა
@@ -2629,7 +2629,7 @@ theme	Appearance	იერსახე
 	Add Guide	დამხმარე ხაზის დამატება
 	Edit Selection	მონიშნულის რედაქტირება
 	Recall Selection	მონიშნულის აღდგენა
-	Remove Guide	დამხმარე ხაზის წაშლა
+	Remove Guide	დამხმარე ხაზის მოცილება
 	Saved Selections	შენახული მონიშვნები
 	Select Guides	დამხმარე ხაზების მონიშვნა
 	Move Guide to Layer	დამხმარე ხაზის შრეზე გადატანა
@@ -2707,7 +2707,7 @@ theme	Appearance	იერსახე
 	Select Freeform Point	თავისუფალი წერტილის მონიშვნა
 	Split Freeform Line	თავისუფალი ხაზის გაყოფა
 	Gradient Vector	გრადიენტის ვექტორი
-	Select Gradient Stop	გრადიენტის წერტილის მონიშვნა
+	Select Gradient Stop	გრადიენტის გადასვლის წერტილის მონიშვნა
 	Create Graph	გრაფიკის შექმნა
 	Graph Data	გრაფიკის მონაცემები
 	Graph Type	გრაფიკის ტიპი
@@ -2845,7 +2845,7 @@ theme	Appearance	იერსახე
 	Character / Paragraph	სიმბოლო / აბზაცი
 	Copy Artboard	სამუშაო დაფის კოპირება
 	Cut Artboard	სამუშაო დაფის ამოჭრა
-	Move Artboard Up/Down	სამუშაო დაფის ზემოთ/ქვემოთ გადატანა
+	Move Artboard Up/Down	სამუშაო დაფის აწევა/ჩამოწევა
 	Add Anchor (Pen)	საყრდენი წერტილის დამატება (კალამი)
 	Add Anchor Point	საყრდენი წერტილის დამატება
 	Average	საშუალო
@@ -2974,7 +2974,7 @@ theme	Appearance	იერსახე
 	Lines	ხაზები
 	List Preferences	პარამეტრების სია
 	Manually	ხელით
-	Mark Older Files as [Converted] When Opened	ძველი ფაილების მონიშვნა როგორც [გარდაქმნილი] გახსნისას
+	Mark Older Files as [Converted] When Opened	ძველი ფაილების მარკირება როგორც [გარდაქმნილი] გახსნისას
 	Match User Interface Brightness	ინტერფეისის სიკაშკაშესთან შესაბამისობა
 	Light Gray	ღია ნაცრისფერი
 	Medium Gray	საშუალო ნაცრისფერი
@@ -2982,7 +2982,7 @@ theme	Appearance	იერსახე
 	Measurement Labels	გაზომვის წარწერები
 	Meters	მეტრები
 	Move Locked and Hidden Artwork with Artboard	ჩაკეტილი და დამალული ნახატის სამუშაო დაფასთან ერთად გადაადგილება
-	Number of Recent Files to Display	საჩვენებელი ბოლოდროინდელი ფაილების რაოდენობა
+	Number of Recent Files to Display	საჩვენებელი ბოლოს გახსნილი ფაილების რაოდენობა
 	Number of Recent Fonts	ბოლოდროინდელი შრიფტების რაოდენობა
 	Numbers Without Units Are Points	ერთეულის გარეშე რიცხვები პუნქტებია
 	Object Highlighting	ობიექტების გამოკვეთა
@@ -3117,8 +3117,8 @@ theme	Appearance	იერსახე
 	Copy to User Defined	მომხმარებლის განსაზღვრულში კოპირება
 	Swatch Library	ფერის ნიმუშების ბიბლიოთეკა
 	Clear All Tabs	ყველა ტაბულაციის გასუფთავება
-	Set Tab Stops	ტაბულაციის პოზიციების დაყენება
-	Tab Stops	ტაბულაციის პოზიციები
+	Set Tab Stops	ტაბულაციის გაჩერებების დაყენება
+	Tab Stops	ტაბულაციის გაჩერებები
 	Flare	ბლიკი
 	Rays	სხივები
 	Rectangle	მართკუთხედი
@@ -3136,7 +3136,7 @@ theme	Appearance	იერსახე
 	Document Setup	დოკუმენტის პარამეტრები
 	French	ფრანგული
 	German	გერმანული
-	Inches	დიუმები
+	Inches	დუიმები
 	Japanese	იაპონური
 	Millimeters	მილიმეტრები
 	Points	პუნქტები
@@ -3195,7 +3195,7 @@ axis	Both	ორივე
 	Area Type Options	არის ტექსტის პარამეტრები
 	Reshape Type Area	ტექსტის არის ფორმის შეცვლა
 	Scale	მასშტაბი
-	Feet & Inches	ფუტები და დიუმები
+	Feet & Inches	ფუტები და დუიმები
 	Pixels	პიქსელები
 	More	მეტი
 	Show	ჩვენება
@@ -3274,7 +3274,7 @@ effect	Regular	ჩვეულებრივი
 	New file	ახალი ფაილი
 	Open	გახსნა
 	Quickly start a new file	ახალი ფაილის სწრაფად შექმნა
-	Recent Files	ბოლოდროინდელი ფაილები
+	Recent Files	ბოლოს გახსნილი ფაილები
 	Vector illustration — fast, open, scriptable.	ვექტორული ილუსტრაცია — სწრაფი, ღია, სკრიპტებით მართვადი.
 	Welcome to VectorCraft	კეთილი იყოს თქვენი მობრძანება VectorCraft-ში
 	ArtCraft website	ArtCraft-ის ვებსაიტი
@@ -3287,8 +3287,8 @@ effect	Regular	ჩვეულებრივი
 	Reset	ჩამოყრა
 	  — missing	  — აკლია
 	(closest)	(უახლოესი)
-	Change	ჩანაცვლება
-	Change All	ყველას ჩანაცვლება
+	Change	შეცვლა
+	Change All	ყველას შეცვლა
 	Find	ძებნა
 	Find Font	შრიფტის ძებნა
 	Fonts in Document: {count}	დოკუმენტის შრიფტები: {count}
@@ -3328,7 +3328,7 @@ effect	Regular	ჩვეულებრივი
 	Saved {path} with {} note(s): {first}	შენახულია: {path}, შენიშვნა ({}): {first}
 	Saving	შენახვა
 	Saving {}	ინახება: {}
-	Search commands and tools…	ბრძანებებისა და ხელსაწყოების ძებნა…
+	Search commands and tools…	ბრძანებებისა და ხელსაწყოების ძიება…
 	Dashed Line	ტირეებიანი ხაზი
 	Panel menu	პანელის მენიუ
 	Unembed…	ჩაშენების მოხსნა…
@@ -3340,7 +3340,7 @@ effect	Regular	ჩვეულებრივი
 	Previous	წინა
 	Restore every preference to its default (applied on OK)	ყველა პარამეტრის ნაგულისხმევ მნიშვნელობაზე დაბრუნება (გამოიყენება OK-ზე დაჭერისას)
 	Smaller ↔ Larger	უფრო პატარა ↔ უფრო დიდი
-	Smart Guides (View → Smart Guides)	ჭკვიანი დამხმარე ხაზები (ჩვენება → ჭკვიანი დამხმარე ხაზები)
+	Smart Guides (View → Smart Guides)	ჭკვიანი დამხმარე ხაზები (ხედი → ჭკვიანი დამხმარე ხაზები)
 	Couldn't save recovery data: {e}	აღდგენის მონაცემები ვერ შეინახა: {e}
 	Discarded {} recovered document(s)	უკუგდებულია აღდგენილი დოკუმენტი ({})
 	Restored {} recovered document(s): save them to keep them	აღდგენილია დოკუმენტი ({}): შესანარჩუნებლად შეინახეთ
@@ -3356,7 +3356,7 @@ effect	Regular	ჩვეულებრივი
 	Channel	არხი
 	Circle	წრე
 	Clip to Art	ნახატზე მოჭრა
-	Colorize	შეფერადება
+	Colorize	გაფერადება
 	Gamma	გამა
 	Hue	ფერის ტონი
 	Input Black	შემავალი შავი
@@ -3372,9 +3372,9 @@ effect	Regular	ჩვეულებრივი
 	Axis:	ღერძი:
 	Free	თავისუფალი
 	Keep:	შენარჩუნება:
-	Search	ძებნა
+	Search	ძიება
 	Classic Defaults	კლასიკური ნაგულისხმევი
-	Uniform	თანაბარი
+	Uniform	ერთგვაროვანი
 	Include Blacks with CMY:	შავის ჩართვა CMY-სთან ერთად:
 	Recolor	ხელახლა შეფერადება
 	Swatch Tiles	ფერის ნიმუშების ფილები
@@ -3573,7 +3573,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Live Paint: these paths are too degenerate to paint	ცოცხალი შეღებვა: ეს ტრაექტორიები ზედმეტად გადაგვარებულია შესაღებად
 @msg	Make Guides: select paths	დამხმარე ხაზების შექმნა: მონიშნეთ ტრაექტორიები
 @msg	No saved selections (Select → Save Selection…)	შენახული მონიშვნები არ არის (მონიშვნა → მონიშნულის შენახვა…)
-@msg	No saved views (View → New View…)	შენახული ხედები არ არის (ჩვენება → ახალი ხედი…)
+@msg	No saved views (View → New View…)	შენახული ხედები არ არის (ხედი → ახალი ხედი…)
 @msg	Offset Path: select paths	ტრაექტორიის წანაცვლება: მონიშნეთ ტრაექტორიები
 @msg	Opened with {_1} note(s): {_2}	გაიხსნა, შენიშვნა ({_1}): {_2}
 @msg	Opened {url}	გაიხსნა {url}
@@ -3650,7 +3650,7 @@ effect	Regular	ჩვეულებრივი
 @msg	a document needs at least one artboard	დოკუმენტს სჭირდება მინიმუმ ერთი სამუშაო დაფა
 @msg	a document needs at least one layer	დოკუმენტს სჭირდება მინიმუმ ერთი შრე
 @msg	a freeform gradient keeps at least one point	თავისუფალი ფორმის გრადიენტი ინარჩუნებს მინიმუმ ერთ წერტილს
-@msg	a gradient needs at least two stops	გრადიენტს სჭირდება მინიმუმ ორი წერტილი
+@msg	a gradient needs at least two stops	გრადიენტს სჭირდება მინიმუმ ორი გადასვლის წერტილი
 @msg	a graphic style named `{to}` already exists	გრაფიკული სტილი სახელით `{to}` უკვე არსებობს
 @msg	a page is missing	გვერდი აკლია
 @msg	a page out of range	გვერდი დიაპაზონს გარეთაა
@@ -3701,7 +3701,7 @@ effect	Regular	ჩვეულებრივი
 @msg	compound paths can only contain paths	შედგენილი ტრაექტორია მხოლოდ ტრაექტორიებს შეიძლება შეიცავდეს
 @msg	compressed (RLE) bitmaps can't be read yet	შეკუმშული (RLE) ბიტმაპების წაკითხვა ჯერ არ ხერხდება
 @msg	damaged	დაზიანებულია
-@msg	decimals must be {_1}–{_2} (got {_3})	მძიმის შემდეგ ათწილადი ნიშნები უნდა იყოს {_1}–{_2} (მიღებულია {_3})
+@msg	decimals must be {_1}–{_2} (got {_3})	ციფრები მძიმის შემდეგ უნდა იყოს {_1}–{_2} (მიღებულია {_3})
 @msg	divide into 1 to {MAX_PIECES} slices	დაყავით 1-დან {MAX_PIECES}-მდე ნაჭრად
 @msg	effect {k} is `{_1}`, not `{id}`	ეფექტი {k} არის `{_1}` და არა `{id}`
 @msg	empty brush stroke	ცარიელი ფუნჯის შტრიხი
@@ -3778,7 +3778,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no files to place	განსათავსებელი ფაილები არ არის
 @msg	no format to export to	ექსპორტის ფორმატი არ არის
 @msg	no free recovery area	აღდგენის თავისუფალი არე არ არის
-@msg	no gradient stop or freeform point is selected	გრადიენტის წერტილი ან თავისუფალი წერტილი მონიშნული არ არის
+@msg	no gradient stop or freeform point is selected	გრადიენტის გადასვლის წერტილი ან თავისუფალი წერტილი მონიშნული არ არის
 @msg	no graphic style `{name}`	გრაფიკული სტილი `{name}` არ არის
 @msg	no graphic style `{n}`	გრაფიკული სტილი `{n}` არ არის
 @msg	no interaction in progress	მიმდინარე ურთიერთქმედება არ არის
@@ -3814,7 +3814,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no such layer or object	ასეთი შრე ან ობიექტი არ არის
 @msg	no such object {0}	ასეთი ობიექტი {0} არ არის
 @msg	no such perspective grid preset	პერსპექტივის ბადის ასეთი პრესეტი არ არის
-@msg	no such recent file	ასეთი ბოლოდროინდელი ფაილი არ არის
+@msg	no such recent file	ასეთი ბოლოს გახსნილი ფაილი არ არის
 @msg	no such recent font	ასეთი ბოლოდროინდელი შრიფტი არ არის
 @msg	no such saved selection	ასეთი შენახული მონიშვნა არ არის
 @msg	no such segment	ასეთი სეგმენტი არ არის
@@ -3915,9 +3915,9 @@ effect	Regular	ჩვეულებრივი
 @msg	shadings of more than 4096 patches or triangles were left out	4096-ზე მეტი ნაწილის ან სამკუთხედის მქონე დაჩრდილვები გამოტოვებულია
 @msg	shadings whose functions are of an unknown type are filled with their middle colour	დაჩრდილვები, რომელთა ფუნქციები უცნობი ტიპისაა, მათი შუა ფერით ივსება
 @msg	shortcut for `{k}` must be a string	`{k}`-ის მალსახმობი სტრიქონი უნდა იყოს
-@msg	stop {i} needs `offset`	გაჩერებას {i} სჭირდება `offset`
-@msg	stop {i} needs a valid `color`	გაჩერებას {i} სჭირდება სწორი `color`
-@msg	stop {i}: `{k}` must be a number	გაჩერება {i}: `{k}` რიცხვი უნდა იყოს
+@msg	stop {i} needs `offset`	გადასვლის წერტილს {i} სჭირდება `offset`
+@msg	stop {i} needs a valid `color`	გადასვლის წერტილს {i} სჭირდება სწორი `color`
+@msg	stop {i}: `{k}` must be a number	გადასვლის წერტილი {i}: `{k}` რიცხვი უნდა იყოს
 @msg	the EMF header is damaged	EMF-ის სათაური დაზიანებულია
 @msg	the PDF has no pages	PDF-ს გვერდები არ აქვს
 @msg	the PDF is no longer loaded	PDF აღარ არის ჩატვირთული
@@ -3971,7 +3971,7 @@ effect	Regular	ჩვეულებრივი
 @msg	the selection has no URL (or they differ)	მონიშნულს URL არ აქვს (ან ისინი განსხვავდება)
 @msg	the selection isn't in perspective	მონიშნული პერსპექტივაში არ არის
 @msg	the stroke has no weight	კონტურს სისქე არ აქვს
-@msg	the thumbnail image is malformed	მინიატიურის გამოსახულება დაზიანებულია
+@msg	the thumbnail image is malformed	ესკიზის გამოსახულება დაზიანებულია
 @msg	the top object must be a path, compound path or text object to use as a clipping mask	მომჭრელ ნიღბად გამოსაყენებლად ზედა ობიექტი უნდა იყოს ტრაექტორია, შედგენილი ტრაექტორია ან ტექსტური ობიექტი
 @msg	the {tool} tool has no options	ხელსაწყოს {tool} პარამეტრები არ აქვს
 @msg	there are no objects to release	გასათავისუფლებელი ობიექტები არ არის
@@ -4039,7 +4039,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Saved {n} files beside {path}	{path}-ის გვერდით შენახულია ფაილები: {n}
 @msg	Saving	შენახვა
 @msg	Saving {_1}	{_1}-ის შენახვა
-@msg	Exporting {_1}	{_1}-ის ექსპორტირება
+@msg	Exporting {_1}	ექსპორტირდება: {_1}
 @msg	Saving recovery data for {_1}	{_1}-ის აღდგენის მონაცემების შენახვა
 @msg	Discarded {_1} recovered document(s)	უარყოფილია აღდგენილი დოკუმენტები: {_1}
 @msg	Restored {_1} recovered document(s): save them to keep them	აღდგენილია დოკუმენტები: {_1}: შესანარჩუნებლად შეინახეთ ისინი
@@ -4091,9 +4091,9 @@ effect	Regular	ჩვეულებრივი
 @msg	VectorCraft doesn't search other apps' or the system's folders: {path}	VectorCraft არ ეძებს სხვა აპების ან სისტემის საქაღალდეებში: {path}
 @msg	VectorCraft doesn't search the Shared or Public folder in Users: {path}	VectorCraft არ ეძებს Users-ის Shared ან Public საქაღალდეში: {path}
 @msg	{path} is not a folder	{path} საქაღალდე არ არის
-@msg	the search couldn't start: try again in a moment	ძებნა ვერ დაიწყო: ცოტა ხანში სცადეთ ხელახლა
-@msg	searching a folder isn't available on the web	საქაღალდეში ძებნა ვებში მიუწვდომელია
-@msg	every search thread stopped on an internal error (please report this bug)	ძებნის ყველა ნაკადი შიდა შეცდომით შეჩერდა (გთხოვთ, შეგვატყობინოთ ეს ხარვეზი)
+@msg	the search couldn't start: try again in a moment	ძიება ვერ დაიწყო: ცოტა ხანში სცადეთ ხელახლა
+@msg	searching a folder isn't available on the web	საქაღალდეში ძიება ვებში მიუწვდომელია
+@msg	every search thread stopped on an internal error (please report this bug)	ძიების ყველა ნაკადი შიდა შეცდომით შეჩერდა (გთხოვთ, შეგვატყობინოთ ეს ხარვეზი)
 @msg	VectorCraft's Fonts folder isn't set here: the desktop app and vectorcraft-cli set it	VectorCraft-ის შრიფტების საქაღალდე აქ დაყენებული არ არის: მას აყენებს სამაგიდო აპი და vectorcraft-cli
 @msg	choose the font files to add	აირჩიეთ დასამატებელი შრიფტის ფაილები
 @msg	{n} font file(s) are now in {folder}	შრიფტის ფაილები ({n}) ახლა აქ არის: {folder}
@@ -4199,7 +4199,7 @@ effect	Regular	ჩვეულებრივი
 	Profile Cover 1500×500	პროფილის ყდა 1500×500
 	Page Cover 1640×624	გვერდის ყდა 1640×624
 	Video Banner 2560×1440	ვიდეოს ბანერი 2560×1440
-	Video Thumbnail 1280×720	ვიდეოს მინიატიურა 1280×720
+	Video Thumbnail 1280×720	ვიდეოს ესკიზი 1280×720
 	Keyboard Shortcuts	კლავიატურის მალსახმობები
 	Set:	ნაკრები:
 	Reset to Defaults	ნაგულისხმევზე დაბრუნება
@@ -4226,7 +4226,7 @@ effect	Regular	ჩვეულებრივი
 	Visible Layers	ხილული შრეები
 	All Layers	ყველა შრე
 	Do Not Scale	მასშტაბის გარეშე
-	Fit to Page	გვერდზე მორგება
+	Fit to Page	გვერდში ჩატევა
 	Custom Scale	მორგებული მასშტაბი
 	Tile Imageable Areas	დასაბეჭდ არეებად დაყოფა
 	Composite	კომპოზიტი
@@ -4321,7 +4321,7 @@ effect	Regular	ჩვეულებრივი
 	High Contrast 3	მაღალი კონტრასტი 3
 	Pentagram	პენტაგრამა
 	Perceptual	აღქმითი
-	Relative Colorimetric	ფარდობითი კოლორიმეტრიული
+	Relative Colorimetric	შეფარდებით კოლორიმეტრული
 	Absolute Colorimetric	აბსოლუტური კოლორიმეტრიული
 	Exact	ზუსტი
 	Preserve Tints	ტონირებების შენარჩუნება
@@ -4425,7 +4425,7 @@ effect	Regular	ჩვეულებრივი
 	Import Data…	მონაცემების იმპორტირება…
 	Transpose	ტრანსპოზიცია
 	Switch x/y	x/y-ის გაცვლა
-	Number of Decimals:	ათწილადი ნიშნების რაოდენობა:
+	Number of Decimals:	ციფრების რაოდენობა მძიმის შემდეგ:
 	Column Width:	სვეტის სიგანე:
 	No Legend	ლეგენდის გარეშე
 	Standard Legend	სტანდარტული ლეგენდა

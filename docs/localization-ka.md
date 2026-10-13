@@ -39,8 +39,8 @@ Follow this table when adding strings; it is the Georgian as the catalog has it 
 
 | Source | Georgian |
 |---|---|
-| File / Edit / Object / Type / Select / Effect / View / Window / Help | ფაილი / რედაქტირება / ობიექტი / ტექსტი / მონიშვნა / ეფექტი / ჩვენება / ფანჯარა / დახმარება |
-| Undo / Redo / Paste | დაბრუნება / ხელახლა შესრულება / ჩასმა |
+| File / Edit / Object / Type / Select / Effect / View / Window / Help | ფაილი / რედაქტირება / ობიექტი / ტექსტი / მონიშვნა / ეფექტი / ხედი / ფანჯარა / დახმარება |
+| Undo / Redo / Paste | დაბრუნება / გამეორება / ჩასმა |
 | Artboard / Artboard Tool | სამუშაო დაფა / სამუშაო დაფის ხელსაწყო |
 | Layers | შრეები |
 | Path / Anchor Point Tool | ტრაექტორია / საყრდენი წერტილის ხელსაწყო |
