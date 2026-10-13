@@ -37,7 +37,7 @@
 	Close	დახურვა
 	Close All	ყველას დახურვა
 	Save	შენახვა
-	Save As…	შენახვა სხვა სახელით…
+	Save As…	შენახვა როგორც…
 	Save a Copy…	ასლის შენახვა…
 	Save as Template…	შაბლონად შენახვა…
 	Save as PDF…	PDF-ად შენახვა…
@@ -115,11 +115,11 @@
 	Transform Each…	თითოეულის გარდაქმნა…
 	Reset Bounding Box	შემომსაზღვრელი ჩარჩოს ჩამოყრა
 	Arrange	დალაგება
-	Bring to Front	წინა პლანზე გადატანა
+	Bring to Front	წინა პლანზე გადმოტანა
 	Bring Forward	წინ გადმოტანა
 	Send Backward	უკან გადატანა
 	Send to Back	უკანა პლანზე გადატანა
-	Send to Current Layer	მიმდინარე ფენაზე გადატანა
+	Send to Current Layer	მიმდინარე შრეზე გადატანა
 	Align	სწორება
 	Horizontal Align Left	ჰორიზონტალურად მარცხნივ სწორება
 	Horizontal Align Center	ჰორიზონტალურად ცენტრში სწორება
@@ -132,7 +132,7 @@
 	Lock	ჩაკეტვა
 	Selection	მონიშნული
 	All Artwork Above	ზემოთ მდებარე მთელი ნახატი
-	Other Layers	სხვა ფენები
+	Other Layers	სხვა შრეები
 	Unlock All	ყველაფრის განბლოკვა
 	Hide	დამალვა
 	Show All	ყველას ჩვენება
@@ -141,7 +141,7 @@
 	Crop Image	გამოსახულების ჩამოჭრა
 	Mask	ნიღაბი
 	Rasterize…	რასტრირება…
-	Create Gradient Mesh…	გრადიენტული ქსელის შექმნა…
+	Create Gradient Mesh…	გრადიენტული ბადის შექმნა…
 	Create Object Mosaic…	ობიექტების მოზაიკის შექმნა…
 	Vector Halftone…	ვექტორული ნახევარტონი…
 	Create Trim Marks	ჭრის ნიშნების შექმნა
@@ -191,8 +191,8 @@
 	Envelope Distort	გარსით დეფორმაცია
 	Make with Warp…	გაღუნვით შექმნა…
 	Reset with Warp…	გაღუნვით გადაყენება…
-	Make with Mesh…	ქსელით შექმნა…
-	Reset with Mesh…	ქსელით გადაყენება…
+	Make with Mesh…	ბადით შექმნა…
+	Reset with Mesh…	ბადით გადაყენება…
 	Make with Top Object	ზედა ობიექტით შექმნა
 	Envelope Options…	გარსის პარამეტრები…
 	Edit Contents	შიგთავსის რედაქტირება
@@ -322,7 +322,7 @@
 	Font Size	შრიფტის ზომა
 	Text Fill Color	ტექსტის შევსების ფერი
 	Text Stroke Color	ტექსტის კონტურის ფერი
-	All on Same Layers	ყველა იმავე ფენებზე
+	All on Same Layers	ყველა იმავე შრეებზე
 	Direction Handles	მიმართულების სახელურები
 	Brush Strokes	ფუნჯის შტრიხები
 	Bristle Brush Strokes	ჯაგრისის ფუნჯის შტრიხები
@@ -519,7 +519,7 @@
 	Graphic Styles	გრაფიკული სტილები
 	History	ისტორია
 	Info	ინფორმაცია
-	Layers	ფენები
+	Layers	შრეები
 	Libraries	ბიბლიოთეკები
 	Links	ბმულები
 	{count} linked image(s) changed on disk. Show the new versions?	დისკზე შეიცვალა დაკავშირებული გამოსახულებები ({count}). ვაჩვენო ახალი ვერსიები?
@@ -551,7 +551,7 @@
 	Previous Data Set	მონაცემთა წინა ნაკრები
 	Make Text Dynamic	ტექსტის დინამიკურად ქცევა
 	Make Visibility Dynamic	ხილვადობის დინამიკურად ქცევა
-	Capture Data Set	მონაცემთა ნაკრების დაფიქსირება
+	Capture Data Set	მონაცემთა ნაკრების ჩაწერა
 	Update Data Set	მონაცემთა ნაკრების განახლება
 	Rename Data Set…	მონაცემთა ნაკრების გადარქმევა…
 	Variable Options…	ცვლადის პარამეტრები…
@@ -678,7 +678,7 @@
 	Mezzotint…	მეცოტინტა…
 	Pointillize…	პუანტილიზმი…
 	Video	ვიდეო
-	De-Interlace…	ჩაწნულობის მოხსნა…
+	De-Interlace…	სტრიქონგამოტოვების მოცილება…
 	NTSC Colors	NTSC ფერები
 	RGB:	RGB:
 	CMYK:	CMYK:
@@ -721,7 +721,7 @@
 	Reset all	ყველაფრის ჩამოყრა
 	Reset to default	ნაგულისხმევზე დაბრუნება
 	Reset all Revolve settings to their defaults.	ბრუნვის ყველა პარამეტრის ნაგულისხმევზე დაბრუნება.
-	Drag values or labels. Double-click a value to type.	გადაათრიეთ მნიშვნელობები ან წარწერები. მნიშვნელობის ასაკრეფად ორჯერ დააწკაპუნეთ.
+	Drag values or labels. Double-click a value to type.	გადაათრიეთ მნიშვნელობები ან წარწერები. მნიშვნელობის ასაკრეფად ორჯერ დაწკაპეთ.
 	Drag rings to rotate. Shift snaps to 15°.	შესაბრუნებლად გადაათრიეთ რგოლები. Shift მიაბამს 15°-ის ჯერად კუთხეებზე.
 	Drag the light, or its rings. Shift snaps to 15°.	გადაათრიეთ სინათლე ან მისი რგოლები. Shift მიაბამს 15°-ის ჯერად კუთხეებზე.
 lighting	Light	სინათლე
@@ -732,7 +732,7 @@ lighting	Light	სინათლე
 	Offset	წანაცვლება
 	Rotation	შემობრუნება
 	Cancel	გაუქმება
-	Accented Edges…	ხაზგასმული კიდეები…
+	Accented Edges…	აქცენტირებული კიდეები…
 	Angled Strokes…	დახრილი შტრიხები…
 	Crosshatch…	ჯვარედინი შტრიხები…
 	Dark Strokes…	მუქი შტრიხები…
@@ -761,7 +761,7 @@ lighting	Light	სინათლე
 	Edit Views	ხედების რედაქტირება
 	Effect…	ეფექტი…
 	EPS Options Dialog	EPS პარამეტრების დიალოგი
-	Expand Layers Panel Rows	ფენების პანელის სტრიქონების გაშლა
+	Expand Layers Panel Rows	შრეების პანელის სტრიქონების გაშლა
 	Export CSS…	CSS-ის ექსპორტირება…
 	Export Keyboard Shortcuts…	კლავიატურის მალსახმობების ექსპორტირება…
 	File Info Dialog	ფაილის ინფორმაციის დიალოგი
@@ -782,7 +782,7 @@ lighting	Light	სინათლე
 	Menu Dialog	მენიუს დიალოგი
 	Merge Graphic Styles…	გრაფიკული სტილების შერწყმა…
 	New Color Group…	ახალი ფერთა ჯგუფი…
-	New Layer Options…	ახალი ფენის პარამეტრები…
+	New Layer Options…	ახალი შრის პარამეტრები…
 	New Swatch…	ფერის ახალი ნიმუში…
 	No saved views (View → New View…)	შენახული ხედები არ არის (ჩვენება → ახალი ხედი…)
 	One Point Perspective Preset 1	ერთწერტილიანი პერსპექტივის პრესეტი 1
@@ -895,7 +895,7 @@ lighting	Light	სინათლე
 	Three Point Perspective Preset 5	სამწერტილიანი პერსპექტივის პრესეტი 5
 	Tool Option	ხელსაწყოს პარამეტრი
 	Tool Options…	ხელსაწყოს პარამეტრები…
-	Toolbar: Advanced / Basic	ხელსაწყოთა ზოლი: გაფართოებული / ძირითადი
+	Toolbar: Advanced / Basic	ხელსაწყოთა ზოლი: გაფართოებული / საბაზო
 	Toolbar: Single/Double Column	ხელსაწყოთა ზოლი: ერთი/ორი სვეტი
 	Toolbar: Add Tool	ხელსაწყოთა ზოლი: ხელსაწყოს დამატება
 	Toolbar: Remove Tool	ხელსაწყოთა ზოლი: ხელსაწყოს ამოშლა
@@ -933,9 +933,9 @@ lighting	Light	სინათლე
 	Anchor Point	საყრდენი წერტილი
 	Anchors:	საყრდენი წერტილები:
 	Click	დაწკაპუნება
-	Click an anchor point	დააწკაპუნეთ საყრდენ წერტილზე
+	Click an anchor point	დაწკაპეთ საყრდენ წერტილზე
 	Click or drag	დაწკაპუნება ან გადათრევა
-	Click the first point	დააწკაპუნეთ პირველ წერტილზე
+	Click the first point	დაწკაპეთ პირველ წერტილზე
 	Connect Selected End Points	მონიშნული ბოლო წერტილების შეერთება
 	Convert Selected Anchor Points to Corner	მონიშნული საყრდენი წერტილების კუთხოვნად გარდაქმნა
 	Convert Selected Anchor Points to Smooth	მონიშნული საყრდენი წერტილების გლუვად გარდაქმნა
@@ -1027,7 +1027,7 @@ lighting	Light	სინათლე
 	Navigate	ნავიგაცია
 	None (/)	არცერთი (/)
 	Select All Pins	ყველა სამაგრის მონიშვნა
-	Show Mesh	ქსელის ჩვენება
+	Show Mesh	ბადის ჩვენება
 	Toggle single/double column	ერთი/ორი სვეტის გადართვა
 	W:	სიგ.:
 	Drag to float the toolbar	გადაათრიეთ ხელსაწყოთა ზოლის მცურავად გადასაქცევად
@@ -1063,7 +1063,7 @@ lighting	Light	სინათლე
 	Live Paint Selection Tool	ცოცხალი შეღებვის მონიშვნის ხელსაწყო
 	Magic Wand Tool	ჯადოსნური ჯოხის ხელსაწყო
 	Measure Tool	გაზომვის ხელსაწყო
-	Mesh Tool	გრადიენტული ქსელის ხელსაწყო
+	Mesh Tool	გრადიენტული ბადის ხელსაწყო
 	Mirror & Cut Tool	არეკვლით ჭრის ხელსაწყო
 	Paintbrush Tool	ფუნჯის ხელსაწყო
 	Path Eraser Tool	ტრაექტორიის საშლელის ხელსაწყო
@@ -1150,12 +1150,12 @@ lighting	Light	სინათლე
 	Vertical Distribute Space	ვერტიკალური განაწილება დაშორებით
 	Vertical Distribute Top	ვერტიკალური განაწილება ზედა კიდით
 	Add New Effect	ახალი ეფექტის დამატება
-	Click to choose a swatch, Shift-click to mix a colour	დააწკაპუნეთ ფერის ნიმუშის ასარჩევად, Shift-დაწკაპუნებით — ფერის შესარევად
-	Click to toggle visibility	დააწკაპუნეთ ხილვადობის გადასართავად
+	Click to choose a swatch, Shift-click to mix a colour	დაწკაპეთ ფერის ნიმუშის ასარჩევად, Shift-დაწკაპუნებით — ფერის შესარევად
+	Click to toggle visibility	დაწკაპეთ ხილვადობის გადასართავად
 	Dashed	ტირეებიანი
 	Delete Selected Item	მონიშნული ელემენტის წაშლა
-	Double-click to edit the characters' paint	ორჯერ დააწკაპუნეთ სიმბოლოების შეღებვის რედაქტირებისთვის
-	Double-click to target the contents	ორჯერ დააწკაპუნეთ შიგთავსის ასარჩევად
+	Double-click to edit the characters' paint	ორჯერ დაწკაპეთ სიმბოლოების შეღებვის რედაქტირებისთვის
+	Double-click to target the contents	ორჯერ დაწკაპეთ შიგთავსის ასარჩევად
 	Drag onto art to apply this appearance	ჩაავლეთ ნახატზე ამ იერსახის გამოსაყენებლად
 	Duplicate Selected Item	მონიშნული ელემენტის დუბლირება
 	Fill:	შევსება:
@@ -1183,8 +1183,8 @@ lighting	Light	სინათლე
 	Scale Artwork with Artboard	ნახატის მასშტაბირება სამუშაო დაფასთან ერთად
 	Add Selected Artwork (Alt: as one asset)	მონიშნული ნახატის დამატება (Alt: ერთ რესურსად)
 	Add Selected Artwork as Multiple Assets	მონიშნული ნახატის დამატება რამდენიმე რესურსად
-	Double-click to rename	ორჯერ დააწკაპუნეთ სახელის გადასარქმევად
-	Drag art here, or select it and click +. Hold Alt for one asset of several objects.	ჩაავლეთ ნახატი აქ, ან მონიშნეთ და დააწკაპუნეთ +-ზე. რამდენიმე ობიექტის ერთ რესურსად დასამატებლად დააჭირეთ Alt-ს.
+	Double-click to rename	ორჯერ დაწკაპეთ სახელის გადასარქმევად
+	Drag art here, or select it and click +. Hold Alt for one asset of several objects.	ჩაავლეთ ნახატი აქ, ან მონიშნეთ და დაწკაპეთ +-ზე. რამდენიმე ობიექტის ერთ რესურსად დასამატებლად დააჭირეთ Alt-ს.
 	Export the selected assets (else all of them)	მონიშნული რესურსების ექსპორტირება (თუ არაფერია მონიშნული — ყველასი)
 	Export {count} Selected	მონიშნულის ექსპორტირება: {count}
 	Select All Assets	ყველა რესურსის მონიშვნა
@@ -1255,10 +1255,10 @@ lighting	Light	სინათლე
 	Copy Color Value (Hex)	ფერის მნიშვნელობის კოპირება (Hex)
 	Create New Swatch…	ახალი ფერის ნიმუშის შექმნა…
 	Name 40%	სახელი 40%
-	Out of Gamut Warning	გაფრთხილება: ფერი გამის გარეთაა
+	Out of Gamut Warning	ფერთა გამიდან გასვლის გაფრთხილება
 	Out of Web Color Warning	გაფრთხილება: ფერი ვებფერი არ არის
 	Web Safe RGB	ვებისთვის უსაფრთხო RGB
-	{warning}: click to correct to the closest color ({hex})	{warning}: დააწკაპუნეთ უახლოეს ფერზე ჩასასწორებლად ({hex})
+	{warning}: click to correct to the closest color ({hex})	{warning}: დაწკაპეთ უახლოეს ფერზე ჩასასწორებლად ({hex})
 	Edit or Apply Colors	ფერების რედაქტირება ან გამოყენება
 	Limit colors to swatch library	ფერების შეზღუდვა ფერის ნიმუშების ბიბლიოთეკით
 	Limit colors to swatch library: {name}	ფერების შეზღუდვა ფერის ნიმუშების ბიბლიოთეკით: {name}
@@ -1270,7 +1270,7 @@ lighting	Light	სინათლე
 	Show Tints/Shades	ტონირებების/ჩრდილების ჩვენება
 	Show Vivid/Muted	ცოცხალი/მქრქალი ტონების ჩვენება
 	Show Warm/Cool	თბილი/ცივი ტონების ჩვენება
-	Click to select, double-click to edit	დააწკაპუნეთ მოსანიშნად, ორჯერ — რედაქტირებისთვის
+	Click to select, double-click to edit	დაწკაპეთ მოსანიშნად, ორჯერ — რედაქტირებისთვის
 	Color Theme	ფერთა თემა
 	Delete theme	თემის წაშლა
 	Edit Theme	თემის რედაქტირება
@@ -1298,7 +1298,7 @@ lighting	Light	სინათლე
 	Selection Only	მხოლოდ მონიშნული
 	{title} (selection)	{title} (მონიშნული)
 	Changed since the last Refresh.	შეიცვალა ბოლო განახლების შემდეგ.
-	Click to zoom in, Alt-click to zoom out, drag to pan, double-click to fit	დააწკაპუნეთ გასადიდებლად, Alt-დაწკაპუნებით — დასაპატარავებლად, ჩავლებით — გადასაადგილებლად, ორჯერ დაწკაპუნებით — ჩასატევად
+	Click to zoom in, Alt-click to zoom out, drag to pan, double-click to fit	დაწკაპეთ გასადიდებლად, Alt-დაწკაპუნებით — დასაპატარავებლად, ჩავლებით — გადასაადგილებლად, ორჯერ დაწკაპუნებით — ჩასატევად
 	Fit in Window	ფანჯარაში ჩატევა
 	Open a document to preview its flattening.	გახსენით დოკუმენტი მისი გაბრტყელების წინასწარ სანახავად.
 	Overprints:	ზედდაბეჭდვები:
@@ -1306,30 +1306,30 @@ lighting	Light	სინათლე
 	Raster/Vector Balance:	რასტრული/ვექტორული ბალანსი:
 	Refresh	განახლება
 	Save Transparency Flattener Preset…	გამჭვირვალობის გაბრტყელების პრესეტის შენახვა…
-	Basic Latin	ძირითადი ლათინური
+	Basic Latin	საბაზო ლათინური
 	Currency & Symbols	ვალუტა და სიმბოლოები
-	Double-click to insert	ორჯერ დააწკაპუნეთ ჩასასმელად
+	Double-click to insert	ორჯერ დაწკაპეთ ჩასასმელად
 	Entire Font	მთელი შრიფტი
 	glyph {id}	გლიფი {id}
 	Greek & Cyrillic	ბერძნული და კირილიცა
 	Latin Extended	გაფართოებული ლათინური
 	Latin-1 Supplement	Latin-1-ის დამატება
 	No fonts are available.	შრიფტები მიუწვდომელია.
-	Select text or click into text with the Type tool to insert glyphs	გლიფების ჩასასმელად მონიშნეთ ტექსტი ან ტექსტის ხელსაწყოთი დააწკაპუნეთ ტექსტში
+	Select text or click into text with the Type tool to insert glyphs	გლიფების ჩასასმელად მონიშნეთ ტექსტი ან ტექსტის ხელსაწყოთი დაწკაპეთ ტექსტში
 	Show:	ჩვენება:
 	Use the Selected Text's Font	მონიშნული ტექსტის შრიფტის გამოყენება
 	Aspect Ratio	გვერდების თანაფარდობა
-	Click the art with the Gradient tool to add or select points.	წერტილების დასამატებლად ან მოსანიშნად დააწკაპუნეთ ნახატზე გრადიენტის ხელსაწყოთი.
-	Click the ramp or a type button to apply a gradient.	გრადიენტის გამოსაყენებლად დააწკაპუნეთ შკალაზე ან ტიპის ღილაკზე.
+	Click the art with the Gradient tool to add or select points.	წერტილების დასამატებლად ან მოსანიშნად დაწკაპეთ ნახატზე გრადიენტის ხელსაწყოთი.
+	Click the ramp or a type button to apply a gradient.	გრადიენტის გამოსაყენებლად დაწკაპეთ შკალაზე ან ტიპის ღილაკზე.
 	Color:	ფერი:
 	Delete Stop	წერტილის წაშლა
 	Edit Gradient	გრადიენტის რედაქტირება
 	Edit the selected point's colour in the Color panel	მონიშნული წერტილის ფერის რედაქტირება ფერის პანელში
 	Edit the stop	წერტილის რედაქტირება
-	Eyedropper: click the art to sample the stop's colour	პიპეტი: დააწკაპუნეთ ნახატზე წერტილის ფერის ასაღებად
+	Eyedropper: click the art to sample the stop's colour	პიპეტი: დაწკაპეთ ნახატზე წერტილის ფერის ასაღებად
 	Gradient across stroke	გრადიენტი კონტურის განივად
 	Gradient along stroke	გრადიენტი კონტურის სიგრძეზე
-	Gradient Fill: click to apply, drag onto art	გრადიენტული შევსება: დააწკაპუნეთ გამოსაყენებლად, ჩაავლეთ ნახატზე
+	Gradient Fill: click to apply, drag onto art	გრადიენტული შევსება: დაწკაპეთ გამოსაყენებლად, ჩაავლეთ ნახატზე
 	Gradient swatches	გრადიენტის ნიმუშები
 	Gradient within stroke	გრადიენტი კონტურის შიგნით
 	Linear Gradient	წრფივი გრადიენტი
@@ -1351,7 +1351,7 @@ lighting	Light	სინათლე
 	Objects using them keep their look but are no longer linked.	მათი მომხმარებელი ობიექტები იერსახეს ინარჩუნებს, მაგრამ აღარ არის დაკავშირებული.
 	Open a document to see its graphic styles.	გახსენით დოკუმენტი მისი გრაფიკული სტილების სანახავად.
 	Open Graphic Style Library	გრაფიკული სტილების ბიბლიოთეკის გახსნა
-	Select styled art and click New Graphic Style.	მონიშნეთ სტილიანი ნახატი და დააწკაპუნეთ „ახალ გრაფიკულ სტილზე“.
+	Select styled art and click New Graphic Style.	მონიშნეთ სტილიანი ნახატი და დაწკაპეთ „ახალ გრაფიკულ სტილზე“.
 	Use Square for Previews	კვადრატის გამოყენება გადახედვისთვის
 	Use Text for Previews	ტექსტის გამოყენება გადახედვისთვის
 	{percent}% opacity	გაუმჭვირვალობა {percent}%
@@ -1385,13 +1385,13 @@ lighting	Light	სინათლე
 	Trace the image with the Default preset	გამოსახულების ვექტორიზაცია ნაგულისხმევი პრესეტით
 	Size: {size}  Tracking: {tracking}	ზომა: {size}  ტრეკინგი: {tracking}
 	<Opacity Mask>	<გაუმჭვირვალობის ნიღაბი>
-	Create New Layer	ახალი ფენის შექმნა
-	Create New Sublayer	ახალი ქვეფენის შექმნა
+	Create New Layer	ახალი შრის შექმნა
+	Create New Sublayer	ახალი ქვეშრის შექმნა
 	Search All	ყველგან ძებნა
 	Graphics	გრაფიკა
 	Local Libraries	ლოკალური ბიბლიოთეკები
 	Add Content	შიგთავსის დამატება
-	Click to apply to the selected type	დააწკაპუნეთ მონიშნულ ტექსტზე გამოსაყენებლად
+	Click to apply to the selected type	დაწკაპეთ მონიშნულ ტექსტზე გამოსაყენებლად
 	Create New Library…	ახალი ბიბლიოთეკის შექმნა…
 	Rename Library…	ბიბლიოთეკის სახელის გადარქმევა…
 	Delete the library “{name}”?	წაიშალოს ბიბლიოთეკა „{name}“?
@@ -1401,7 +1401,7 @@ lighting	Light	სინათლე
 	This library is empty	ეს ბიბლიოთეკა ცარიელია
 	No results	შედეგები არ არის
 	No items in this library match “{query}”.	ამ ბიბლიოთეკაში „{query}“-ს შესაბამისი ელემენტი არ არის.
-	Right-click an item to move it into this group.	ამ ჯგუფში გადასატანად დააწკაპუნეთ ელემენტზე მარჯვენა ღილაკით.
+	Right-click an item to move it into this group.	ამ ჯგუფში გადასატანად დაწკაპეთ ელემენტზე მარჯვენა ღილაკით.
 	New Group	ახალი ჯგუფი
 	New Group…	ახალი ჯგუფი…
 	Move to Group	ჯგუფში გადატანა
@@ -1448,8 +1448,8 @@ lighting	Light	სინათლე
 	Tolerance:	დაშვება:
 	Transparency Options	გამჭვირვალობის პარამეტრები
 	Color Mixer (Shift-click the chip)	ფერის შემრევი (Shift-დაწკაპუნება ფერის ნიშანზე)
-	Fill: click for swatches, Shift-click for the color mixer	შევსება: დააწკაპუნეთ ფერის ნიმუშებისთვის, Shift-დაწკაპუნებით — ფერის შემრევისთვის
-	Stroke: click for swatches, Shift-click for the color mixer	კონტური: დააწკაპუნეთ ფერის ნიმუშებისთვის, Shift-დაწკაპუნებით — ფერის შემრევისთვის
+	Fill: click for swatches, Shift-click for the color mixer	შევსება: დაწკაპეთ ფერის ნიმუშებისთვის, Shift-დაწკაპუნებით — ფერის შემრევისთვის
+	Stroke: click for swatches, Shift-click for the color mixer	კონტური: დაწკაპეთ ფერის ნიმუშებისთვის, Shift-დაწკაპუნებით — ფერის შემრევისთვის
 	This panel is on the roadmap (see the parity plan).	ეს პანელი სამომავლო გეგმაშია (იხ. პარიტეტის გეგმა).
 	Open a document to navigate it.	გახსენით დოკუმენტი მასში სანავიგაციოდ.
 	View Artboard Only	მხოლოდ სამუშაო დაფის ჩვენება
@@ -1464,10 +1464,10 @@ lighting	Light	სინათლე
 	Reset OpenType Features	OpenType შესაძლებლობების ჩამოყრა
 	Select text to set its OpenType features.	OpenType შესაძლებლობების დასაყენებლად მონიშნეთ ტექსტი.
 	Standard Ligatures	სტანდარტული ლიგატურები
-	Swash	სვაში
+	Swash	მოხატული ასოები (swash)
 	Tabular Lining	ცხრილური ხაზოვანი
 	Tabular Oldstyle	ცხრილური ძველებური
-	Every-line Composer	ყველა სტრიქონის კომპოზიტორი
+	Every-line Composer	აბზაცის მიხედვით აწყობა
 	First-line Left Indent	პირველი სტრიქონის მარცხენა შეწევა
 	Hyphenation…	სიტყვების გადატანა…
 	Justification…	სწორება…
@@ -1483,7 +1483,7 @@ lighting	Light	სინათლე
 	Right-to-Left Paragraph Direction	აბზაცის მიმართულება მარჯვნიდან მარცხნივ
 	Roman Hanging Punctuation	ლათინური გამოწეული პუნქტუაცია
 	Select a text object to edit its paragraph attributes.	აბზაცის ატრიბუტების რედაქტირებისთვის მონიშნეთ ტექსტური ობიექტი.
-	Single-line Composer	ერთი სტრიქონის კომპოზიტორი
+	Single-line Composer	სტრიქონის მიხედვით აწყობა
 	Space After Paragraph	ინტერვალი აბზაცის შემდეგ
 	Space Before Paragraph	ინტერვალი აბზაცის წინ
 	Top-to-Top Leading	სტრიქონთა დაშორება ზედა კიდიდან ზედა კიდემდე
@@ -1524,7 +1524,7 @@ lighting	Light	სინათლე
 	V Spacing:	ვერტ. დაშორება:
 	Width:	სიგანე:
 	Appearance panel	იერსახის პანელი
-	Arrange: Bring to Front	წინა პლანზე გადატანა
+	Arrange: Bring to Front	წინა პლანზე გადმოტანა
 	Draw:	ხატვა:
 	Edit Artboards	სამუშაო დაფების რედაქტირება
 	Flip Along Horizontal Axis	ჰორიზონტალური ღერძის გასწვრივ არეკვლა
@@ -1573,12 +1573,12 @@ lighting	Light	სინათლე
 	End arrowhead	ბოლო ისრის წვერი
 	Exact dash lengths	ტირეების ზუსტი სიგრძე
 	Fit dashes to corners and ends	ტირეების მორგება კუთხეებსა და ბოლოებზე
-	Flip Across	გადაბრუნება გარდიგარდმო
-	Flip Along	გადაბრუნება გასწვრივ
+	Flip Across	არეკვლა გარდიგარდმო
+	Flip Along	არეკვლა გასწვრივ
 	gap	შუალედი
 	Limit:	ზღვარი:
 	Link start and end arrowhead scales	საწყისი და ბოლო ისრის წვერების მასშტაბების დაკავშირება
-	Miter Join	წვეტიანი შეერთება
+	Miter Join	მახვილი შეერთება
 	Profile:	პროფილი:
 	Projecting Cap	გამოწეული დაბოლოება
 	Round Cap	მომრგვალებული დაბოლოება
@@ -1622,13 +1622,13 @@ lighting	Light	სინათლე
 	{kind} Gradient	{kind} გრადიენტი
 	{kind}, {model}	{kind}, {model}
 	No symbols in this document	ამ დოკუმენტში სიმბოლოები არ არის
-	Select art and click New Symbol to make one.	მონიშნეთ ნახატი და შესაქმნელად დააწკაპუნეთ „ახალ სიმბოლოზე“.
+	Select art and click New Symbol to make one.	მონიშნეთ ნახატი და შესაქმნელად დაწკაპეთ „ახალ სიმბოლოზე“.
 	Symbol Libraries (on the roadmap)	სიმბოლოების ბიბლიოთეკები (სამომავლო გეგმაშია)
 	Align On:	სწორება მიმართ:
 	Center-Justified Tab	ცენტრით სწორებული ტაბულაცია
 	Above Text	ტექსტის ზემოთ
 	Position Panel Above Text	პანელის ტექსტის ზემოთ განთავსება
-	Click to add a tab stop, drag to move it, drag it off the ruler to delete it	დააწკაპუნეთ ტაბულაციის დასამატებლად, ჩაავლეთ გადასაადგილებლად, სახაზავიდან გაიტანეთ წასაშლელად
+	Click to add a tab stop, drag to move it, drag it off the ruler to delete it	დაწკაპეთ ტაბულაციის დასამატებლად, ჩაავლეთ გადასაადგილებლად, სახაზავიდან გაიტანეთ წასაშლელად
 	Decimal-Justified Tab	ათწილადი მძიმით სწორებული ტაბულაცია
 	Delete Tab	ტაბულაციის წაშლა
 	Leader:	მიმთითებელი:
@@ -1694,7 +1694,7 @@ lighting	Light	სინათლე
 	Transform Object Only	მხოლოდ ობიექტის გარდაქმნა
 	Transform Pattern Only	მხოლოდ პატერნის გარდაქმნა
 	Use Registration Point for Symbol	სიმბოლოსთვის მიბმის წერტილის გამოყენება
-	Click to edit the mask; Alt-click to view only the mask; Shift-click to disable or enable it	დააწკაპეთ ნიღბის რედაქტირებისთვის; Alt-დაწკაპუნება — მხოლოდ ნიღბის ნახვა; Shift-დაწკაპუნება — მისი გამორთვა ან ჩართვა
+	Click to edit the mask; Alt-click to view only the mask; Shift-click to disable or enable it	დაწკაპეთ ნიღბის რედაქტირებისთვის; Alt-დაწკაპუნება — მხოლოდ ნიღბის ნახვა; Shift-დაწკაპუნება — მისი გამორთვა ან ჩართვა
 	Hide Thumbnails	მინიატურების დამალვა
 	Invert Mask	ნიღბის ინვერსია
 	Isolate Blending	შერევის იზოლირება
@@ -1784,7 +1784,7 @@ lighting	Light	სინათლე
 	Color Picker	ფერის ამრჩევი
 	Color Swatches	ფერის ნიმუშები
 	Only Web Colors	მხოლოდ ვებ-ფერები
-	Original: click to restore	საწყისი: დააწკაპეთ აღსადგენად
+	Original: click to restore	საწყისი: დაწკაპეთ აღსადგენად
 	Ascender	ზედა გამონაშვერი
 	Descender	ქვედა გამონაშვერი
 	On Left Side	მარცხენა მხარეს
@@ -1794,7 +1794,7 @@ lighting	Light	სინათლე
 	Full Width	სრული სიგანე
 	Chamfer	ფასკა
 	Inverted Round	შებრუნებული მომრგვალება
-	Bleed:	ნაპირს მიღმა ზოლი:
+	Bleed:	ჭრისპირა არე:
 	Discard White Overprint in Output	თეთრი ზედდაბეჭდვის უგულებელყოფა გამოტანისას
 	Double Quotes:	ორმაგი ბრჭყალები:
 	Export and Clipboard Transparency Flattener Settings	ექსპორტისა და ბუფერის გამჭვირვალობის გაბრტყელების პარამეტრები
@@ -1819,7 +1819,7 @@ lighting	Light	სინათლე
 	Center Artwork	ნახატის ცენტრირება
 	DXF Import Options	DXF-ის იმპორტის პარამეტრები
 	Layout:	განლაგება:
-	Merge Layers	ფენების შერწყმა
+	Merge Layers	შრეების შერწყმა
 	Place DXF	DXF-ის განთავსება
 	Scale Lineweights	ხაზის სისქეების მასშტაბირება
 	Scale to Fit Artboard	სამუშაო დაფაზე მორგება
@@ -1834,7 +1834,7 @@ lighting	Light	სინათლე
 	Type becomes outlines, and strokes a CAD line can't draw become filled shapes.	ტექსტი კონტურებად იქცევა, ხოლო ის კონტურები, რომლებსაც CAD-ხაზი ვერ ხატავს, შევსებულ ფიგურებად.
 	Type stays text, and every stroke is a line with its lineweight and dashes.	ტექსტი ტექსტად რჩება, ყოველი კონტური კი ხაზია თავისი სისქითა და ტირეებით.
 	Version:	ვერსია:
-	Spin	დატრიალება
+	Spin	ბრუნვა
 	Good	კარგი
 	Best	საუკეთესო
 	Amount	რაოდენობა
@@ -1856,14 +1856,14 @@ lighting	Light	სინათლე
 	Distort Linear Gradients	წრფივი გრადიენტების დეფორმაცია
 	Distort Pattern Fills	პატერნით შევსების დეფორმაცია
 	Distortion	დეფორმაცია
-	Envelope Mesh	გარსის ქსელი
+	Envelope Mesh	გარსის ბადე
 	Maintain Envelope Shape	გარსის ფორმის შენარჩუნება
 	Preserve Shape Using:	ფორმის შენარჩუნების საშუალება:
-	Reset Envelope Mesh	გარსის ქსელის ჩამოყრა
+	Reset Envelope Mesh	გარსის ბადის ჩამოყრა
 	Reset Envelope Shape	გარსის ფორმის საწყისზე დაბრუნება
 	V:	V:
 	Warp Options	გაღუნვის პარამეტრები
-	Compatible Gradient and Gradient Mesh Printing	თავსებადი გრადიენტისა და გრადიენტული ქსელის ბეჭდვა
+	Compatible Gradient and Gradient Mesh Printing	თავსებადი გრადიენტისა და გრადიენტული ბადის ბეჭდვა
 	Embed Fonts (for other applications)	შრიფტების ჩაშენება (სხვა აპლიკაციებისთვის)
 	EPS Options	EPS-ის პარამეტრები
 	Include CMYK PostScript in RGB Files	CMYK PostScript-ის ჩართვა RGB ფაილებში
@@ -1874,7 +1874,7 @@ lighting	Light	სინათლე
 	Transparency is flattened with the preset. Type is written as outlines; gradients as bands of colour.	გამჭვირვალობა ბრტყელდება პრესეტით. ტექსტი იწერება კონტურებად, გრადიენტები — ფერის ზოლებად.
 	Transparency is flattened with the preset. Type is written as outlines; gradients stay smooth.	გამჭვირვალობა ბრტყელდება პრესეტით. ტექსტი იწერება კონტურებად, გრადიენტები გლუვი რჩება.
 	Expand Gradient To	გრადიენტის გაშლა:
-	Gradient Mesh	გრადიენტული ქსელი
+	Gradient Mesh	გრადიენტული ბადე
 	Specify:	მითითება:
 	Export As	ექსპორტირება როგორც
 	One file per artboard: <name>-<artboard>.{ext}	ერთი ფაილი თითო სამუშაო დაფაზე: <name>-<artboard>.{ext}
@@ -1888,7 +1888,7 @@ lighting	Light	სინათლე
 	Format Settings	ფორმატის პარამეტრები
 	Formats:	ფორმატები:
 	Full Document	მთელი დოკუმენტი
-	Include Bleed	ნაპირს მიღმა ზოლის ჩართვა
+	Include Bleed	ჭრისპირა არის ჩართვა
 	No assets yet. Collect art with Object › Collect for Export, or drag it into the Asset Export panel.	რესურსები ჯერ არ არის. შეაგროვეთ ნახატი ბრძანებით ობიექტი › ექსპორტისთვის შეგროვება, ან გადაიტანეთ რესურსების ექსპორტის პანელში.
 	Open Location after Export	ექსპორტის შემდეგ ადგილის გახსნა
 	PDF Preset:	PDF-ის პრესეტი:
@@ -1902,7 +1902,7 @@ lighting	Light	სინათლე
 	Eyedropper Picks Up:	პიპეტი იღებს:
 	Focal Fill	ფოკუსური შევსება
 	Focal Stroke	ფოკუსური კონტური
-	Miter Limit	წვეტის ზღვარი
+	Miter Limit	მახვილის ზღვარი
 	Point Sample	წერტილოვანი ნიმუში
 	Raster Sample Size:	რასტრის ნიმუშის ზომა:
 	Weight	სისქე
@@ -1935,7 +1935,7 @@ lighting	Light	სინათლე
 	Clip Complex Regions	რთული უბნების მოჭრა
 	Convert All Strokes to Outlines	ყველა კონტურის ფიგურებად გარდაქმნა
 	Convert All Text to Outlines	მთელი ტექსტის კონტურებად გარდაქმნა
-	Gradient and Mesh Resolution:	გრადიენტისა და ქსელის გარჩევადობა:
+	Gradient and Mesh Resolution:	გრადიენტისა და ბადის გარჩევადობა:
 	Line Art and Text Resolution:	ხაზოვანი ნახატისა და ტექსტის გარჩევადობა:
 	Preserve Alpha Transparency	ალფა-გამჭვირვალობის შენარჩუნება
 	Preserve Overprints and Spot Colors	ზედდაბეჭდვისა და სპოტ-ფერების შენარჩუნება
@@ -1947,9 +1947,9 @@ lighting	Light	სინათლე
 	Built-in presets don't change: New makes a copy you can edit.	ჩაშენებული პრესეტები არ იცვლება: „ახალი“ ქმნის რედაქტირებად ასლს.
 	Horizontal %	ჰორიზონტალური %
 	Include Cmy Blacks	CMY შავების ჩართვა
-	Make all bleed settings the same	ნაპირს მიღმა ზოლის ყველა მნიშვნელობის გატოლება
-	Make the bleed values differ	ნაპირს მიღმა ზოლის სხვადასხვა მნიშვნელობა
-	Miter Limit:	წვეტის ზღვარი:
+	Make all bleed settings the same	ჭრისპირა არის ყველა მნიშვნელობის გატოლება
+	Make the bleed values differ	ჭრისპირა არის სხვადასხვა მნიშვნელობა
+	Miter Limit:	მახვილის ზღვარი:
 	Radius 1	რადიუსი 1
 	Radius 2	რადიუსი 2
 	Radius1	რადიუსი1
@@ -1957,7 +1957,7 @@ lighting	Light	სინათლე
 	Relative	ფარდობითი
 	Absolute	აბსოლუტური
 	Vertical %	ვერტიკალური %
-	Miter	წვეტიანი
+	Miter	მახვილი
 	Bevel	წაკვეთილი
 	A lower value follows the stroke closely; a higher one gives fewer points and smoother curves.	დაბალი მნიშვნელობა ზუსტად მიჰყვება შემოხაზვას; მაღალი იძლევა ნაკლებ წერტილს და გლუვ მრუდებს.
 	Accurate	ზუსტი
@@ -1978,9 +1978,9 @@ lighting	Light	სინათლე
 	“{file}” is protected by a password.	„{file}“ დაცულია პაროლით.
 	Dim Images to:	გამოსახულებების ჩაბნელება:
 	Light Blue	ღია ლურჯი
-	Layers Panel Options	ფენების პანელის პარამეტრები
+	Layers Panel Options	შრეების პანელის პარამეტრები
 	Row Size:	სტრიქონის ზომა:
-	Show Layers Only	მხოლოდ ფენების ჩვენება
+	Show Layers Only	მხოლოდ შრეების ჩვენება
 	Thumbnails:	მინიატურები:
 	Anchor Points	საყრდენი წერტილები
 	Brush Affects:	ფუნჯი მოქმედებს:
@@ -2028,7 +2028,7 @@ lighting	Light	სინათლე
 	Background Contents	ფონის შიგთავსი
 	Background Contents:	ფონის შიგთავსი:
 	BLANK DOCUMENT PRESETS	ცარიელი დოკუმენტის პრესეტები
-	Bleed	ნაპირს მიღმა ზოლი
+	Bleed	ჭრისპირა არე
 	Change to Right-to-Left Layout	მარჯვნიდან მარცხნივ განლაგებაზე გადასვლა
 	Columns:	სვეტები:
 	Create Document	დოკუმენტის შექმნა
@@ -2091,9 +2091,9 @@ lighting	Light	სინათლე
 	Three Point	სამწერტილიანი
 	Two Point	ორწერტილიანი
 	User Preset	მომხმარებლის პრესეტი
-	Click to place each file at 100%, or drag to size it; arrow keys switch files, Esc skips one.	დააწკაპეთ თითოეული ფაილის 100%-ით განსათავსებლად, ან გადაათრიეთ ზომის მისაცემად; ისრიანი კლავიშები ფაილებს ცვლის, Esc ერთს გამოტოვებს.
+	Click to place each file at 100%, or drag to size it; arrow keys switch files, Esc skips one.	დაწკაპეთ თითოეული ფაილის 100%-ით განსათავსებლად, ან გადაათრიეთ ზომის მისაცემად; ისრიანი კლავიშები ფაილებს ცვლის, Esc ერთს გამოტოვებს.
 	Keep a link to an image file instead of only embedding it	გამოსახულების ფაილის ბმულის შენარჩუნება მხოლოდ ჩაშენების ნაცვლად
-	Place onto a new locked, dimmed template layer below the current layer	ახალ ჩაკეტილ, ჩამქრალ შაბლონის ფენაზე განთავსება მიმდინარე ფენის ქვემოთ
+	Place onto a new locked, dimmed template layer below the current layer	ახალ ჩაკეტილ, ჩამქრალ შაბლონის შრეზე განთავსება მიმდინარე შრის ქვემოთ
 	Swap the selected object for the file, keeping its place and transform	მონიშნული ობიექტის ფაილით ჩანაცვლება მისი ადგილისა და გარდაქმნის შენარჩუნებით
 	On: one locked object showing the document, updated when it changes.	ჩართული: ერთი ჩაკეტილი ობიექტი, რომელიც დოკუმენტს აჩვენებს და მისი ცვლილებისას ახლდება.
 	Off: an editable copy of its art, embedded in this document.	გამორთული: მისი ნახატის რედაქტირებადი ასლი, ჩაშენებული ამ დოკუმენტში.
@@ -2136,7 +2136,7 @@ lighting	Light	სინათლე
 	How colours outside the press's gamut are separated.	როგორ სეპარირდება ფერები, რომლებიც საბეჭდი მანქანის გამის მიღმაა.
 	Ignore Artboards (all the art as one page)	სამუშაო დაფების უგულებელყოფა (მთელი ნახატი ერთ გვერდად)
 	Image:	გამოსახულება:
-	Marks and Bleed	ნიშნები და ნაპირს მიღმა ზოლი
+	Marks and Bleed	ნიშნები და ჭრისპირა არე
 	Media	მედია
 	New Print Preset	ბეჭდვის ახალი პრესეტი
 	Next page	შემდეგი გვერდი
@@ -2150,7 +2150,7 @@ lighting	Light	სინათლე
 	Placement:	განთავსება:
 	Preserve CMYK Numbers	CMYK მნიშვნელობების შენარჩუნება
 	Previous page	წინა გვერდი
-	Print Layers:	ფენების ბეჭდვა:
+	Print Layers:	შრეების ბეჭდვა:
 	Print Preset:	ბეჭდვის პრესეტი:
 	Printer	პრინტერი
 	Printer profile:	პრინტერის პროფილი:
@@ -2184,10 +2184,10 @@ lighting	Light	სინათლე
 	Save the selected preset to a file	მონიშნული პრესეტის ფაილში შენახვა
 	Embed ICC Profile	ICC პროფილის ჩაშენება
 	Flat Image	ბრტყელი გამოსახულება
-	Include Hidden Layers	დამალული ფენების ჩართვა
+	Include Hidden Layers	დამალული შრეების ჩართვა
 	Maximum Editability	მაქსიმალური რედაქტირებადობა
 	Options:	პარამეტრები:
-	Write Layers	ფენების ჩაწერა
+	Write Layers	შრეების ჩაწერა
 	Anti-alias	ანტიალიასინგი
 	Around Object	ობიექტის ირგვლივ
 	Background:	ფონი:
@@ -2255,7 +2255,7 @@ lighting	Light	სინათლე
 	Optimized	ოპტიმიზებული
 	Order:	რიგი:
 	Original	ორიგინალი
-	Output:	გამოტანა:
+	Output:	გამომავალი:
 	Percent:	პროცენტი:
 	Preview in Browser needs the desktop app (the web downloads files instead)	ბრაუზერში წინასწარ ნახვას სამაგიდო აპი სჭირდება (ვებ-ვერსია ფაილებს ჩამოტვირთავს)
 	Progressive	პროგრესული
@@ -2275,11 +2275,11 @@ lighting	Light	სინათლე
 	Create PDF-Compatible File	PDF-თან თავსებადი ფაილის შექმნა
 	Embed ICC Profiles	ICC პროფილების ჩაშენება
 	File Name:	ფაილის სახელი:
-	Save As	შენახვა სხვა სახელით
+	Save As	შენახვა როგორც
 	Save as Template	შაბლონად შენახვა
 	Save each artboard to a separate file	თითოეული სამუშაო დაფის ცალკე ფაილად შენახვა
 	All printer's marks	პრინტერის ყველა ნიშანი
-	Bleeds	ნაპირს მიღმა ზოლები
+	Bleeds	ჭრისპირა არეები
 	Bottom:	ქვემოთ:
 	Changes allowed:	დაშვებული ცვლილებები:
 	Color bars	ფერის ზოლები
@@ -2292,7 +2292,7 @@ lighting	Light	სინათლე
 	Compression:	შეკუმშვა:
 	Condition identifier:	პირობის იდენტიფიკატორი:
 	Convert text to outlines	ტექსტის კონტურებად გარდაქმნა
-	Create PDF layers from layers and sublayers	PDF ფენების შექმნა ფენებიდან და ქვეფენებიდან
+	Create PDF layers from layers and sublayers	PDF შრეების შექმნა შრეებიდან და ქვეშრეებიდან
 	Description	აღწერა
 	Destination:	დანიშნულება:
 	Document open password	დოკუმენტის გახსნის პაროლი
@@ -2310,10 +2310,10 @@ lighting	Light	სინათლე
 	Flattener preset:	გაბრტყელების პრესეტი:
 	General › Thumbnails	ზოგადი › მინიატიურები
 	Grayscale images	ნაცრისფერი გამოსახულებები
-	Include non-printing layers	არაბეჭდვადი ფენების ჩართვა
+	Include non-printing layers	არაბეჭდვადი შრეების ჩართვა
 	Left:	მარცხნივ:
 	Mark as trapped	ტრაპინგის მონიშვნა
-	Marks and Bleeds	ნიშნები და ნაპირს მიღმა ზოლები
+	Marks and Bleeds	ნიშნები და ჭრისპირა არეები
 	Monochrome images	მონოქრომული გამოსახულებები
 	New PDF Preset	ახალი PDF პრესეტი
 	of characters used	გამოყენებული სიმბოლოებიდან
@@ -2352,7 +2352,7 @@ lighting	Light	სინათლე
 	Top:	ზემოთ:
 	Trim mark weight:	ჭრის ნიშნის სისქე:
 	Trim marks	ჭრის ნიშნები
-	Use document bleed settings	დოკუმენტის ნაპირს მიღმა ზოლის პარამეტრების გამოყენება
+	Use document bleed settings	დოკუმენტის ჭრისპირა არის პარამეტრების გამოყენება
 	View PDF after saving	PDF-ის ნახვა შენახვის შემდეგ
 	Warnings	გაფრთხილებები
 	CMYK profile in effect	მოქმედი CMYK პროფილი
@@ -2393,7 +2393,7 @@ lighting	Light	სინათლე
 	Images:	გამოსახულებები:
 	Include Metadata	მეტამონაცემების ჩართვა
 	Internal CSS	შიდა CSS
-	Layer Names	ფენების სახელები
+	Layer Names	შრეების სახელები
 	Minify	მინიფიკაცია
 	Minimal	მინიმალური
 	Object IDs:	ობიექტის ID-ები:
@@ -2495,14 +2495,14 @@ lighting	Light	სინათლე
 	Screen	ეკრანი
 axis	Horizontal	ჰორიზონტალური
 axis	Vertical	ვერტიკალური
-	Sprinkles	მოფანტული
+	Sprinkles	მოფრქვეული ნაწილაკები
 	Clumped	შეჯგუფებული
 	Contrasty	კონტრასტული
 	Enlarged	გადიდებული
 	Stippled	პუნქტირებული
 	Speckle	ლაქები
 	Brick	აგური
-	Burlap	ჯუთი
+	Burlap	ტომრის ქსოვილი
 	Canvas	ტილო
 	Sandstone	ქვიშაქვა
 	Bottom Left	ქვედა მარცხენა
@@ -2511,7 +2511,7 @@ axis	Vertical	ვერტიკალური
 	Bottom Right	ქვედა მარჯვენა
 effect	Soft	რბილი
 	Blocks	ბლოკები
-	Frosted	მქრქალი მინა
+	Frosted	მქრქალი
 	Tiny Lens	პატარა ლინზა
 	Right Diagonal	მარჯვენა დიაგონალი
 	Left Diagonal	მარცხენა დიაგონალი
@@ -2584,7 +2584,7 @@ theme	Appearance	იერსახე
 	Saturate	გაჯერება
 	Convert Color	ფერის გარდაქმნა
 	Convert Document Color Mode	დოკუმენტის ფერის რეჟიმის გარდაქმნა
-	Gamut Warning	გამის გაფრთხილება
+	Gamut Warning	ფერთა გამიდან გასვლის გაფრთხილება
 	Load Color Profile…	ფერის პროფილის ჩატვირთვა…
 	Plates	ფირფიტები
 	Spot Color	სპოტ-ფერი
@@ -2632,7 +2632,7 @@ theme	Appearance	იერსახე
 	Remove Guide	დამხმარე ხაზის წაშლა
 	Saved Selections	შენახული მონიშვნები
 	Select Guides	დამხმარე ხაზების მონიშვნა
-	Move Guide to Layer	დამხმარე ხაზის ფენაზე გადატანა
+	Move Guide to Layer	დამხმარე ხაზის შრეზე გადატანა
 	Blob Brush	ლაქის ფუნჯი
 	Convert Anchor Point	საყრდენი წერტილის გარდაქმნა
 	Curvature	მრუდი
@@ -2671,7 +2671,7 @@ theme	Appearance	იერსახე
 	File Formats	ფაილის ფორმატები
 	Flattener presets	გაბრტყელების პრესეტები
 	Format Options	ფორმატის პარამეტრები
-	Layer	ფენა
+	Layer	შრე
 	Link	ბმული
 	Model	მოდელი
 	Open Document	დოკუმენტის გახსნა
@@ -2703,7 +2703,7 @@ theme	Appearance	იერსახე
 	Add Freeform Point	თავისუფალი წერტილის დამატება
 	Delete Freeform Point	თავისუფალი წერტილის წაშლა
 	Edit Freeform Point	თავისუფალი წერტილის რედაქტირება
-	Freeform Gradient	თავისუფალი გრადიენტი
+	Freeform Gradient	თავისუფალი ფორმის გრადიენტი
 	Select Freeform Point	თავისუფალი წერტილის მონიშვნა
 	Split Freeform Line	თავისუფალი ხაზის გაყოფა
 	Gradient Vector	გრადიენტის ვექტორი
@@ -2716,33 +2716,33 @@ theme	Appearance	იერსახე
 	Text	ტექსტი
 	Artboard Options	სამუშაო დაფის პარამეტრები
 	Artboard Options…	სამუშაო დაფის პარამეტრები…
-	Collect in New Layer	ახალ ფენაში შეგროვება
+	Collect in New Layer	ახალ შრეში შეგროვება
 	Delete Artboard	სამუშაო დაფის წაშლა
 	Delete Selection	მონიშნულის წაშლა
 	Duplicate Selection	მონიშნულის დუბლირება
 	Highlight Rows	სტრიქონების გამოკვეთა
-	Layer Options	ფენის პარამეტრები
-	Layer Options…	ფენის პარამეტრები…
+	Layer Options	შრის პარამეტრები
+	Layer Options…	შრის პარამეტრები…
 	Make/Release Clipping Mask	მომჭრელი ნიღბის შექმნა/მოხსნა
 	Move Rows	სტრიქონების გადატანა
 	New Artboard	ახალი სამუშაო დაფა
-	New Layer…	ახალი ფენა…
-	New Sublayer…	ახალი ქვეფენა…
-	Paste Remembers Layers	ჩასმისას ფენების დამახსოვრება
+	New Layer…	ახალი შრე…
+	New Sublayer…	ახალი ქვეშრე…
+	Paste Remembers Layers	ჩასმისას შრეების დამახსოვრება
 	Reorder	გადალაგება
 	Select Art	ნახატის მონიშვნა
-	Set Current Layer	მიმდინარე ფენად დაყენება
+	Set Current Layer	მიმდინარე შრედ დაყენება
 	Flatten Artwork	ნახატის გაბრტყელება
 	Locate Object	ობიექტის მოძებნა
 	Lock Others	დანარჩენების ჩაკეტვა
 	Merge Selected	მონიშნულების შერწყმა
 	Outline Others	დანარჩენები კონტურის რეჟიმში
-	Preview All Layers	ყველა ფენის წინასწარი ნახვა
-	Release to Layers (Build)	ფენებად გათავისუფლება (აგება)
-	Release to Layers (Sequence)	ფენებად გათავისუფლება (თანმიმდევრობა)
+	Preview All Layers	ყველა შრის წინასწარი ნახვა
+	Release to Layers (Build)	შრეებად გათავისუფლება (აგება)
+	Release to Layers (Sequence)	შრეებად გათავისუფლება (თანმიმდევრობა)
 	Reverse Order	რიგის შებრუნება
-	Show All Layers	ყველა ფენის ჩვენება
-	Unlock All Layers	ყველა ფენის განბლოკვა
+	Show All Layers	ყველა შრის ჩვენება
+	Unlock All Layers	ყველა შრის განბლოკვა
 	English: USA	English: USA
 	Move	გადატანა
 	Character Style	სიმბოლოს სტილი
@@ -2769,23 +2769,23 @@ theme	Appearance	იერსახე
 	Placement Options	განთავსების პარამეტრები
 	Relink	ხელახლა დაკავშირება
 	Unembed	ჩაშენების მოხსნა
-	Add Mesh Line	ქსელის ხაზის დამატება
+	Add Mesh Line	ბადის ხაზის დამატება
 	Add Spine Point	ხერხემლის წერტილის დამატება
 	Blend Info	გადასვლის ინფორმაცია
 	Blend Options	გადასვლის პარამეტრები
-	Delete Mesh Point	ქსელის წერტილის წაშლა
+	Delete Mesh Point	ბადის წერტილის წაშლა
 	Delete Spine Point	ხერხემლის წერტილის წაშლა
 	Envelope Info	გარსის ინფორმაცია
 	Envelope Options	გარსის პარამეტრები
-	Expand Gradient Mesh	გრადიენტული ქსელის გაშლა
+	Expand Gradient Mesh	გრადიენტული ბადის გაშლა
 	Make Envelope	გარსის შექმნა
-	Move Envelope Mesh Point	გარსის ქსელის წერტილის გადაადგილება
-	Move Mesh Point	ქსელის წერტილის გადაადგილება
+	Move Envelope Mesh Point	გარსის ბადის წერტილის გადაადგილება
+	Move Mesh Point	ბადის წერტილის გადაადგილება
 	Move Spine Point	ხერხემლის წერტილის გადაადგილება
 	Reshape Spine Segment	ხერხემლის სეგმენტის ფორმის შეცვლა
-	Reset with Mesh	ქსელით გადაყენება
+	Reset with Mesh	ბადით გადაყენება
 	Reset with Warp	გაღუნვით ხელახლა დაყენება
-	Set Mesh Point Color	ქსელის წერტილის ფერის დაყენება
+	Set Mesh Point Color	ბადის წერტილის ფერის დაყენება
 	Edit Opacity Mask	გაუმჭვირვალობის ნიღბის რედაქტირება
 	Opacity Mask	გაუმჭვირვალობის ნიღაბი
 	Stop Editing Opacity Mask	გაუმჭვირვალობის ნიღბის რედაქტირების დასრულება
@@ -3133,7 +3133,7 @@ theme	Appearance	იერსახე
 	no document	დოკუმენტი არ არის
 	Blue	ლურჯი
 	Custom	მორგებული
-	Document Setup	დოკუმენტის მომართვა
+	Document Setup	დოკუმენტის პარამეტრები
 	French	ფრანგული
 	German	გერმანული
 	Inches	დიუმები
@@ -3146,7 +3146,7 @@ effect	Points	წერტილები
 	Discard Empty Type	ცარიელი ტექსტის მოცილება
 	Copyright	საავტორო უფლება
 	Other	სხვა
-	Print	ბეჭდვა
+	Print	დაბეჭდვა
 	Solid	მთლიანი
 	Difference	სხვაობა
 	Flatten Transparency	გამჭვირვალობის გაბრტყელება
@@ -3436,12 +3436,12 @@ effect	Regular	ჩვეულებრივი
 	Character Style Options	სიმბოლოს სტილის პარამეტრები
 	Flip	არეკვლა
 	Couldn't {} {name}: {e}	ვერ მოხერხდა {}: {name}: {e}
-	Create PDF layers from top-level layers	PDF ფენების შექმნა ზედა დონის ფენებიდან
+	Create PDF layers from top-level layers	PDF შრეების შექმნა ზედა დონის შრეებიდან
 	Delete Character Style	სიმბოლოს სტილის წაშლა
-	Delete Layer	ფენის წაშლა
+	Delete Layer	შრის წაშლა
 	Delete Paragraph Style	აბზაცის სტილის წაშლა
 	Duplicate Character Style	სიმბოლოს სტილის დუბლირება
-	Duplicate Layer	ფენის დუბლირება
+	Duplicate Layer	შრის დუბლირება
 	Duplicate Paragraph Style	აბზაცის სტილის დუბლირება
 	Spacing	ინტერვალი
 	Mojikumi	Mojikumi
@@ -3453,17 +3453,17 @@ effect	Regular	ჩვეულებრივი
 	Redefine Paragraph Style	აბზაცის სტილის ხელახლა განსაზღვრა
 	Rename Character Style	სიმბოლოს სტილის გადარქმევა
 	Rename Paragraph Style	აბზაცის სტილის გადარქმევა
-	Select All Art on Layer	ფენაზე მთელი ნახატის მონიშვნა
+	Select All Art on Layer	შრეზე მთელი ნახატის მონიშვნა
 	Settings…	პარამეტრები…
 	Joins	შეერთებები
 	Drag art, colors and text styles here to reuse them across documents. Libraries are stored on this machine — no account required.	გადმოიტანეთ აქ ნახატი, ფერები და ტექსტის სტილები, რომ სხვა დოკუმენტებშიც გამოიყენოთ. ბიბლიოთეკები ინახება ამ კომპიუტერზე — ანგარიში საჭირო არ არის.
-	De-Interlace	გაშლის მოცილება
-	Eliminate	მოცილება
+	De-Interlace	სტრიქონგამოტოვების მოცილება
+	Eliminate	აღმოფხვრა
 	Create New Fields by	ახალი ველების შექმნა
 	Craquelure	კრაკელიური
 	Grain	მარცვალი
 	Mosaic Tiles	მოზაიკის ფილები
-	Patchwork	ნაჭრებიანი ქსოვილი
+	Patchwork	ნაჭრების მოზაიკა
 	Stained Glass	ვიტრაჟი
 	Texturizer	ტექსტურირება
 	Crack Spacing	ბზარებს შორის მანძილი
@@ -3483,11 +3483,11 @@ effect	Regular	ჩვეულებრივი
 	Glass	მინა
 	Ocean Ripple	ოკეანის ტალღები
 	Graininess	მარცვლოვნება
-	Glow Amount	ნათების რაოდენობა
-	Clear Amount	სისუფთავე
+	Glow Amount	ნათების ოდენობა
+	Clear Amount	სისუფთავის ოდენობა
 	Ripple Size	ტალღის ზომა
 	Ripple Magnitude	ტალღის სიდიდე
-	Accented Edges	გამოკვეთილი კიდეები
+	Accented Edges	აქცენტირებული კიდეები
 	Angled Strokes	დახრილი შტრიხები
 	Dark Strokes	მუქი შტრიხები
 	Ink Outlines	მელნის კონტურები
@@ -3504,12 +3504,12 @@ effect	Regular	ჩვეულებრივი
 	Dark Intensity	მუქის ინტენსივობა
 	Spray Radius	შესხურების რადიუსი
 	Stroke Direction	შტრიხის მიმართულება
-	Stroke Width	შტრიხის სიგანე
+	Stroke Width	კონტურის სისქე
 	Stroke Pressure	შტრიხის დაწოლა
 @plural	{n} item|{n} items	ელემენტი: {n}
 @plural	Color Table ({n} color)|Color Table ({n} colors)	ფერების ცხრილი (ფერი: {n})
 @plural	Delete this {n} graphic style?|Delete these {n} graphic styles?	წაიშალოს გრაფიკული სტილები ({n})?
-@plural	{n} Layer|{n} Layers	ფენა: {n}
+@plural	{n} Layer|{n} Layers	შრე: {n}
 @plural	{n} Object|{n} Objects	ობიექტი: {n}
 @plural	{n} area highlighted|{n} areas highlighted	გამოკვეთილი არე: {n}
 @plural	{n} color|{n} colors	ფერი: {n}
@@ -3522,17 +3522,17 @@ effect	Regular	ჩვეულებრივი
 @msg	no library `{id}`	ბიბლიოთეკა `{id}` არ არსებობს
 @msg	select some type first	ჯერ მონიშნეთ ტექსტი
 @msg	{_1} has no {_2} style	{_1}-ს არ აქვს სტილი {_2}
-@msg	a layer couldn't be read	ფენის წაკითხვა ვერ მოხერხდა
+@msg	a layer couldn't be read	შრის წაკითხვა ვერ მოხერხდა
 @msg	it has more than one artboard	მას ერთზე მეტი სამუშაო დაფა აქვს
 @msg	it has no page	მას გვერდი არ აქვს
 @msg	it has too many text objects	მასში ზედმეტად ბევრი ტექსტური ობიექტია
 @msg	it has too much text	მასში ზედმეტად ბევრი ტექსტია
 @msg	its editing data doesn't say where its artboard is	მისი რედაქტირების მონაცემები არ მიუთითებს, სად არის სამუშაო დაფა
-@msg	its editing data has no layers	მის რედაქტირების მონაცემებში ფენები არ არის
+@msg	its editing data has no layers	მის რედაქტირების მონაცემებში შრეები არ არის
 @msg	its editing data is damaged	მისი რედაქტირების მონაცემები დაზიანებულია
 @msg	its editing data is for a different page	მისი რედაქტირების მონაცემები სხვა გვერდს ეკუთვნის
-@msg	its layers use {_1}, which aren't read yet	მისი ფენები იყენებს {_1}-ს, რომლის წაკითხვაც ჯერ არ ხერხდება
-@msg	its page has text, and its layers have no text objects to put it in	მის გვერდზე ტექსტია, ფენებში კი არ არის ტექსტური ობიექტები, სადაც ის ჩაჯდებოდა
+@msg	its layers use {_1}, which aren't read yet	მისი შრეები იყენებს {_1}-ს, რომლის წაკითხვაც ჯერ არ ხერხდება
+@msg	its page has text, and its layers have no text objects to put it in	მის გვერდზე ტექსტია, შრეებში კი არ არის ტექსტური ობიექტები, სადაც ის ჩაჯდებოდა
 @msg	its type is to come in as outlines, which only its page has	მისი ტექსტი კონტურებად უნდა შემოვიდეს, ასეთი კი მხოლოდ მის გვერდზეა
 @msg	the art on them differs from the page's in {_1}% of it	მათზე არსებული ნახატი გვერდისას {_1}%-ით განსხვავდება
 @msg	`to` must be "corner" or "smooth"	`to` უნდა იყოს "corner" ან "smooth"
@@ -3586,7 +3586,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Packaged {n} file(s){note}	შეფუთულია ფაილი ({n}){note}
 @msg	Preview in Browser needs the desktop app (the web downloads files instead)	ბრაუზერში წინასწარ ნახვას დესკტოპის აპი სჭირდება (ვებში ფაილები ჩამოიტვირთება)
 @msg	Release Guides: no guides	დამხმარე ხაზების მოხსნა: დამხმარე ხაზები არ არის
-@msg	Release: no layer to put the rectangle in	მოხსნა: მართკუთხედის ჩასასმელი ფენა არ არის
+@msg	Release: no layer to put the rectangle in	მოხსნა: მართკუთხედის ჩასასმელი შრე არ არის
 @msg	Replace Spine: select a blend and a path	ხერხემლის ჩანაცვლება: მონიშნეთ გადასვლა და ტრაექტორია
 @msg	select two or more objects to distribute	გასანაწილებლად მონიშნეთ ორი ან მეტი ობიექტი
 @msg	select paths or anchor points	მონიშნეთ ტრაექტორიები ან საყრდენი წერტილები
@@ -3596,7 +3596,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Saved recovery data for {title}	შენახულია აღდგენის მონაცემები: {title}
 @msg	Saved to User Defined: {_1}	შენახულია მომხმარებლის განსაზღვრულში: {_1}
 @msg	Saved {path}	შენახულია: {path}
-@msg	Select text or click into text with the Type tool to insert glyphs	გლიფების ჩასასმელად მონიშნეთ ტექსტი ან ტექსტის ხელსაწყოთი დააწკაპუნეთ ტექსტში
+@msg	Select text or click into text with the Type tool to insert glyphs	გლიფების ჩასასმელად მონიშნეთ ტექსტი ან ტექსტის ხელსაწყოთი დაწკაპეთ ტექსტში
 @msg	Shape Builder: no region under the pointer	ფიგურების კონსტრუქტორი: მაჩვენებლის ქვეშ არე არ არის
 @msg	Shape Builder: select paths or compound paths	ფიგურების კონსტრუქტორი: მონიშნეთ ტრაექტორიები ან შედგენილი ტრაექტორიები
 @msg	Show All Hidden Attributes: nothing is hidden	ყველა დამალული ატრიბუტის ჩვენება: დამალული არაფერია
@@ -3650,7 +3650,7 @@ effect	Regular	ჩვეულებრივი
 @msg	a colour index is 0 to {_1}, not {n}	ფერის ინდექსი არის 0-დან {_1}-მდე და არა {n}
 @msg	a colour is an index, #rrggbb or a preset name, not {v}	ფერი არის ინდექსი, #rrggbb ან პრესეტის სახელი და არა {v}
 @msg	a document needs at least one artboard	დოკუმენტს სჭირდება მინიმუმ ერთი სამუშაო დაფა
-@msg	a document needs at least one layer	დოკუმენტს სჭირდება მინიმუმ ერთი ფენა
+@msg	a document needs at least one layer	დოკუმენტს სჭირდება მინიმუმ ერთი შრე
 @msg	a freeform gradient keeps at least one point	თავისუფალი ფორმის გრადიენტი ინარჩუნებს მინიმუმ ერთ წერტილს
 @msg	a gradient needs at least two stops	გრადიენტს სჭირდება მინიმუმ ორი წერტილი
 @msg	a graphic style named `{to}` already exists	გრაფიკული სტილი სახელით `{to}` უკვე არსებობს
@@ -3735,7 +3735,7 @@ effect	Regular	ჩვეულებრივი
 @msg	its preview was placed instead, at screen resolution	სამაგიეროდ განთავსდა მისი გადახედვა, ეკრანის გარჩევადობით
 @msg	join needs open paths	შეერთებას ღია ტრაექტორიები სჭირდება
 @msg	lang must be one of {_1}	lang უნდა იყოს ერთ-ერთი: {_1}
-@msg	layers can't be wrap objects	ფენები შემოსავლელი ობიექტები ვერ იქნება
+@msg	layers can't be wrap objects	შრეები შემოსავლელი ობიექტები ვერ იქნება
 @msg	missing `folder`	აკლია `folder`
 @msg	missing `id` (see plugin.list)	აკლია `id` (იხ. plugin.list)
 @msg	missing `name`	აკლია `name`
@@ -3765,7 +3765,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no clock to keep a heartbeat by	პულსის შესანარჩუნებელი საათი არ არის
 @msg	no colour group `{g}`	ფერების ჯგუფი `{g}` არ არის
 @msg	no cross-reference table	ჯვარედინი მიმართვების ცხრილი არ არის
-@msg	no current layer	მიმდინარე ფენა არ არის
+@msg	no current layer	მიმდინარე შრე არ არის
 @msg	no data	მონაცემები არ არის
 @msg	no dialog open	დიალოგი გახსნილი არ არის
 @msg	no document	დოკუმენტი არ არის
@@ -3813,7 +3813,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no such anchor	ასეთი საყრდენი წერტილი არ არის
 @msg	no such artboard	ასეთი სამუშაო დაფა არ არის
 @msg	no such document	ასეთი დოკუმენტი არ არსებობს
-@msg	no such layer or object	ასეთი ფენა ან ობიექტი არ არის
+@msg	no such layer or object	ასეთი შრე ან ობიექტი არ არის
 @msg	no such object {0}	ასეთი ობიექტი {0} არ არის
 @msg	no such perspective grid preset	პერსპექტივის ბადის ასეთი პრესეტი არ არის
 @msg	no such recent file	ასეთი ბოლოდროინდელი ფაილი არ არის
@@ -3889,7 +3889,7 @@ effect	Regular	ჩვეულებრივი
 @msg	select a Live Paint group	მონიშნეთ ცოცხალი შეღებვის ჯგუფი
 @msg	select a blend	მონიშნეთ გადასვლა
 @msg	select a clip group	მონიშნეთ მომჭრელი ჯგუფი
-@msg	select a gradient mesh	მონიშნეთ გრადიენტული ქსელი
+@msg	select a gradient mesh	მონიშნეთ გრადიენტული ბადე
 @msg	select a linked image: an embedded one has no file	მონიშნეთ მიბმული გამოსახულება: ჩაშენებულს ფაილი არ აქვს
 @msg	select a repeat	მონიშნეთ გამეორება
 @msg	select a stroke with a variable width	მონიშნეთ ცვლადი სიგანის კონტური
@@ -3904,7 +3904,7 @@ effect	Regular	ჩვეულებრივი
 @msg	select an object in perspective	მონიშნეთ ობიექტი პერსპექტივაში
 @msg	select artwork (or a colour group) to recolor	მონიშნეთ ხელახლა შესაფერადებელი ნახატი (ან ფერთა ჯგუფი)
 @msg	select at least two objects	მონიშნეთ ორი ობიექტი მაინც
-@msg	select objects, not layers	მონიშნეთ ობიექტები და არა ფენები
+@msg	select objects, not layers	მონიშნეთ ობიექტები და არა შრეები
 @msg	select one path, or give its `id`	მონიშნეთ ერთი ტრაექტორია ან მიუთითეთ მისი `id`
 @msg	select paths to join	მონიშნეთ შესაერთებელი ტრაექტორიები
 @msg	select the art to repeat	მონიშნეთ გასამეორებელი ნახატი
@@ -3950,11 +3950,11 @@ effect	Regular	ჩვეულებრივი
 @msg	the file was read up to an error ({why}): what follows it was left out	ფაილი წაკითხულია შეცდომამდე ({why}): მის შემდეგ მოსული გამოტოვებულია
 @msg	the file's preview header points outside the file	ფაილის გადახედვის სათაური ფაილის გარეთ მიუთითებს
 @msg	the image's pixels don't match its size	გამოსახულების პიქსელები მის ზომას არ ემთხვევა
-@msg	the layer has no objects to clip by	ფენას არ აქვს ობიექტები მოსაჭრელად
-@msg	the layer or group is locked	ფენა ან ჯგუფი ჩაკეტილია
-@msg	the guide is on a hidden or locked layer	დამხმარე ხაზი დამალულ ან ჩაკეტილ ფენაზეა
-@msg	the target layer is locked or hidden	სამიზნე ფენა ჩაკეტილი ან დამალულია
-@msg	the layer to flatten into is hidden	ფენა, რომელშიც უნდა გაბრტყელდეს, დამალულია
+@msg	the layer has no objects to clip by	შრეს არ აქვს ობიექტები მოსაჭრელად
+@msg	the layer or group is locked	შრე ან ჯგუფი ჩაკეტილია
+@msg	the guide is on a hidden or locked layer	დამხმარე ხაზი დამალულ ან ჩაკეტილ შრეზეა
+@msg	the target layer is locked or hidden	სამიზნე შრე ჩაკეტილი ან დამალულია
+@msg	the layer to flatten into is hidden	შრე, რომელშიც უნდა გაბრტყელდეს, დამალულია
 @msg	the object already has an opacity mask	ობიექტს უკვე აქვს გაუმჭვირვალობის ნიღაბი
 @msg	the object has no geometry	ობიექტს გეომეტრია არ აქვს
 @msg	the object has no opacity mask	ობიექტს გაუმჭვირვალობის ნიღაბი არ აქვს
@@ -4075,10 +4075,10 @@ effect	Regular	ჩვეულებრივი
 @msg	`{what}` closes nothing	`{what}` არაფერს ხურავს
 @msg	`{what}` closes something it didn't open	`{what}` ხურავს იმას, რაც არ გაუხსნია
 @msg	a path has too many points	ტრაექტორიას ზედმეტად ბევრი წერტილი აქვს
-@msg	it ends inside a layer	ის ფენის შიგნით მთავრდება
-@msg	it has art outside its layers	მას ფენების გარეთ ნახატი აქვს
+@msg	it ends inside a layer	ის შრის შიგნით მთავრდება
+@msg	it has art outside its layers	მას შრეების გარეთ ნახატი აქვს
 @msg	it has more than {MAX_NODES} objects	მას {MAX_NODES}-ზე მეტი ობიექტი აქვს
-@msg	it has no layers	მას ფენები არ აქვს
+@msg	it has no layers	მას შრეები არ აქვს
 @msg	it has too many values in a row	მას ერთ რიგში ზედმეტად ბევრი მნიშვნელობა აქვს
 @msg	it has {_1}, which VectorCraft doesn't read from it yet	მას აქვს {_1}, რასაც VectorCraft მისგან ჯერ ვერ კითხულობს
 @msg	its objects are nested too deeply	მისი ობიექტები ზედმეტად ღრმადაა ჩადგმული
@@ -4171,7 +4171,7 @@ effect	Regular	ჩვეულებრივი
 	Web 1366×768	ვები 1366×768
 	Web 1280×800	ვები 1280×800
 	Web 1024×768	ვები 1024×768
-	Legal	იურიდიული ინფორმაცია
+	Legal	Legal
 	Tabloid	Tabloid
 	A3	A3
 	A4	A4
@@ -4214,7 +4214,7 @@ effect	Regular	ჩვეულებრივი
 	Use Default	ნაგულისხმევის გამოყენება
 	Go to Conflict	კონფლიქტზე გადასვლა
 	Remove the shortcut	მალსახმობის მოცილება
-	Click, then press the new shortcut (Esc cancels)	დააწკაპუნეთ, შემდეგ დააჭირეთ ახალ მალსახმობს (Esc აუქმებს)
+	Click, then press the new shortcut (Esc cancels)	დაწკაპეთ, შემდეგ დააჭირეთ ახალ მალსახმობს (Esc აუქმებს)
 	All shortcuts reset to defaults.	ყველა მალსახმობი ნაგულისხმევზე დაბრუნდა.
 	Imported. Press OK to keep the imported set.	შემოტანილია. შემოტანილი ნაკრების შესანარჩუნებლად დააჭირეთ OK-ს.
 	⚠ {chord} was already used by {names} — it has been removed there.	{chord} უკვე გამოიყენებოდა აქ: {names} — იქიდან მოცილებულია.
@@ -4225,9 +4225,9 @@ effect	Regular	ჩვეულებრივი
 	Simulate	სიმულაცია
 	Portrait (flipped)	ვერტიკალური (ამოტრიალებული)
 	Landscape (flipped)	ჰორიზონტალური (ამოტრიალებული)
-	Visible & Printable Layers	ხილული და დასაბეჭდი ფენები
-	Visible Layers	ხილული ფენები
-	All Layers	ყველა ფენა
+	Visible & Printable Layers	ხილული და დასაბეჭდი შრეები
+	Visible Layers	ხილული შრეები
+	All Layers	ყველა შრე
 	Do Not Scale	მასშტაბის გარეშე
 	Fit to Page	გვერდზე მორგება
 	Custom Scale	მორგებული მასშტაბი
@@ -4330,7 +4330,7 @@ effect	Regular	ჩვეულებრივი
 	Preserve Tints	ტონირებების შენარჩუნება
 	Scale Tints	ტონირებების მასშტაბირება
 	Linear	წრფივი
-	Freeform	თავისუფალი
+	Freeform	თავისუფალი ფორმა
 	8 Colors	8 ფერი
 	16 Colors	16 ფერი
 	256 Colors	256 ფერი
@@ -4341,7 +4341,7 @@ effect	Regular	ჩვეულებრივი
 	Guide	დამხმარე ხაზი
 	Symbol	სიმბოლო
 	Envelope	გარსი
-	Mesh	ქსელი
+	Mesh	გრადიენტული ბადე
 	Placed Document	განთავსებული დოკუმენტი
 	Radial Repeat	რადიალური გამეორება
 	Grid Repeat	ბადისებრი გამეორება
@@ -4469,19 +4469,19 @@ effect	Regular	ჩვეულებრივი
 	Isometric Left	იზომეტრია მარცხნიდან
 	Isometric Right	იზომეტრია მარჯვნიდან
 	Isometric Top	იზომეტრია ზემოდან
-	Off-Axis Back	დახრილად უკნიდან
-	Off-Axis Bottom	დახრილად ქვემოდან
-	Off-Axis Front	დახრილად წინიდან
-	Off-Axis Left	დახრილად მარცხნიდან
-	Off-Axis Right	დახრილად მარჯვნიდან
-	Off-Axis Top	დახრილად ზემოდან
-	Ogee	ოჟივი
+	Off-Axis Back	ღერძს გარეთ უკნიდან
+	Off-Axis Bottom	ღერძს გარეთ ქვემოდან
+	Off-Axis Front	ღერძს გარეთ წინიდან
+	Off-Axis Left	ღერძს გარეთ მარცხნიდან
+	Off-Axis Right	ღერძს გარეთ მარჯვნიდან
+	Off-Axis Top	ღერძს გარეთ ზემოდან
+	Ogee	S-ისებრი
 	Reset all 3D settings to their defaults.	3D-ის ყველა პარამეტრის ნაგულისხმევზე დაბრუნება.
 	Step	საფეხური
-	Taper	შევიწროება
+	Taper	წაწვეტება
 	Twist	გრეხა
 	Volume	მოცულობა
-3d	Cap	ტორსი
+3d	Cap	თავსახური
 3d	Solid	მყარი
 3d	Hollow	ღრუ
 3d	Bevel	წაკვეთა
@@ -4530,7 +4530,7 @@ mark-style	Japanese	იაპონური
 	Alt+Drag	Alt+გადათრევა
 	Anchors	საყრდენი წერტილები
 	Area Type	არის ტექსტი
-	Basic	ძირითადი
+	Basic	საბაზო
 	Black Outline	შავი კონტური
 	Brown	ყავისფერი
 	Convert to Global	გლობალურად გარდაქმნა
@@ -4560,7 +4560,7 @@ mark-style	Japanese	იაპონური
 	Make Text Wrap	ტექსტის გარსშემოვლების შექმნა
 	Measure	გაზომვა
 	Monochrome	მონოქრომული
-	Muted	მქრქალი
+	Muted	მკრთალი
 	of	/
 	Orange	ნარინჯისფერი
 	Pattern Swatches	პატერნის ნიმუშები
@@ -4596,7 +4596,7 @@ mark-style	Japanese	იაპონური
 	Vertical Area Type	ვერტიკალური არის ტექსტი
 	Vertical Type	ვერტიკალური ტექსტი
 	Vertical Type on a Path	ვერტიკალური ტექსტი ტრაექტორიაზე
-	Vivid	მკვეთრი
+	Vivid	ცოცხალი
 	Warm	თბილი
 	WebP	WebP
 	Working RGB	სამუშაო RGB

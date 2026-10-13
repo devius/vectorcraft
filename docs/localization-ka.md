@@ -24,7 +24,7 @@ consulted. Drafted with AI assistance; a native-speaker review is pending (doubt
   lower case (and bring Mtavruli back to it) instead of capitalizing it (`capitalizes` guard in
   `crates/engine/src/cmd/typemenu.rs`); UPPER CASE still gives Mtavruli, as Unicode defines it.
 - **Counts.** A noun after a number stays singular, so every `@plural` row has one count-neutral form:
-  `ფენა: {n}` rather than a number glued to a noun.
+  `შრე: {n}` rather than a number glued to a noun.
 - **Fonts.** The bundled UI fonts (Source Sans 3, JetBrains Mono) have no Georgian. The desktop app adds
   the first installed face of `theme::GEORGIAN_FONTS` (SF Georgian, Arial Unicode, Sylfaen, Noto Sans
   Georgian, DejaVu Sans) to every family from the first frame. craft-fonts has no Georgian face yet, so
@@ -42,7 +42,7 @@ Follow this table when adding strings; it is the Georgian as the catalog has it 
 | File / Edit / Object / Type / Select / Effect / View / Window / Help | ფაილი / რედაქტირება / ობიექტი / ტექსტი / მონიშვნა / ეფექტი / ჩვენება / ფანჯარა / დახმარება |
 | Undo / Redo / Paste | დაბრუნება / ხელახლა შესრულება / ჩასმა |
 | Artboard / Artboard Tool | სამუშაო დაფა / სამუშაო დაფის ხელსაწყო |
-| Layers | ფენები |
+| Layers | შრეები |
 | Path / Anchor Point Tool | ტრაექტორია / საყრდენი წერტილის ხელსაწყო |
 | Stroke / Fill | კონტური / შევსება |
 | Swatches | ფერის ნიმუშები |

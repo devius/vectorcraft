@@ -631,14 +631,14 @@ fn georgian_reads_as_georgian() {
         ("Stroke", "კონტური"),
         ("Fill", "შევსება"),
         ("Direct Selection Tool", "პირდაპირი მონიშვნის ხელსაწყო"),
-        ("Save As…", "შენახვა სხვა სახელით…"),
+        ("Save As…", "შენახვა როგორც…"),
         ("Undo", "დაბრუნება"),
         ("File", "ფაილი"),
     ] {
         assert_eq!(tr(ka(), en), want);
     }
     for n in [0, 1, 2, 5, 21] {
-        assert_eq!(trn(ka(), n, "{n} Layer", "{n} Layers"), format!("ფენა: {n}"));
+        assert_eq!(trn(ka(), n, "{n} Layer", "{n} Layers"), format!("შრე: {n}"));
     }
     assert_eq!(tr_ctx(ka(), "axis", "Both"), "ორივე");
     assert_eq!(tr_id(ka(), "pathfinder.add", "Add"), "გაერთიანება");
