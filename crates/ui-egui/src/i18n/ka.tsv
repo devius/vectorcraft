@@ -162,7 +162,7 @@
 	Path	ტრაექტორია
 	Join	შეერთება
 	Average…	საშუალო…
-	Outline Stroke	შემოხაზვის კონტურად გარდაქმნა
+	Outline Stroke	კონტურის ფიგურად გარდაქმნა
 	Offset Path…	ტრაექტორიის წანაცვლება…
 	Reverse Path Direction	ტრაექტორიის მიმართულების შებრუნება
 	Simplify…	გამარტივება…
@@ -1831,7 +1831,7 @@ lighting	Light	სინათლე
 	Number of Colors:	ფერების რაოდენობა:
 	Raster File Format:	რასტრული ფაილის ფორმატი:
 	True colour needs version 2004 or later: the nearest of 256 colours is written.	სრულ ფერს სჭირდება 2004 ან უფრო ახალი ვერსია: იწერება 256 ფერიდან უახლოესი.
-	Type becomes outlines, and strokes a CAD line can't draw become filled shapes.	ტექსტი კონტურებად იქცევა, ხოლო შემოხაზვები, რომლებსაც CAD-ხაზი ვერ ხატავს, შევსებულ ფიგურებად.
+	Type becomes outlines, and strokes a CAD line can't draw become filled shapes.	ტექსტი კონტურებად იქცევა, ხოლო ის კონტურები, რომლებსაც CAD-ხაზი ვერ ხატავს, შევსებულ ფიგურებად.
 	Type stays text, and every stroke is a line with its lineweight and dashes.	ტექსტი ტექსტად რჩება, ყოველი კონტური კი ხაზია თავისი სისქითა და ტირეებით.
 	Version:	ვერსია:
 	Spin	დატრიალება
@@ -1933,7 +1933,7 @@ lighting	Light	სინათლე
 	Largest:	უდიდესი:
 	Anti-alias Rasters	რასტრების ანტიალიასინგი
 	Clip Complex Regions	რთული უბნების მოჭრა
-	Convert All Strokes to Outlines	ყველა შემოხაზვის კონტურებად გარდაქმნა
+	Convert All Strokes to Outlines	ყველა კონტურის ფიგურებად გარდაქმნა
 	Convert All Text to Outlines	მთელი ტექსტის კონტურებად გარდაქმნა
 	Gradient and Mesh Resolution:	გრადიენტისა და ქსელის გარჩევადობა:
 	Line Art and Text Resolution:	ხაზოვანი ნახატისა და ტექსტის გარჩევადობა:
@@ -3579,7 +3579,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Offset Path: select paths	ტრაექტორიის წანაცვლება: მონიშნეთ ტრაექტორიები
 @msg	Opened with {_1} note(s): {_2}	გაიხსნა, შენიშვნა ({_1}): {_2}
 @msg	Opened {url}	გაიხსნა {url}
-@msg	Outline Stroke: no stroked paths selected	შემოხაზვის კონტურად გარდაქმნა: შემოხაზული ტრაექტორიები მონიშნული არ არის
+@msg	Outline Stroke: no stroked paths selected	კონტურის ფიგურად გარდაქმნა: კონტურიანი ტრაექტორიები მონიშნული არ არის
 @msg	PDF settings are not an object	PDF-ის პარამეტრები ობიექტი არ არის
 @msg	PDF writer error: {0}	PDF-ის ჩამწერის შეცდომა: {0}
 @msg	Packaged {n} file(s) in {folder}{note}	შეფუთულია ფაილი ({n}) საქაღალდეში {folder}{note}
@@ -4368,7 +4368,7 @@ effect	Regular	ჩვეულებრივი
 	Transparent Objects	გამჭვირვალე ობიექტები
 	All Affected Objects	ყველა შეცვლილი ობიექტი
 	Expanded Patterns	გაშლილი პატერნები
-	Outlined Strokes	კონტურებად გარდაქმნილი შემოხაზვები
+	Outlined Strokes	ფიგურებად გარდაქმნილი კონტურები
 	Outlined Text	კონტურებად გარდაქმნილი ტექსტი
 	All Rasterized Regions	ყველა რასტრირებული არე
 	High Resolution	მაღალი გარჩევადობა
