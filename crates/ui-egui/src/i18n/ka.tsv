@@ -62,7 +62,7 @@
 	Print…	დაბეჭდვა…
 	Edit	რედაქტირება
 	Undo	დაბრუნება
-	Redo	გამეორება
+	Redo	ხელახლა შესრულება
 	Cut	ამოჭრა
 	Copy	კოპირება
 	Paste	ჩასმა
@@ -846,8 +846,8 @@ lighting	Light	სინათლე
 	Recent Font 7	ბოლოდროინდელი შრიფტი 7
 	Recent Font 8	ბოლოდროინდელი შრიფტი 8
 	Recent Font 9	ბოლოდროინდელი შრიფტი 9
-	Redo {name}	{name}-ის გამეორება
-	Redo {}	{}-ის გამეორება
+	Redo {name}	ხელახლა შესრულება: {name}
+	Redo {}	ხელახლა შესრულება: {}
 	Missing Fonts Dialog	დაკარგული შრიფტების დიალოგი
 	Find Fonts in Folder…	შრიფტების ძებნა საქაღალდეში…
 	Rename Workspace	სამუშაო სივრცის გადარქმევა
