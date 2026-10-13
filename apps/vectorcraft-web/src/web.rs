@@ -67,6 +67,7 @@ pub fn start() {
         // Fallback fonts the first frame needs (Noto Sans Arabic), fetched while the loading text
         // shows; the rest load in the background once the app runs.
         crate::fonts::load_startup_fonts().await;
+        crate::fonts::load_georgian_font().await;
         let host = Host {
             runner: eframe::WebRunner::new(),
             inbox: Arc::default(),
