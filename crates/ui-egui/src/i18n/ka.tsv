@@ -28,7 +28,7 @@
 	Light	ღია
 	Quit VectorCraft	VectorCraft-იდან გასვლა
 	File	ფაილი
-	New…	შექმნა…
+	New…	ახალი…
 	New from Template…	შაბლონიდან შექმნა…
 	Open…	გახსნა…
 	Open Recent Files	ბოლოდროინდელი ფაილების გახსნა
@@ -59,7 +59,7 @@
 	CMYK Color	CMYK ფერი
 	RGB Color	RGB ფერი
 	File Info…	ფაილის ინფორმაცია…
-	Print…	ბეჭდვა…
+	Print…	დაბეჭდვა…
 	Edit	რედაქტირება
 	Undo	დაბრუნება
 	Redo	ხელახლა შესრულება
@@ -3405,7 +3405,7 @@ effect	Regular	ჩვეულებრივი
 	Swap Fill and Stroke (Shift+X)	შევსებისა და კონტურის გაცვლა (Shift+X)
 	Manage Workspaces	სამუშაო სივრცეების მართვა
 	Name:	სახელი:
-	New	შექმნა
+	New	ახალი
 	New Workspace	ახალი სამუშაო სივრცე
 	Rename	გადარქმევა
 	Save the current layout under this name	მიმდინარე განლაგების შენახვა ამ სახელით
