@@ -404,6 +404,12 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "{name?} open Graphic Style Options (dialog `graphicStyleOptions`, field `name`): for style `name` OK renames it (graphicStyle.rename); without, OK makes a new style of that name from the selection (graphicStyle.new)",
     ),
     (
+        "ui.symbolOptions",
+        "Symbol Options…",
+        "",
+        "{} open Symbol Options for a new symbol made from the selection, what the Symbols panel's New Symbol opens (dialog `symbolOptions`, field `name`, default the first free \"New Symbol\"/\"New Symbol N\"); OK runs symbol.new {name}",
+    ),
+    (
         "tool.options",
         "Tool Options…",
         "",
@@ -758,6 +764,12 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "{path?: a .wasm file} install a WebAssembly plug-in (plugin.install); without a path pick one (the web opens the browser's file picker; File › Open of a .wasm installs it too)",
     ),
     (
+        "ui.checkScript",
+        "Check Script…",
+        "",
+        "{path? | data? | dataBase64?, name?, includes?: true with a path} check a script written for the reference app without running it (script.check; with a path, the files its #include lines name are checked too) and show the report (dialog `scriptCheck`: `report`, script.check's result; Copy Report copies it as JSON); without a file pick one (the web opens the browser's file picker; File › Open of a .jsx, .jsxinc or .jsxbin file shows the report too)",
+    ),
+    (
         "ui.perspectiveGridDialog",
         "Define Perspective Grid…",
         "",
@@ -899,11 +911,11 @@ pub(crate) fn opt_bool(p: &Value, key: &str) -> Result<Option<bool>, String> {
 /// `params` has only keys the params description of engine command `id` names, or the parameter
 /// error naming the one it doesn't (#1442). The UI's own commands aren't checked yet: their
 /// descriptions haven't been audited against what they read.
-pub fn check_params(id: &str, params: &Value) -> Result<(), String> {
+pub fn check_params(session: &vectorcraft_engine::Session, id: &str, params: &Value) -> Result<(), String> {
     if UI_COMMANDS.iter().any(|c| c.0 == id) {
         return Ok(());
     }
-    vectorcraft_engine::check_params(id, params).map_err(|e| e.to_string())
+    session.check_params(id, params).map_err(|e| e.to_string())
 }
 
 pub fn run_ui_command(app: &mut VectorcraftApp, id: &str, p: &Value) -> Option<Result<Value, String>> {
@@ -1290,6 +1302,7 @@ pub fn run_ui_command(app: &mut VectorcraftApp, id: &str, p: &Value) -> Option<R
         }
         "ui.colorPicker" => crate::dialogs::open_color_picker(app, p),
         "ui.graphicStyleOptions" => crate::dialogs::graphic_style_options::open(app, s("name").as_deref()),
+        "ui.symbolOptions" => crate::dialogs::symbol_options::open(app),
         "ui.brushOptions" => crate::dialogs::brush_options::open(app, s("name").as_deref()),
         "tool.options" => crate::toolbar::open_options(app, &s("tool").unwrap_or_default()),
         "ui.colorGuideOptions" => {
@@ -1427,6 +1440,7 @@ pub fn run_ui_command(app: &mut VectorcraftApp, id: &str, p: &Value) -> Option<R
         "ui.printPresetDialog" => crate::dialogs::print::open_preset(app, p),
         "plugin.dialog" => crate::dialogs::plugin::open(app, p),
         "ui.installPlugin" => io::install_plugin(app, s("path")),
+        "ui.checkScript" => crate::dialogs::script_check::command(app, p),
         "ui.perspectiveGridDialog" => crate::dialogs::perspective_grid::open(app),
         "ui.perspectivePresetsDialog" => {
             crate::dialogs::perspective_presets::open(app, s("selected").as_deref());
@@ -2080,7 +2094,7 @@ pub fn menu_tree_named(english_names: bool) -> Vec<(&'static str, Vec<Item>)> {
                 c("Export Selection…", "file.exportSelection"),
                 Sep,
                 c("Package…", "ui.packageDialog"),
-                sub("Scripts", vec![todos("Other Script…", "Cmd+F12")]),
+                sub("Scripts", vec![c("Check Script…", "ui.checkScript"), todos("Other Script…", "Cmd+F12")]),
                 Sep,
                 c("Document Setup…", "file.documentSetup"),
                 sub(

@@ -114,6 +114,9 @@ dialog open); without `name` it names a new style made from the selection (`grap
 `ui.mergeGraphicStyles {names}` opens the same dialog to name the style `ui.dialog.confirm` merges from them
 (`graphicStyle.merge`). Deleting styles from the panel asks first with a `confirm` dialog (`graphicStyle.delete`).
 
+Symbols: `ui.symbolOptions` opens the `symbolOptions` dialog (field `name`) that the Symbols panel's New Symbol asks
+first; `ui.dialog.confirm` makes the symbol from the selection with that name (`symbol.new`).
+
 Gradient panel: double-clicking a stop on the panel's slider opens the same `gradientStop` popover, with a `screen`
 field (`[x, y]`, screen points) in place of `x`/`y`. The panel's stop eyedropper selects the Eyedropper tool with the
 tool option `stop` (the tool to return to; `tool.setOption {key: "stop", value: "gradient"}`): its next click on art
@@ -507,7 +510,8 @@ type with those options (`file.place {text: {…}}`).
 
 System clipboard formats: through the desktop app, `edit.copy` and `edit.cut` publish what `clipboard.flavours`
 lists to the system clipboard, and every Paste command first loads what another app copied (`clipboard.importSvg`,
-`importPdf`, `importText` or `importImage`, centred in the view); an import error answers the Paste with that error
+`importPdf`, `importEps`, `importText` or `importImage`, centred in the view; the desktop app reads PDF and EPS from
+the Windows clipboard and, with SVG, from the macOS pasteboard, and an `.eps` file copied in a file manager anywhere); an import error answers the Paste with that error
 and pastes nothing. Cmd+V also pastes a bitmap or PDF with no text beside it (on the key's release, as egui sends no
 Paste event for it). Screenshots paste on every platform: Windows reads `PNG`, else `CF_DIBV5`/`CF_DIB`, macOS the
 pasteboard's PNG or TIFF, Linux `image/png`, and the web the picture the browser's paste event carries (#457).

@@ -15,6 +15,7 @@ use vectorcraft_doc::{AppearanceItem, Document, FillLayer, Node, NodeId, NodeKin
 use vectorcraft_geom::{Affine, Point, Vec2};
 
 use super::edit::selected_roots;
+use super::pathops::{remove_each, separate};
 use super::*;
 use crate::EngineError;
 
@@ -525,14 +526,6 @@ fn normalize(mut art: Node) -> Result<(Node, (f64, f64), Point)> {
     Ok((art, (w, h), c))
 }
 
-fn unique_symbol_name(d: &Document, base: &str) -> String {
-    let taken = |n: &str| d.symbols.iter().any(|s| s.name == n);
-    if !taken(base) {
-        return base.to_string();
-    }
-    (2..).map(|i| format!("{base} {i}")).find(|n| !taken(n)).unwrap_or_else(|| base.to_string())
-}
-
 fn instances_of(d: &Document, name: Option<&str>) -> Vec<NodeId> {
     let mut v = vec![];
     d.walk(|n| {
@@ -569,6 +562,10 @@ fn symbol_list(s: &mut Session, _: &Value) -> Result<Value> {
 /// Replace the root nodes `ids` with one instance of `name` (art already stored). Returns the id.
 fn replace_with_instance(d: &mut Document, ids: &[NodeId], name: &str, xf: Affine) -> Result<NodeId> {
     let top = *ids.last().ok_or_else(|| EngineError::Other("nothing selected".into()))?;
+    if separate(d, ids) {
+        let id = d.alloc_id();
+        return Ok(d.wrap(ids, |_| Node::new(id, NodeKind::SymbolInstance { symbol: name.into(), xf }))?);
+    }
     let (par, idx, _) = d.position(top).ok_or(EngineError::NoNode(top))?;
     let id = d.alloc_id();
     d.insert(par, idx + 1, Node::new(id, NodeKind::SymbolInstance { symbol: name.into(), xf }))?;
@@ -582,7 +579,7 @@ fn symbol_new(s: &mut Session, p: &Value) -> Result<Value> {
     let ids = roots(s, p)?;
     let art = selection_art(s, p)?.ok_or_else(|| EngineError::Other("nothing selected".into()))?;
     let (art, size, c) = normalize(art)?;
-    let name = unique_symbol_name(&s.doc()?.doc, str_param(p, "name").filter(|n| !n.trim().is_empty()).unwrap_or("New Symbol"));
+    let name = s.doc()?.doc.unique_symbol_name(str_param(p, "name").filter(|n| !n.trim().is_empty()).unwrap_or("New Symbol"));
     let id = s.edit("New Symbol", |d, sel| {
         let art = d.reid(&art);
         d.symbols.push(Symbol { name: name.clone(), art: Arc::new(art) });
@@ -742,9 +739,7 @@ fn symbol_delete(s: &mut Session, p: &Value) -> Result<Value> {
         if expand {
             break_links(d, &inst)?;
         } else {
-            for i in inst {
-                d.remove(i)?;
-            }
+            remove_each(d, &inst)?;
         }
         d.symbols.retain(|x| x.name != name);
         set_natural_size(d, &name, None);
@@ -761,7 +756,7 @@ fn symbol_duplicate(s: &mut Session, p: &Value) -> Result<Value> {
     let name = name_param(p, C)?.to_string();
     let d = &s.doc()?.doc;
     let sym = d.symbols.iter().find(|x| x.name == name).cloned().ok_or_else(|| bad(C, format!("no symbol named `{name}`")))?;
-    let new = unique_symbol_name(d, str_param(p, "newName").unwrap_or(&format!("{name} copy")));
+    let new = d.unique_symbol_name(str_param(p, "newName").unwrap_or(&format!("{name} copy")));
     let size = natural_size(d, &name);
     s.edit("Duplicate Symbol", |d, _| {
         let art = d.reid(&sym.art);
@@ -871,12 +866,7 @@ fn symbol_spray(s: &mut Session, p: &Value) -> Result<Value> {
             .collect();
         let n = doomed.len();
         if n > 0 {
-            s.edit("Symbol Sprayer", |d, _| {
-                for id in &doomed {
-                    d.remove(*id)?;
-                }
-                Ok(())
-            })?;
+            s.edit("Symbol Sprayer", |d, _| remove_each(d, &doomed))?;
         }
         return Ok(json!({ "count": n }));
     }

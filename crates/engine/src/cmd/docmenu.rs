@@ -10,6 +10,7 @@ use vectorcraft_doc::{CharStyle, Guide, Node, NodeId, NodeKind, SavedSelection, 
 use vectorcraft_geom::Vec2;
 
 use super::edit::selected_roots;
+use super::pathops::Beside;
 use super::select::{selectable_ids, walk_selectable};
 use super::*;
 
@@ -488,8 +489,10 @@ fn release_guides(s: &mut Session, _: &Value) -> Result<Value> {
 fn lock_guides(s: &mut Session, p: &Value) -> Result<Value> {
     let v = p.get("locked").and_then(Value::as_bool).unwrap_or(!s.menu.guides_locked);
     s.menu.guides_locked = v;
-    // Locked guides can't stay selected.
-    if v && !s.doc()?.selection.guides.is_empty() {
+    // Locked guides can't stay selected, ruler guides or guide paths ([`Session::select`] lets
+    // those go).
+    let st = s.doc()?;
+    if v && (!st.selection.guides.is_empty() || st.selection.objects.iter().any(|id| crate::is_guide_path(&st.doc, *id))) {
         s.select(|_, sel| sel.guides.clear())?;
     }
     Ok(json!({ "locked": v }))
@@ -504,10 +507,13 @@ fn clear_guides(s: &mut Session, _: &Value) -> Result<Value> {
     }
     s.edit("Clear Guides", |d, _| {
         d.guides.clear();
+        let mut gone = Beside::replacing(d, &paths);
         for id in &paths {
-            let _ = d.remove(*id);
+            if d.node(*id).is_some() {
+                gone.put(d, *id, vec![])?;
+            }
         }
-        Ok(())
+        gone.finish(d)
     })?;
     Ok(json!({ "count": n }))
 }
