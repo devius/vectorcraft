@@ -4599,7 +4599,7 @@ mark-style	Japanese	იაპონური
 	Working RGB	სამუშაო RGB
 	X:	X:
 	Y:	Y:
-	Auto Color	ავტოფერი
+	Auto Color	ავტომატური ფერი
 	Check Script	სკრიპტის შემოწმება
 	Check Script…	სკრიპტის შემოწმება…
 	Copy Report	ანგარიშის კოპირება
@@ -4656,7 +4656,7 @@ mark-style	Japanese	იაპონური
 	Symbol Options…	სიმბოლოს პარამეტრები…
 	Auto Grouping	ავტომატური დაჯგუფება
 	Ignore Color	ფერის იგნორირება
-imageTrace	Outline	კონტურები
+imageTrace	Outline	კონტური
 @msg	Copied the script report	კოპირებულია სკრიპტის ანგარიში
 @msg	Offset Path: the offset leaves nothing of the selected paths (an inset larger than the shapes)	ტრაექტორიის წანაცვლება: წანაცვლების შემდეგ მონიშნული ტრაექტორიებიდან არაფერი რჩება (შიგნით წანაცვლება ფიგურებზე დიდია)
 @msg	{path}: not a file	{path}: ფაილი არ არის
