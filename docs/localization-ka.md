@@ -1,6 +1,6 @@
 # Georgian interface
 
-> **Last reviewed:** 2026-10-13 · **Last updated:** 2026-10-13 · **Change:** minor (Georgian notes and terminology; catalog brought up to date with upstream main, 194 rows added) · **Target:** Adobe Illustrator 2026 (30.x)
+> **Last reviewed:** 2026-10-13 · **Last updated:** 2026-10-14 · **Change:** minor (63 rows for strings added upstream: shortcut-set import, toolbar controls, Revolve lighting) · **Target:** Adobe Illustrator 2026 (30.x)
 
 Choose **Edit › Preferences… › User Interface › Language › ქართული** (on macOS also
 **VectorCraft › Language › ქართული**), or follow a Georgian system language (`ka`, `ka-GE`,
@@ -9,7 +9,7 @@ is `auto`). The catalog code is `ka`; `app.language` with `{"lang":"ka"}` select
 choice is saved as the `interfaceLanguage` preference. Document text, command ids, menu paths used by
 scripts, CLI/MCP/control responses and file paths do not change.
 
-`crates/ui-egui/src/i18n/ka.tsv` has about 4,650 rows: every menu string, command label and `tl!`
+`crates/ui-egui/src/i18n/ka.tsv` has about 4,720 rows: every menu string, command label and `tl!`
 literal (panels, dialogs, tooltips, Preferences), the `@plural` rows and the `@msg` status and error
 messages, held complete by the tests. Left in English on purpose (`MENU_KEEP_AS_IS`): the product name,
 language names, OpenType, the built-in workspace names and the bracketed perspective grid preset names;
@@ -84,3 +84,4 @@ status and error messages, `@plural` for `one|other` sources, `@id` for a comman
 | Date | Change | Summary |
 |---|---|---|
 | 2026-10-13 | minor | Georgian notes and terminology; 194 rows for strings added upstream (graphs, relinking, 3D and Materials, grid tool options, file filters) |
+| 2026-10-14 | minor | 63 rows for strings added upstream (shortcut-set import and import matches, toolbar controls, Revolve lighting, corner radius); 3 retired Revolve rows removed |
