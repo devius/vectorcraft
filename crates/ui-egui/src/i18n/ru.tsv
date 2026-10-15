@@ -482,6 +482,7 @@
 	Color bars	Цветные полосы
 	Color blindness – Deuteranopia-type	Дальтонизм — дейтеранопия
 	Color blindness – Protanopia-type	Дальтонизм — протанопия
+	Color blindness – Tritanopia-type	Дальтонизм — тританопия
 	Color Burn	Затемнение основы
 	Color conversion:	Преобразование цвета:
 	Color Dodge	Осветление основы
@@ -613,7 +614,7 @@
 	Create Gradient Mesh…	Создать градиентную сетку…
 	Create Graph	Создать диаграмму
 	Create New Layer	Создать новый слой
-	Create New Sublayer	Создать новый подcлой
+	Create New Sublayer	Создать новый подслой
 	Create New Swatch…	Создать новый образец…
 	Create New {kind} Style	Создать новый стиль {kind}
 	Create Object Mosaic…	Создать мозаику объектов…
@@ -650,6 +651,7 @@
 	Cyan	Голубой
 	Dark	Тёмный
 	Darken	Замена тёмным
+	Darkness	Затемнение
 	dash	штрих
 	Dash Pattern	Шаблон штрихов
 	Dashed	Штриховой
@@ -1003,6 +1005,9 @@
 	Export…	Экспорт…
 	Extrude & Bevel…	Выдавливание и фаска…
 	Eyedropper	Пипетка
+	Sample Color from Screen	Взять цвет с экрана
+	This system has no screen color sampler	В этой системе нет средства выбора цвета с экрана
+	The active document changed while the screen color sampler was open	Активный документ сменился, пока было открыто средство выбора цвета с экрана
 	Eyedropper Applies:	Пипетка применяет:
 	Eyedropper Options	Параметры пипетки
 	Eyedropper Picks Up:	Пипетка берёт:
@@ -1034,6 +1039,7 @@
 	Fill (X), double-click for the Color Picker	Заливка (X), дважды щёлкните для палитры цветов
 	Fill and Stroke	Заливка и обводка
 	Fill new strokes	Заполнять новые обводки
+	Keep selected	Оставлять выбранным
 	Fill Color	Цвет заливки
 	Fill New Type Objects With Placeholder Text	Заполнять новые текстовые объекты текстом-заполнителем
 	Fill Rule	Правило заливки
@@ -1057,6 +1063,7 @@
 	Fit Headline	Подогнать заголовок
 	Decrease Font Size	Уменьшить размер шрифта
 	Increase Font Size	Увеличить размер шрифта
+	Reset Tracking and Kerning	Сбросить трекинг и кернинг
 	Spacing	Интервал
 	Step Type	Подгонять текст по шагам
 	Fit in View	Вписать в вид
@@ -1366,7 +1373,7 @@
 	Invert	Инвертировать
 	Invert Colors	Инвертировать цвета
 	Invert Mask	Инвертировать маску
-	Isolate	Aизолировать
+	Isolate	Изолировать
 	Isolate Blending	Изолировать наложение
 	Isolate Group	Изолировать группу
 	Italian	Итальянский
@@ -1477,6 +1484,20 @@
 	Left:	Слева:
 	Legacy Macintosh RGB (Gamma 1.8)	Устаревший Macintosh RGB (гамма 1.8)
 	Legacy vector clipboard	Устаревший векторный буфер обмена
+	Legacy (version 7)	Устаревший (версия 7)
+	Transparent Images:	Прозрачные изображения:
+	Flatten	Объединить
+	Omit	Пропустить
+	Legacy .ai Options	Параметры устаревшего .ai
+	A legacy .ai file holds one artboard: each artboard you check is saved as a separate file.	Устаревший файл .ai содержит одну монтажную область: каждая отмеченная монтажная область сохраняется в отдельный файл.
+	{count} of {total} artboards	{count} из {total} монтажных областей
+	Check an artboard to save.	Отметьте монтажную область для сохранения.
+	Hidden Objects:	Скрытые объекты:
+	Hidden Layer	Скрытый слой
+	Make Visible	Сделать видимыми
+	Text:	Текст:
+	Editable	Редактируемый
+	PDF-compatible	Совместимый с PDF
 	Legacy vector clipboard (no transparency)	Устаревший векторный буфер обмена (без прозрачности)
 	Less	Меньше
 	Letter	Letter
@@ -1774,7 +1795,7 @@
 	New PDF Preset	Новый набор PDF
 	New Print Preset	Новый набор печати
 	New Scatter Brush from Selection	Новая кисть-распыление из выделенного
-	New Sublayer…	Новый подcлой…
+	New Sublayer…	Новый подслой…
 	New Swatch	Новый образец
 	New Swatch…	Новый образец…
 	New Symbol	Новый символ
@@ -2000,6 +2021,7 @@
 	Panel menu	Меню панели
 	Panel Options…	Параметры панели…
 	Panels	Панели
+	Panels Except Tools and Control	Панели, кроме инструментов и панели Control
 	Paragraph	Абзац
 	Paragraph Style	Стиль абзаца
 	Paragraph Style Options	Параметры стиля абзаца
@@ -3405,6 +3427,7 @@ imageTrace	Outline	Контур
 	 to set spacing and orientation	 для задания интервала и ориентации
 	:	:
 	Isolate Selected Group	Изолировать выбранную группу
+	Isolate Selected Object	Изолировать выбранный объект
 	Release Clipping Mask	Освободить маску обрезки
 	Make Compound Path	Создать составной контур
 	Release Compound Path	Освободить составной контур
@@ -3490,6 +3513,8 @@ axis	Both	Оба
 @msg	its type is to come in as outlines, which only its page has	его текст должен прийти в виде контуров, а они есть только на его странице
 @msg	the art on them differs from the page's in {_1}% of it	изображение на слоях отличается от изображения на странице на {_1} % площади
 @msg	the art on them differs from the page's in {_1}% of it: they come from its editing data all the same	изображение на слоях отличается от изображения на странице на {_1} % площади: тем не менее слои взяты из его данных для редактирования
+@msg	the file's layers weren't read ({_1}): it comes in as its page, in one layer	слои файла не прочитаны ({_1}): он открывается как его страница, на одном слое
+@msg	the file's layers weren't read from its editing data ({_1}): they come from its PDF part	слои файла не прочитаны из его данных для редактирования ({_1}): они взяты из его PDF-части
 @msg	`to` must be "corner" or "smooth"	`to` должно быть "corner" или "smooth"
 @msg	BMP files are RGB or grayscale: colorModel rgb or gray	файлы BMP бывают RGB или в оттенках серого: colorModel rgb или gray
 @msg	Blend colors: select at least three objects with filled colours	Смешивание цветов: выберите не менее трёх объектов с цветными заливками
@@ -3632,6 +3657,9 @@ axis	Both	Оба
 @msg	axis must be "vertical", "horizontal" or an angle in degrees, not `{v}`	axis должно быть "vertical", "horizontal" или углом в градусах, а не `{v}`
 @msg	background {other}: transparent, white, black or a colour such as "#ff8800"	фон {other}: transparent, white, black или цвет, например "#ff8800"
 @msg	bad color {v}	недопустимый цвет {v}
+@msg	the Color Picker is not open	палитра цветов не открыта
+@msg	the screen color sampler is already open	средство выбора цвета с экрана уже открыто
+@msg	this system has no screen color sampler	в этой системе нет средства выбора цвета с экрана
 @msg	bad colour `{hex}` (#rrggbb)	недопустимый цвет `{hex}` (#rrggbb)
 @msg	bad page tree	недопустимое дерево страниц
 @msg	bad shortcut	недопустимое сочетание клавиш
@@ -4376,3 +4404,54 @@ lighting	Light	Свет
 	Softness	Мягкость
 	Ambient Light	Окружающий свет
 	Light behind the object	Свет позади объекта
+
+# Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
+	Dimension	Размер
+	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Чертёж : реальный размер — при 1:10 1 единица на странице подписывается как 10.
+	Preview (1 inch on the page)	Просмотр (1 дюйм на странице)
+	Set as Default	Установить по умолчанию
+	 out from a highlighted edge to place its dimension  |  	 наружу от подсвеченного края, чтобы разместить его размер  |  
+	 cancels  |  Double-click the tool for options	 отменяет  |  Двойной щелчок по инструменту открывает параметры
+	Linear	Линейный
+	Angular	Угловой
+	Away from the Line	Вдали от линии
+	Between Line and Object	Между линией и объектом
+	Drag out from a segment, or click two points, then click to place.	Перетащите наружу от сегмента или щёлкните две точки, затем щёлкните, чтобы разместить.
+	Drag out from a corner, or click two straight lines, then click to place.	Перетащите наружу от угла или щёлкните две прямые линии, затем щёлкните, чтобы разместить.
+	Drag out from a circle or arc for its radius, inwards for its diameter.	Перетащите от окружности или дуги наружу — радиус, внутрь — диаметр.
+@msg	Choose a circle or a perfect arc	Выберите окружность или правильную дугу
+@msg	Choose a precision from 0 to 6	Выберите точность от 0 до 6
+	Create Dimension	Создать размер
+	Dimension Tool	Инструмент «Размер»
+	Dimension Tool Options	Параметры инструмента «Размер»
+	Display	Отображение
+	Font Family:	Семейство шрифтов:
+	Font Style:	Начертание:
+	Precision:	Точность:
+	Update Dimensions	Обновить размеры
+	X:	X:
+	Y:	Y:
+@msg	Angles require two straight segments	Для угла нужны два прямых сегмента
+@msg	Choose two different points	Выберите две разные точки
+@msg	Choose two non-parallel straight segments	Выберите два непараллельных прямых сегмента
+@msg	Choose two nonzero angle arms	Выберите две стороны угла ненулевой длины
+@msg	Dimension point is outside the canvas	Точка размера находится за пределами холста
+@msg	Dimension size is outside its supported range	Размер выходит за поддерживаемые пределы
+@msg	First measured segment no longer exists	Первый измеряемый сегмент больше не существует
+@msg	Invalid dimension distance	Недопустимое расстояние размера
+@msg	Invalid dimension font name	Недопустимое имя шрифта размера
+@msg	Invalid drawing scale	Недопустимый масштаб чертежа
+@msg	Invalid real scale	Недопустимый реальный масштаб
+@msg	Measured anchor no longer exists	Измеряемая опорная точка больше не существует
+@msg	Measured segment no longer exists	Измеряемый сегмент больше не существует
+@msg	Non-finite dimension	Размер не является конечным числом
+@msg	Scale must be drawing:real, for example 1:10	Масштаб должен быть в виде чертёж:реальность, например 1:10
+@msg	Scale ratio must be between 1:1000000 and 1000000:1	Соотношение масштаба должно быть от 1:1000000 до 1000000:1
+@msg	Second measured segment no longer exists	Второй измеряемый сегмент больше не существует
+@msg	Unknown dimension mode	Неизвестный режим размера
+@msg	Unknown dimension option {k}	Неизвестный параметр размера {k}
+@msg	Unknown dimension style	Неизвестный стиль размера
+@msg	Unknown unit	Неизвестная единица
+# Revolve cap description
+	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Закрывает круглые торцы открытых профилей. При неполном вращении боковые срезы остаются открытыми.
+	Distance	Расстояние
