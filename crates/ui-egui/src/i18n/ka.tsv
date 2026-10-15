@@ -4722,3 +4722,78 @@ imageTrace	Outline	კონტური
 @msg	unknown control `{name}`: fillStroke, coloring, drawMode or screenMode	უცნობი control `{name}`: fillStroke, coloring, drawMode ან screenMode
 @plural	agrees with {n} default shortcut|agrees with {n} default shortcuts	ემთხვევა ნაგულისხმევ მალსახმობებს: {n}|ემთხვევა ნაგულისხმევ მალსახმობებს: {n}
 @plural	{n} part of the file wasn't read|{n} parts of the file weren't read	ფაილის წაუკითხავი ნაწილები: {n}|ფაილის წაუკითხავი ნაწილები: {n}
+# Upstream sync 2026-10-16: legacy .ai export, screen color sampler, Hidden Objects, Dimension tool.
+	Color blindness – Tritanopia-type	დალტონიზმი – ტრიტანოპიის ტიპი
+	Darkness	სიმუქე
+	Sample Color from Screen	ფერის აღება ეკრანიდან
+	This system has no screen color sampler	ამ სისტემას ეკრანიდან ფერის აღების საშუალება არ აქვს
+	The active document changed while the screen color sampler was open	აქტიური დოკუმენტი შეიცვალა, სანამ ეკრანიდან ფერის აღება ღია იყო
+	Keep selected	მონიშნულად დატოვება
+	Reset Tracking and Kerning	ტრეკინგისა და კერნინგის ჩამოყრა
+	Legacy (version 7)	ძველი (ვერსია 7)
+	Transparent Images:	გამჭვირვალე გამოსახულებები:
+	Flatten	გაბრტყელება
+	Omit	გამოტოვება
+	Legacy .ai Options	ძველი .ai ფორმატის პარამეტრები
+	A legacy .ai file holds one artboard: each artboard you check is saved as a separate file.	ძველი .ai ფაილი ერთ სამუშაო დაფას იტევს: თითოეული სამუშაო დაფა, რომელსაც მონიშნავთ, ცალკე ფაილად შეინახება.
+	{count} of {total} artboards	სამუშაო დაფა: {count} / {total}
+	Check an artboard to save.	შესანახად მონიშნეთ სამუშაო დაფა.
+	Hidden Objects:	დამალული ობიექტები:
+	Hidden Layer	დამალული შრე
+	Make Visible	გამოჩენა
+	Text:	ტექსტი:
+	Editable	რედაქტირებადი
+	PDF-compatible	PDF-თან თავსებადი
+	Panels Except Tools and Control	პანელები, ხელსაწყოებისა და მართვის პანელის გარდა
+	Isolate Selected Object	მონიშნული ობიექტის იზოლირება
+@msg	the file's layers weren't read ({_1}): it comes in as its page, in one layer	ფაილის შრეები ვერ წაიკითხა ({_1}): ის გაიხსნება როგორც მისი გვერდი, ერთ შრეში
+@msg	the file's layers weren't read from its editing data ({_1}): they come from its PDF part	ფაილის შრეები რედაქტირების მონაცემებიდან ვერ წაიკითხა ({_1}): ისინი მისი PDF ნაწილიდან აიღება
+@msg	the Color Picker is not open	ფერის ამრჩევი გახსნილი არ არის
+@msg	the screen color sampler is already open	ეკრანიდან ფერის აღება უკვე გახსნილია
+@msg	this system has no screen color sampler	ამ სისტემას ეკრანიდან ფერის აღების საშუალება არ აქვს
+# Dimension tool and Object › Dimensions. A drafting dimension is ზომა (ზომის დასმა), like a dimension on a technical drawing.
+	Dimension	ზომა
+	Drawing : real size — 1:10 labels 1 unit on the page as 10.	ნახაზი : რეალური ზომა — 1:10 გვერდზე 1 ერთეულს 10-ად აწერს.
+	Preview (1 inch on the page)	წინასწარი ნახვა (1 დიუმი გვერდზე)
+	Set as Default	ნაგულისხმევად დაყენება
+	 out from a highlighted edge to place its dimension  |  	 — გამოკვეთილი კიდიდან გარეთ, მისი ზომის დასასმელად  |  
+	 cancels  |  Double-click the tool for options	 — გაუქმება  |  პარამეტრებისთვის ორჯერ დაწკაპეთ ხელსაწყოზე
+	Angular	კუთხური
+	Away from the Line	ხაზისგან მოშორებით
+	Between Line and Object	ხაზსა და ობიექტს შორის
+	Drag out from a segment, or click two points, then click to place.	გადაათრიეთ სეგმენტიდან გარეთ ან დაწკაპეთ ორ წერტილზე, შემდეგ დასასმელად დაწკაპეთ.
+	Drag out from a corner, or click two straight lines, then click to place.	გადაათრიეთ კუთხიდან გარეთ ან დაწკაპეთ ორ სწორ ხაზზე, შემდეგ დასასმელად დაწკაპეთ.
+	Drag out from a circle or arc for its radius, inwards for its diameter.	რადიუსისთვის გადაათრიეთ წრიდან ან რკალიდან გარეთ, დიამეტრისთვის — შიგნით.
+@msg	Choose a circle or a perfect arc	აირჩიეთ წრე ან წრიული რკალი
+@msg	Choose a precision from 0 to 6	აირჩიეთ სიზუსტე 0-დან 6-მდე
+	Create Dimension	ზომის შექმნა
+	Dimension Tool	ზომის ხელსაწყო
+	Dimension Tool Options	ზომის ხელსაწყოს პარამეტრები
+	Display	ჩვენება
+	Font Family:	შრიფტის ოჯახი:
+	Font Style:	შრიფტის სტილი:
+	Precision:	სიზუსტე:
+	Update Dimensions	ზომების განახლება
+@msg	Angles require two straight segments	კუთხისთვის ორი სწორი სეგმენტია საჭირო
+@msg	Choose two different points	აირჩიეთ ორი განსხვავებული წერტილი
+@msg	Choose two non-parallel straight segments	აირჩიეთ ორი არაპარალელური სწორი სეგმენტი
+@msg	Choose two nonzero angle arms	აირჩიეთ კუთხის ორი არანულოვანი სიგრძის გვერდი
+@msg	Dimension point is outside the canvas	ზომის წერტილი ტილოს გარეთაა
+@msg	Dimension size is outside its supported range	ზომის სიდიდე მხარდაჭერილ დიაპაზონს სცდება
+@msg	First measured segment no longer exists	პირველი გაზომილი სეგმენტი აღარ არსებობს
+@msg	Invalid dimension distance	ზომის არასწორი მანძილი
+@msg	Invalid dimension font name	ზომის შრიფტის არასწორი სახელი
+@msg	Invalid drawing scale	ნახაზის არასწორი მასშტაბი
+@msg	Invalid real scale	რეალური ზომის არასწორი მასშტაბი
+@msg	Measured anchor no longer exists	გაზომილი საყრდენი წერტილი აღარ არსებობს
+@msg	Measured segment no longer exists	გაზომილი სეგმენტი აღარ არსებობს
+@msg	Non-finite dimension	ზომა სასრული რიცხვი არ არის
+@msg	Scale must be drawing:real, for example 1:10	მასშტაბი უნდა იყოს ნახაზი:რეალური, მაგალითად 1:10
+@msg	Scale ratio must be between 1:1000000 and 1000000:1	მასშტაბის შეფარდება 1:1000000-სა და 1000000:1-ს შორის უნდა იყოს
+@msg	Second measured segment no longer exists	მეორე გაზომილი სეგმენტი აღარ არსებობს
+@msg	Unknown dimension mode	ზომის უცნობი რეჟიმი
+@msg	Unknown dimension option {k}	ზომის უცნობი პარამეტრი {k}
+@msg	Unknown dimension style	ზომის უცნობი სტილი
+@msg	Unknown unit	უცნობი ერთეული
+	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	ღია პროფილების წრიული ბოლოების დახურვა. ნაწილობრივი ბრუნვისას ჭრის მხარეები ღია რჩება.
+	Distance	მანძილი
