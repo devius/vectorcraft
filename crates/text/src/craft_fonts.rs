@@ -167,7 +167,8 @@ mod tests {
         // The fallbacks the first frame may need: Noto Sans Arabic, Noto Sans Thai and Noto Sans
         // Georgian, where the checkout has them.
         let startup: Vec<_> = WEB_FONTS.iter().filter(|w| w.startup).map(|w| w.family).collect();
-        let expected: Vec<_> = ["Noto Sans Arabic", "Noto Sans Thai", "Noto Sans Georgian"].into_iter().filter(|n| CRAFT_FONTS.iter().any(|f| f.family == *n)).collect();
+        let expected: Vec<_> =
+            ["Noto Sans Arabic", "Noto Sans Thai", "Noto Sans Georgian"].into_iter().filter(|n| CRAFT_FONTS.iter().any(|f| f.family == *n)).collect();
         assert_eq!(startup, expected);
     }
 }
