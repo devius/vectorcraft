@@ -570,6 +570,7 @@
 	Color bars	Thanh màu
 	Color blindness – Deuteranopia-type	Mù màu – loại Deuteranopia
 	Color blindness – Protanopia-type	Mù màu – loại Protanopia
+	Color blindness – Tritanopia-type	Mù màu – loại Tritanopia
 	Color Burn	Đốt màu
 	Color conversion:	Chuyển đổi màu:
 	Color Dodge	Tránh màu
@@ -764,6 +765,7 @@
 	Dark Strokes	Nét tối
 	Dark Strokes…	Nét tối…
 	Darken	Làm tối
+	Darkness	Độ tối
 	dash	nét đứt
 	Dash Pattern	Mẫu nét đứt
 	Dashed	Nét đứt
@@ -1168,6 +1170,9 @@
 	Export…	Xuất…
 	Extrude & Bevel…	Kéo dài & vát…
 	Eyedropper	Ống hút màu
+	Sample Color from Screen	Lấy mẫu màu từ màn hình
+	This system has no screen color sampler	Hệ thống này không có công cụ lấy mẫu màu trên màn hình
+	The active document changed while the screen color sampler was open	Tài liệu đang hoạt động đã thay đổi trong khi công cụ lấy mẫu màu trên màn hình đang mở
 	Eyedropper Applies:	Ống hút màu áp dụng:
 	Eyedropper Options	Tùy chọn Ống hút màu
 	Eyedropper Picks Up:	Ống hút màu lấy mẫu:
@@ -1202,6 +1207,7 @@
 	Fill Color	Màu tô
 	Fill Grid	Tô lưới
 	Fill new strokes	Tô nét mới
+	Keep selected	Giữ trạng thái đã chọn
 	Fill New Type Objects With Placeholder Text	Tô đối tượng chữ mới bằng văn bản giữ chỗ
 	Fill Rule	Quy tắc tô
 	Fill with Placeholder Text	Tô bằng văn bản giữ chỗ
@@ -1610,6 +1616,7 @@
 	Isolate Blending	Tách biệt hòa trộn
 	Isolate Group	Tách biệt nhóm
 	Isolate Selected Group	Tách biệt nhóm đã chọn
+	Isolate Selected Object	Tách biệt đối tượng đã chọn
 	Isometric Bottom	Đẳng góc dưới
 	Isometric Left	Đẳng góc trái
 	Isometric Right	Đẳng góc phải
@@ -1694,6 +1701,20 @@
 	Left-Justified Tab	Tab căn trái
 	Left-to-Right Paragraph Direction	Đoạn văn từ trái sang phải
 	Left:	Trái:
+	Legacy (version 7)	Cũ (phiên bản 7)
+	Transparent Images:	Ảnh trong suốt:
+	Flatten	Làm phẳng
+	Omit	Bỏ qua
+	Legacy .ai Options	Tùy chọn .ai cũ
+	A legacy .ai file holds one artboard: each artboard you check is saved as a separate file.	Một tệp .ai cũ chỉ chứa một bảng vẽ: mỗi bảng vẽ bạn chọn được lưu thành một tệp riêng.
+	{count} of {total} artboards	{count} trên {total} bảng vẽ
+	Check an artboard to save.	Hãy chọn một bảng vẽ để lưu.
+	Hidden Objects:	Đối tượng ẩn:
+	Hidden Layer	Lớp ẩn
+	Make Visible	Hiện ra
+	Text:	Văn bản:
+	Editable	Có thể chỉnh sửa
+	PDF-compatible	Tương thích PDF
 	Legacy Macintosh RGB (Gamma 1.8)	RGB Macintosh cũ (Gamma 1.8)
 	Legacy vector clipboard	Bảng tạm vector cũ
 	Legacy vector clipboard (no transparency)	Bảng tạm vector cũ (không có trong suốt)
@@ -2252,6 +2273,7 @@
 	Panel menu	Menu bảng
 	Panel Options…	Tùy chọn bảng…
 	Panels	Bảng
+	Panels Except Tools and Control	Bảng trừ Công cụ và Điều khiển
 	Paragraph	Đoạn văn
 	Paragraph Style	Kiểu đoạn văn
 	Paragraph Style Options	Tùy chọn kiểu đoạn văn
@@ -2640,6 +2662,7 @@
 	Reset to Default	Đặt lại về mặc định
 	Reset to default	Đặt lại về mặc định
 	Reset to White, Black	Đặt lại về Trắng, Đen
+	Reset Tracking and Kerning	Đặt lại giãn chữ và kerning
 	Reset with Mesh	Đặt lại với lưới
 	Reset with Mesh…	Đặt lại với lưới…
 	Reset with Warp	Đặt lại với biến dạng
@@ -3777,6 +3800,9 @@ theme	Appearance	Giao diện
 @msg	axis must be "vertical", "horizontal" or an angle in degrees, not `{v}`	axis phải là "vertical", "horizontal" hoặc góc theo độ, không phải `{v}`
 @msg	background {other}: transparent, white, black or a colour such as "#ff8800"	background {other}: transparent, white, black hoặc màu như "#ff8800"
 @msg	bad color {v}	màu không hợp lệ {v}
+@msg	the Color Picker is not open	Bộ chọn màu chưa được mở
+@msg	the screen color sampler is already open	công cụ lấy mẫu màu trên màn hình đã được mở
+@msg	this system has no screen color sampler	hệ thống này không có công cụ lấy mẫu màu trên màn hình
 @msg	bad colour `{hex}` (#rrggbb)	màu không hợp lệ `{hex}` (#rrggbb)
 @msg	bad page tree	cây trang bị lỗi
 @msg	bad shortcut	phím tắt không hợp lệ
@@ -4179,6 +4205,8 @@ theme	Appearance	Giao diện
 @msg	the art is too light for any dots	tác phẩm quá sáng để có bất kỳ chấm nào
 @msg	the art on them differs from the page's in {_1}% of it	tác phẩm trên chúng khác với trang {_1}%
 @msg	the art on them differs from the page's in {_1}% of it: they come from its editing data all the same	tác phẩm trên chúng khác với tác phẩm của trang ở {_1}% diện tích: dù vậy chúng vẫn được lấy từ dữ liệu chỉnh sửa
+@msg	the file's layers weren't read ({_1}): it comes in as its page, in one layer	không đọc được các lớp của tệp ({_1}): tệp được mở dưới dạng trang của nó, trong một lớp
+@msg	the file's layers weren't read from its editing data ({_1}): they come from its PDF part	không đọc được các lớp của tệp từ dữ liệu chỉnh sửa ({_1}): chúng được lấy từ phần PDF
 @msg	the artboard to fit must be a positive size up to {_1} pt	bảng vẽ cần khớp phải có kích thước dương tối đa {_1} pt
 @msg	the background worker stopped	tiến trình nền đã dừng
 @msg	the compressed file unpacks to more than VectorCraft reads ({_1} MB of document, {_2} MB per image)	tệp nén giải nén ra nhiều hơn VectorCraft đọc ({_1} MB tài liệu, {_2} MB mỗi ảnh)
@@ -4362,3 +4390,51 @@ theme	Appearance	Giao diện
 	Softness	Độ mềm
 	Ambient Light	Ánh sáng môi trường
 	Light behind the object	Ánh sáng phía sau đối tượng
+# Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
+	Dimension	Kích thước
+	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Bản vẽ : kích thước thực — 1:10 ghi 1 đơn vị trên trang thành 10.
+	Preview (1 inch on the page)	Xem trước (1 inch trên trang)
+	Set as Default	Đặt làm mặc định
+	 out from a highlighted edge to place its dimension  |  	 ra ngoài từ một cạnh được tô sáng để đặt kích thước của nó  |  
+	 cancels  |  Double-click the tool for options	 để hủy  |  Nhấp đúp vào công cụ để mở tùy chọn
+	Linear	Tuyến tính
+	Angular	Góc
+	Away from the Line	Cách xa đường
+	Between Line and Object	Giữa đường và đối tượng
+	Drag out from a segment, or click two points, then click to place.	Kéo ra ngoài từ một đoạn, hoặc nhấp hai điểm, rồi nhấp để đặt.
+	Drag out from a corner, or click two straight lines, then click to place.	Kéo ra ngoài từ một góc, hoặc nhấp hai đường thẳng, rồi nhấp để đặt.
+	Drag out from a circle or arc for its radius, inwards for its diameter.	Kéo từ đường tròn hoặc cung ra ngoài để lấy bán kính, vào trong để lấy đường kính.
+@msg	Choose a circle or a perfect arc	Hãy chọn một đường tròn hoặc một cung hoàn hảo
+@msg	Choose a precision from 0 to 6	Hãy chọn độ chính xác từ 0 đến 6
+	Create Dimension	Tạo kích thước
+	Dimension Tool	Công cụ Kích thước
+	Dimension Tool Options	Tùy chọn công cụ Kích thước
+	Display	Hiển thị
+	Font Family:	Họ phông chữ:
+	Font Style:	Kiểu phông chữ:
+	Precision:	Độ chính xác:
+	Update Dimensions	Cập nhật kích thước
+@msg	Angles require two straight segments	Góc cần hai đoạn thẳng
+@msg	Choose two different points	Hãy chọn hai điểm khác nhau
+@msg	Choose two non-parallel straight segments	Hãy chọn hai đoạn thẳng không song song
+@msg	Choose two nonzero angle arms	Hãy chọn hai cạnh góc có độ dài khác 0
+@msg	Dimension point is outside the canvas	Điểm kích thước nằm ngoài vùng vẽ
+@msg	Dimension size is outside its supported range	Kích thước nằm ngoài phạm vi được hỗ trợ
+@msg	First measured segment no longer exists	Đoạn được đo thứ nhất không còn tồn tại
+@msg	Invalid dimension distance	Khoảng cách kích thước không hợp lệ
+@msg	Invalid dimension font name	Tên phông chữ của kích thước không hợp lệ
+@msg	Invalid drawing scale	Tỷ lệ bản vẽ không hợp lệ
+@msg	Invalid real scale	Tỷ lệ thực không hợp lệ
+@msg	Measured anchor no longer exists	Điểm neo được đo không còn tồn tại
+@msg	Measured segment no longer exists	Đoạn được đo không còn tồn tại
+@msg	Non-finite dimension	Kích thước không phải là số hữu hạn
+@msg	Scale must be drawing:real, for example 1:10	Tỷ lệ phải có dạng bản vẽ:thực tế, ví dụ 1:10
+@msg	Scale ratio must be between 1:1000000 and 1000000:1	Tỷ lệ phải nằm trong khoảng 1:1000000 đến 1000000:1
+@msg	Second measured segment no longer exists	Đoạn được đo thứ hai không còn tồn tại
+@msg	Unknown dimension mode	Chế độ kích thước không xác định
+@msg	Unknown dimension option {k}	Tùy chọn kích thước không xác định {k}
+@msg	Unknown dimension style	Kiểu kích thước không xác định
+@msg	Unknown unit	Đơn vị không xác định
+# Revolve cap description
+	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Đóng các đầu tròn của biên dạng mở. Khi xoay một phần, các mặt cắt bên vẫn mở.
+	Distance	Khoảng cách

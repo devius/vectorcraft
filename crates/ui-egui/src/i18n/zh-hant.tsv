@@ -457,6 +457,7 @@
 	Color bars	色彩條
 	Color blindness – Deuteranopia-type	色盲 – 綠色盲型
 	Color blindness – Protanopia-type	色盲 – 紅色盲型
+	Color blindness – Tritanopia-type	色盲 – 藍色盲型
 	Color Burn	加深顏色
 	Color conversion:	色彩轉換：
 	Color Dodge	加亮顏色
@@ -625,6 +626,7 @@
 	Cyan	青色
 	Dark	深色
 	Darken	變暗
+	Darkness	暗度
 	dash	虛線
 	Dash Pattern	虛線樣式
 	Dashed	虛線
@@ -980,6 +982,9 @@
 	Export…	匯出…
 	Extrude & Bevel…	突出與斜角…
 	Eyedropper	滴管
+	Sample Color from Screen	從螢幕取樣顏色
+	This system has no screen color sampler	此系統沒有螢幕取色工具
+	The active document changed while the screen color sampler was open	螢幕取色工具開啟期間，作用中的文件已變更
 	Eyedropper Applies:	滴管套用：
 	Eyedropper Options	滴管選項
 	Eyedropper Picks Up:	滴管擷取：
@@ -1012,6 +1017,7 @@
 	Fill and Stroke	填色與筆畫
 	Fill Color	填色顏色
 	Fill new strokes	為新筆畫套用填色
+	Keep selected	保持選取狀態
 	Fill New Type Objects With Placeholder Text	以預留位置文字填滿新文字物件
 	Fill Rule	填色規則
 	Fill with Placeholder Text	以預留位置文字填滿
@@ -1035,6 +1041,7 @@
 	Fit Headline	符合標題
 	Decrease Font Size	縮小字體大小
 	Increase Font Size	放大字體大小
+	Reset Tracking and Kerning	重設字距與字距微調
 	Spacing	間距
 	Step Type	依增量調整文字
 	Fit in View	符合檢視
@@ -1455,6 +1462,20 @@
 	Left:	左：
 	Legacy Macintosh RGB (Gamma 1.8)	舊版 Macintosh RGB (Gamma 1.8)
 	Legacy vector clipboard	舊版向量剪貼簿
+	Legacy (version 7)	舊版 (版本 7)
+	Transparent Images:	透明影像：
+	Flatten	平面化
+	Omit	略過
+	Legacy .ai Options	舊版 .ai 選項
+	A legacy .ai file holds one artboard: each artboard you check is saved as a separate file.	舊版 .ai 檔案只包含一個工作區域：勾選的每個工作區域都會儲存為獨立的檔案。
+	{count} of {total} artboards	{total} 個工作區域中的 {count} 個
+	Check an artboard to save.	請勾選要儲存的工作區域。
+	Hidden Objects:	隱藏的物件：
+	Hidden Layer	隱藏圖層
+	Make Visible	設為可見
+	Text:	文字：
+	Editable	可編輯
+	PDF-compatible	與 PDF 相容
 	Legacy vector clipboard (no transparency)	舊版向量剪貼簿 (無透明度)
 	Less	較少
 	Letter	Letter
@@ -1981,6 +2002,7 @@
 	Panel menu	面板選單
 	Panel Options…	面板選項…
 	Panels	面板
+	Panels Except Tools and Control	除工具與控制以外的面板
 	Paragraph	段落
 	Paragraph Style	段落樣式
 	Paragraph Style Options	段落樣式選項
@@ -3395,6 +3417,7 @@ imageTrace	Outline	輪廓
 	 to set spacing and orientation	可設定間距與方向
 	:	：
 	Isolate Selected Group	隔離選取的群組
+	Isolate Selected Object	隔離選取的物件
 	Release Clipping Mask	釋放剪裁遮色片
 	Make Compound Path	製作複合路徑
 	Release Compound Path	釋放複合路徑
@@ -3741,3 +3764,34 @@ lighting	Light	光源
 	Softness	柔和度
 	Ambient Light	環境光
 	Light behind the object	光源位於物件後方
+# Dimension tool (linked dimension annotations)
+	Create Dimension	建立尺寸標註
+	Dimension Tool	尺寸標註工具
+	Dimension Tool Options	尺寸標註工具選項
+	Font Family:	字體系列：
+	Font Style:	字體樣式：
+	Precision:	精確度：
+	Update Dimensions	更新尺寸標註
+	Display	顯示
+
+# Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
+	Dimension	尺寸
+	Drawing : real size — 1:10 labels 1 unit on the page as 10.	圖紙 : 實際尺寸 — 1:10 會將頁面上的 1 個單位標示為 10。
+	Preview (1 inch on the page)	預覽（頁面上 1 英寸）
+	Set as Default	設為預設
+	 out from a highlighted edge to place its dimension  |  	 從醒目提示的邊緣向外拖曳以放置其尺寸  |  
+	 cancels  |  Double-click the tool for options	 取消  |  按兩下工具開啟選項
+	Linear	線性
+	Angular	角度
+	Away from the Line	遠離尺寸線
+	Between Line and Object	在尺寸線與物件之間
+	Drag out from a segment, or click two points, then click to place.	從線段向外拖曳，或按一下兩個點，然後按一下以放置。
+	Drag out from a corner, or click two straight lines, then click to place.	從角向外拖曳，或按一下兩條直線，然後按一下以放置。
+	Drag out from a circle or arc for its radius, inwards for its diameter.	從圓形或圓弧向外拖曳得到半徑，向內拖曳得到直徑。
+@msg	Choose a circle or a perfect arc	請選擇圓形或標準圓弧
+@msg	Choose a precision from 0 to 6	請選擇 0 到 6 之間的精度
+	X:	X：
+	Y:	Y：
+# Revolve cap description
+	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	封閉開放輪廓的圓形端部。部分旋轉的切割側面保持開放。
+	Distance	距離

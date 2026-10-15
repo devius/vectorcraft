@@ -412,7 +412,11 @@ pub fn save(app: &mut VectorcraftApp, mode: SaveMode, p: &Value, ask_options: bo
     }
     if ask && asks_options(mode, chosen.format) {
         let path = chosen.path.clone().unwrap_or_default();
-        return ask_format_options(app, mode, chosen.format, &path);
+        let r = ask_format_options(app, mode, chosen.format, &path);
+        if let Some(d) = app.ui.dialog.as_mut() {
+            d.fields.insert(crate::dialogs::AFTER_PANEL.into(), json!(true));
+        }
+        return r;
     }
     write_plan(app, chosen)
 }
@@ -614,6 +618,7 @@ pub fn export(app: &mut VectorcraftApp, format: Option<&str>, path: Option<Strin
         std::borrow::Cow::Borrowed(_) => st.doc.clone(),
         std::borrow::Cow::Owned(d) => std::sync::Arc::new(d),
     };
+    let doc = fileio::titled_for_export(&doc, st.path.as_deref(), f.id).map_or(doc, std::sync::Arc::new);
     let path = target_path(app, path, f.extensions[0])?;
     let mut again = params.clone();
     if let Some(o) = again.as_object_mut() {

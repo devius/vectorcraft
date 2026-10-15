@@ -170,6 +170,16 @@ pub static LANGUAGES: [LangInfo; 17] = [
         complete_menus: true,
         catalog: OnceLock::new(),
     },
+    // Bulgarian: the whole interface (every menu string and `tl!` literal) and the status and error
+    // messages, with one/other plural forms; every `bg-*` locale (including `bg-BG`) resolves here.
+    LangInfo {
+        code: "bg",
+        name: "Български",
+        source: include_str!("bg.tsv"),
+        plural: plural_one_other,
+        complete_menus: true,
+        catalog: OnceLock::new(),
+    },
     // Hungarian: the whole interface and the status and error messages, keeping the same names in
     // English as Spanish; a count takes the singular ("3 réteg"), so plurals have one form. Every
     // `hu-*` locale (including `hu-HU`) resolves here.
