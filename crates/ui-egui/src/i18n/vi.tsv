@@ -256,7 +256,6 @@
 	Art using a deleted global swatch keeps its colour.	Tác phẩm dùng mẫu màu toàn cục đã xóa vẫn giữ màu của nó.
 	Artboard	Bảng vẽ
 	Artboard Options	Tùy chọn bảng vẽ
-	Artboard Options: edit with the Artboard tool	Tùy chọn bảng vẽ: chỉnh sửa bằng Công cụ Bảng vẽ
 	Artboard Options…	Tùy chọn bảng vẽ…
 	Artboard Tool	Công cụ Bảng vẽ
 	Artboard {number}	Bảng vẽ {number}
@@ -346,6 +345,7 @@
 	Blocks	Khối
 	Blue	Xanh lam
 	Blur	Mờ
+	Blur Mode	Chế độ làm mờ
 	Bold	Đậm
 	Border Thickness	Độ dày viền
 	Both sides	Cả hai mặt
@@ -997,6 +997,7 @@
 	East Asian Type	Chữ Đông Á
 	Edge	Cạnh
 	Edge Brightness	Độ sáng cạnh
+	Edge Only	Chỉ cạnh
 	Edge Width	Độ rộng cạnh
 	Edit	Chỉnh sửa
 	Edit Artboards	Chỉnh sửa các bảng vẽ
@@ -1446,6 +1447,7 @@
 	Hide Print Tiling	Ẩn ghép trang in
 	Hide Rulers	Ẩn thước
 	Hide Slices	Ẩn lát cắt
+	Hide Template	Ẩn mẫu
 	Hide Text Threads	Ẩn luồng văn bản
 	Hide Thumbnail	Ẩn hình thu nhỏ
 	Hide Thumbnails	Ẩn các hình thu nhỏ
@@ -1912,6 +1914,7 @@
 	Miter Limit:	Giới hạn góc nhọn:
 	Mixed Appearances	Diện mạo hỗn hợp
 	Mixed Objects	Đối tượng hỗn hợp
+	Mode	Chế độ
 	Mode:	Chế độ:
 	Model	Mô hình
 	Models	Mô hình AI
@@ -2244,6 +2247,7 @@
 	Overlap:	Chồng lấp:
 	Overlapping	Chồng lấp
 	Overlay	Phủ lên
+	Overlay Edge	Cạnh phủ lên
 	Overprint	In chồng
 	Overprint and Transparency Flattener	In chồng và làm phẳng trong suốt
 	Overprint and Transparency Flattener Options	Tùy chọn in chồng và làm phẳng trong suốt
@@ -2302,6 +2306,7 @@
 	Pathfinder Options…	Tùy chọn Pathfinder…
 	Pathfinders:	Pathfinder:
 	Paths	Đường dẫn
+	Path Length	Độ dài đường dẫn
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Đường dẫn: {paths}    Điểm neo: {anchors}    Màu: {colors}
 	Pattern	Họa tiết
 	Pattern Brush Options	Tùy chọn cọ họa tiết
@@ -2656,6 +2661,7 @@
 	Reset Panel	Đặt lại bảng
 	Reset Preferences	Đặt lại tùy chọn
 	Reset Profiles	Đặt lại hồ sơ màu
+	Rotate View	Xoay chế độ xem
 	Reset Rotate View	Đặt lại xoay chế độ xem
 	Reset Ruler Origin	Đặt lại gốc thước
 	Reset the rows to the artwork's colors	Đặt lại các hàng về màu của tác phẩm
@@ -2891,6 +2897,17 @@
 	Scrub Numeric Fields by Dragging	Cuộn nhanh trường số bằng cách kéo
 	Search	Tìm kiếm
 	Search All	Tìm kiếm tất cả
+	Filter	Bộ lọc
+	Clear All	Xóa tất cả
+	By Object	Theo đối tượng
+	By Layer	Theo lớp
+	Images	Hình ảnh
+	Groups	Nhóm
+	Linked Files	Tệp được liên kết
+	Locked	Đã khóa
+	Hidden	Đã ẩn
+	Filter Layers Panel Rows	Lọc hàng bảng Lớp
+@msg	`{key}` must be an array of these names: {_1}	`{key}` phải là một mảng gồm các tên sau: {_1}
 	Search commands and tools	Tìm kiếm lệnh và công cụ
 	Search commands and tools…	Tìm kiếm lệnh và công cụ…
 	Search Commands…	Tìm kiếm lệnh…
@@ -3048,6 +3065,7 @@
 	Show Modified	Hiện đã sửa đổi
 	Show Note	Hiện ghi chú
 	Show Options	Hiện tùy chọn
+	Color Panel Options	Tùy chọn bảng màu
 	Show Package	Hiện gói
 	Show Panel	Hiện bảng
 	Show Pattern Swatches	Hiện mẫu họa tiết
@@ -3061,6 +3079,7 @@
 	Show Slices	Hiện lát cắt
 	Show Swatch Bounds	Hiện vùng giới hạn mẫu màu
 	Show Swatch Kinds	Hiện loại mẫu màu
+	Show Template	Hiện mẫu
 	Show Text Threads	Hiện chuỗi văn bản
 	Show The Home Screen When No Documents Are Open	Hiện màn hình chính khi không có tài liệu nào mở
 	Show Thumbnail	Hiện hình thu nhỏ
@@ -3733,6 +3752,7 @@ theme	Appearance	Giao diện
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` phải nằm trong khoảng {min} đến {max} (nhận được {x})
 @msg	`{key}` must be one of {_1}	`{key}` phải là một trong {_1}
 @msg	`{key}` must be true or false	`{key}` phải là true hoặc false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` phải là grayscale, rgb, hsb, cmyk hoặc websafe
 @msg	`{k}` must be [x, y]	`{k}` phải là [x, y]
 @msg	`{name}` has no options	`{name}` không có tùy chọn
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` là không gian làm việc tích hợp sẵn; hãy chọn tên khác
@@ -4282,7 +4302,7 @@ theme	Appearance	Giao diện
 @msg	this file's PostScript couldn't be read ({why}): {what}	PostScript của tệp này không thể đọc được ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	định dạng này chứa một bảng vẽ: xuất nhiều bảng vẽ dưới dạng PDF hoặc với document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	đây là bản vẽ DWG, không thể đọc: lưu từ ứng dụng CAD dưới dạng ASCII DXF và mở tệp đó
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	đây là tệp PostScript (tệp .ai lưu ở định dạng cũ hơn hoặc không có tương thích PDF, hoặc tệp EPS), chưa thể mở: lưu dưới dạng PDF, .ai tương thích PDF hoặc SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	đây là tệp PostScript (tệp .ai lưu ở định dạng cũ hơn hoặc không có tương thích PDF, hoặc tệp EPS), không phải PDF: Tệp › Mở và Tệp › Đặt đọc tệp này dưới dạng EPS
 @msg	this is not a PostScript file	đây không phải là tệp PostScript
 @msg	this isn't a flat-colour logo ({_1}% of its solid areas match a few flat colours), so Flat Logo mode would turn its gradients into patches: use Color mode instead	đây không phải là logo màu phẳng ({_1}% vùng đặc khớp với một vài màu phẳng), Flat Logo mode sẽ chuyển các chuyển sắc thành mảng: hãy dùng chế độ Color thay thế
 @msg	this PostScript file can't be read ({why}): save it as PDF or SVG in the app that made it	tệp PostScript này không thể đọc được ({why}): lưu dưới dạng PDF hoặc SVG trong ứng dụng đã tạo nó

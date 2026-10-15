@@ -57,6 +57,10 @@
 	Draft	Bozza
 	Good	Buona
 	Best	Ottima
+	Mode	Modalità
+	Blur Mode	Modalità sfocatura
+	Edge Only	Solo bordi
+	Overlay Edge	Sovrapponi bordi
 
 # Status and error messages too (`@msg` rows at the end, `COMPLETE_MESSAGES` in the tests).
 # A native speaker's review is welcome: keep the placeholders ({name}), the trailing "…" and the
@@ -222,7 +226,6 @@
 	Art	Grafica
 	Art using a deleted global swatch keeps its colour.	La grafica che usa un campione globale eliminato mantiene il suo colore.
 	Artboard Options	Opzioni tavola da disegno
-	Artboard Options: edit with the Artboard tool	Opzioni tavola da disegno: modifica con lo strumento Tavola da disegno
 	Artboard Options…	Opzioni tavola da disegno…
 	Artboard Tool	Strumento Tavola da disegno
 	Artboard {number}	Tavola da disegno {number}
@@ -1266,6 +1269,7 @@
 	Hide Print Tiling	Nascondi affiancamento di stampa
 	Hide Rulers	Nascondi righelli
 	Hide Slices	Nascondi sezioni
+	Hide Template	Nascondi modello
 	Hide Text Threads	Nascondi concatenamenti testo
 	Hide Thumbnail	Nascondi miniatura
 	Hide Thumbnails	Nascondi miniature
@@ -2050,6 +2054,7 @@
 	Pathfinder Options…	Opzioni elaborazione tracciati…
 	Pathfinders:	Elaborazioni tracciati:
 	Paths	Tracciati
+	Path Length	Lunghezza dei tracciati
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Tracciati: {paths}    Ancoraggi: {anchors}    Colori: {colors}
 	Pattern	Motivo
 	Pattern Editing	Modifica motivo
@@ -2408,6 +2413,7 @@
 	Reset Panel	Reimposta pannello
 	Reset Preferences	Reimposta preferenze
 	Reset Profiles	Reimposta profili
+	Rotate View	Ruota vista
 	Reset Rotate View	Reimposta rotazione vista
 	Reset the rows to the artwork's colors	Reimposta le righe sui colori della grafica
 	Reset to Default	Reimposta valori predefiniti
@@ -2608,6 +2614,17 @@
 	Scripts	Script
 	Search	Cerca
 	Search All	Cerca ovunque
+	Filter	Filtro
+	Clear All	Cancella tutto
+	By Object	Per oggetto
+	By Layer	Per livello
+	Images	Immagini
+	Groups	Gruppi
+	Linked Files	File collegati
+	Locked	Bloccati
+	Hidden	Nascosti
+	Filter Layers Panel Rows	Filtra righe del pannello Livelli
+@msg	`{key}` must be an array of these names: {_1}	`{key}` deve essere un array di questi nomi: {_1}
 	Search commands and tools	Cerca comandi e strumenti
 	Search commands and tools…	Cerca comandi e strumenti…
 	Search Commands…	Cerca comandi…
@@ -2745,6 +2762,7 @@
 	Show Modified	Mostra modificati
 	Show Note	Mostra nota
 	Show Options	Mostra opzioni
+	Color Panel Options	Opzioni pannello Colore
 	Show Package	Mostra pacchetto
 	Show Panel	Mostra pannello
 	Show Pattern Swatches	Mostra campioni motivo
@@ -2757,6 +2775,7 @@
 	Show Slices	Mostra sezioni
 	Show Swatch Bounds	Mostra limiti campione
 	Show Swatch Kinds	Mostra tipi di campione
+	Show Template	Mostra modello
 	Show Text Threads	Mostra concatenamenti testo
 	Show The Home Screen When No Documents Are Open	Mostra la schermata iniziale quando non ci sono documenti aperti
 	Show Thumbnail	Mostra miniatura
@@ -3616,6 +3635,7 @@ axis	Both	Entrambi
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` deve essere compreso tra {min} e {max} (ricevuto {x})
 @msg	`{key}` must be one of {_1}	`{key}` deve essere uno dei seguenti: {_1}
 @msg	`{key}` must be true or false	`{key}` deve essere true o false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` deve essere grayscale, rgb, hsb, cmyk o websafe
 @msg	`{k}` must be [x, y]	`{k}` deve essere [x, y]
 @msg	`{name}` has no options	`{name}` non ha opzioni
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` è un'area di lavoro integrata; scegli un altro nome
@@ -3975,7 +3995,7 @@ axis	Both	Entrambi
 @msg	this file's PostScript couldn't be read ({why}): {what}	impossibile leggere il PostScript di questo file ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	questo formato contiene una sola tavola da disegno: esportane più di una come PDF o con document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	questo è un disegno DWG, che non può essere letto: salvalo dall'app CAD come DXF ASCII e apri quel file
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	questo è un file PostScript (un .ai salvato in un formato precedente o senza compatibilità PDF, oppure un file EPS), che non può ancora essere aperto: salvalo come PDF, .ai compatibile con PDF o SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	questo è un file PostScript (un .ai salvato in un formato precedente o senza compatibilità PDF, oppure un file EPS), non un PDF: File › Apri e File › Inserisci lo leggono come EPS
 @msg	this is not a PostScript file	questo non è un file PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	le scelte rapide degli strumenti devono essere un singolo tasto (eventualmente con Shift)
 @msg	truncated	troncato

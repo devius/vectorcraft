@@ -504,6 +504,8 @@
 	Show Video Rulers	Zobrazit video pravítka
 	Hide Bounding Box	Skrýt ohraničovací rámeček
 	Show Bounding Box	Zobrazit ohraničovací rámeček
+	Hide Template	Skrýt šablonu
+	Show Template	Zobrazit šablonu
 	Show Transparency Grid	Zobrazit mřížku průhlednosti
 	Hide Transparency Grid	Skrýt mřížku průhlednosti
 	Hide Text Threads	Skrýt zřetězení textu
@@ -1280,7 +1282,6 @@ lighting	Light	Světlo
 	Rectangle: Sunshine	Obdélník: Sluneční svit
 	Redefine Graphic Style “{name}”	Předefinovat grafický styl „{name}“
 	Show Thumbnail	Zobrazit miniaturu
-	Artboard Options: edit with the Artboard tool	Možnosti pracovní plochy: upravte nástrojem Pracovní plocha
 	Delete Artboards	Odstranit pracovní plochy
 	Delete Empty Artboards	Odstranit prázdné pracovní plochy
 	Duplicate Artboards	Duplikovat pracovní plochy
@@ -1344,6 +1345,7 @@ lighting	Light	Světlo
 	Roman Baseline	Latinková účaří
 	Select a text object to edit its character attributes.	Vyberte textový objekt, abyste mohli upravit atributy jeho znaků.
 	Show Options	Zobrazit možnosti
+	Color Panel Options	Možnosti panelu Barva
 	Small Caps	Kapitálky
 	Small Caps (on the roadmap)	Kapitálky (v plánu)
 	Standard Vertical Roman Alignment	Standardní svislé zarovnání latinky
@@ -1500,6 +1502,17 @@ lighting	Light	Světlo
 	Create New Layer	Vytvořit novou vrstvu
 	Create New Sublayer	Vytvořit novou podvrstvu
 	Search All	Hledat ve všem
+	Filter	Filtr
+	Clear All	Smazat vše
+	By Object	Podle objektu
+	By Layer	Podle vrstvy
+	Images	Obrazy
+	Groups	Skupiny
+	Linked Files	Propojené soubory
+	Locked	Zamčené
+	Hidden	Skryté
+	Filter Layers Panel Rows	Filtrovat řádky panelu Vrstvy
+@msg	`{key}` must be an array of these names: {_1}	`{key}` musí být pole těchto názvů: {_1}
 	Graphics	Grafika
 	Local Libraries	Místní knihovny
 	Add Content	Přidat obsah
@@ -1961,6 +1974,10 @@ lighting	Light	Světlo
 	Spin	Otáčení
 	Good	Dobrá
 	Best	Nejlepší
+	Mode	Režim
+	Blur Mode	Režim rozostření
+	Edge Only	Jen okraje
+	Overlay Edge	Překrýt okraje
 	Amount	Míra
 	Contrast	Kontrast
 	Edit the applied effect, or add another one?	Upravit použitý efekt, nebo přidat další?
@@ -2841,6 +2858,7 @@ theme	Appearance	Motiv
 	Width Profile	Profil šířky
 	Objects	Objekty
 	Paths	Cesty
+	Path Length	Délka cest
 	Add Guide	Přidat vodítko
 	Edit Selection	Upravit výběr
 	Recall Selection	Vyvolat výběr
@@ -3910,6 +3928,7 @@ imageTrace	Outline	Obrys
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` musí být mezi {min} a {max} (zadáno {x})
 @msg	`{key}` must be one of {_1}	`{key}` musí být jedno z {_1}
 @msg	`{key}` must be true or false	`{key}` musí být true nebo false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` musí být grayscale, rgb, hsb, cmyk nebo websafe
 @msg	`{k}` must be [x, y]	`{k}` musí být [x, y]
 @msg	`{name}` has no options	`{name}` nemá žádné možnosti
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` je vestavěný pracovní prostor; zvolte jiný název
@@ -4268,7 +4287,7 @@ imageTrace	Outline	Obrys
 @msg	this file's PostScript couldn't be read ({why}): {what}	PostScript tohoto souboru nelze přečíst ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	tento formát pojme jednu pracovní plochu: více jich exportujte jako PDF nebo pomocí document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	toto je výkres DWG, který nelze přečíst: uložte jej v aplikaci CAD jako ASCII DXF a otevřete ten
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	toto je soubor PostScript (.ai uložený ve starším formátu nebo bez kompatibility s PDF, nebo soubor EPS), který zatím nelze otevřít: uložte jej jako PDF, .ai kompatibilní s PDF nebo SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	toto je soubor PostScript (.ai uložený ve starším formátu nebo bez kompatibility s PDF, nebo soubor EPS), nikoli PDF: Soubor › Otevřít a Soubor › Umístit jej načtou jako EPS
 @msg	this is not a PostScript file	toto není soubor PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	zkratky nástrojů musí být jediná klávesa (volitelně se Shift)
 @msg	truncated	zkráceno

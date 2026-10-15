@@ -89,6 +89,8 @@ enum Drag {
     Art,
     /// Fingers making a touch gesture ([`crate::touch`]): the first one's press does nothing.
     Gesture,
+    /// A press in Presentation Mode: released as a click, it goes to the next artboard.
+    Present,
 }
 
 fn drag_id() -> egui::Id {
@@ -281,6 +283,7 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
         h,
         outline: app.ui.view.outline,
         trim: app.ui.view.trim_view,
+        templates: app.ui.view.templates,
         ppp,
         hidden: vec![],
         rot: v.rotation,
@@ -329,6 +332,7 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
             proof: vectorcraft_render::proof::active_proof(),
             overprint_preview: vectorcraft_render::proof::overprint_preview_on(),
             trim: app.ui.view.trim_view,
+            hide_templates: !app.ui.view.templates,
             tile_edge: vectorcraft_color::Color::from_hex(&app.session.prefs.pattern_tile_edge_color).map_or(opts.tile_edge, |c| {
                 let [r, g, b, _] = c.to_rgba8(1.0);
                 [r, g, b]
@@ -407,7 +411,7 @@ pub fn show(app: &mut VectorcraftApp, ui: &mut Ui) {
     }
     // Artboard edges and names. The Artboard tool labels its active artboard itself (following
     // a move or resize): that one isn't named twice.
-    let active_ab = 0;
+    let active_ab = crate::panels::artboards::selected(app, doc.artboards.len());
     let artboard_tool = app.session.tool_id() == "artboard";
     let tool_labelled = artboard_tool.then(|| app.session.tool_options()["active"].as_u64()).flatten();
     for (i, ab) in doc.artboards.iter().enumerate() {
@@ -633,6 +637,27 @@ fn handle_input(app: &mut VectorcraftApp, ui: &Ui, resp: &egui::Response, rect: 
         }
     }
 
+    // In Presentation Mode a click anywhere goes to the next artboard. The tool receives no press,
+    // drag or hover, and a drag does not pan the view. A drag that began before the mode was turned
+    // on ends as usual.
+    if app.ui.screen_mode == 3 && matches!(drag, None | Some(Drag::Present | Drag::Gesture)) {
+        let pressed = drag.is_none() && pointer.primary_pressed() && resp.hovered() && at.is_some();
+        // `press` is this frame's new press, or else the press held so far. A quick tap can be
+        // pressed and released in one frame.
+        let press = if pressed { Some(Drag::Present) } else { drag };
+        if press.is_some() && !pointer.primary_down() {
+            ui.data_mut(|dd| dd.remove::<Drag>(drag_id()));
+            // A tap of several fingers leaves `Drag::Gesture` (`touch_gestures`), and its release
+            // does not move the view to the next artboard.
+            if press == Some(Drag::Present) && resp.clicked() {
+                crate::shortcuts::presentation_step(app, true);
+            }
+        } else if pressed {
+            ui.data_mut(|dd| dd.insert_temp(drag_id(), Drag::Present));
+        }
+        return;
+    }
+
     let tool = app.session.tool_id();
     // Held, Space is the Hand tool for the moment, and Cmd+Space the Zoom tool (with Alt, zooming
     // out), whatever the tool.
@@ -718,7 +743,7 @@ fn handle_input(app: &mut VectorcraftApp, ui: &Ui, resp: &egui::Response, rect: 
                     }
                     ui.data_mut(|dd| dd.insert_temp(drag_id(), Drag::ZoomScrub { start, held, moved }));
                 }
-                Drag::Art | Drag::Gesture => {}
+                Drag::Art | Drag::Gesture | Drag::Present => {}
                 Drag::Tool if drag_art_out(app, ui, resp, p, view) => {
                     ui.data_mut(|dd| dd.insert_temp(drag_id(), Drag::Art));
                 }
@@ -772,7 +797,7 @@ fn handle_input(app: &mut VectorcraftApp, ui: &Ui, resp: &egui::Response, rect: 
                     let ev = PointerEvent { kind: PointerKind::Up, pos: xf.to_doc(p), mods: mods(m, space), pressure: pen_pressure(ui, false) };
                     dispatch(app, &ev, view);
                 }
-                Drag::Art | Drag::Gesture => {}
+                Drag::Art | Drag::Gesture | Drag::Present => {}
                 Drag::Pan { .. } | Drag::RotateView { .. } => {}
             }
         }
@@ -791,6 +816,7 @@ fn handle_input(app: &mut VectorcraftApp, ui: &Ui, resp: &egui::Response, rect: 
         // A double-click on type switched a selection tool to the Type tool: the caret goes where
         // the type was clicked, so typing edits it at once.
         if before != "type" && app.session.tool_id() == "type" {
+            app.session.set_tool_option("prevTool", &json!(before));
             for kind in [PointerKind::Down, PointerKind::Up] {
                 dispatch(app, &PointerEvent { kind, ..ev }, view);
             }
@@ -2191,6 +2217,16 @@ pub(crate) fn task_bar_rect(ctx: &egui::Context) -> Option<egui::Rect> {
     ctx.memory(|m| m.areas().is_visible(&egui::LayerId::new(egui::Order::Middle, id)).then(|| m.area_rect(id)).flatten())
 }
 
+/// Whether the objects `ids` (or anything inside them) are painted with a colour: a solid colour,
+/// a gradient's stops or a mesh's points, which Recolor Artwork can change.
+pub(crate) fn has_colors(doc: &vectorcraft_doc::Document, ids: &[vectorcraft_doc::NodeId]) -> bool {
+    ids.iter().filter_map(|id| doc.node(*id)).any(|n| {
+        let mut found = false;
+        vectorcraft_doc::swatches::node_colors(n, &mut |_, _| found = true);
+        found
+    })
+}
+
 /// The Contextual Task Bar: a floating pill under the selection with the most likely next actions.
 /// Its handle drags it anywhere on the canvas; unpinned it keeps that offset as it follows the
 /// selection, pinned it stays put ([`crate::state::TaskBarPlace`]).
@@ -2228,6 +2264,7 @@ fn task_bar(app: &mut VectorcraftApp, ui: &mut Ui, xf: &Xf) {
     }
     items.push((tl!("Duplicate"), "copy", "edit.duplicate"));
     let fill = first.as_ref().map(|f| f.appearance.fill_paint()).unwrap_or_default();
+    let colored = has_colors(&st.doc, &st.selection.objects);
     let doc = st.uid;
     let anchor = xf.to_screen(Point::new(b.center().x, b.y1));
     let est_w = 118.0 + items.iter().map(|(l, _, _)| l.len() as f32 * 7.2 + 44.0).sum::<f32>();
@@ -2300,6 +2337,10 @@ fn task_bar(app: &mut VectorcraftApp, ui: &mut Ui, xf: &Xf) {
                     if resp.on_hover_text(tl!("Fill")).clicked() {
                         app.session.fill_active = true;
                         app.ui.open_panel = Some("swatches".into());
+                    }
+                    // Recolor Artwork, when the selection has colours to recolour.
+                    if colored && widgets::icon_button(ui, "palette", tl!("Recolor Artwork"), false, 30.0).clicked() {
+                        run = Some(("ui.recolorDialog", json!({})));
                     }
                     if widgets::icon_button(ui, "lock", tl!("Lock (⌘2)"), false, 30.0).clicked() {
                         run = Some(("object.lock", json!({})));
@@ -2549,6 +2590,56 @@ mod tests {
         assert_eq!(lefts(&app), [boards[2].x0; 2], "the left edges are on the active artboard's");
         app.run("object.align", json!({"horizontal": "left", "to": "artboard", "artboard": 1})).unwrap();
         assert_eq!(lefts(&app), [boards[1].x0; 2], "an artboard the caller names is kept");
+    }
+
+    /// The canvas outlines the active artboard in black, 1 px wide, and outlines the other
+    /// artboards in gray, 0.6 px wide. In the test, the active artboard is Artboard 1 at first,
+    /// then the one Go to Artboard went to, and then, with several artboards selected by the
+    /// Artboard tool, the tool's active one (the one Shift-clicked last).
+    #[test]
+    fn the_active_artboard_is_outlined_in_black() {
+        let mut app = VectorcraftApp::new(Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 200, "height": 100, "artboards": 3})).unwrap();
+        let ctx = egui::Context::default();
+        // → each artboard's edge as drawn: (width, color).
+        let edges = |app: &mut VectorcraftApp| {
+            let s = shapes(app, &ctx);
+            let xf = Xf::new(app.canvas_rect.unwrap(), app.view().unwrap());
+            let on = |p: &[Pos2], q: &[Pos2]| p.len() == q.len() && p.iter().zip(q).all(|(a, b)| (*a - *b).length() < 0.01);
+            let boards: Vec<Rect> = app.session.active().unwrap().doc.artboards.iter().map(|a| a.rect).collect();
+            boards
+                .iter()
+                .map(|r| {
+                    let q = xf.quad(*r);
+                    s.iter()
+                        .find_map(|s| match s {
+                            Shape::Path(p) if p.closed && p.fill == Color32::TRANSPARENT && on(&p.points, &q) => {
+                                Some((p.stroke.width, p.stroke.color.clone()))
+                            }
+                            _ => None,
+                        })
+                        .expect("the artboard's edge")
+                })
+                .collect::<Vec<_>>()
+        };
+        let (black, gray) = (egui::epaint::ColorMode::Solid(Color32::from_gray(0)), egui::epaint::ColorMode::Solid(Color32::from_gray(120)));
+        let active = |i: usize| -> Vec<(f32, egui::epaint::ColorMode)> {
+            (0..3).map(|j| if j == i { (1.0, black.clone()) } else { (0.6, gray.clone()) }).collect()
+        };
+        assert_eq!(edges(&mut app), active(0));
+        app.run("view.goToArtboard", json!({"index": 1})).unwrap();
+        assert_eq!(edges(&mut app), active(1), "Artboard 2 is active: its edge is black and Artboard 1's edge is gray");
+        // The Artboard tool starts on Artboard 2; a Shift-click on Artboard 3 selects it too and
+        // makes it the active one.
+        app.select_tool("artboard");
+        let at = app.session.active().unwrap().doc.artboards[2].rect.center();
+        let view = app.view_info();
+        let shift = Mods { shift: true, ..Default::default() };
+        for kind in [PointerKind::Down, PointerKind::Up] {
+            dispatch(&mut app, &PointerEvent { kind, pos: at, mods: shift, pressure: 1.0 }, view);
+        }
+        assert_eq!(app.session.tool_options()["selected"], json!([2, 1]));
+        assert_eq!(edges(&mut app), active(2), "Artboard 3 is the active one of the two selected");
     }
 
     /// Enable Touch Gestures (#585): a two-finger tap undoes and a three-finger one redoes, and the
@@ -3165,6 +3256,38 @@ mod tests {
         app.view_mut().unwrap().zoom = 0.5;
         let (w, _, hard, _) = upload(&mut app);
         assert!(w > 600 && !hard, "zoomed out: the screen's pixels");
+    }
+
+    /// View › Hide Template (#2000): a template layer's art leaves the canvas, and Show Template
+    /// draws it again, dimmed as before; each re-renders at once.
+    #[test]
+    fn hide_template_leaves_template_layers_off_the_canvas() {
+        let mut app = VectorcraftApp::new(Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
+        app.canvas.worker_started = true; // render on this thread
+        app.session.execute("shape.rectangle", &json!({"x": 100, "y": 50, "width": 200, "height": 200})).unwrap();
+        let layer = app.session.active().unwrap().doc.layers[0].id.0;
+        app.session.execute("layer.template", &json!({"ids": [layer], "on": true})).unwrap();
+        let ctx = egui::Context::default();
+        // How many pixels of the art's raster one frame uploads are painted, None when it was not
+        // re-rendered.
+        let painted = |app: &mut VectorcraftApp| -> Option<usize> {
+            let (_, mut delta) = frame_output(app, &ctx);
+            let art = app.canvas.texture.as_ref().unwrap().id();
+            let n = delta.set.iter().find(|e| e.0.eq(&art)).and_then(|e| e.1.last()).map(|d| {
+                let egui::ImageData::Color(img) = &d.image;
+                img.pixels.iter().filter(|c| c.a() != 0).count()
+            });
+            delta.clear();
+            n
+        };
+        let shown = painted(&mut app).expect("the first frame renders the art");
+        assert!(shown > 1000, "the template layer's art is drawn: {shown} pixels");
+        assert_eq!(app.run("view.template", json!({})).unwrap(), json!(false));
+        assert_eq!(painted(&mut app), Some(0), "Hide Template re-renders without the template layer");
+        assert_eq!(painted(&mut app), None, "nothing changed: no re-render");
+        assert_eq!(app.run("view.template", json!({})).unwrap(), json!(true));
+        assert_eq!(painted(&mut app), Some(shown), "Show Template draws it again as before");
     }
 
     /// General › Anti-aliased Artwork (#394): on (the default), the art's edges are smoothed on
@@ -4220,6 +4343,106 @@ mod tests {
     }
 
     #[test]
+    fn double_clicking_type_with_the_direct_selection_tool_puts_the_caret_there() {
+        let mut app = VectorcraftApp::new(Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
+        let id = app.session.execute("text.create", &json!({"x": 100, "y": 150, "text": "Hello world", "size": 24})).unwrap()["id"].as_u64().unwrap();
+        app.session.execute("select.none", &json!({})).unwrap();
+        app.select_tool("directSelection");
+        let ctx = egui::Context::default();
+        let timed = |app: &mut VectorcraftApp, time: f64, events: Vec<egui::Event>| {
+            let screen = egui::Rect::from_min_size(Pos2::ZERO, vec2(800.0, 600.0));
+            let mut out = ctx.run_ui(egui::RawInput { screen_rect: Some(screen), time: Some(time), events, ..Default::default() }, |ui| {
+                crate::shortcuts::handle(app, ui.ctx());
+                show(app, ui)
+            });
+            out.textures_delta.clear();
+        };
+        timed(&mut app, 0.0, vec![]);
+        let xf = Xf::new(app.canvas_rect.unwrap(), app.view().unwrap());
+        let text = |app: &VectorcraftApp| match &app.session.active().unwrap().doc.node(vectorcraft_doc::NodeId(id)).unwrap().kind {
+            NodeKind::Text(t) => t.plain_text(),
+            _ => panic!("not text"),
+        };
+        // Double-click the middle of the text with Direct Selection.
+        let b = app.session.active().unwrap().doc.node(vectorcraft_doc::NodeId(id)).unwrap().geometric_bounds().unwrap();
+        let at = xf.to_screen(b.center());
+        let button = |pressed| egui::Event::PointerButton { pos: at, button: egui::PointerButton::Primary, pressed, modifiers: Default::default() };
+        timed(&mut app, 1.0, vec![egui::Event::PointerMoved(at), button(true), button(false), button(true), button(false)]);
+        timed(&mut app, 1.1, vec![]);
+        // The Type tool edits the text, with the caret inside it, where it was clicked: typing goes
+        // into the text, not to tool shortcuts.
+        assert_eq!(app.session.tool_id(), "type");
+        assert!(app.session.tool_wants_text());
+        let o = app.session.tool_options();
+        assert_eq!(o["editing"], json!(id));
+        let caret = o["caret"].as_u64().unwrap();
+        assert!((1..11).contains(&caret), "caret {caret}");
+        app.session.tool_text("X", app.view_info()).unwrap();
+        let t = text(&app);
+        assert_eq!((t.len(), t.find('X')), (12, Some(caret as usize)), "{t}");
+
+        // Pressing Escape exits text editing and returns to Direct Selection tool.
+        let esc = |pressed| egui::Event::Key { key: egui::Key::Escape, physical_key: None, pressed, repeat: false, modifiers: Default::default() };
+        timed(&mut app, 1.2, vec![esc(true), esc(false)]);
+        assert_eq!(app.session.tool_id(), "directSelection");
+        assert!(!app.session.tool_wants_text());
+    }
+
+    #[test]
+    fn escape_while_editing_in_isolation_returns_to_selection_tool_and_keeps_isolation_until_second_escape() {
+        let mut app = VectorcraftApp::new(Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
+        let tid =
+            app.session.execute("text.create", &json!({"x": 100, "y": 150, "text": "Nested hello", "size": 24})).unwrap()["id"].as_u64().unwrap();
+        // Group the text inside a group.
+        app.session.execute("select.all", &json!({})).unwrap();
+        app.session.execute("object.group", &json!({})).unwrap();
+        app.select_tool("selection");
+        let ctx = egui::Context::default();
+        let timed = |app: &mut VectorcraftApp, time: f64, events: Vec<egui::Event>| {
+            let screen = egui::Rect::from_min_size(Pos2::ZERO, vec2(800.0, 600.0));
+            let mut out = ctx.run_ui(egui::RawInput { screen_rect: Some(screen), time: Some(time), events, ..Default::default() }, |ui| {
+                crate::shortcuts::handle(app, ui.ctx());
+                show(app, ui)
+            });
+            out.textures_delta.clear();
+        };
+        timed(&mut app, 0.0, vec![]);
+        let xf = Xf::new(app.canvas_rect.unwrap(), app.view().unwrap());
+        let b = app.session.active().unwrap().doc.node(vectorcraft_doc::NodeId(tid)).unwrap().geometric_bounds().unwrap();
+        let at = xf.to_screen(b.center());
+        let button = |pressed| egui::Event::PointerButton { pos: at, button: egui::PointerButton::Primary, pressed, modifiers: Default::default() };
+        let esc = |pressed| egui::Event::Key { key: egui::Key::Escape, physical_key: None, pressed, repeat: false, modifiers: Default::default() };
+
+        // 1st double-click on group enters isolation mode.
+        timed(&mut app, 1.0, vec![egui::Event::PointerMoved(at), button(true), button(false), button(true), button(false)]);
+        timed(&mut app, 1.1, vec![]);
+        assert!(app.session.active().unwrap().isolation.is_some(), "should be in isolation mode");
+        assert_eq!(app.session.tool_id(), "selection");
+
+        // 2nd double-click on the text inside the isolated group enters text editing.
+        timed(&mut app, 2.0, vec![egui::Event::PointerMoved(at), button(true), button(false), button(true), button(false)]);
+        timed(&mut app, 2.1, vec![]);
+        assert_eq!(app.session.tool_id(), "type");
+        assert!(app.session.tool_wants_text());
+        assert!(app.session.active().unwrap().isolation.is_some(), "isolation mode still active while editing text");
+
+        // 1st Escape exits text edit mode, returns to Selection tool, but keeps isolation mode.
+        timed(&mut app, 3.0, vec![esc(true), esc(false)]);
+        timed(&mut app, 3.1, vec![]);
+        assert_eq!(app.session.tool_id(), "selection");
+        assert!(!app.session.tool_wants_text());
+        assert!(app.session.active().unwrap().isolation.is_some(), "1st Escape must NOT end isolation mode");
+
+        // 2nd Escape exits isolation mode.
+        timed(&mut app, 4.0, vec![esc(true), esc(false)]);
+        timed(&mut app, 4.1, vec![]);
+        assert_eq!(app.session.tool_id(), "selection");
+        assert!(app.session.active().unwrap().isolation.is_none(), "2nd Escape must exit isolation mode");
+    }
+
+    #[test]
     fn a_symbol_dropped_on_the_canvas_is_placed_there() {
         let mut app = VectorcraftApp::new(Session::new(), Default::default());
         app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
@@ -4679,6 +4902,42 @@ mod tests {
         let doc = app.session.active().unwrap();
         assert_eq!(doc.selection.objects, vec![vectorcraft_doc::NodeId(id)]);
         assert_eq!(doc.doc.art_bounds(), before, "the tap moved nothing");
+    }
+
+    /// The Contextual Task Bar shows Recolor Artwork (a palette) when the selection has colours,
+    /// and it opens the Recolor Artwork dialog; art painted with None has no button.
+    #[test]
+    fn the_task_bar_recolors_coloured_art() {
+        let mut app = VectorcraftApp::new(Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
+        let id = app.session.execute("shape.rectangle", &json!({"x": 180, "y": 130, "width": 40, "height": 40})).unwrap()["id"].clone();
+        app.session.execute("paint.setFill", &json!({"ids": [id], "color": "#cc3322"})).unwrap();
+        app.select_tool("selection");
+        let ctx = egui::Context::default();
+        let click = |app: &mut VectorcraftApp| {
+            frame(app, &ctx, vec![]);
+            frame(app, &ctx, vec![]);
+            let bar = task_bar_rect(&ctx).expect("the task bar shows");
+            // Right to left: the frame's margin, More Options, Lock, then Recolor.
+            let at = pos2(bar.right() - 8.0 - 30.0 - 6.0 - 30.0 - 6.0 - 15.0, bar.center().y);
+            let button =
+                |pressed| egui::Event::PointerButton { pos: at, button: egui::PointerButton::Primary, pressed, modifiers: Default::default() };
+            frame(app, &ctx, vec![egui::Event::PointerMoved(at)]);
+            frame(app, &ctx, vec![button(true)]);
+            frame(app, &ctx, vec![button(false)]);
+        };
+        let st = app.session.active().unwrap();
+        assert!(has_colors(&st.doc, &st.selection.objects));
+        click(&mut app);
+        assert_eq!(app.ui.dialog.as_ref().map(|d| d.kind.as_str()), Some(crate::dialogs::recolor::KIND));
+
+        app.ui.dialog = None;
+        app.session.execute("paint.setFill", &json!({"ids": [id], "none": true})).unwrap();
+        app.session.execute("paint.setStroke", &json!({"ids": [id], "none": true})).unwrap();
+        let st = app.session.active().unwrap();
+        assert!(!has_colors(&st.doc, &st.selection.objects), "None paints have no colours");
+        click(&mut app);
+        assert!(app.ui.dialog.is_none(), "no Recolor button without colours");
     }
 
     /// The Contextual Task Bar's handle drags it: unpinned it keeps that offset as it follows the

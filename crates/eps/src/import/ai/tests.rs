@@ -217,6 +217,29 @@ fn a_pattern_tiles_from_its_lower_left_wherever_its_definition_drew_it() {
     assert_eq!(xf * Point::ZERO, Point::new(0.0, 92.0));
 }
 
+/// A gradient in a pattern's definition is placed by an `Xm` written y down about the canvas point of
+/// art space's origin (here 7941, 7941: the canvas's centre less the template box's): its ramp from
+/// (10, 0) up to (10, 20) in the pattern's space is `0 -20 20 0 -7931 7941 Xm`.
+#[test]
+fn a_gradient_in_a_patterns_definition_is_placed_from_the_canvas() {
+    let defs =
+        "%AI5_BeginGradient: (G)\n(G) 0 2 Bd\n[\n<00FF>\n0\n%_0 0 0 0 1 0 0 2 1 6 50 0 Bs\n%_0 0 0 0 0 0 1 2 1 6 50 100 Bs\nBD\n%AI5_EndGradient\n";
+    let tile = rect_path(0.0, 0.0, 20.0, 20.0).replace('\n', "\n%_");
+    let pattern = format!(
+        "%AI3_BeginPattern: (Shade)\n(Shade) 0 0 20 20\n%_0 A\n%_0 Xw\n%_0 Ae\n%_u\n%_Bb\n%_1 (G) 0 0 90 1 1 0 0 1 0 0 1 Bg\n\
+         %_0 -20 20 0 -7931 7941 Xm\n%_{tile}f\n%_0 BB\n%_U\nE\n%AI3_EndPattern\n"
+    );
+    let file = stream(&format!("{defs}{pattern}{}", layer(&(rect_path(0.0, 0.0, 1.0, 1.0) + "f\n"))))
+        .replace("%%EndComments", "%AI3_TemplateBox: 250.5 -250.5 250.5 -250.5\n%%EndComments");
+    let doc = read(file.as_bytes()).unwrap().doc;
+    let def = doc.pattern("Shade").unwrap();
+    let shaded = &def.art[0].children().unwrap()[0];
+    let Paint::Gradient(g) = fill(shaded) else { panic!("{:?}", fill(shaded)) };
+    let geom = g.geom.unwrap();
+    // The pattern's space is y down.
+    assert!(geom.start.distance(Point::new(10.0, 0.0)) < 1e-9 && geom.end.distance(Point::new(10.0, -20.0)) < 1e-9, "{geom:?}");
+}
+
 /// A pattern whose definition it can't read whole isn't kept: a fill with it is something the file
 /// has that isn't read, where it shows. Its definition costs nothing else.
 #[test]
@@ -580,6 +603,44 @@ fn images_with_alpha_channels() {
     // Data cut short: the image goes, with a warning.
     let r = read(&image("[ 1 0 0 1 0 100 ]", (4, 4), ("DeviceRGB", 3, 0), &[1, 2, 3], 6)).unwrap();
     assert!(art(&r.doc).is_empty() && r.warnings.iter().any(|w| w.contains("cut short")));
+}
+
+/// CMYK images keep their ink amounts, as the file's PDF part keeps them, and an alpha channel
+/// becomes their opacity mask: a grayscale image over the image.
+#[test]
+fn cmyk_images_keep_their_ink_amounts() {
+    // 3 × 1: cyan, 100% black, then a mix.
+    let inks = [255, 0, 0, 0, 0, 0, 0, 255, 12, 34, 56, 78];
+    let doc = read(&image("[ 10 0 0 10 50 90 ]", (3, 1), ("DeviceCMYK", 4, 0), &inks, 14)).unwrap().doc;
+    let a = art(&doc);
+    let NodeKind::Image(im) = &a[0].kind else { panic!("{:?}", a[0].kind) };
+    let blob = &doc.images[&im.key];
+    assert!(blob.is_cmyk(), "{}", blob.mime);
+    assert_eq!(blob.cmyk().map(|i| (i.width, i.height, i.data)), Some((3, 1, inks.to_vec())));
+    assert!(a[0].extras().mask.is_none(), "no alpha channel, no mask");
+    // The same samples with an alpha channel.
+    let data = [&inks[..], &[255, 128, 0]].concat();
+    let doc = read(&image("[ 10 0 0 10 50 90 ]", (3, 1), ("DeviceCMYK", 4, 1), &data, 17)).unwrap().doc;
+    let a = art(&doc);
+    let NodeKind::Image(im) = &a[0].kind else { panic!("{:?}", a[0].kind) };
+    assert_eq!(doc.images[&im.key].cmyk().map(|i| i.data), Some(inks.to_vec()), "the inks are the same");
+    let m = a[0].extras().mask.clone().expect("the alpha channel is an opacity mask");
+    assert!(m.clip);
+    let NodeKind::Image(mi) = &m.art.kind else { panic!("{:?}", m.art.kind) };
+    assert_eq!((mi.width, mi.height, mi.xf), (3, 1, im.xf), "the mask covers the image");
+    let gray = image::load_from_memory(&doc.images[&mi.key].bytes).unwrap().to_luma8();
+    assert_eq!(gray.into_raw(), [255, 128, 0]);
+    // An alpha channel that hides nothing adds no mask.
+    let data = [&inks[..], &[255; 3]].concat();
+    let doc = read(&image("[ 10 0 0 10 50 90 ]", (3, 1), ("DeviceCMYK", 4, 1), &data, 17)).unwrap().doc;
+    let a = art(&doc);
+    assert!(a[0].extras().mask.is_none());
+    // Hex samples, and a four-channel image whose space the data doesn't name.
+    let hex: String = inks.iter().map(|b| format!("{b:02x}")).collect();
+    let text = String::from_utf8(image("[ 1 0 0 1 0 100 ]", (3, 1), ("Other", 4, 0), hex.as_bytes(), 26)).unwrap();
+    let doc = read(text.replacen("8 4 0 0 1 0 4 4 0 0", "8 4 0 0 0 0 4 4 0 0", 1).as_bytes()).unwrap().doc;
+    let NodeKind::Image(im) = &art(&doc)[0].kind else { panic!() };
+    assert_eq!(doc.images[&im.key].cmyk().map(|i| i.data), Some(inks.to_vec()));
 }
 
 /// Editing data with one layer (showing or not) holding a placed file: its matrix, the file at

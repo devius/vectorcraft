@@ -56,6 +56,10 @@
 	Draft	Чорнове
 	Good	Гарне
 	Best	Найкраще
+	Mode	Режим
+	Blur Mode	Режим розмиття
+	Edge Only	Лише краї
+	Overlay Edge	Накладання країв
 	  — missing	  — відсутній
 	 to search every command	 для пошуку будь-якої команди
 	(closest)	(найближчий)
@@ -216,7 +220,6 @@
 	Art	Малюнок
 	Art using a deleted global swatch keeps its colour.	Графіка з видаленим глобальним зразком зберігає свій колір.
 	Artboard Options	Параметри монтажної області
-	Artboard Options: edit with the Artboard tool	Параметри монтажної області: редагуються інструментом «Монтажна область»
 	Artboard Options…	Параметри монтажної області…
 	Artboard Tool	Інструмент «Монтажна область»
 	Artboard {number}	Монтажна область {number}
@@ -1260,6 +1263,7 @@
 	Hide Print Tiling	Приховати розбиття для друку
 	Hide Rulers	Приховати лінійки
 	Hide Slices	Приховати фрагменти
+	Hide Template	Приховати шаблон
 	Hide Text Threads	Приховати зв’язки тексту
 	Hide Thumbnail	Приховати мініатюру
 	Hide Thumbnails	Приховати мініатюри
@@ -2042,6 +2046,7 @@
 	Pathfinder Options…	Параметри обробки контурів…
 	Pathfinders:	Обробка контурів:
 	Paths	Контури
+	Path Length	Довжина контурів
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Контури: {paths} Опорні точки: {anchors} Кольори: {colors}
 	Pattern	Візерунок
 	Pattern Editing	Редагування візерунка
@@ -2400,6 +2405,7 @@
 	Reset Panel	Скинути панель
 	Reset Preferences	Скинути налаштування
 	Reset Profiles	Скинути профілі
+	Rotate View	Повернути вид
 	Reset Rotate View	Скинути поворот виду
 	Reset the rows to the artwork's colors	Скинути рядки до кольорів малюнка
 	Reset to Default	Скинути до значень за замовчуванням
@@ -2600,6 +2606,17 @@
 	Scripts	Сценарії
 	Search	Пошук
 	Search All	Шукати скрізь
+	Filter	Фільтр
+	Clear All	Очистити все
+	By Object	За об’єктами
+	By Layer	За шарами
+	Images	Зображення
+	Groups	Групи
+	Linked Files	Пов’язані файли
+	Locked	Заблоковані
+	Hidden	Приховані
+	Filter Layers Panel Rows	Фільтрувати рядки панелі «Шари»
+@msg	`{key}` must be an array of these names: {_1}	`{key}` має бути масивом цих назв: {_1}
 	Search commands and tools	Пошук команд та інструментів
 	Search commands and tools…	Пошук команд та інструментів…
 	Search Commands…	Пошук команд…
@@ -2737,6 +2754,7 @@
 	Show Modified	Показати змінені
 	Show Note	Показати примітку
 	Show Options	Показати параметри
+	Color Panel Options	Параметри панелі «Колір»
 	Show Package	Показати пакет
 	Show Panel	Показати панель
 	Show Pattern Swatches	Показати зразки візерунків
@@ -2749,6 +2767,7 @@
 	Show Slices	Показати фрагменти
 	Show Swatch Bounds	Показати межі зразка
 	Show Swatch Kinds	Показати типи зразків
+	Show Template	Показати шаблон
 	Show Text Threads	Показати зв’язки тексту
 	Show The Home Screen When No Documents Are Open	Показувати початковий екран, коли документи не відкриті
 	Show Thumbnail	Показати мініатюру
@@ -3600,6 +3619,7 @@ axis	Both	Обидві
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` має бути від {min} до {max} (отримано {x})
 @msg	`{key}` must be one of {_1}	`{key}` має бути одним з: {_1}
 @msg	`{key}` must be true or false	`{key}` має бути true або false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` має бути grayscale, rgb, hsb, cmyk або websafe
 @msg	`{k}` must be [x, y]	`{k}` має бути [x, y]
 @msg	`{name}` has no options	`{name}` не має параметрів
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` - вбудоване робоче середовище; виберіть інше ім’я
@@ -3959,7 +3979,7 @@ axis	Both	Обидві
 @msg	this file's PostScript couldn't be read ({why}): {what}	PostScript цього файлу неможливо прочитати ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	цей формат містить одну монтажну область: експортуйте кілька як PDF або за допомогою document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	це креслення DWG, яке неможливо прочитати: збережіть його з CAD як ASCII DXF і відкрийте його
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	це файл PostScript (.ai, збережений у старому форматі або без сумісності з PDF, або файл EPS), який поки неможливо відкрити: збережіть його як PDF, .ai із сумісністю з PDF або SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	це файл PostScript (.ai, збережений у старому форматі або без сумісності з PDF, або файл EPS), а не PDF: Файл › Відкрити та Файл › Розмістити читають його як EPS
 @msg	this is not a PostScript file	це не файл PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	поєднання інструментів має бути однією клавішею (необов’язково з Shift)
 @msg	truncated	усічено

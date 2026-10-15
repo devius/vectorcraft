@@ -327,7 +327,6 @@
 	Art using a deleted global swatch keeps its colour.	A törölt globális színmintát használó grafika megtartja a színét.
 	Artboard	Rajztábla
 	Artboard Options	Rajztábla beállításai
-	Artboard Options: edit with the Artboard tool	Rajztábla beállításai: szerkesztés a Rajztábla eszközzel
 	Artboard Options…	Rajztábla beállításai…
 	Artboard Tool	Rajztábla
 	Artboard {number}	Rajztábla {number}
@@ -425,6 +424,7 @@
 	Blocks	Kockák
 	Blue	Kék
 	Blur	Elmosás
+	Blur Mode	Elmosási mód
 	Bold	Félkövér
 	Border Thickness	Szegélyvastagság
 	Bottom	Alsó
@@ -1114,6 +1114,7 @@
 	East Asian Type	Kelet-ázsiai szöveg
 	Edge	Él
 	Edge Brightness	Él fényessége
+	Edge Only	Csak élek
 	Edge Width	Élszélesség
 	Edit	Szerkesztés
 	Edit Artboards	Rajztáblák szerkesztése
@@ -1612,6 +1613,7 @@
 	Hide Print Tiling	Nyomtatási csempézés elrejtése
 	Hide Rulers	Vonalzók elrejtése
 	Hide Slices	Szeletek elrejtése
+	Hide Template	Sablon elrejtése
 	Hide Text Threads	Szövegláncok elrejtése
 	Hide Thumbnail	Bélyegkép elrejtése
 	Hide Thumbnails	Bélyegképek elrejtése
@@ -2115,6 +2117,7 @@
 	Mixed Appearances	Vegyes megjelenések
 	Mixed Objects	Vegyes objektumok
 	Mobile	Mobil
+	Mode	Mód
 	Mode:	Mód:
 	Model	Modell
 	Models	Modellek
@@ -2450,6 +2453,7 @@
 	Overlap:	Átfedés:
 	Overlapping	Átfedő
 	Overlay	Átfedés
+	Overlay Edge	Élek átfedése
 	Overprint	Felülnyomás
 	Overprint and Transparency Flattener	Felülnyomás és átlátszóság-lapítás
 	Overprint and Transparency Flattener Options	Felülnyomás és átlátszóság-lapítás beállításai
@@ -2509,6 +2513,7 @@
 	Pathfinder Options…	Útvonalkezelő beállításai…
 	Pathfinders:	Útvonalkezelők:
 	Paths	Útvonalak
+	Path Length	Útvonalak hossza
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Útvonalak: {paths}    Horgonypontok: {anchors}    Színek: {colors}
 	Pattern	Mintázat
 	Pattern Brush Options	Mintázatecset beállításai
@@ -3159,6 +3164,17 @@
 	Scrub Numeric Fields by Dragging	Számmezők állítása húzással
 	Search	Keresés
 	Search All	Keresés mindenben
+	Filter	Szűrő
+	Clear All	Összes törlése
+	By Object	Objektum szerint
+	By Layer	Réteg szerint
+	Images	Képek
+	Groups	Csoportok
+	Linked Files	Csatolt fájlok
+	Locked	Zárolt
+	Hidden	Rejtett
+	Filter Layers Panel Rows	Rétegek panel sorainak szűrése
+@msg	`{key}` must be an array of these names: {_1}	`{key}`: ezen nevek tömbje kell: {_1}
 	Search commands and tools	Parancsok és eszközök keresése
 	Search commands and tools…	Parancsok és eszközök keresése…
 	Search Commands…	Parancsok keresése…
@@ -3325,6 +3341,7 @@
 	Show Modified	Módosultak megjelenítése
 	Show Note	Megjegyzés megjelenítése
 	Show Options	Beállítások megjelenítése
+	Color Panel Options	Szín panel beállításai
 	Show Package	Csomag megjelenítése
 	Show Panel	Panel megjelenítése
 	Show Pattern Swatches	Mintázat-színminták megjelenítése
@@ -3338,6 +3355,7 @@
 	Show Slices	Szeletek megjelenítése
 	Show Swatch Bounds	Színminta határainak megjelenítése
 	Show Swatch Kinds	Színmintafajták megjelenítése
+	Show Template	Sablon megjelenítése
 	Show Text Threads	Szövegláncok megjelenítése
 	Show The Home Screen When No Documents Are Open	Kezdőképernyő megjelenítése, ha nincs nyitott dokumentum
 	Show Thumbnail	Bélyegkép megjelenítése
@@ -4103,6 +4121,7 @@ imageTrace	Outline	Körvonal
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}`: {min} és {max} közötti érték kell (kapott érték: {x})
 @msg	`{key}` must be one of {_1}	`{key}`: ezek egyike kell: {_1}
 @msg	`{key}` must be true or false	`{key}`: true vagy false kell
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode`: grayscale, rgb, hsb, cmyk vagy websafe kell
 @msg	`{k}` must be [x, y]	`{k}`: [x, y] kell
 @msg	`{name}` has no options	ennek nincsenek beállításai: `{name}`
 @msg	`{name}` is a built-in workspace; choose another name	beépített munkaterület: `{name}`; válassz másik nevet
@@ -4645,7 +4664,7 @@ imageTrace	Outline	Körvonal
 @msg	this file's PostScript couldn't be read ({why}): {what}	a fájl PostScript-tartalma nem olvasható ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	ez a formátum egy rajztáblát tárol: többet PDF-ként vagy a document.exportForScreens paranccsal exportálj
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	ez DWG-rajz, amely nem olvasható: mentsd ASCII DXF-ként a CAD-alkalmazásból, és azt nyisd meg
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	ez PostScript-fájl (régebbi formátumban vagy PDF-kompatibilitás nélkül mentett .ai, illetve EPS), amely még nem nyitható meg: mentsd PDF-ként, PDF-kompatibilis .ai-ként vagy SVG-ként
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	ez PostScript-fájl (régebbi formátumban vagy PDF-kompatibilitás nélkül mentett .ai, illetve EPS), nem PDF: a Fájl › Megnyitás és a Fájl › Elhelyezés EPS-ként olvassa be
 @msg	this is not a PostScript file	ez nem PostScript-fájl
 @msg	this isn't a flat-colour logo ({_1}% of its solid areas match a few flat colours), so Flat Logo mode would turn its gradients into patches: use Color mode instead	ez nem egyszínű logó (az egyszínű területeinek csak ennyi része illik néhány alapszínhez: {_1}%), így az Egyszínű logó mód foltokká alakítaná a színátmeneteit: használd inkább a Színes módot
 @msg	this kind of brush has no options dialog yet	ennek az ecsetfajtának még nincs beállítási párbeszédablaka

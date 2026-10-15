@@ -219,7 +219,8 @@ pub struct Interaction {
     /// The perspective transform the previews make (`perspective.transform` params): Transform
     /// Again repeats it once the drag is committed.
     pub perspective_again: Option<Value>,
-    /// A transform with `copy` keeps the copies it made of the snapshot here ([`PreviewCopies`]).
+    /// A transform or a perspective edit with `copy` keeps the copies it made of the snapshot here
+    /// ([`PreviewCopies`]).
     pub(crate) copies: Option<Arc<PreviewCopies>>,
 }
 
@@ -233,14 +234,15 @@ pub enum LastTransform {
     Each(Value),
 }
 
-/// This holds the copies that a transform with `copy` made of an interaction's snapshot
-/// ([`cmd::object::apply_transform`]). A later transform with `copy` of the same objects, while
-/// the document is still that snapshot, starts from `doc` and transforms only the copies.
+/// This holds the copies that a transform or a perspective edit with `copy` made of an
+/// interaction's snapshot ([`cmd::object::apply_transform`]; `persp_edit` and `plane_move` in
+/// `cmd::distortcmds`). A later transform or perspective edit with `copy` of the same objects,
+/// while the document is still that snapshot, starts from `doc` and transforms only the copies.
 #[derive(Debug)]
 pub(crate) struct PreviewCopies {
     /// The copies were made from this snapshot.
     pub(crate) from: Arc<Document>,
-    /// The transform copied these objects.
+    /// The transform or perspective edit copied these objects.
     pub(crate) roots: Vec<NodeId>,
     /// This is `from` with the copies added, untransformed.
     pub(crate) doc: Arc<Document>,
@@ -561,11 +563,16 @@ pub const ON_ACTIVE_ARTBOARD: [&str; 7] = [
     "select.allOnArtboard",
 ];
 
+/// The commands that resize the active artboard, which the app passes as their `index`: Fit to
+/// Artwork Bounds and Fit to Selected Art (Object › Artboards). A `command.batch` given `artboard`
+/// passes it on, as `index`, to each of their steps that names none.
+pub const FIT_ACTIVE_ARTBOARD: [&str; 2] = ["artboard.fitToArt", "artboard.fitToSelection"];
+
 /// `(command, param)` pairs the journal records only so a replay reproduces the original run
 /// (dates from the clock: `cmd::clock_date`; the active artboard the app passes to the
-/// [`ON_ACTIVE_ARTBOARD`] commands and to a batch); an action leaves them out
-/// ([`Session::journal_for_action`]).
-const REPLAY_ONLY: [(&str, &str); 11] = [
+/// [`ON_ACTIVE_ARTBOARD`] and [`FIT_ACTIVE_ARTBOARD`] commands and to a batch); an action leaves
+/// them out ([`Session::journal_for_action`]).
+const REPLAY_ONLY: [(&str, &str); 13] = [
     ("file.new", "created"),
     ("document.save", "modified"),
     ("file.saveAs", "modified"),
@@ -575,6 +582,8 @@ const REPLAY_ONLY: [(&str, &str); 11] = [
     ("object.align", "artboard"),
     ("object.distribute", "artboard"),
     ("object.distributeSpacing", "artboard"),
+    ("artboard.fitToArt", "index"),
+    ("artboard.fitToSelection", "index"),
     ("select.allOnArtboard", "artboard"),
     ("command.batch", "artboard"),
 ];

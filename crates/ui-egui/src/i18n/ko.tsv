@@ -479,6 +479,7 @@
 	Fit Artboard in Window	창에 아트보드 맞추기
 	Fit All in Window	창에 모두 맞추기
 	Actual Size	실제 크기
+	Rotate View	보기 회전
 	Reset Rotate View	회전 보기 재설정
 	Hide Edges	가장자리 숨기기
 	Hide Artboards	아트보드 숨기기
@@ -493,6 +494,7 @@
 	Show Video Rulers	비디오 눈금자 표시
 	Hide Bounding Box	경계 상자 숨기기
 	Show Transparency Grid	투명도 격자 표시
+	Hide Template	템플릿 숨기기
 	Hide Text Threads	문자 연결선 숨기기
 	Hide Gradient Annotator	그레이디언트 주석 숨기기
 	Hide Corner Widget	모퉁이 위젯 숨기기
@@ -653,6 +655,7 @@
 	Preview	미리 보기
 	Show Edges	가장자리 표시
 	Show Corner Widget	모퉁이 위젯 표시
+	Show Template	템플릿 표시
 	Show Text Threads	문자 스레드 표시
 	Hide Hidden Characters	숨겨진 문자 숨기기
 	Show Gradient Annotator	그레이디언트 주석 도구 표시
@@ -854,7 +857,6 @@
 	Art using a deleted global swatch keeps its colour.	삭제된 글로벌 견본을 사용한 아트워크는 색상을 유지합니다.
 	ArtCraft website	ArtCraft 웹사이트
 	Artboard Options	아트보드 옵션
-	Artboard Options: edit with the Artboard tool	아트보드 옵션: 아트보드 도구로 편집
 	Artboard Options…	아트보드 옵션…
 	Artboard Tool	아트보드 도구
 	Artboard {number}	아트보드 {number}
@@ -2106,6 +2108,7 @@
 	Pathfinder Options…	패스파인더 옵션…
 	Pathfinders:	패스파인더:
 	Paths	패스
+	Path Length	패스 길이
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	패스: {paths}    앵커: {anchors}    색상: {colors}
 	Pattern Editing	패턴 편집
 	Pattern options are available in pattern editing mode.	패턴 옵션은 패턴 편집 모드에서 사용할 수 있습니다.
@@ -2475,6 +2478,17 @@
 	Screen	스크린
 	Screens	화면
 	Search All	모두 검색
+	Filter	필터
+	Clear All	모두 지우기
+	By Object	개체별
+	By Layer	레이어별
+	Images	이미지
+	Groups	그룹
+	Linked Files	연결된 파일
+	Locked	잠김
+	Hidden	숨김
+	Filter Layers Panel Rows	레이어 패널 행 필터링
+@msg	`{key}` must be an array of these names: {_1}	`{key}`은(는) 다음 이름의 배열이어야 합니다: {_1}
 	Search commands and tools	명령 및 도구 검색
 	Search commands and tools…	명령 및 도구 검색…
 	Secondary	보조
@@ -2558,6 +2572,7 @@
 	Show List View	목록 보기 표시
 	Show Note	메모 표시
 	Show Options	옵션 표시
+	Color Panel Options	색상 패널 옵션
 	Show Package	패키지 표시
 	Show Panel	패널 표시
 	Show Perspective Grid	원근 격자 표시
@@ -3493,6 +3508,10 @@ theme	Appearance	외관
 	Draft	초안
 	Good	좋음
 	Best	최상
+	Mode	모드
+	Blur Mode	흐림 모드
+	Edge Only	가장자리만
+	Overlay Edge	가장자리 오버레이
 @msg	Reset {_1}	{_1}을(를) 재설정했습니다
 @msg	Saving	저장 중
 @msg	Saving {_1}	{_1} 저장 중
@@ -3858,7 +3877,7 @@ theme	Appearance	외관
 @msg	the PDF is password-protected: give its password	PDF가 암호로 보호되어 있습니다: 암호를 입력하세요
 @msg	the PDF password is wrong	PDF 암호가 올바르지 않습니다
 @msg	the file holds only a placeholder page, not its art (it was saved without PDF compatibility): save it again with PDF compatibility on, or as PDF or SVG	파일에 아트웍 없이 대체 페이지만 들어 있습니다(PDF 호환 없이 저장됨): PDF 호환을 켜고 다시 저장하거나 PDF나 SVG로 저장하세요
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	PostScript 파일(이전 형식이나 PDF 호환 없이 저장한 .ai, 또는 EPS 파일)이라 아직 열 수 없습니다: PDF, PDF 호환 .ai 또는 SVG로 저장하세요
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	PDF가 아니라 PostScript 파일(이전 형식이나 PDF 호환 없이 저장한 .ai, 또는 EPS 파일)입니다: 파일 › 열기와 파일 › 가져오기는 이 파일을 EPS로 읽습니다
 @msg	unsupported: {0}	지원되지 않음: {0}
 @msg	a page is missing	페이지가 없습니다
 @msg	a page tree kid isn't a reference	페이지 트리 하위 항목이 참조가 아닙니다
@@ -3991,6 +4010,7 @@ theme	Appearance	외관
 @msg	Opened {url}	{url}을(를) 열었습니다
 @msg	No saved views (View → New View…)	저장된 보기가 없습니다(보기 → 새 보기…)
 @msg	`command` must be a command whose menu item opens a dialog (see ui.menuDialog)	`command`는 메뉴 항목이 대화상자를 여는 명령이어야 합니다(ui.menuDialog 참조)
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode`은(는) grayscale, rgb, hsb, cmyk, websafe 중 하나여야 합니다
 @msg	`{key}` must be true or false	`{key}`은(는) true 또는 false여야 합니다
 @msg	brightness must be dark|mediumDark|mediumLight|light	brightness는 dark|mediumDark|mediumLight|light 중 하나여야 합니다
 @msg	index must be a number or first, previous, next or last	index는 숫자이거나 first, previous, next, last 중 하나여야 합니다

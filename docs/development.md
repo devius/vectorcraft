@@ -1,6 +1,7 @@
 # Development
 
-> **Last updated:** 2026-10-13 · **Change:** verified PngSuite downloads (#1729).
+> **Last updated:** 2026-10-14 · **Change:** leaving out the bundled fonts (`bundled-fonts` feature).
+> **Last updated:** 2026-10-14 · **Change:** document-font registration for all explicitly supplied faces.
 
 ## Web build
 
@@ -105,7 +106,7 @@ The window runs natively on Wayland (eframe's `wayland` feature) and on X11. On 
 
 - **Clipboard:** under Wayland arboard talks to the compositor through the data-control protocol (wlroots compositors such as Sway and Hyprland, KDE Plasma), so bitmaps (`image/png`), SVG markup and text copied in any app paste (#398). Where the compositor lacks the protocol (GNOME's Mutter, [arboard#223](https://github.com/1Password/arboard/issues/223)), arboard falls back to the X11 clipboard through XWayland, which only holds what X11 apps copied. egui's own text paste into fields goes through smithay-clipboard and works either way.
 - **Clipboard owners that never answer (#510):** reading the clipboard waits on the app that owns it: arboard gives up on an X11 owner after 4 s, and a Wayland read waits for the owner to send its data. So on Linux the check that enables the Paste menu items runs on a background thread with a second clipboard handle (`crates/ui-egui/src/clipboard_probe.rs`, installed as `Services::clipboard_probe`), only while nothing is copied in the app and a document is open, and the window keeps drawing. A paste itself still reads on the UI thread, so pasting from such an owner waits for it once. Windows and macOS keep the check on the UI thread: Windows only asks which formats the clipboard holds, macOS asks the pasteboard server.
-- **Copied files:** files copied in a file manager (`text/uri-list`; `CF_HDROP` on Windows, file URLs on macOS) paste as the first one that is art (SVG, PDF, EMF/WMF or a bitmap), before the clipboard's other formats (which include the files' paths as text).
+- **Copied files:** files copied in a file manager (`text/uri-list`; `CF_HDROP` on Windows, file URLs on macOS) paste as the first one that is art (SVG, PDF, EPS, EMF/WMF or a bitmap; a `.ai` or `.ait` file as the PDF or PostScript it holds), before the clipboard's other formats (which include the files' paths as text).
 - **Dropping files on the window does not work under Wayland:** winit 0.30, which eframe 0.36 runs on, has no Wayland drag and drop ([winit#1881](https://github.com/rust-windowing/winit/issues/1881), added in winit 0.31; [egui#1563](https://github.com/emilk/egui/issues/1563)), so no `dropped_files` arrive. Until eframe moves to winit 0.31: copy the files in the file manager and paste them, use File › Place or Open, or open the window through XWayland, where drops work: set **Preferences › Performance › Linux Display Server** to **X11 (XWayland)** and restart (#1151), or start the app with `WAYLAND_DISPLAY= vectorcraft`. The preference (`linuxDisplayServer`, read at startup in `apps/vectorcraft/src/main.rs`, shown on Linux only) has winit open the window on X11 (`EventLoopBuilderExtX11::with_x11`) when the session is Wayland, `DISPLAY` is set and the X11 libraries winit loads are installed (`apps/vectorcraft/src/xwayland.rs` reads `ldconfig -p` and the usual library directories); otherwise the window opens on Wayland and the log says why. Unlike clearing `WAYLAND_DISPLAY`, it leaves the clipboard on the compositor's own.
 - **Pens and pen displays under Wayland (#491):** winit 0.30 doesn't bind the Wayland tablet protocol (`zwp_tablet_v2`; tablet input arrives in winit 0.31, [winit#4318](https://github.com/rust-windowing/winit/pull/4318), [egui#7731](https://github.com/emilk/egui/pull/7731)). Since Plasma 6.3, KWin no longer turns tablet input into pointer input for such apps ([kwin!6336](https://invent.kde.org/plasma/kwin/-/merge_requests/6336)): the pen moves the compositor's cursor over the window, but the app gets no motion or presses and shows none of its own cursors. Until eframe moves to winit 0.31, either run the app under XWayland, which supports the tablet protocol and hands the pen to X11 apps as a pointer (Preferences › Performance › Linux Display Server › X11 (XWayland), `WAYLAND_DISPLAY= vectorcraft`, or `env -u WAYLAND_DISPLAY vectorcraft`; for a desktop launcher, put `env WAYLAND_DISPLAY=` before the command in its `Exec=` line), or turn KWin's deprecated emulation back on for the whole session by setting `KWIN_WAYLAND_EMULATE_TABLET=1` in KWin's environment (for example in a file under `~/.config/environment.d/` or in `/etc/environment`) and logging in again. The pen then works as a mouse, without pressure: winit 0.30 reads pen pressure on Windows only (Windows Ink, which reaches the Liquify tools' Use Pressure Pen). Other compositors that don't emulate a pointer for tablets behave the same way.
 
@@ -139,11 +140,30 @@ CRAFT_FONTS_DIR="$PWD/../craft-fonts" cargo xtask ci   # also runs the Japanese-
   so they are the fallback for Japanese after the requested font; installed system fonts come after.
   Noto Sans Thai (when the checkout has it) is the fallback for Thai where no Thai font is
   installed, and the web build fetches it before the app starts (`crates/text/web-fonts.txt`).
+  All other supplied faces follow those existing document fallbacks in manifest order, so they
+  can also be selected by family name. This does not change which faces the web build embeds
+  or fetches, and no craft-fonts faces are registered when the optional input is absent.
 - UI: `theme::install_fonts` adds them at the end of every egui family (BIZ UDPGothic first), after
   the UI fonts and before the installed fonts `ui_fonts.rs` discovers for other scripts.
 - Tests that need Japanese glyphs skip with a message when built without craft-fonts. The FreeBSD
   CI job and every release job (`release.yml`) check craft-fonts out at a pinned commit; release
   packages carry each embedded font's `OFL-<family>.txt`.
+
+### Leaving out the bundled fonts (embedders)
+
+The Latin fonts in `assets/fonts/` are compiled into `vectorcraft-text` by its `bundled-fonts`
+feature (3.4 MB of the binary). It is on by default, and `vectorcraft-engine`'s default
+`bundled-fonts` feature turns it on, so the apps and anything built on the engine have them. An
+embedder that brings every font itself at run time (`FontDb::add_font`, say a web app serving its
+own font catalogue) depends on the engine with `default-features = false` and doesn't ship them
+twice. Its font database starts without them: on the web and without craft-fonts it starts empty,
+and text has no glyphs until a font is added.
+
+- The workspace declares `vectorcraft-text` without default features, so no library crate turns the
+  fonts back on; a crate whose tests lay type out asks for `bundled-fonts` in its
+  dev-dependencies (or gets it through `vectorcraft-testkit`, which uses the engine).
+- `cargo test -p vectorcraft-text --no-default-features --test without_bundled_fonts` checks the
+  configuration without them.
 
 ### Arabic fonts and the web build
 
@@ -343,4 +363,6 @@ do not replace expected hashes automatically in response to a download mismatch.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-14 | minor | Document the `bundled-fonts` feature of vectorcraft-text and vectorcraft-engine (Fonts › Leaving out the bundled fonts). |
+| 2026-10-14 | minor | Document registration of every explicitly supplied craft-fonts face after the existing script-specific prefix; empty input and web selection remain unchanged. |
 | 2026-10-13 | minor | Document pinned PngSuite files, integrity checks and download budgets (#1729). |

@@ -587,6 +587,8 @@ fn arb_pdf_op() -> impl Strategy<Value = String> {
         Just("/GS0".to_string()),
         Just("/DeviceRGB".to_string()),
         Just("/CS0".to_string()),
+        Just("/CS1".to_string()),
+        Just("/P0".to_string()),
         Just("/DeviceCMYK".to_string()),
         Just("/Pattern".to_string()),
         Just("(Hi)".to_string()),
@@ -611,6 +613,9 @@ fn arb_resources() -> impl Strategy<Value = String> {
         "<< /ColorSpace << /CS0 [/DeviceN [] /DeviceGray << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >>] >> >>".to_string(),
         "<< /ColorSpace << /CS0 [/DeviceN [/A /None /Cyan /All] [/ICCBased << /N 4 >>] << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >>] >> >>".to_string(),
         "<< /Shading << /Sh0 << /ShadingType 2 /ColorSpace [/Separation /Ink /DeviceCMYK << /FunctionType 2 /Domain [0 1] /C0 [0 0 0 0] /C1 [0 1 0 0] /N 1 >>] /Coords [0 0 100 0] /Function << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >> >> >> >>".to_string(),
+        // Inks with the same values and other names, as color spaces, a shading pattern and a
+        // shading (the page's walk tells them apart).
+        "<< /ColorSpace << /CS0 [/Separation /A /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] /CS1 [/Separation /B /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] >> /Pattern << /P0 << /PatternType 2 /Shading << /ShadingType 2 /ColorSpace [/Separation /B /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] /Coords [0 0 100 0] /Function << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >> >> >> >> /Shading << /Sh0 << /ShadingType 2 /ColorSpace [/Separation /A /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] /Coords [0 0 100 0] /Function << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >> >> >> >>".to_string(),
     ])
 }
 
@@ -665,18 +670,21 @@ fn arb_box() -> impl Strategy<Value = Option<[f64; 4]>> {
 proptest! {
     #![proptest_config(config())]
 
-    /// Every page box, rotation, page pick, password and Crop To, through `document.open` and
-    /// `document.pdfInfo` (with a thumbnail).
+    /// Every page box, rotation, `UserUnit`, page pick, password and Crop To, through
+    /// `document.open` and `document.pdfInfo` (with a thumbnail).
     #[test]
     fn pdf_import_options_never_panic(
         boxes in prop::collection::vec(arb_box(), 5),
         rotate in prop::sample::select(vec![0, 90, 180, 270, 45, -90, 1_000_000_000]),
+        unit in prop::sample::select(vec!["", "10", "2.5", "1", "0", "-10", "0.001", "99999999999999999999", "/Ten", "(10)", "99 0 R", "huge"]),
         encrypt in any::<bool>(),
         password in prop::sample::select(vec!["", "pw", "wrong", "\u{0}\u{ff}"]),
         pages in prop::sample::select(vec!["1", "2", "1-2", "2-1", "0", "-", "1-", "all", "1,1,2", "99999999999999999999"]),
         crop in prop::sample::select(vec!["bounding", "art", "crop", "trim", "bleed", "media", "nope"]),
     ) {
         use vectorcraft_testkit::pdf::{PdfPage, pdf};
+        // A `UserUnit` of 1 followed by 308 zeros (a PDF number has no exponent).
+        let unit = if unit == "huge" { format!("1{}", "0".repeat(308)) } else { unit.to_string() };
         let page = PdfPage {
             media: boxes[0].unwrap_or([0.0, 0.0, 100.0, 100.0]),
             crop: boxes[1],
@@ -684,6 +692,7 @@ proptest! {
             trim: boxes[3],
             art: boxes[4],
             rotate,
+            entries: if unit.is_empty() { String::new() } else { format!("/UserUnit {unit}") },
             ..PdfPage::new(0.0, 0.0, "0 0 1 rg 20 20 50 50 re f")
         };
         let bytes = pdf(&[page.clone(), page], encrypt.then_some("pw"));
@@ -697,7 +706,7 @@ proptest! {
                 survive("pdf options", || Some(d)).unwrap();
             }
         });
-        r.map_err(|msg| TestCaseError::fail(format!("{pages} {crop} {rotate}: panicked: {msg}")))?;
+        r.map_err(|msg| TestCaseError::fail(format!("{pages} {crop} {rotate} {unit}: panicked: {msg}")))?;
     }
 }
 
@@ -726,7 +735,7 @@ fn rich_resources_pdf(content: &str, config: &str) -> Vec<u8> {
     ];
     let (a, b, form, pat, mesh, hidden) = (x, x + 1, x + 2, x + 3, x + 4, x + 5);
     let resources = format!(
-        "/Properties << /MC0 {a} 0 R /MC1 {b} 0 R >> /XObject << /X0 {form} 0 R /X1 {hidden} 0 R >> /Pattern << /P0 {pat} 0 R >> /Shading << /Sh0 {mesh} 0 R /Sh1 << /ShadingType 3 /ColorSpace /DeviceGray /Coords [50 50 0 50 50 40] /Extend [false false] /Function << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >> >> >> /ExtGState << /GS0 << /OP true /OPM 1 /SMask << /Type /Mask /S /Luminosity /G {form} 0 R /BC [1] /TR << /FunctionType 2 /Domain [0 1] /C0 [1] /C1 [0] /N 1 >> >> >> /GS1 << /OP true /op false /SMask << /Type /Mask /S /Alpha /G {form} 0 R >> >> /GS2 << /OP 7 /op (x) /OPM -3 >> /GS3 << /op true >> >> /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /ABCDEF+Odd-Name,Bold >> >> /ColorSpace << /CS0 [/Pattern /DeviceRGB] >>"
+        "/Properties << /MC0 {a} 0 R /MC1 {b} 0 R >> /XObject << /X0 {form} 0 R /X1 {hidden} 0 R >> /Pattern << /P0 {pat} 0 R >> /Shading << /Sh0 {mesh} 0 R /Sh1 << /ShadingType 3 /ColorSpace /DeviceGray /Coords [50 50 0 50 50 40] /Extend [false false] /Function << /FunctionType 2 /Domain [0 1] /C0 [0] /C1 [1] /N 1 >> >> >> /ExtGState << /GS0 << /OP true /OPM 1 /SMask << /Type /Mask /S /Luminosity /G {form} 0 R /BC [1] /TR << /FunctionType 2 /Domain [0 1] /C0 [1] /C1 [0] /N 1 >> >> >> /GS1 << /OP true /op false /SMask << /Type /Mask /S /Alpha /G {form} 0 R >> >> /GS2 << /OP 7 /op (x) /OPM -3 >> /GS3 << /op true >> >> /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /ABCDEF+Odd-Name,Bold >> >> /ColorSpace << /CS0 [/Pattern /DeviceRGB] /CS1 [/Separation /A /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] /CS2 [/Separation /B /DeviceRGB << /FunctionType 2 /Domain [0 1] /C0 [1 1 1] /C1 [0 0 1] /N 1 >>] >>"
     );
     let catalog = format!("/OCProperties << /OCGs [{a} 0 R {b} 0 R 99 0 R] /D << {} >> >> ", config.replace("{B}", &format!("{b} 0 R")));
     let extra: Vec<&str> = extra.iter().map(String::as_str).collect();
@@ -752,6 +761,11 @@ fn arb_rich_op() -> impl Strategy<Value = String> {
             "/GS3 gs",
             "/CS0 cs 1 0 0 /P0 scn",
             "/Pattern cs /P0 scn",
+            // Inks with the same values and other names: set, and a pattern set in one.
+            "/CS1 cs 1 scn",
+            "/CS2 cs 0.5 scn",
+            "/CS2 CS 1 SCN",
+            "/CS1 cs /P0 scn",
             "/Sh0 sh",
             "/Sh1 sh",
             "BT /F1 12 Tf 10 10 Td (Hi there) Tj [(a) -900 (b)] TJ ET",
@@ -1860,6 +1874,10 @@ fn editing_text() -> String {
         "0 0 0 1 (Black global) 0.4 0 Xk".into(),
         "(Dots) 0 0 1 1 0 0 0 0 0 [1 0 0 1 0 0] p".into(),
         square(60),
+        // A 2 × 1 CMYK image with an alpha channel, its samples in hex.
+        "%AI5_File:\n%AI5_BeginRaster\n() 1 XG\n/DeviceCMYK XN\n[ 4 0 0 4 10 30 ] 2 1 0 Xh\n[ 4 0 0 4 10 30 ] 0 0 2 1 2 1 8 4 1 0 0 0 4 4 0 0\n\
+         %%BeginData: 18\rXI\nff000000000000ff80ff\n%%EndData\nXH\n%AI5_EndRaster\nN"
+            .into(),
     ]
     .join("\n");
     let layer = |name: &str, visible: u8, body: &str| {
@@ -1884,6 +1902,17 @@ fn editing_eps(editing: &str) -> Vec<u8> {
         lines.join("\n")
     )
     .into_bytes()
+}
+
+/// The fuzzed editing data, as it is, reads its CMYK image with its ink amounts and its alpha
+/// channel as an opacity mask.
+#[test]
+fn the_editing_fixture_reads_its_cmyk_image_with_its_mask() {
+    let private = [b"%AI24_ZStandard_Data".as_slice(), &zstd(&editing_text())].concat();
+    let (doc, warnings, layers) = vectorcraft_eps::layered_ai(&private, Document::new(100.0, 100.0), vec![], false, true, 1.0);
+    let mut found = vec![];
+    doc.visit_images(|n, im| found.push((doc.images[&im.key].cmyk().map(|i| i.data), n.extras().mask.is_some())));
+    assert!(layers && found.contains(&(Some(vec![255, 0, 0, 0, 0, 0, 0, 255]), true)), "{found:?} {warnings:?}");
 }
 
 /// The text document of a story of centred type with two styles, as an editing copy keeps it.
@@ -2022,7 +2051,7 @@ proptest! {
                 *x = b;
             }
         }
-        survive("mutated .ai editing data", || Some(vectorcraft_eps::layered_ai(&private, Document::new(100.0, 100.0), vec![], false, false).0))?;
+        survive("mutated .ai editing data", || Some(vectorcraft_eps::layered_ai(&private, Document::new(100.0, 100.0), vec![], false, false, 1.0).0))?;
     }
 }
 
@@ -2310,9 +2339,13 @@ proptest! {
     fn ai_hostile_editing_data_never_panics(tokens in prop::collection::vec(arb_ai_token(), 0..80)) {
         use vectorcraft_testkit::ai;
         let data = ai::editing_data(200.0, 100.0, &format!("%AI5_BeginLayer\n1 1 1 1 0 0 1 0 79 128 255 0 50 0 Lb\n(L) Ln\n{}\nLB\n", tokens.join(" ")));
-        survive("hostile editing data", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], false, false).0))?;
-        survive("hostile editing data, type as outlines", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], true, false).0))?;
-        survive("hostile editing data, trusted", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], false, true).0))?;
+        survive("hostile editing data", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], false, false, 1.0).0))?;
+        survive("hostile editing data, type as outlines", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], true, false, 1.0).0))?;
+        survive("hostile editing data, trusted", || Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(200.0, 100.0), vec![], false, true, 1.0).0))?;
+        // A PDF part read from a user space of 10 points a unit: the layers are read in its units and scaled.
+        survive("hostile editing data in units of 10 points", || {
+            Some(vectorcraft_eps::layered_ai(data.as_bytes(), Document::new(2000.0, 1000.0), vec![], false, false, 10.0).0)
+        })?;
         let eps = ai::eps(data.as_bytes(), ai::page_ps());
         survive("hostile editing data in an EPS", || vectorcraft_engine::cmd::fileio::load("x.eps", &eps).ok().map(|l| l.doc))?;
         // An EPS whose page is its art's box, not its artboard: what prints outside it is compared too.
