@@ -140,12 +140,15 @@ CRAFT_FONTS_DIR="$PWD/../craft-fonts" cargo xtask ci   # also runs the Japanese-
   so they are the fallback for Japanese after the requested font; installed system fonts come after.
   Noto Sans Thai (when the checkout has it) is the fallback for Thai where no Thai font is
   installed, and the web build fetches it before the app starts (`crates/text/web-fonts.txt`).
+  Noto Sans Georgian (when the checkout has it) is the same for Georgian.
   All other supplied faces follow those existing document fallbacks in manifest order, so they
   can also be selected by family name. This does not change which faces the web build embeds
   or fetches, and no craft-fonts faces are registered when the optional input is absent.
-- UI: `theme::install_fonts` adds them at the end of every egui family (BIZ UDPGothic first), after
-  the UI fonts and before the installed fonts `ui_fonts.rs` discovers for other scripts.
-- Tests that need Japanese glyphs skip with a message when built without craft-fonts. The FreeBSD
+- UI: `theme::install_fonts` adds them at the end of every egui family (BIZ UDPGothic first, then
+  Noto Sans Georgian for the Georgian interface), after the UI fonts and before the installed fonts
+  `ui_fonts.rs` discovers for other scripts. On the web, Noto Sans Georgian is fetched at startup
+  and reaches the UI through `ui_fonts.rs`.
+- Tests that need Japanese or Georgian glyphs skip with a message when built without craft-fonts. The FreeBSD
   CI job and every release job (`release.yml`) check craft-fonts out at a pinned commit; release
   packages carry each embedded font's `OFL-<family>.txt`.
 

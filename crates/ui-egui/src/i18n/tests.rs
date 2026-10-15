@@ -266,8 +266,7 @@ fn is_cjk(c: char) -> bool {
     matches!(c as u32, 0x1100..=0x11FF | 0x3000..=0x9FFF | 0xAC00..=0xD7AF | 0xF900..=0xFAFF | 0xFF00..=0xFFEF | 0x20000..=0x2FFFF)
 }
 
-/// Georgian letters (Mkhedruli, Mtavruli, Asomtavruli): no bundled UI font has them, so they come
-/// from an installed font and are not checked here.
+/// Georgian letters (Mkhedruli, Mtavruli, Asomtavruli): only craft-fonts' Noto Sans Georgian has them.
 fn is_georgian(c: char) -> bool {
     matches!(c as u32, 0x10A0..=0x10FF | 0x1C90..=0x1CBF | 0x2D00..=0x2D2F)
 }
@@ -276,10 +275,12 @@ fn is_georgian(c: char) -> bool {
 /// (the web build has no system fonts to fall back to). Chinese and Japanese characters come from
 /// the craft-fonts build input, which is optional: without it they are left to the installed
 /// fonts, and with it the Japanese catalog is checked against BIZ UDPGothic (the Traditional
-/// Chinese one waits for a Traditional Chinese UI font in craft-fonts).
+/// Chinese one waits for a Traditional Chinese UI font in craft-fonts). Georgian letters are the
+/// same: checked against Noto Sans Georgian when craft-fonts has it.
 #[test]
 fn bundled_fonts_cover_the_catalogs() {
     let japanese_ui_font = vectorcraft_text::CRAFT_FONTS.iter().any(|f| f.is_japanese());
+    let georgian_ui_font = vectorcraft_text::CRAFT_FONTS.iter().any(|f| f.is_georgian());
     let ctx = egui::Context::default();
     crate::theme::install_fonts(&ctx);
     let mut output = ctx.run_ui(egui::RawInput::default(), |_| {});
@@ -298,7 +299,7 @@ fn bundled_fonts_cover_the_catalogs() {
             let chars: std::collections::BTreeSet<char> = entries
                 .iter()
                 .flat_map(|(_, _, tr)| tr.chars())
-                .filter(|c| !c.is_whitespace() && (cjk_checked || !is_cjk(*c)) && !is_georgian(*c))
+                .filter(|c| !c.is_whitespace() && (cjk_checked || !is_cjk(*c)) && (georgian_ui_font || !is_georgian(*c)))
                 .collect();
             for family in &families {
                 let font = egui::FontId::new(13.0, family.clone());
