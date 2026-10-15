@@ -1746,6 +1746,8 @@
 	Internet Standard RGB (sRGB)	Internetes szabványos RGB (sRGB)
 	Interpolation	Interpoláció
 	Intersect	Metszet
+	Intertwine	Összefonás
+	Arrange Intertwine Area	Összefonási terület elrendezése
 	Inverse	Kijelölés megfordítása
 	Invert	Invertálás
 	Invert Colors	Színek invertálása
@@ -4549,6 +4551,7 @@ imageTrace	Outline	Körvonal
 @msg	select a linked image: an embedded one has no file	jelölj ki egy csatolt képet: a beágyazottnak nincs fájlja
 @msg	select a Live Paint group	jelölj ki egy élőfestés-csoportot
 @msg	select a repeat	jelölj ki egy ismétlést
+@msg	select an Intertwine group	jelölj ki egy összefonási csoportot
 @msg	select a stroke with a variable width	jelölj ki egy változó szélességű körvonalat
 @msg	select a symbol instance	jelölj ki egy szimbólumpéldányt
 @msg	select an envelope	jelölj ki egy burkolót
@@ -4822,7 +4825,7 @@ imageTrace	Outline	Körvonal
 	Softness	Lágyság
 	Ambient Light	Környezeti fény
 	Light behind the object	Fény az objektum mögött
-
+	Registration:	Regisztráció:
 # Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
 	Dimension	Méret
 	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Rajz : valós méret — 1:10 esetén az oldalon 1 egység 10-ként jelenik meg.
@@ -4870,3 +4873,23 @@ imageTrace	Outline	Körvonal
 # Revolve cap description
 	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Nyitott profilok kör alakú végeinek lezárása. Részleges körforgatás esetén a vágott oldalak nyitva maradnak.
 	Distance	Távolság
+@msg	span must be "object" or "selection", got {v}	a span értéke "object" vagy "selection" lehet, nem {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" egy `gradient` értéket helyez el, nem színmintát
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" színátmenetet helyez el: adja meg a `gradient` értéket
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" lineáris vagy sugaras színátmenetet helyez el, nem szabad formájút
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" magát a színátmenetet helyezi el: hagyja el a `start` és `end` értéket (ezek már a dokumentum koordinátáiban helyezik el)
+	Make Image Dynamic	Kép dinamikussá tétele
+	Import Data Sets…	Adatkészletek importálása…
+	Export Data Sets…	Adatkészletek exportálása…
+	Make Graph Dynamic	Diagram dinamikussá tétele
+	Batch…	Kötegelt feldolgozás…
+	Source Folder:	Forrásmappa:
+	Destination Folder:	Célmappa:
+	Overrides	Felülbírálások
+	Uses every data set of the open document.	A megnyitott dokumentum minden adatkészletét használja.
+@msg	Batch: {count} processed	Kötegelt feldolgozás: {count} feldolgozva
+@msg	Batch: {count} processed, {failed} failed	Kötegelt feldolgozás: {count} feldolgozva, {failed} sikertelen
+@msg	choose a destination folder	válasszon célmappát
+@msg	choose a source folder	válasszon forrásmappát
+@msg	open a document with data sets	nyisson meg egy adatkészleteket tartalmazó dokumentumot
+@msg	the action has no steps	a műveletnek nincsenek lépései

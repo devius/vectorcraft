@@ -1369,6 +1369,8 @@
 	Internal CSS	Внутрішній CSS
 	Internet Standard RGB (sRGB)	Стандартний інтернет-RGB (sRGB)
 	Intersect	Перетин
+	Intertwine	Переплетення
+	Arrange Intertwine Area	Упорядкувати ділянку переплетення
 	Inverse	Обернене
 	Invert	Інвертувати
 	Invert Colors	Інвертувати кольори
@@ -3889,6 +3891,7 @@ axis	Both	Обидві
 @msg	select a gradient mesh	виділіть градієнтну сітку
 @msg	select a linked image: an embedded one has no file	виділіть пов’язане зображення: у вбудованого немає файлу
 @msg	select a repeat	виділіть повтор
+@msg	select an Intertwine group	виділіть групу переплетення
 @msg	select a stroke with a variable width	виділіть обведення зі змінною шириною
 @msg	select a symbol instance	виділіть екземпляр символу
 @msg	select an Image Trace object	виділіть об’єкт трасування зображення
@@ -4408,7 +4411,7 @@ lighting	Light	Світло
 	Softness	М'якість
 	Ambient Light	Навколишнє світло
 	Light behind the object	Світло позаду об'єкта
-
+	Registration:	Реєстрація:
 # Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
 	Dimension	Розмір
 	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Креслення : реальний розмір — при 1:10 1 одиниця на сторінці підписується як 10.
@@ -4459,3 +4462,23 @@ lighting	Light	Світло
 # Revolve cap description
 	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Закриває круглі торці відкритих профілів. За неповного обертання бічні зрізи залишаються відкритими.
 	Distance	Відстань
+@msg	span must be "object" or "selection", got {v}	span має бути "object" або "selection", а не {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" розміщує `gradient`, а не зразок
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" розміщує градієнт: вкажіть `gradient`
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" розміщує лінійний або радіальний градієнт, а не довільний
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" сам розміщує градієнт: приберіть `start` і `end` (вони вже задають його в координатах документа)
+	Make Image Dynamic	Зробити зображення динамічним
+	Import Data Sets…	Імпортувати набори даних…
+	Export Data Sets…	Експортувати набори даних…
+	Make Graph Dynamic	Зробити діаграму динамічною
+	Batch…	Пакетна обробка…
+	Source Folder:	Вихідна папка:
+	Destination Folder:	Папка призначення:
+	Overrides	Перевизначення
+	Uses every data set of the open document.	Використовує кожен набір даних відкритого документа.
+@msg	Batch: {count} processed	Пакетна обробка: оброблено {count}
+@msg	Batch: {count} processed, {failed} failed	Пакетна обробка: оброблено {count}, з помилкою {failed}
+@msg	choose a destination folder	виберіть папку призначення
+@msg	choose a source folder	виберіть вихідну папку
+@msg	open a document with data sets	відкрийте документ із наборами даних
+@msg	the action has no steps	у дії немає кроків

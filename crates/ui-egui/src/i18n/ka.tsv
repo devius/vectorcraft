@@ -4819,3 +4819,28 @@ imageTrace	Outline	კონტური
 @msg	`{key}` must be an array of these names: {_1}	`{key}` უნდა იყოს ამ სახელების მასივი: {_1}
 @msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` უნდა იყოს grayscale, rgb, hsb, cmyk ან websafe
 @msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	ეს PostScript ფაილია (ძველ ფორმატში ან PDF-თან თავსებადობის გარეშე შენახული .ai, ან EPS ფაილი) და არა PDF: ფაილი › გახსნა და ფაილი › განთავსება მას EPS-ად კითხულობს
+# Upstream sync 2026-10-16 (3): Intertwine, symbol registration, gradient span, data sets, Batch.
+	Intertwine	გადახლართვა
+	Arrange Intertwine Area	გადახლართვის არის დალაგება
+@msg	select an Intertwine group	მონიშნეთ გადახლართვის ჯგუფი
+	Registration:	საბაზისო წერტილი:
+@msg	span must be "object" or "selection", got {v}	span უნდა იყოს "object" ან "selection", მიღებულია {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" ათავსებს `gradient`-ს და არა ფერის ნიმუშს
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" ათავსებს გრადიენტს: მიუთითეთ `gradient`
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" ათავსებს წრფივ ან რადიალურ გრადიენტს და არა თავისუფალი ფორმისას
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" თავად ათავსებს გრადიენტს: გამოტოვეთ `start` და `end` (ისინი მას უკვე დოკუმენტის კოორდინატებში ათავსებენ)
+	Make Image Dynamic	გამოსახულების დინამიკურად ქცევა
+	Import Data Sets…	მონაცემთა ნაკრებების იმპორტი…
+	Export Data Sets…	მონაცემთა ნაკრებების ექსპორტი…
+	Make Graph Dynamic	დიაგრამის დინამიკურად ქცევა
+	Batch…	პაკეტური დამუშავება…
+	Source Folder:	წყარო საქაღალდე:
+	Destination Folder:	დანიშნულების საქაღალდე:
+	Overrides	უგულებელყოფა
+	Uses every data set of the open document.	იყენებს გახსნილი დოკუმენტის ყველა მონაცემთა ნაკრებს.
+@msg	Batch: {count} processed	პაკეტური დამუშავება: დამუშავდა {count}
+@msg	Batch: {count} processed, {failed} failed	პაკეტური დამუშავება: დამუშავდა {count}, ვერ დამუშავდა {failed}
+@msg	choose a destination folder	აირჩიეთ დანიშნულების საქაღალდე
+@msg	choose a source folder	აირჩიეთ წყარო საქაღალდე
+@msg	open a document with data sets	გახსენით დოკუმენტი მონაცემთა ნაკრებებით
+@msg	the action has no steps	მოქმედებას ნაბიჯები არ აქვს

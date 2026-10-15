@@ -1357,6 +1357,8 @@
 	Internal CSS	Internes CSS
 	Internet Standard RGB (sRGB)	Internet-Standard-RGB (sRGB)
 	Intersect	Schnittmenge bilden
+	Intertwine	Verflechten
+	Arrange Intertwine Area	Überlappungsbereich verflechten
 	Inverse	Auswahl umkehren
 	Invert	Umkehren
 	Invert Colors	Farben umkehren
@@ -3806,6 +3808,7 @@ theme	Appearance	Erscheinungsbild
 @msg	select a gradient mesh	wählen Sie ein Verlaufsgitter aus
 @msg	select a linked image: an embedded one has no file	wählen Sie ein verknüpftes Bild aus: Ein eingebettetes hat keine Datei
 @msg	select a repeat	wählen Sie eine Wiederholung aus
+@msg	select an Intertwine group	wählen Sie eine Verflechtungsgruppe aus
 @msg	select a stroke with a variable width	wählen Sie eine Kontur mit variabler Breite aus
 @msg	select a symbol instance	wählen Sie eine Symbolinstanz aus
 @msg	select an Image Trace object	wählen Sie ein Bildnachzeichner-Objekt aus
@@ -4388,7 +4391,7 @@ theme	Appearance	Erscheinungsbild
 	Softness	Weichheit
 	Ambient Light	Umgebungslicht
 	Light behind the object	Licht hinter dem Objekt
-
+	Registration:	Registrierung:
 # Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
 	Dimension	Bemaßung
 	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Zeichnung : reale Größe — 1:10 beschriftet 1 Einheit auf der Seite als 10.
@@ -4439,3 +4442,23 @@ theme	Appearance	Erscheinungsbild
 # Revolve cap description
 	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Schließt die kreisförmigen Enden offener Profile. Bei einer Teildrehung bleiben die Schnittseiten offen.
 	Distance	Abstand
+@msg	span must be "object" or "selection", got {v}	span muss "object" oder "selection" sein, nicht {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" platziert einen `gradient`, kein Farbfeld
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" platziert einen Verlauf: geben Sie `gradient` an
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" platziert einen linearen oder radialen Verlauf, keinen Freiform-Verlauf
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" platziert den Verlauf selbst: lassen Sie `start` und `end` weg (sie platzieren ihn bereits in Dokumentkoordinaten)
+	Make Image Dynamic	Bild dynamisch machen
+	Import Data Sets…	Datensätze importieren…
+	Export Data Sets…	Datensätze exportieren…
+	Make Graph Dynamic	Diagramm dynamisch machen
+	Batch…	Stapelverarbeitung…
+	Source Folder:	Quellordner:
+	Destination Folder:	Zielordner:
+	Overrides	Überschreibungen
+	Uses every data set of the open document.	Verwendet jeden Datensatz des geöffneten Dokuments.
+@msg	Batch: {count} processed	Stapelverarbeitung: {count} verarbeitet
+@msg	Batch: {count} processed, {failed} failed	Stapelverarbeitung: {count} verarbeitet, {failed} fehlgeschlagen
+@msg	choose a destination folder	wählen Sie einen Zielordner
+@msg	choose a source folder	wählen Sie einen Quellordner
+@msg	open a document with data sets	öffnen Sie ein Dokument mit Datensätzen
+@msg	the action has no steps	die Aktion hat keine Schritte
