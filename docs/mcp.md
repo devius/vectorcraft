@@ -260,7 +260,7 @@ The older names below remain listed because existing workflows use them.
 |---|---|
 | `command_list` | Optional `filter`, `enabled_only`; returns the command array |
 | `command_run` | `id`, optional `params`; runs the command through the existing backend. An unknown key in `params` is an error that names it and the nearest key the command takes (`invalid parameters for `file.new`: unknown parameter `widht`; did you mean `width`?`), so a misspelt key no longer runs the command with its default (see [Parameter keys](#parameter-keys)) |
-| `command_batch` | `steps: [{id, params?}]` (at most 256), optional `stop_on_error` (default true), `atomic` and `label`; returns `completed`, `failed`, `results: [{ok, result\|error}]`. Each edit has its own undo step, or with `atomic: true` the batch's edits are one undo step named `label` (else after its first edit; `edit.undoGroup.begin`/`end` underneath); failures set `isError`. A param string `"$N.path"` or `"$last.path"` takes a value from an earlier step's result (see `run` below). Kept step results total at most 8 MiB; past that the batch stops with the reason |
+| `command_batch` | `steps: [{id, params?}]` (at most 256), optional `stop_on_error` (default true), `atomic` and `label`; returns `completed`, `failed`, `results: [{ok, result\|error}]` and `created` (the ids the `draw_path` / `draw_shape` steps made, in order). A step's `id` is a command id, or `draw_path` / `draw_shape` with that tool's arguments as `params` (checked as `tools/call` checks them; the step's result is the tool's, so `"$N.id"` is the new object). Each edit has its own undo step, or with `atomic: true` the batch's edits are one undo step named `label` (else after its first edit; `edit.undoGroup.begin`/`end` underneath); failures set `isError`. A param string `"$N.path"` or `"$last.path"` takes a value from an earlier step's result (see `run` below). Kept step results total at most 8 MiB; past that the batch stops with the reason. This is the MCP tool, not the engine command `command.batch` (that one takes `commands: [{command, params}]` and is what the Actions panel plays); use `command_run` with `command.batch` when replaying a recorded action |
 | `doc_inspect` | Optional `depth`, `childLimit`; same summary as `inspect_document` |
 | `render_preview` | Optional `max_side` (1–4096, default 1024) and `artboard` (0-based, default 0); inline PNG of that artboard without editing it. Artboards too large to render within the allocation bound return a tool error |
 | `ui_inspect`, `ui_screenshot` | Connected desktop state/window capture; tool errors in headless mode |
@@ -278,6 +278,16 @@ explicit `ids`.
 
 Paint values (`fill`, `stroke`) accept `"#rrggbb"`, `"none"`, `[r,g,b]` (0..1), `{"c","m","y","k"}`, `{"gray"}`,
 or a full `paint.setFill` params object (`{"gradient": …}`, `{"swatch": "name"}`).
+For `draw_shape` and `draw_path`, omitted paint fields inherit the current [new-art appearance](#new-art). Both
+also style the new object in the same call: `dash` (lengths, or null for solid), `cap`
+(butt|round|square) and `join` (miter|round|bevel) go to `stroke.set` with `strokeWidth`; `opacity` (0–100 %)
+and `name` to `object.setProps`; `effects: [{effect, params?}]` are applied in order as `apply_effect`
+does, to the whole object. They are checked before anything is drawn (effect ids against `effect.list`),
+so a bad one draws nothing. The reply adds `name`, `opacity` and `effects` (each `effect.apply` result)
+when given; `paint` lists the stroke options applied.
+A gradient given to several objects fits each one's own bounds; `paint.setFill` / `paint.setStroke` with
+`span: "selection"` place a linear or radial gradient once on the union of the targets' bounds instead, so one
+ramp runs across them.
 For `draw_shape` and `draw_path`, omitted paint fields inherit the current [new-art appearance](#new-art).
 For a filled shape or path without an outline, pass an explicit `fill` and `stroke: "none"`.
 Lines start with no fill and a visible stroke.
@@ -295,8 +305,8 @@ objects' fills or strokes differ (`fillMixed` / `strokeMixed`, drawn as a "?" pr
 | `inspect_ui` | `{}` | UI state. Remote mode only. |
 | `select_tool` | `{tool}` | `selection`, `directSelection`, `pen`, `rectangle`, `ellipse`, `polygon`, `star`, `lineSegment`, … |
 | `pointer_gesture` | `{events:[{kind,x,y,mods?}], tool?, mods?}` | `kind` is one of `down`, `drag`, `up`, `move`, `doubleclick`. Events go through the same path as the mouse. |
-| `draw_path` | `{points \| d, closed?, fill?, stroke?, strokeWidth?}` | `points` is `[[x,y],…]` or `[{x,y,in?,out?,smooth?},…]`. `d` is SVG path data. |
-| `draw_shape` | `{shape, …geometry, fill?, stroke?, strokeWidth?}` | `rectangle`/`ellipse`: `x,y,width,height` (plus `radius` for corners). `polygon`: `cx,cy,radius,sides`. `star`: `cx,cy,radius1,radius2,points`. `line`: `x1,y1,x2,y2`. |
+| `draw_path` | `{points \| d, closed?, fill?, stroke?, strokeWidth?, dash?, cap?, join?, opacity?, name?, effects?}` | `points` is `[[x,y],…]` or `[{x,y,in?,out?,smooth?},…]`. `d` is SVG path data. The options are below. |
+| `draw_shape` | `{shape, …geometry, fill?, stroke?, strokeWidth?, dash?, cap?, join?, opacity?, name?, effects?}` | `rectangle`/`ellipse`: `x,y,width,height` (plus `radius` for corners). `polygon`: `cx,cy,radius,sides`. `star`: `cx,cy,radius1,radius2,points`. `line`: `x1,y1,x2,y2`. |
 | `set_paint` | `{fill?, stroke?, strokeWidth?, ids?}` | Applies to the selection (or `ids`) and becomes the default for new art. |
 | `press_key` | `{key, mods?}` | Remote: a real key event. Headless: runs the command or tool bound to that shortcut, or sends the key to the busy tool (digits too: `5` while dragging with the Perspective Selection tool). |
 | `type_text` | `{text}` | Remote only. |
@@ -976,9 +986,17 @@ already walks Image Trace. Short agent entry points:
   `symbol.replace`, `symbol.edit`, `symbol.duplicate`, `symbol.selectInstances {name}`.
 - Brushes: `brush.list`, `brush.get {name}`, `brush.apply {name, ids?}`, `brush.new {type, name?, params?, ids?}`,
   `brush.setCurrent {name}`, `brush.options {name, params?}`, `brush.freehand`, `object.expandBrush {ids?}`.
-- Variables: `variable.list`, `variable.define {name, kind: text|visibility}`, `variable.bind {variable, ids?}`,
-  `variable.makeTextDynamic`, `variable.makeVisibilityDynamic`, `variable.unbind`, `dataset.new` / `dataset.set` /
-  `dataset.select`.
+- Variables: `variable.list`, `variable.define {name, kind: text|visibility|image|graph}`, `variable.bind {variable, ids?}`,
+  `variable.makeTextDynamic`, `variable.makeVisibilityDynamic`, `variable.makeImageDynamic`, `variable.makeGraphDynamic`,
+  `variable.unbind`, `variable.rename`, `variable.delete`, `variable.highlight` (image values are file paths, graph
+  values CSV as `graph.setData`).
+- Data sets: `dataset.list`, `dataset.new {name, values?}`, `dataset.set {name, values?}`, `dataset.rename`,
+  `dataset.delete`, `dataset.capture`, `dataset.update`, `dataset.select {name}`, `dataset.next` /
+  `dataset.prev` (each `dataset.select` / next / prev is one undo step over every bound object), `dataset.import {path|data|dataBase64|csv}` /
+  `dataset.export {path?}` (CSV: `name`, then one column per variable).
+- Batch: `action.batch {commands, source?: folder|datasets, folder?, destination?: none|saveAndClose|folder,
+  destinationFolder?, overrideOpen?, overrideSave?, overrideExport?, includeSubdirs?, stopOnError?}` plays an
+  action on every file in a folder or every data set (the Actions panel menu's Batch…).
 - Image Trace: `imageTrace.presets`, `imageTrace.make {id?, preset?, params?, view?}` (or `imageTrace.makeAndExpand`),
   `imageTrace.setView`, `imageTrace.expand`, `imageTrace.release`.
 
@@ -993,7 +1011,11 @@ variables of the same kind on one object, the one defined last wins.
 {"name":"run_command","arguments":{"command":"symbol.list","params":{}}}
 {"name":"run_command","arguments":{"command":"brush.list","params":{}}}
 {"name":"run_command","arguments":{"command":"variable.list","params":{}}}
+{"name":"run_command","arguments":{"command":"dataset.list","params":{}}}
+{"name":"run_command","arguments":{"command":"dataset.capture","params":{}}}
+{"name":"run_command","arguments":{"command":"dataset.select","params":{"name":"Data Set 1"}}}
 {"name":"run_command","arguments":{"command":"imageTrace.presets","params":{}}}
+{"name":"run_command","arguments":{"command":"command.batch","params":{"label":"Offset","commands":[{"command":"object.move","params":{"dx":10,"dy":10,"copy":true}}]}}}
 ```
 
 `dataset.update {all?}` writes what the bound objects hold now into the active data set, for each variable that the
@@ -1676,7 +1698,8 @@ the other model (`preserveNumbers`: colours already in it keep their numbers); g
 too and printer's marks are not. The destination is any profile `edit.colorSettings` lists (default: the document's
 for its colour mode). `profiles` (`all`, `destination`, or `taggedSource` for a document assigned profiles with
 `edit.assignProfile`) writes colours in ICC-based spaces with their profiles embedded: CMYK with the destination's or
-the document's CMYK profile, RGB as sRGB, grey with the sRGB tone curve. `outputIntent` embeds a profile as the file's
+the document's CMYK profile, RGB as sRGB, grey with the sRGB tone curve (PDF/A, PDF/X-3 and PDF/X-4 files are
+always tagged, whatever `profiles` says). `outputIntent` embeds a profile as the file's
 `/GTS_PDFX` output intent with `outputCondition`, `outputConditionId` and `registry`, and `trapped` sets `/Trapped`
 (PDF/A files keep their own output intent). Type is written as selectable, searchable text in embedded subset fonts
 with a ToUnicode map (fonts whose licence forbids embedding stay outlines, with a warning); `advanced: {outlineText:
@@ -1780,7 +1803,10 @@ for `edit.pasteInPlace`, `edit.pasteInFront` and `edit.pasteInBack`, and to each
 none, when the step runs. When the document a step runs in has no artboard at that index (for example, after an
 earlier step deleted the active artboard when it was the last one), the step gets that document's last artboard. In
 remote mode, MCP's `run_command` calls and each step of the `command_batch` tool get the active artboard too. The
-Actions panel plays an action as a `command.batch`. An action recorded in the Actions panel leaves the artboard out,
+Actions panel plays an action as a `command.batch`. The Actions panel menu's Batch… runs
+`action.batch`: the same steps on every readable file in a folder (or every data set of the open document), with
+destination `none` | `saveAndClose` | `folder` and Override Open / Save / Export. Caps: 500 files or data sets, 8
+folder levels, 256 steps. An action recorded in the Actions panel leaves the artboard out,
 and its steps of these commands get the artboard that is active when the action plays. A press with the Selection,
 Direct Selection or Group Selection tool inside an artboard makes that artboard the active one; with the Selection
 tool, a Shift-click on an empty spot inside an artboard makes it active and keeps the selection. Choosing the Artboard

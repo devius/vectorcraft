@@ -1608,6 +1608,8 @@
 	Internet Standard RGB (sRGB)	RGB chuẩn Internet (sRGB)
 	Interpolation	Nội suy
 	Intersect	Giao nhau
+	Intertwine	Đan xen
+	Arrange Intertwine Area	Sắp xếp vùng đan xen
 	Inverse	Đảo ngược
 	Invert	Đảo ngược
 	Invert Colors	Đảo màu
@@ -4182,6 +4184,7 @@ theme	Appearance	Giao diện
 @msg	select a linked image: an embedded one has no file	hãy chọn ảnh liên kết: ảnh nhúng không có tệp
 @msg	select a Live Paint group	hãy chọn nhóm tô trực tiếp
 @msg	select a repeat	hãy chọn một đối tượng lặp
+@msg	select an Intertwine group	hãy chọn một nhóm đan xen
 @msg	select a stroke with a variable width	hãy chọn nét có chiều rộng biến đổi
 @msg	select a symbol instance	hãy chọn đối tượng ký hiệu
 @msg	select an envelope	hãy chọn một Envelope
@@ -4410,6 +4413,7 @@ theme	Appearance	Giao diện
 	Softness	Độ mềm
 	Ambient Light	Ánh sáng môi trường
 	Light behind the object	Ánh sáng phía sau đối tượng
+	Registration:	Điểm đăng ký:
 # Dimension tool and Object › Dimensions (dimension groups, their dialog and messages).
 	Dimension	Kích thước
 	Drawing : real size — 1:10 labels 1 unit on the page as 10.	Bản vẽ : kích thước thực — 1:10 ghi 1 đơn vị trên trang thành 10.
@@ -4458,3 +4462,23 @@ theme	Appearance	Giao diện
 # Revolve cap description
 	Close the circular ends of open profiles. Partial sweeps keep their cut sides open.	Đóng các đầu tròn của biên dạng mở. Khi xoay một phần, các mặt cắt bên vẫn mở.
 	Distance	Khoảng cách
+@msg	span must be "object" or "selection", got {v}	span phải là "object" hoặc "selection", không phải {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" đặt một `gradient`, không phải mẫu màu
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" đặt một dải chuyển màu: hãy cung cấp `gradient`
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" đặt dải chuyển màu tuyến tính hoặc xuyên tâm, không phải dạng tự do
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" tự đặt dải chuyển màu: hãy bỏ `start` và `end` (chúng đã đặt nó theo tọa độ tài liệu)
+	Make Image Dynamic	Tạo hình ảnh động
+	Import Data Sets…	Nhập tập dữ liệu…
+	Export Data Sets…	Xuất tập dữ liệu…
+	Make Graph Dynamic	Tạo biểu đồ động
+	Batch…	Hàng loạt…
+	Source Folder:	Thư mục nguồn:
+	Destination Folder:	Thư mục đích:
+	Overrides	Ghi đè
+	Uses every data set of the open document.	Dùng mọi tập dữ liệu của tài liệu đang mở.
+@msg	Batch: {count} processed	Hàng loạt: đã xử lý {count}
+@msg	Batch: {count} processed, {failed} failed	Hàng loạt: đã xử lý {count}, lỗi {failed}
+@msg	choose a destination folder	hãy chọn thư mục đích
+@msg	choose a source folder	hãy chọn thư mục nguồn
+@msg	open a document with data sets	hãy mở một tài liệu có tập dữ liệu
+@msg	the action has no steps	hành động không có bước nào

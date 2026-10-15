@@ -194,7 +194,7 @@ always use the English ids and labels, so agents and scripts never see translate
 Languages shipped: English (`en`, the source), Traditional Chinese (`zh-hant`, complete, in the vocabulary used
 in Taiwan; `zh-TW`, `zh-HK`, `zh-MO` and `zh-Hant-*` locales all resolve to it), Simplified Chinese (`zh-hans`,
 complete, in the vocabulary used in mainland China; `zh-CN`, `zh-SG`, `zh-Hans-*` and a bare `zh` resolve to it,
-so the two scripts never mix), Japanese (`ja`, complete), Korean (`ko`, complete; every `ko-*` locale resolves to it; a count takes no plural, and Hangul is drawn with an installed system font), Vietnamese (`vi`, complete; every `vi-*` locale resolves to it; a count takes no plural, so plurals have one form), German (`de`, complete; `de-DE`, `de-AT`, `de-CH` and every
+so the two scripts never mix), Japanese (`ja`, complete), Korean (`ko`, complete; every `ko-*` locale resolves to it; a count takes no plural, and Hangul is drawn with an installed system font), Vietnamese (`vi`, complete; every `vi-*` locale resolves to it; a count takes no plural, so plurals have one form), Finnish (`fi`, complete; every `fi-*` locale resolves to it; one/other plurals with the partitive after numbers other than 1), German (`de`, complete; `de-DE`, `de-AT`, `de-CH` and every
 other `de-*` locale resolve to it), Spanish (`es`, complete, in neutral
 international Spanish; every `es-*` locale such as `es-ES`, `es-MX`, `es-AR` or `es-419` resolves to it), French (`fr`,
 complete; `fr-FR`, `fr-BE`, `fr-CA`, `fr-CH` and every other `fr-*` locale resolve to it), Italian (`it`,
@@ -202,8 +202,9 @@ complete; `it-IT`, `it-CH` and every other `it-*` locale resolve to it), Russian
 locale such as `ru-RU`, `ru-BY` or `ru-KZ` resolves to it), Ukrainian (`uk`, complete; `uk-UA`,
 `uk_UA.UTF-8` and every other `uk-*` locale resolve to it; integer plurals use one/few/many), Hungarian (`hu`, complete;
 `hu-HU` and every other `hu-*` locale resolve to it; a count takes the singular, so plurals have one form), Polish (`pl`, complete; `pl-PL` and every other `pl-*`
-locale resolve to it; plurals use one/few/many, with 21, 31 … taking many), Georgian (`ka`, complete; `ka-GE` and `ka_GE.UTF-8` resolve to it; one count-neutral plural form), Czech (`cs`, every menu label) and Brazilian Portuguese
-(`pt-br`, every menu label and every `tl!` literal). Untranslated text falls back to English until its rows are added.
+locale resolve to it; plurals use one/few/many, with 21, 31 … taking many), Swedish (`sv`, complete; `sv-SE`, `sv-FI` and every
+other `sv-*` locale resolve to it), Georgian (`ka`, complete; `ka-GE` and `ka_GE.UTF-8` resolve to it; one count-neutral plural form), Czech (`cs`, every menu label) and Brazilian Portuguese
+(`pt-br`, complete; `pt-BR`, `pt_BR.UTF-8` and other tags that resolve to `pt-br` through `candidates`). Untranslated text falls back to English until its rows are added.
 
 - `tl!("…")` translates a literal into the language the UI is drawn in; `i18n::t(s)` is the same for a
   `&str`. `tr(lang, s)` takes the language; `tr_ctx` when one English word needs different translations;
@@ -230,7 +231,7 @@ locale resolve to it; plurals use one/few/many, with 21, 31 … taking many), Ge
   control channel, MCP and tests read them) and are translated only where the status bar draws them
   (`i18n::msg`). `@msg` catalog rows hold a whole message or a template such as
   `Couldn't open {name}: {e}`; `{_1}`, `{_2}` … stand for the format string's `{}`, and the values in the
-  placeholders are translated in turn (the reason after `: {e}` is often a message too). Czech, German, Spanish, French, Georgian, Hungarian, Italian, Japanese, Korean, Polish, Russian, Ukrainian and Vietnamese cover every
+  placeholders are translated in turn (the reason after `: {e}` is often a message too). Czech, German, Spanish, French, Georgian, Hungarian, Italian, Japanese, Korean, Polish, Brazilian Portuguese, Russian, Swedish, Ukrainian, Vietnamese and Finnish cover every
   message literal the test scan finds (`complete_languages_translate_every_message`, languages listed in
   `COMPLETE_MESSAGES`): a new `Err("…")`, `Other(…)`, `#[error(…)]` or `status(…)` message needs a row in each of those catalogs (`VECTORCRAFT_I18N_DUMP_MESSAGES=messages.txt cargo test -p vectorcraft-ui-egui
   complete_languages_translate_every_message` lists them all). Other languages show messages in English

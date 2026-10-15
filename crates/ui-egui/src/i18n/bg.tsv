@@ -1351,6 +1351,8 @@
 	Internal CSS	Вътрешен CSS
 	Internet Standard RGB (sRGB)	Интернет стандартен RGB (sRGB)
 	Intersect	Пресечение
+	Intertwine	Преплитане
+	Arrange Intertwine Area	Подреждане на зоната на преплитане
 	Inverse	Инвертиране
 	Invert	Инвертиране
 	Invert Colors	Инвертиране на цветовете
@@ -3829,6 +3831,7 @@ axis	Both	И двете
 @msg	select a gradient mesh	изберете мрежа на градиент (gradient mesh)
 @msg	select a linked image: an embedded one has no file	изберете свързано изображение: вграденото няма файл
 @msg	select a repeat	изберете повторение (repeat)
+@msg	select an Intertwine group	изберете група за преплитане (Intertwine)
 @msg	select a stroke with a variable width	изберете щрих с променлива дебелина
 @msg	select a symbol instance	изберете екземпляр на символ
 @msg	select an Image Trace object	изберете обект за трасиране на изображение (Image Trace)
@@ -4869,7 +4872,27 @@ theme	Appearance	Външен вид
 
 # Type › Reset Tracking and Kerning
 	Reset Tracking and Kerning	Нулиране на разредката и кернинга
-
+@msg	span must be "object" or "selection", got {v}	span трябва да е "object" или "selection", а не {v}
+@msg	span: "selection" places a `gradient`, not a swatch	span: "selection" поставя `gradient`, а не мостра
+@msg	span: "selection" places a gradient: give `gradient`	span: "selection" поставя градиент: задайте `gradient`
+@msg	span: "selection" places a linear or radial gradient, not a freeform one	span: "selection" поставя линеен или радиален градиент, а не свободен
+@msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" поставя самия градиент: пропуснете `start` и `end` (те вече го поставят в координатите на документа)
+	Make Image Dynamic	Динамично изображение
+	Import Data Sets…	Импортиране на набори от данни…
+	Export Data Sets…	Експортиране на набори от данни…
+	Make Graph Dynamic	Динамична диаграма
+	Batch…	Пакет…
+	Source Folder:	Изходна папка:
+	Destination Folder:	Целева папка:
+	Overrides	Заместване
+	Uses every data set of the open document.	Използва всеки набор от данни на отворения документ.
+@msg	Batch: {count} processed	Пакет: обработени {count}
+@msg	Batch: {count} processed, {failed} failed	Пакет: обработени {count}, неуспешни {failed}
+@msg	choose a destination folder	изберете целева папка
+@msg	choose a source folder	изберете изходна папка
+@msg	open a document with data sets	отворете документ с набори от данни
+@msg	the action has no steps	действието няма стъпки
+	Registration:	Регистрация:
 # Layers panel filters (Filter Layers Panel Rows) and Color Panel Options
 	By Layer	По слой
 	By Object	По обект
@@ -4882,7 +4905,6 @@ theme	Appearance	Външен вид
 	Locked	Заключени
 	Color Panel Options	Опции на панела „Цвят“
 	Filter Layers Panel Rows	Филтриране на редовете в панела „Слоеве“
-
 # View › Hide Template / Show Template
 	Hide Template	Скриване на шаблона
 	Show Template	Показване на шаблона
