@@ -55,6 +55,10 @@
 	Draft	Черновое
 	Good	Хорошее
 	Best	Наилучшее
+	Mode	Режим
+	Blur Mode	Режим размытия
+	Edge Only	Только края
+	Overlay Edge	Наложение краёв
 
 # Status and error messages too (`@msg` rows at the end, `COMPLETE_MESSAGES` in the tests).
 # A native speaker's review is welcome: keep the placeholders ({name}), the trailing "…" and the
@@ -220,7 +224,6 @@
 	Art	Рисунок
 	Art using a deleted global swatch keeps its colour.	Рисунок с удалённым глобальным образцом сохраняет свой цвет.
 	Artboard Options	Параметры монтажной области
-	Artboard Options: edit with the Artboard tool	Параметры монтажной области: редактируются инструментом «Монтажная область»
 	Artboard Options…	Параметры монтажной области…
 	Artboard Tool	Инструмент «Монтажная область»
 	Artboard {number}	Монтажная область {number}
@@ -1264,6 +1267,7 @@
 	Hide Print Tiling	Скрыть разбиение для печати
 	Hide Rulers	Скрыть линейки
 	Hide Slices	Скрыть фрагменты
+	Hide Template	Скрыть шаблон
 	Hide Text Threads	Скрыть связи текста
 	Hide Thumbnail	Скрыть миниатюру
 	Hide Thumbnails	Скрыть миниатюры
@@ -2046,6 +2050,7 @@
 	Pathfinder Options…	Параметры обработки контуров…
 	Pathfinders:	Обработка контуров:
 	Paths	Контуры
+	Path Length	Длина контуров
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Контуры: {paths}    Опорные точки: {anchors}    Цвета: {colors}
 	Pattern	Узор
 	Pattern Editing	Редактирование узора
@@ -2404,6 +2409,7 @@
 	Reset Panel	Сбросить панель
 	Reset Preferences	Сбросить настройки
 	Reset Profiles	Сбросить профили
+	Rotate View	Повернуть вид
 	Reset Rotate View	Сбросить поворот вида
 	Reset the rows to the artwork's colors	Сбросить строки к цветам рисунка
 	Reset to Default	Сбросить к значениям по умолчанию
@@ -2604,6 +2610,17 @@
 	Scripts	Сценарии
 	Search	Поиск
 	Search All	Искать везде
+	Filter	Фильтр
+	Clear All	Очистить всё
+	By Object	По объектам
+	By Layer	По слоям
+	Images	Изображения
+	Groups	Группы
+	Linked Files	Связанные файлы
+	Locked	Заблокированные
+	Hidden	Скрытые
+	Filter Layers Panel Rows	Фильтровать строки панели «Слои»
+@msg	`{key}` must be an array of these names: {_1}	`{key}` должно быть массивом из этих имён: {_1}
 	Search commands and tools	Поиск команд и инструментов
 	Search commands and tools…	Поиск команд и инструментов…
 	Search Commands…	Поиск команд…
@@ -2741,6 +2758,7 @@
 	Show Modified	Показать изменённые
 	Show Note	Показать примечание
 	Show Options	Показать параметры
+	Color Panel Options	Параметры панели «Цвет»
 	Show Package	Показать пакет
 	Show Panel	Показать панель
 	Show Pattern Swatches	Показать образцы узоров
@@ -2753,6 +2771,7 @@
 	Show Slices	Показать фрагменты
 	Show Swatch Bounds	Показать границы образца
 	Show Swatch Kinds	Показать типы образцов
+	Show Template	Показать шаблон
 	Show Text Threads	Показать связи текста
 	Show The Home Screen When No Documents Are Open	Показывать начальный экран, когда документы не открыты
 	Show Thumbnail	Показать миниатюру
@@ -3612,6 +3631,7 @@ axis	Both	Оба
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` должно быть от {min} до {max} (получено {x})
 @msg	`{key}` must be one of {_1}	`{key}` должно быть одним из: {_1}
 @msg	`{key}` must be true or false	`{key}` должно быть true или false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` должно быть grayscale, rgb, hsb, cmyk или websafe
 @msg	`{k}` must be [x, y]	`{k}` должно быть [x, y]
 @msg	`{name}` has no options	`{name}` не имеет параметров
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` — встроенная рабочая среда; выберите другое имя
@@ -3971,7 +3991,7 @@ axis	Both	Оба
 @msg	this file's PostScript couldn't be read ({why}): {what}	PostScript этого файла невозможно прочитать ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	этот формат содержит одну монтажную область: экспортируйте несколько как PDF или с помощью document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	это чертёж DWG, который невозможно прочитать: сохраните его из приложения CAD как ASCII DXF и откройте его
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	это файл PostScript (.ai, сохранённый в старом формате или без совместимости с PDF, либо файл EPS), который пока невозможно открыть: сохраните его как PDF, .ai с совместимостью с PDF или SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	это файл PostScript (.ai, сохранённый в старом формате или без совместимости с PDF, либо файл EPS), а не PDF: Файл › Открыть и Файл › Поместить читают его как EPS
 @msg	this is not a PostScript file	это не файл PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	сочетания инструментов должны быть одной клавишей (необязательно с Shift)
 @msg	truncated	усечено

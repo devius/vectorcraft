@@ -191,7 +191,6 @@
 	Art	圖稿
 	Art using a deleted global swatch keeps its colour.	使用已刪除整體色票的圖稿會保留其顏色。
 	Artboard Options	工作區域選項
-	Artboard Options: edit with the Artboard tool	工作區域選項：請使用工作區域工具編輯
 	Artboard Options…	工作區域選項…
 	Artboard Tool	工作區域工具
 	Artboard {number}	工作區域 {number}
@@ -1242,6 +1241,7 @@
 	Hide Print Tiling	隱藏列印分頁
 	Hide Rulers	隱藏尺標
 	Hide Slices	隱藏切片
+	Hide Template	隱藏範本
 	Hide Text Threads	隱藏文字串連
 	Hide Thumbnail	隱藏縮圖
 	Hide Thumbnails	隱藏縮圖
@@ -2027,6 +2027,7 @@
 	Pathfinder Options…	路徑管理員選項…
 	Pathfinders:	路徑管理員：
 	Paths	路徑
+	Path Length	路徑長度
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	路徑：{paths}    錨點：{anchors}    顏色：{colors}
 	Pattern	圖樣
 	Pattern Editing	圖樣編輯
@@ -2386,6 +2387,7 @@
 	Reset Panel	重設面板
 	Reset Preferences	重設偏好設定
 	Reset Profiles	重設描述檔
+	Rotate View	旋轉檢視
 	Reset Rotate View	重設旋轉檢視
 	Reset the rows to the artwork's colors	將各列重設為圖稿的顏色
 	Reset to Default	重設為預設值
@@ -2586,6 +2588,16 @@
 	Scripts	指令碼
 	Search	搜尋
 	Search All	搜尋全部
+	Filter	篩選
+	Clear All	全部清除
+	By Object	依物件
+	By Layer	依圖層
+	Images	影像
+	Groups	群組
+	Linked Files	連結檔案
+	Locked	已鎖定
+	Hidden	已隱藏
+	Filter Layers Panel Rows	篩選圖層面板列
 	Search commands and tools	搜尋指令與工具
 	Search commands and tools…	搜尋指令與工具…
 	Search Commands…	搜尋指令…
@@ -2723,6 +2735,7 @@
 	Show Modified	顯示已修改
 	Show Note	顯示註解
 	Show Options	顯示選項
+	Color Panel Options	顏色面板選項
 	Show Package	顯示封裝
 	Show Panel	顯示面板
 	Show Pattern Swatches	顯示圖樣色票
@@ -2735,6 +2748,7 @@
 	Show Slices	顯示切片
 	Show Swatch Bounds	顯示色票邊界
 	Show Swatch Kinds	顯示色票種類
+	Show Template	顯示範本
 	Show Text Threads	顯示文字串連
 	Show The Home Screen When No Documents Are Open	沒有開啟文件時顯示首頁
 	Show Thumbnail	顯示縮圖
@@ -3535,6 +3549,10 @@ axis	Both	兩者
 	Method	方法
 	Quality	品質
 	Radius	半徑
+	Mode	模式
+	Blur Mode	模糊模式
+	Edge Only	僅邊緣
+	Overlay Edge	覆蓋邊緣
 	Spin	旋轉
 	Draft	草稿
 	Good	良好

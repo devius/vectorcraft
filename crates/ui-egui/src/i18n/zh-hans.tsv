@@ -180,7 +180,6 @@
 	Art	图稿
 	Art using a deleted global swatch keeps its colour.	使用已删除全局色板的图稿会保留其颜色。
 	Artboard Options	画板选项
-	Artboard Options: edit with the Artboard tool	画板选项：使用画板工具编辑
 	Artboard Options…	画板选项…
 	Artboard Tool	画板工具
 	Artboard {number}	画板 {number}
@@ -1215,6 +1214,7 @@
 	Hide Print Tiling	隐藏打印分页
 	Hide Rulers	隐藏标尺
 	Hide Slices	隐藏切片
+	Hide Template	隐藏模板
 	Hide Text Threads	隐藏文本串接线
 	Hide Thumbnail	隐藏缩略图
 	Hide Thumbnails	隐藏缩略图
@@ -1937,6 +1937,7 @@
 	Pathfinder Options…	路径查找器选项…
 	Pathfinders:	路径查找器：
 	Paths	路径
+	Path Length	路径长度
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	路径：{paths}    锚点：{anchors}    颜色：{colors}
 	Pattern	图案
 	Pattern Editing	图案编辑
@@ -2462,6 +2463,16 @@
 	Scripts	脚本
 	Search	搜索
 	Search All	搜索全部
+	Filter	筛选
+	Clear All	全部清除
+	By Object	按对象
+	By Layer	按图层
+	Images	图像
+	Groups	编组
+	Linked Files	链接文件
+	Locked	已锁定
+	Hidden	已隐藏
+	Filter Layers Panel Rows	筛选图层面板行
 	Search commands and tools	搜索命令和工具
 	Search commands and tools…	搜索命令和工具…
 	Search Commands…	搜索命令…
@@ -2594,6 +2605,7 @@
 	Show Modified	显示已修改
 	Show Note	显示注解
 	Show Options	显示选项
+	Color Panel Options	颜色面板选项
 	Show Package	显示打包
 	Show Panel	显示面板
 	Show Pattern Swatches	显示图案色板
@@ -2606,6 +2618,7 @@
 	Show Slices	显示切片
 	Show Swatch Bounds	显示色板边界
 	Show Swatch Kinds	显示色板种类
+	Show Template	显示模板
 	Show Text Threads	显示文本串接线
 	Show The Home Screen When No Documents Are Open	没有打开文档时显示主页
 	Show Thumbnail	显示缩略图
@@ -3752,6 +3765,10 @@ axis	Both	两者
 	Method	方法
 	Quality	质量
 	Radius	半径
+	Mode	模式
+	Blur Mode	模糊模式
+	Edge Only	仅边缘
+	Overlay Edge	叠加边缘
 	Spin	旋转
 	Draft	草稿
 	Good	良好

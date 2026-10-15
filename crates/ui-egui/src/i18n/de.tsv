@@ -39,6 +39,10 @@
 	Draft	Entwurf
 	Good	Gut
 	Best	Sehr gut
+	Mode	Modus
+	Blur Mode	Weichzeichnermodus
+	Edge Only	Nur Kanten
+	Overlay Edge	Kanten überlagern
 
 # Status and error messages too (`@msg` rows at the end, `COMPLETE_MESSAGES` in the tests).
 # A native speaker's review is welcome: keep the placeholders ({name}), the trailing "…" and the
@@ -204,7 +208,6 @@
 	Art	Bild
 	Art using a deleted global swatch keeps its colour.	Grafiken, die ein gelöschtes globales Farbfeld verwenden, behalten ihre Farbe.
 	Artboard Options	Zeichenflächenoptionen
-	Artboard Options: edit with the Artboard tool	Zeichenflächenoptionen: mit dem Zeichenflächen-Werkzeug bearbeiten
 	Artboard Options…	Zeichenflächenoptionen…
 	Artboard Tool	Zeichenflächen-Werkzeug
 	Artboard {number}	Zeichenfläche {number}
@@ -1250,6 +1253,7 @@
 	Hide Print Tiling	Druckaufteilung ausblenden
 	Hide Rulers	Lineale ausblenden
 	Hide Slices	Slices ausblenden
+	Hide Template	Vorlage ausblenden
 	Hide Text Threads	Textverkettungen ausblenden
 	Hide Thumbnail	Miniatur ausblenden
 	Hide Thumbnails	Miniaturen ausblenden
@@ -1999,6 +2003,7 @@
 	Pathfinder Options…	Pathfinder-Optionen…
 	Pathfinders:	Pathfinder:
 	Paths	Pfade
+	Path Length	Pfadlänge
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Pfade: {paths}    Ankerpunkte: {anchors}    Farben: {colors}
 	Pattern	Muster
 	Pattern Editing	Musterbearbeitung
@@ -2357,6 +2362,7 @@
 	Reset Panel	Bedienfeld zurücksetzen
 	Reset Preferences	Voreinstellungen zurücksetzen
 	Reset Profiles	Profile zurücksetzen
+	Rotate View	Ansicht drehen
 	Reset Rotate View	Ansichtsdrehung zurücksetzen
 	Reset the rows to the artwork's colors	Zeilen auf die Farben der Grafik zurücksetzen
 	Reset to Default	Auf Standard zurücksetzen
@@ -2557,6 +2563,17 @@
 	Scripts	Skripte
 	Search	Suchen
 	Search All	Alle durchsuchen
+	Filter	Filter
+	Clear All	Alle aufheben
+	By Object	Nach Objekt
+	By Layer	Nach Ebene
+	Images	Bilder
+	Groups	Gruppen
+	Linked Files	Verknüpfte Dateien
+	Locked	Gesperrt
+	Hidden	Ausgeblendet
+	Filter Layers Panel Rows	Zeilen im Ebenenbedienfeld filtern
+@msg	`{key}` must be an array of these names: {_1}	`{key}` muss ein Array mit diesen Namen sein: {_1}
 	Search commands and tools	Befehle und Werkzeuge suchen
 	Search commands and tools…	Befehle und Werkzeuge suchen…
 	Search Commands…	Befehle suchen…
@@ -2694,6 +2711,7 @@
 	Show Modified	Geänderte einblenden
 	Show Note	Notiz einblenden
 	Show Options	Optionen einblenden
+	Color Panel Options	Optionen für das Farbbedienfeld
 	Show Package	Paket anzeigen
 	Show Panel	Bedienfeld einblenden
 	Show Pattern Swatches	Musterfelder einblenden
@@ -2706,6 +2724,7 @@
 	Show Slices	Slices einblenden
 	Show Swatch Bounds	Farbfeldbegrenzung einblenden
 	Show Swatch Kinds	Farbfeldarten einblenden
+	Show Template	Vorlage einblenden
 	Show Text Threads	Textverkettungen einblenden
 	Show The Home Screen When No Documents Are Open	Startbildschirm anzeigen, wenn keine Dokumente geöffnet sind
 	Show Thumbnail	Miniatur einblenden
@@ -3516,6 +3535,7 @@ theme	Appearance	Erscheinungsbild
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` muss zwischen {min} und {max} liegen (erhalten: {x})
 @msg	`{key}` must be one of {_1}	`{key}` muss einer der folgenden Werte sein: {_1}
 @msg	`{key}` must be true or false	`{key}` muss true oder false sein
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` muss grayscale, rgb, hsb, cmyk oder websafe sein
 @msg	`{k}` must be [x, y]	`{k}` muss [x, y] sein
 @msg	`{name}` has no options	`{name}` hat keine Optionen
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` ist ein integrierter Arbeitsbereich; wählen Sie einen anderen Namen
@@ -3876,7 +3896,7 @@ theme	Appearance	Erscheinungsbild
 @msg	this file's PostScript couldn't be read ({why}): {what}	das PostScript dieser Datei konnte nicht gelesen werden ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	dieses Format fasst eine Zeichenfläche: Exportieren Sie mehrere als PDF oder mit document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	dies ist eine DWG-Zeichnung, die nicht gelesen werden kann: Speichern Sie sie in der CAD-App als ASCII-DXF und öffnen Sie diese Datei
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	dies ist eine PostScript-Datei (eine .ai-Datei in einem älteren Format oder ohne PDF-Kompatibilität oder eine EPS-Datei), die noch nicht geöffnet werden kann: Speichern Sie sie als PDF, als PDF-kompatible .ai-Datei oder als SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	dies ist eine PostScript-Datei (eine .ai-Datei in einem älteren Format oder ohne PDF-Kompatibilität oder eine EPS-Datei), keine PDF-Datei: Datei › Öffnen und Datei › Platzieren lesen sie als EPS
 @msg	this is not a PostScript file	dies ist keine PostScript-Datei
 @msg	tool shortcuts must be a single key (optionally with Shift)	Tastaturbefehle für Werkzeuge müssen aus einer einzelnen Taste bestehen (optional mit Shift)
 @msg	truncated	abgeschnitten
@@ -4354,6 +4374,11 @@ theme	Appearance	Erscheinungsbild
 @msg	give the path `id`	geben Sie die `id` des Pfads an
 @msg	invalid stroke widths	ungültige Konturbreiten
 @msg	object has no weighted stroke	das Objekt hat keine Kontur mit einer gültigen positiven Stärke
+# Free Distort: the names of the handles on the four corners of its box.
+	Top Left	Oben links
+	Top Right	Oben rechts
+	Bottom Right	Unten rechts
+	Bottom Left	Unten links
 # Corner Radius: a field per corner of a live rectangle.
 	Single Corner Radius	Einheitlicher Eckenradius
 	Top Left:	Oben links:

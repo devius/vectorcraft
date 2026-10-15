@@ -22,11 +22,11 @@ Part of [target-app-parity.md](target-app-parity.md); open work is in [gaps.md](
 |---|---|---:|---|
 | Convert to Shape | Rectangle, Rounded Rectangle, Ellipse | 3/3 | — |
 | Crop Marks | Crop Marks | 1/1 | — |
-| Distort & Transform | Free Distort, Pucker & Bloat, Roughen, Transform, Tweak, Twist, Zig Zag | 7/7 | Transform's Transform Objects/Patterns and Scale Strokes & Effects options, invisible Reflect checkboxes (#885); Zig Zag's ridges are evenly spaced along each segment (#1558); Roughen with Smooth keeps turn-backs smooth instead of cusps that draw as spikes (#1646) |
+| Distort & Transform | Free Distort, Pucker & Bloat, Roughen, Transform, Tweak, Twist, Zig Zag | 7/7 | Free Distort's dialog has a handle on each corner of the object's bounds, moved by dragging or with the arrow keys; Transform's Transform Objects/Patterns and Scale Strokes & Effects options, invisible Reflect checkboxes (#885); Zig Zag's ridges are evenly spaced along each segment (#1558); Roughen with Smooth keeps turn-backs smooth instead of cusps that draw as spikes (#1646) |
 | Path | Offset Path, Outline Object, Outline Stroke | 2/3 | Outline Object |
 | Pathfinder | Add, Intersect, Exclude, Subtract, Minus Back, Divide, Trim, Merge, Crop, Outline, Hard Mix, Soft Mix, Trap | 10/13 | Hard Mix, Soft Mix, Trap |
 | Rasterize | Rasterize… (as a live effect) | 0/1 | the live effect (Object › Rasterize exists) |
-| Stylize | Drop Shadow, Feather, Inner Glow, Outer Glow, Round Corners, Scribble | 6/6 | Scribble draws one zig-zag per region, with no lines across holes and notches (#1651) |
+| Stylize | Drop Shadow, Feather, Inner Glow, Outer Glow, Round Corners, Scribble | 6/6 | Scribble Options' Settings presets |
 | SVG Filters | Apply SVG Filter… and the filter list | 0/1 | the whole submenu (SVG filters on import round-trip already) |
 | Warp | Arc, Arc Lower, Arc Upper, Arch, Bulge, Shell Lower, Shell Upper, Flag, Wave, Fish, Rise, Fisheye, Inflate, Squeeze, Twist | 15/15 | warp point editing in envelopes; Arc is a circular arc in the object's own proportions (#1578) |
 
@@ -39,7 +39,7 @@ its resolution, PDF export warns once per object with the requested and the lowe
 | Submenu | Items | Ours | Missing |
 |---|---|---:|---|
 | Artistic | Colored Pencil, Cutout, Dry Brush, Film Grain, Fresco, Neon Glow, Paint Daubs, Palette Knife, Plastic Wrap, Poster Edges, Rough Pastels, Smudge Stick, Sponge, Underpainting, Watercolor | 1/15 (approximate Film Grain) | Colored Pencil, Cutout, Dry Brush, Fresco, Neon Glow, Paint Daubs, Palette Knife, Plastic Wrap, Poster Edges, Rough Pastels, Smudge Stick, Sponge, Underpainting, Watercolor |
-| Blur | Gaussian Blur, Radial Blur, Smart Blur | 3/3 | Smart Blur's Edge Only and Overlay Edge modes |
+| Blur | Gaussian Blur, Radial Blur, Smart Blur | 3/3 | — |
 | Brush Strokes | Accented Edges, Angled Strokes, Crosshatch, Dark Strokes, Ink Outlines, Spatter, Sprayed Strokes, Sumi-e | 8/8 | — |
 | Distort | Diffuse Glow, Glass, Ocean Ripple | 3/3 | Glass's Load Texture |
 | Pixelate | Color Halftone, Crystallize, Mezzotint, Pointillize | 4/4 | — |

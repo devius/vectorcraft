@@ -57,6 +57,10 @@
 	Draft	Borrador
 	Good	Buena
 	Best	Óptima
+	Mode	Modo
+	Blur Mode	Modo de desenfoque
+	Edge Only	Solo bordes
+	Overlay Edge	Superponer bordes
 
 # Status and error messages too (`@msg` rows at the end, `COMPLETE_MESSAGES` in the tests).
 # A native speaker's review is welcome: keep the placeholders ({name}), the trailing "…" and the
@@ -222,7 +226,6 @@
 	Art	Ilustración
 	Art using a deleted global swatch keeps its colour.	La ilustración que usa una muestra global eliminada conserva su color.
 	Artboard Options	Opciones de mesa de trabajo
-	Artboard Options: edit with the Artboard tool	Opciones de mesa de trabajo: edita con la herramienta Mesa de trabajo
 	Artboard Options…	Opciones de mesa de trabajo…
 	Artboard Tool	Herramienta Mesa de trabajo
 	Artboard {number}	Mesa de trabajo {number}
@@ -1267,6 +1270,7 @@
 	Hide Print Tiling	Ocultar mosaico de impresión
 	Hide Rulers	Ocultar reglas
 	Hide Slices	Ocultar sectores
+	Hide Template	Ocultar plantilla
 	Hide Text Threads	Ocultar enlaces de texto
 	Hide Thumbnail	Ocultar miniatura
 	Hide Thumbnails	Ocultar miniaturas
@@ -2048,6 +2052,7 @@
 	Pathfinder Options…	Opciones de Buscatrazos…
 	Pathfinders:	Buscatrazos:
 	Paths	Trazados
+	Path Length	Longitud de los trazados
 	Paths: {paths}    Anchors: {anchors}    Colors: {colors}	Trazados: {paths}    Anclas: {anchors}    Colores: {colors}
 	Pattern	Motivo
 	Pattern Editing	Edición de motivo
@@ -2606,6 +2611,17 @@
 	Scripts	Scripts
 	Search	Buscar
 	Search All	Buscar en todo
+	Filter	Filtro
+	Clear All	Borrar todo
+	By Object	Por objeto
+	By Layer	Por capa
+	Images	Imágenes
+	Groups	Grupos
+	Linked Files	Archivos vinculados
+	Locked	Bloqueados
+	Hidden	Ocultos
+	Filter Layers Panel Rows	Filtrar filas del panel Capas
+@msg	`{key}` must be an array of these names: {_1}	`{key}` debe ser una lista de estos nombres: {_1}
 	Search commands and tools	Buscar comandos y herramientas
 	Search commands and tools…	Buscar comandos y herramientas…
 	Search Commands…	Buscar comandos…
@@ -2743,6 +2759,7 @@
 	Show Modified	Mostrar modificados
 	Show Note	Mostrar nota
 	Show Options	Mostrar opciones
+	Color Panel Options	Opciones del panel Color
 	Show Package	Mostrar paquete
 	Show Panel	Mostrar panel
 	Show Pattern Swatches	Mostrar muestras de motivo
@@ -2755,6 +2772,7 @@
 	Show Slices	Mostrar sectores
 	Show Swatch Bounds	Mostrar límites de muestra
 	Show Swatch Kinds	Mostrar tipos de muestra
+	Show Template	Mostrar plantilla
 	Show Text Threads	Mostrar enlaces de texto
 	Show The Home Screen When No Documents Are Open	Mostrar la pantalla de inicio cuando no haya documentos abiertos
 	Show Thumbnail	Mostrar miniatura
@@ -3614,6 +3632,7 @@ axis	Both	Ambos
 @msg	`{key}` must be between {min} and {max} (got {x})	`{key}` debe estar entre {min} y {max} (se recibió {x})
 @msg	`{key}` must be one of {_1}	`{key}` debe ser uno de estos: {_1}
 @msg	`{key}` must be true or false	`{key}` debe ser true o false
+@msg	`mode` must be grayscale, rgb, hsb, cmyk or websafe	`mode` debe ser grayscale, rgb, hsb, cmyk o websafe
 @msg	`{k}` must be [x, y]	`{k}` debe ser [x, y]
 @msg	`{name}` has no options	`{name}` no tiene opciones
 @msg	`{name}` is a built-in workspace; choose another name	`{name}` es un espacio de trabajo integrado; elige otro nombre
@@ -3973,7 +3992,7 @@ axis	Both	Ambos
 @msg	this file's PostScript couldn't be read ({why}): {what}	no se pudo leer el PostScript de este archivo ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	este formato admite una sola mesa de trabajo: exporta varias como PDF o con document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	este es un dibujo DWG, que no se puede leer: guárdalo desde la aplicación de CAD como DXF ASCII y abre ese archivo
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	este es un archivo PostScript (un .ai guardado en un formato antiguo o sin compatibilidad con PDF, o un archivo EPS), que todavía no se puede abrir: guárdalo como PDF, .ai compatible con PDF o SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	este es un archivo PostScript (un .ai guardado en un formato antiguo o sin compatibilidad con PDF, o un archivo EPS), no un PDF: Archivo › Abrir y Archivo › Colocar lo leen como EPS
 @msg	this is not a PostScript file	este no es un archivo PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	los atajos de herramientas deben ser una sola tecla (opcionalmente con Shift)
 @msg	truncated	truncado

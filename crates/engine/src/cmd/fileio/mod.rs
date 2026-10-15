@@ -65,8 +65,8 @@ pub use native::with_compression_pref;
 pub use pdfimport::{LoadOptions, page_document};
 pub(crate) use save::job_for;
 pub use save::{
-    SAVE_FORMATS, SaveJob, SaveMode, SavePlan, StreamWrite, export_folder, save_filters, save_format, save_job, save_plan, save_with,
-    stamp_save_dates, templates_dialog_folder, templates_folder,
+    SAVE_FORMATS, SaveJob, SaveMode, SavePlan, StreamWrite, TEMPLATE_FORMATS, export_folder, save_filters, save_format, save_job, save_plan,
+    save_with, stamp_save_dates, template_filters, templates_dialog_folder, templates_folder,
 };
 pub use screens::{PRESETS as SCREEN_PRESETS, ScreenSize, preset_rows as screen_preset_rows};
 pub(crate) use screens::{
@@ -142,7 +142,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Batch",
             [],
             None,
-            "{label?, commands: [{command, params}], artboard?: index (the active artboard; the app passes it: each edit.pasteInPlace, edit.pasteInFront, edit.pasteInBack, object.align, object.distribute, object.distributeSpacing or select.allOnArtboard step that names none gets it, or the last artboard of a document with fewer)} run several commands as ONE undo step (one in each document they edit: steps may open, switch, close or revert documents); stops at the first error and rolls everything back, documents included",
+            "{label?, commands: [{command, params}], artboard?: index (the active artboard; the app passes it: each edit.pasteInPlace, edit.pasteInFront, edit.pasteInBack, object.align, object.distribute, object.distributeSpacing or select.allOnArtboard step that names none gets it, and each artboard.fitToArt or artboard.fitToSelection step that names no index gets it as index, or the last artboard of a document with fewer)} run several commands as ONE undo step (one in each document they edit: steps may open, switch, close or revert documents); stops at the first error and rolls everything back, documents included",
             has_doc,
             batch::batch
         ),
@@ -160,7 +160,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "PDF Info",
             [],
             None,
-            "{path | name? | dataBase64 (a file's path, or its bytes), password?, thumbnail?: page (1-based), thumbnailSize?: 160 (px, longest side), cropTo?: crop (the thumbnail's box)} → {pages, needsPassword, wrongPassword?, pageInfo: [{width, height (pt, as shown), rotation, boxes: {media, crop, bleed, trim, art: [x0, y0, x1, y1] (PDF space, pt)}}], thumbnail?: PNG dataBase64}; an encrypted PDF without its password → {pages: 0, needsPassword: true}",
+            "{path | name? | dataBase64 (a file's path, or its bytes), password?, thumbnail?: page (1-based), thumbnailSize?: 160 (px, longest side), cropTo?: crop (the thumbnail's box)} → {pages, needsPassword, wrongPassword?, pageInfo: [{width, height (pt, as shown), rotation, boxes: {media, crop, bleed, trim, art: [x0, y0, x1, y1] (PDF space, pt)}}], thumbnail?: PNG dataBase64}; a page whose UserUnit (PDF 1.6) is above 1 gives its size and boxes in pt, its numbers times the UserUnit (one above 75,000 counts as 75,000); an encrypted PDF without its password → {pages: 0, needsPassword: true}",
             always,
             pdfimport::pdf_info
         ),
@@ -497,7 +497,17 @@ pub const FORMATS: &[Format] = &[
         raster: false,
         options: native::AI_OPTIONS,
     },
-    reader("ait", "PDF-compatible .ait template", &["ait"], "application/pdf", false),
+    Format {
+        id: "ait",
+        label: "PDF-compatible .ait template",
+        extensions: &["ait"],
+        mime: "application/pdf",
+        read: true,
+        // Save as Template writes it, with the .ai file's options; exports don't.
+        write: false,
+        raster: false,
+        options: native::AI_OPTIONS,
+    },
     Format {
         id: "png",
         label: "PNG",

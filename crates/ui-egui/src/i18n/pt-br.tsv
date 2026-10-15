@@ -228,7 +228,6 @@
 	ArtCraft Website	Site do ArtCraft
 	ArtCraft website	Site do ArtCraft
 	Artboard Options	Opções de Mesa de Trabalho
-	Artboard Options: edit with the Artboard tool	Opções de Mesa de Trabalho: edite com a ferramenta Mesa de Trabalho
 	Artboard Options…	Opções de Mesa de Trabalho…
 	Artboard Tool	Ferramenta Mesa de Trabalho
 	Artboard {number}	Mesa de Trabalho {number}
@@ -1096,6 +1095,7 @@
 	Hide Print Tiling	Ocultar Tesselação de Impressão
 	Hide Rulers	Ocultar Réguas
 	Hide Slices	Ocultar Fatias
+	Hide Template	Ocultar Modelo
 	Hide Text Threads	Ocultar Fios de Texto
 	Hide Thumbnail	Ocultar Miniatura
 	Hide Thumbnails	Ocultar Miniaturas
@@ -1986,6 +1986,7 @@
 	Reset Panel	Redefinir Painel
 	Reset Preferences	Redefinir Preferências
 	Reset Profiles	Redefinir Perfis
+	Rotate View	Girar Visualização
 	Reset Rotate View	Redefinir Visualização Girada
 	Reset the rows to the artwork's colors	Redefinir as linhas para as cores da arte
 	Reset to Default	Redefinir para o Padrão
@@ -2138,6 +2139,17 @@
 	Scribble…	Rabisco…
 	Scripts	Scripts
 	Search All	Pesquisar em Tudo
+	Filter	Filtro
+	Clear All	Limpar Tudo
+	By Object	Por Objeto
+	By Layer	Por Camada
+	Images	Imagens
+	Groups	Grupos
+	Linked Files	Arquivos Vinculados
+	Locked	Bloqueados
+	Hidden	Ocultos
+	Filter Layers Panel Rows	Filtrar linhas do painel Camadas
+@msg	`{key}` must be an array of these names: {_1}	`{key}` deve ser uma matriz destes nomes: {_1}
 	Search Commands…	Pesquisar Comandos…
 	Search commands and tools	Pesquisar comandos e ferramentas
 	Search commands and tools…	Pesquisar comandos e ferramentas…
@@ -2261,6 +2273,7 @@
 	Show Slices	Mostrar Fatias
 	Show Swatch Bounds	Mostrar Limites das Amostras
 	Show Swatch Kinds	Mostrar Tipos de Amostra
+	Show Template	Mostrar Modelo
 	Show Text Threads	Mostrar Fios de Texto
 	Show The Home Screen When No Documents Are Open	Mostrar a Tela Inicial quando não houver Documentos Abertos
 	Show Thumbnail	Mostrar Miniatura
@@ -3573,7 +3586,7 @@ axis	Both	Ambos
 @msg	this file's PostScript couldn't be read ({why}): {what}	não foi possível ler o PostScript deste arquivo ({why}): {what}
 @msg	this format holds one artboard: export several as PDF or with document.exportForScreens	este formato comporta uma prancheta: exporte várias como PDF ou com document.exportForScreens
 @msg	this is a DWG drawing, which can't be read: save it from the CAD app as an ASCII DXF and open that	este é um desenho DWG, que não pode ser lido: salve-o no aplicativo de CAD como DXF ASCII e abra esse arquivo
-@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), which can't be opened yet: save it as PDF, PDF-compatible .ai or SVG	este é um arquivo PostScript (um .ai salvo em formato mais antigo ou sem compatibilidade com PDF, ou um arquivo EPS), que ainda não pode ser aberto: salve-o como PDF, .ai compatível com PDF ou SVG
+@msg	this is a PostScript file (an .ai saved in an older format or without PDF compatibility, or an EPS file), not a PDF: File › Open and File › Place read it as EPS	este é um arquivo PostScript (um .ai salvo em formato mais antigo ou sem compatibilidade com PDF, ou um arquivo EPS), não um PDF: Arquivo › Abrir e Arquivo › Colocar o leem como EPS
 @msg	this is not a PostScript file	este não é um arquivo PostScript
 @msg	tool shortcuts must be a single key (optionally with Shift)	os atalhos de ferramenta devem ser uma única tecla (opcionalmente com Shift)
 @msg	truncated	truncado

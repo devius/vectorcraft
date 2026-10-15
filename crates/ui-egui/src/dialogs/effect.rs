@@ -11,7 +11,7 @@ use serde_json::{Map, Value, json};
 
 use vectorcraft_color::Color;
 
-use super::{DialogSpec, form, transform_each};
+use super::{DialogSpec, form, free_distort, transform_each};
 use crate::panels::c32;
 use crate::state::Dialog;
 use crate::theme::Tokens;
@@ -141,10 +141,20 @@ fn body(app: &mut VectorcraftApp, ui: &mut egui::Ui, d: &mut Dialog) -> bool {
         None if id == ZIG_ZAG => zig_zag_fields(ui, d, app.session.general_unit()),
         None if id == DROP_SHADOW => drop_shadow_fields(ui, d, app.session.general_unit()),
         None if id == "artistic.filmGrain" => film_grain_fields(ui, d),
+        None if id == free_distort::FREE_DISTORT => {
+            free_distort::fields(app, ui, d);
+            values_changed(d)
+        }
         None => {
             let doc = vectorcraft_effects::effect_info(&id).map(|e| e.params).unwrap_or_default();
             let unit = app.session.general_unit();
-            form::param_fields(ui, d, &|k| vectorcraft_effects::is_length(&id, k, relative), &|k| choices(&id, k), &|k| doc_rank(doc, k), unit)
+            let changed =
+                form::param_fields(ui, d, &|k| vectorcraft_effects::is_length(&id, k, relative), &|k| choices(&id, k), &|k| doc_rank(doc, k), unit);
+            // The fields show what the effect stores: Scribble's 270° angle reads -90°.
+            if let Value::Object(m) = vectorcraft_effects::upgrade_params(&id, &Value::Object(d.fields.clone())) {
+                d.fields = m;
+            }
+            changed
         }
     };
     ui.add_space(6.0);
@@ -189,6 +199,7 @@ fn choices(effect: &str, key: &str) -> Option<form::Choices> {
         ("blur.radial", "method") => Some(&[("Spin", "spin"), ("Zoom", "zoom")]),
         ("blur.radial", "quality") => Some(&[("Draft", "draft"), ("Good", "good"), ("Best", "best")]),
         ("blur.smart", "quality") => Some(&[("Low", "low"), ("Medium", "medium"), ("High", "high")]),
+        ("blur.smart", "blurMode") => Some(&vectorcraft_effects::pixel::SMART_BLUR_MODES),
         ("brushStrokes.sprayedStrokes", "strokeDirection") => Some(&vectorcraft_effects::pixel::STROKE_DIRECTIONS),
         ("distort.glass", "texture") => Some(&vectorcraft_effects::pixel::GLASS_TEXTURES),
         ("pixelate.mezzotint", "type") => Some(&vectorcraft_effects::pixel::MEZZOTINT_TYPES),

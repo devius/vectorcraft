@@ -305,6 +305,8 @@ objects' fills or strokes differ (`fillMixed` / `strokeMixed`, drawn as a "?" pr
 | `screenshot` | `{path?, scale?, artboard?, window?}` | Returns MCP image content (`image/png`, base64) plus a text block. Renders the artboard; `window:true` captures the app window (remote only). With `path` the backend (the headless session or the app) writes the PNG there too. |
 | `open_file` | `{path}` | Opens any readable file as a new active document: `.vectorcraft`/`.drawcraft`, `.vctemplate`, `.svg`/`.svgz`, `.pdf`/`.ai`, `.ait`, `.eps`, `.dxf`, `.emf`, `.wmf`, PNG, JPEG, GIF, WebP, TIFF, BMP, PSD/PSB (an image opens as a document of its pixel size; a Photoshop file as its merged image). Templates (`.vctemplate`, `.ait`) open as a new untitled document. PDF, `.ai` and SVG files saved with Preserve Editing reopen as the document they carry. The reply is `document.open`'s: its `warnings` say what didn't come in as it was (an EPS whose PostScript can't be read opens as its preview, and the warning names the PostScript error, the operator and the procedure). `run_command document.formats` lists the formats. |
 | `save_file` | `{path?}` | Runs `document.save`: the document's own file in its own format (native `.vectorcraft` unless it was opened from or saved as SVG, PDF or a restorable `.ai`; then `warnings` say what that format loses). A path's extension picks the format (`.vectorcraft`, `.vctemplate`, `.pdf`, `.svg`, `.svgz`, `.ai`: a PDF carrying the native document, which reopens editable). |
+| `export` | `{path?, format?, scale?, artboard?, range?, selection?, outlineText?, options?}` | `svg`, `svgz`, `pdf`, `eps`, `dxf`, `emf`, `wmf`, `png`, `jpg`, `webp`, `gif`, `png8` (an indexed `.png`), `tiff`, `bmp`, `tga`, `psd` (layered), `txt` (the document's text), `vectorcraft` or `template` (a native template). The tool's `format` enum and `document.formats` list them, generated from the engine's format table. When `format` is omitted, it comes from the path's extension. PDF writes one page per artboard: all of them, or `artboard` (0-based) / `range` (`"1-3, 5"`, 1-based); the other formats write one artboard. `options` carries more format options (e.g. `{"quality": 80}` for JPEG). `selection: true` exports the selected objects cropped to their bounds (the reply adds their `bounds`, and reports `format` and the encoder's `warnings` as a whole-document export does); `outlineText: true` writes SVG text as paths. Template layers are left out, live effects are kept, and exporting `vectorcraft` never changes the document's path. Without `path` the bytes come back as `dataBase64`. Both backends run the same `document.export` call. |
+| `add_text` | `{text, x?, y?, width?, height?, fit?, fitMinPercent?, path?, mode?, pathEffect?, size?, font?, color?, justify?, vertical?}` | Point type at (x, y) (`justify`: `left`, `center` or `right` starts, centres or ends each line on x); area type with `width`/`height` (`fit`: `none`, `autoHeight`, `shrinkText`, as `text.areaOptions`); or `path` + `mode` (`area`/`onPath`) to flow text in or along a path, with `pathEffect` (`rainbow`, `skew`, `3dRibbon`, `stairStep`, `gravity`); `justify` (also `auto`, `justifyAll`) aligns the paragraphs of every kind, as `text.setStyle` does later. `vertical: true` uses the existing vertical writing mode for every kind (default `false`, horizontal). Returns `{id}`, with `overflow: true` when the text doesn't fit its frame or path. |
 | `export` | `{path?, format?, scale?, artboard?, range?, selection?, outlineText?, options?}` | `svg`, `svgz`, `pdf`, `ai` (the PDF-compatible `.ai` that Save writes, which carries the document when every artboard is written in order), `eps`, `dxf`, `emf`, `wmf`, `png`, `jpg`, `webp`, `gif`, `png8` (an indexed `.png`), `tiff`, `bmp`, `tga`, `psd` (layered), `txt` (the document's text), `vectorcraft` or `template` (a native template). The tool's `format` enum and `document.formats` list them, generated from the engine's format table. When `format` is omitted, it comes from the path's extension. PDF and `.ai` write one page per artboard: all of them, or `artboard` (0-based) / `range` (`"1-3, 5"`, 1-based). SVG, SVGZ and EPS write one file per chosen artboard. Rasters, DXF, EMF and WMF write one artboard, or one file per chosen artboard with `options: {"useArtboards": true}`. `options` carries more format options (e.g. `{"quality": 80}` for JPEG). `selection: true` exports the selected objects cropped to their bounds (the reply adds their `bounds`, and reports `format` and the encoder's `warnings` as a whole-document export does); `outlineText: true` writes SVG text as paths. Template layers are left out, live effects are kept, and exporting `vectorcraft` never changes the document's path. Without `path` the bytes come back as `dataBase64`. Both backends run the same `document.export` call. |
 | `add_text` | `{text, x?, y?, width?, height?, fit?, fitMinPercent?, path?, mode?, pathEffect?, size?, font?, color?, justify?}` | Point type at (x, y) (`justify`: `left`, `center` or `right` starts, centres or ends each line on x); area type with `width`/`height` (`fit`: `none`, `autoHeight`, `shrinkText`, as `text.areaOptions`); or `path` + `mode` (`area`/`onPath`) to flow text in or along a path, with `pathEffect` (`rainbow`, `skew`, `3dRibbon`, `stairStep`, `gravity`); `justify` (also `auto`, `justifyAll`) aligns the paragraphs of every kind, as `text.setStyle` does later. Returns `{id}`, with `overflow: true` when the text doesn't fit its frame or path. |
 | `apply_effect` | `{effect?, params?, ids?}` | Appends a live effect. Without `effect`, returns the effect catalogue with parameters and defaults. |
@@ -313,6 +315,16 @@ objects' fills or strokes differ (`fillMixed` / `strokeMixed`, drawn as a "?" pr
 | `create_graph` | `{type?, x, y, width, height, csv? \| series?, categories?, rows?}` | The nine Illustrator graph types: column, stacked column, bar, stacked bar, line, area, scatter, pie and radar. An empty CSV cell or a `null` in `rows` is a blank value; a number in straight quotes is a label. Edit later with `graph.setData` / `graph.setType` via `run_command`. |
 | `text_wrap` | `{ids?, offset?, invert?, release?}` | Area type below the objects (same layer) flows around them. |
 | `undo` / `redo` | `{}` | Many calls that change nothing record no undo step, for example `object.align` with nothing to move, `object.move` by 0 without `copy` and `object.showAll` with nothing hidden. `undo` (`edit.undo`) after such a call undoes the step before it. `inspect_document` lists the undo steps as `history`. |
+
+For example, create editable Japanese area type with the engine's vertical writing mode:
+
+```json
+{"name":"add_text","arguments":{"text":"こんにちは","x":40,"y":40,"width":160,"height":240,"size":20,"vertical":true}}
+```
+
+`vertical` also applies to point type and to `path` + `mode` (`area` or `onPath`). Omit it or pass `false`
+for horizontal writing. This is the same option as `text.create` / `text.createInPath`; it does not change
+the engine's existing glyph orientation or CJK composition.
 
 For SVG/SVGZ, `export`'s top-level `outlineText: true` writes text as paths; DXF takes it too (its type is outlined anyway unless `preserve: editability`).
 PDF instead uses `options: {"advanced": {"outlineText": true}}`; its default is false (live text).
@@ -403,8 +415,9 @@ markup around it: if another app changed the SVG since, `document.open` reads it
 
 Saving beyond `save_file` goes through `run_command`: `file.saveAs {path?, format?, options?, svg?}` (the document takes
 on the new file and format), `file.saveCopy` (the document keeps its path, title and modified state),
-`file.saveAsTemplate` (a `.vctemplate` that opens untitled; the suggested name and the Templates folder come back
-without a path), `file.newFromTemplate {path}`, `file.revert` and `file.formatOptions {format?}` (a format's options
+`file.saveAsTemplate {path?, format?}` (it writes a `.vctemplate`, or, for `format: "ait"` or a `.ait` path, a
+PDF-compatible `.ait` written as a `.ai` file is; both open untitled; the suggested name and the Templates folder come
+back without a path), `file.newFromTemplate {path}`, `file.revert` and `file.formatOptions {format?}` (a format's options
 with the values a save would use). Without a path the save commands return `{dataBase64, name, folder?, warnings}`. A document saved as SVG or PDF
 remembers its options, so the next save reuses them. A PDF opened with `pages`, `cropTo` or `password` is only part
 of the file, so Save asks for a new name instead of writing it back.
@@ -544,7 +557,11 @@ Opening a PDF (or `.ai`) imports every page as an artboard and layer; `document.
 `cropTo` (`bounding` (the art's bounds), `art`, `crop` (default), `trim`, `bleed`, `media`: the box each artboard gets;
 with `trim` the bleed box round it becomes the document's bleed, and a PDF-compatible `.ai` or a PDF saved with its editing data opens on its trim boxes for
 `crop`, its crop box taking the bleed in) and `password` for an encrypted file. `document.pdfInfo` reads a file without opening it: the page count, each page's
-size and boxes, `needsPassword`, and with `thumbnail: n` a PNG of page n. Imported colours keep their model:
+size and boxes, `needsPassword`, and with `thumbnail: n` a PNG of page n. A page whose `UserUnit` (PDF 1.6) is above 1
+opens at its size in points, the file's numbers times the `UserUnit` (one above 75,000 counts as 75,000), and
+`document.pdfInfo` gives its size and boxes in points too. A `.ai` whose editing data has its artboards in the units of
+such a page opens from that data at the page's size.
+Imported colours keep their model:
 DeviceCMYK and CMYK ICC colours stay CMYK (a file painted mostly in CMYK opens as a CMYK document), DeviceGray is Gray,
 and Separation and DeviceN inks become spot swatches the art links to at its tint (gradient stops too). CMYK images
 (DeviceCMYK, or ICC-based with four components) keep their ink amounts: a CMYK JPEG as it is, any other as a CMYK TIFF
@@ -1362,6 +1379,15 @@ and `layerRows`, the rows highlighted in the panel.
   layersOnly, rowSize small|medium|large|other, otherSize, thumbLayers, thumbGroups, thumbObjects), and
   `ui.layersExpand {ids?, open?}` opens or closes rows as their triangles do (Alt-click: everything inside).
   A document opens with only its top-level layers open; the open rows are saved in the native file and reopen that way.
+- **Search and filter** (control channel and the app's MCP): the Search All field keeps the rows whose names hold the
+  text typed, and `ui.layersFilter {objects?, layers?}` sets the choices of the Filter button beside it. `objects` (By
+  Object) takes `paths` (paths and compound paths), `shapes` (live rectangles, ellipses, polygons and lines), `text`,
+  `images`, `effects` (rows with an effect on themselves or on a fill or stroke, shown or hidden), `groups`,
+  `linkedFiles` (linked images and placed documents) and `guides` (paths made into guides, and ruler guides); `layers`
+  (By Layer) takes `locked` and `hidden` (the row's own lock and eye). A row stays when it is one of those kinds and in
+  one of those states (an empty list takes every row) and its name holds the search text, or when a row inside it
+  stays. A key left out keeps its list. The filter lasts the session and does not change the document, its open rows
+  or the selection. `ui.layersFilter` answers `{objects, layers}`.
 
 ```json
 {"name":"run_command","arguments":{"command":"layer.newSublayer","params":{"name":"Shadows"}}}
@@ -1601,11 +1627,11 @@ the path it had begun while that stays selected. Its reply's `tool` is the tool 
 The Curvature tool edits any selected path, whatever drew it, keeping its shape except where edited (#798). Each edit
 is one undo step and leaves the anchor it edited direct-selected (the tool's current point):
 `path.curvatureEdit {id, subpath?, op, …}` answers `{anchor}`. `op: "move"` with `anchor`, `x`, `y` moves a point and
-re-curves only its two segments: a smooth point turns along the line through its neighbours, and the neighbours'
-handles keep their directions (their lengths scale with the chord), so the segments beyond don't change.
+re-curves only its two segments: a smooth point takes the tool's handles (along the circle through it and its neighbours; the one handle into
+the curve at an end), and the neighbours' handles keep their directions (their lengths scale with the chord), so the segments beyond don't change.
 `op: "insert"` with `segment`, `t` adds a smooth point there without changing the shape (with `x`, `y` it is then
 moved there: the tool's click-and-drag on a segment). `op: "extend"` with `x`, `y` goes on from the `end` (default)
-or the `start` of an open subpath, and `op: "close"` closes it from that end; `from` says how the old end bends into
+or the `start` of an open subpath (the new end curves into the path unless `corner` is true), and `op: "close"` closes it from that end; `from` says how the old end bends into
 the new segment: `"keep"` (default) keeps its curve, `"smooth"` curves it through its neighbours (a point the tool
 placed), `"corner"` leaves it without handles. Alt-click or double-click toggles a point with `path.convertAnchor`, and
 Backspace/Delete removes the current point with `path.removeAnchor`.
@@ -1760,6 +1786,14 @@ Direct Selection or Group Selection tool inside an artboard makes that artboard 
 tool, a Shift-click on an empty spot inside an artboard makes it active and keeps the selection. Choosing the Artboard
 tool (`tool.select {tool: "artboard"}`) starts it on the active artboard: its `active` option is that artboard's index.
 
+`artboard.fitToArt {index?}` (Object › Artboards › Fit to Artwork Bounds) and `artboard.fitToSelection {index?}`
+(Object › Artboards › Fit to Selected Art) resize artboard `index` (a 0-based index), or the first artboard when the
+call gives none. The desktop app adds its active artboard as `index` to the calls of these two commands that it runs
+without `index`, MCP's `run_command` calls in remote mode included. A batch passes its `artboard` on to each of their
+steps that names no `index`, as the step's `index`. When the document a step runs in has no artboard at that index,
+the step gets that document's last artboard. An action recorded in the Actions panel leaves `index` out of these
+steps, and they resize the artboard that is active when the action plays.
+
 ```json
 {"name":"run_command","arguments":{"command":"object.align","params":{"horizontal":"left","to":"artboard","artboard":1}}}
 {"name":"run_command","arguments":{"command":"object.distribute","params":{"horizontal":"left","to":"artboard","artboard":1}}}
@@ -1856,6 +1890,10 @@ draws, and View › Snap to Grid snaps to its subdivisions. Changing either sets
 `file.new` gives a new document that grid, and `document.open`, `file.newFromTemplate` and `file.revert` give it to
 every document they read except a native file and the native document that an SVG, PDF, `.ai` or EPS file carries
 (`restored: true`), which keep the grid they were saved with.
+
+`view.rotate {angle}` (desktop app) turns the view to `angle` degrees about the center of the canvas; a positive angle
+turns the art clockwise on screen. View › Rotate View and the status bar's angle menu run it. It returns `{angle}`, the
+angle it set, normalized to (-180, 180], and `view.rotateReset` turns the view back to 0.
 
 The Smart Guides preferences (Preferences › Smart Guides) apply to `pointer_gesture` with Smart Guides on (the
 default view) and to the mouse; they change what the tools show and how far a target pulls, and only Construction
@@ -2286,8 +2324,12 @@ as `document.open` reads one), `clipboard.importImage {dataBase64, mime?}` (an e
 physical size) or `clipboard.importText {text}` (point text in the default type style), each centred on `center`
 (default: the first artboard); then any `edit.paste*` command pastes it. The desktop app does this itself: Copy and
 Cut publish the formats to the system clipboard, and a Paste outside text editing first reads what another app
-copied (SVG, then PDF, then text, then a bitmap; SVG markup in text counts as SVG). Pasting what VectorCraft copied
-keeps the lossless internal clipboard. Windows carries every format both ways and pastes a bitmap from PNG, else
+copied (SVG, then PDF, then text, then a bitmap; SVG markup in text counts as SVG). A background thread makes the
+formats and they are published when they are ready. While that thread has a save, an export, a print or a recovery
+copy to finish, Copy and Cut make and publish them at once. When another Copy or Cut, or a copy of text in
+VectorCraft, comes first, they are dropped. Pasting what VectorCraft copied keeps the lossless internal clipboard,
+also before its formats are published. While a text field or the Type tool has the keyboard, the app waits for
+them. Windows carries every format both ways and pastes a bitmap from PNG, else
 from the device-independent bitmap screenshots copy (`CF_DIBV5`, then `CF_DIB`; alpha kept, opaque when it is zero
 throughout, at most 32768 px a side); macOS and Linux carry one format (the text, else the PNG) and paste text and
 bitmaps (macOS the pasteboard's PNG, else TIFF, as screenshots copy them). On the web Copy publishes SVG text, and
@@ -2392,8 +2434,10 @@ result carries the same files as a zip (`{name: "<name>.zip", dataBase64}`, entr
 
 `document.info {selectionOnly?, category?, format?: "text"}` adds `sections` (`[{id, title, rows: [[label, value]]}]`:
 document, objects, graphicStyles, spotColors, patterns, gradients, symbols, fonts, fontDetails, linkedImages,
-embeddedImages); `format: "text"` returns the plain-text report Document Info › Save… (`docInfo.save {path?}`) and
-the package report write.
+embeddedImages) and `pathLength` (pt: the total length of the paths, compound paths' pieces included and guides left
+out, which objects lists as Path Length in the document's units, say for a cut line or an LED strip along the letters);
+`format: "text"` returns the plain-text report Document Info › Save… (`docInfo.save {path?}`) and the package report
+write.
 
 ```json
 {"name":"run_command","arguments":{"command":"file.package","params":{"folder":"/tmp/handoff","copyFonts":false}}}
