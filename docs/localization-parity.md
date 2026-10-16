@@ -56,7 +56,7 @@ plus review. Native-speaker review is human work and isn't in the hours.
 | Swedish | `sv` | 4,770 rows, 668 of them `@msg` (counted 2026-10-15): menus, `tl!` literals and messages complete (tests); one/other plurals | full; native review welcome |
 | Bulgarian | `bg` | 4,910 rows, 703 of them `@msg` (counted 2026-10-16): menus, `tl!` literals and messages complete (tests) | full; AI-drafted, native review pending |
 | Greek | `el` | 4,880 rows, 709 of them `@msg` (counted 2026-10-16): menus, `tl!` literals and messages complete (tests) | full; native review welcome |
-| Georgian | `ka` | 4,800 rows (counted 2026-10-16): menus, panels, dialogs, plurals (one count-neutral form) and messages, tested complete; reviewed by a native speaker | full |
+| Georgian | `ka` | 4,890 rows (counted 2026-10-17): menus, panels, dialogs, plurals (one count-neutral form) and messages, tested complete; reviewed by a native speaker | full |
 
 Nineteen non-English catalogs in all. Illustrator, as its public documentation lists, ships around two dozen
 interface languages (including Polish, Dutch, Turkish, the Nordic languages, Hungarian, and Middle East
