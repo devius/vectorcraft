@@ -4844,3 +4844,71 @@ imageTrace	Outline	კონტური
 @msg	choose a source folder	აირჩიეთ წყარო საქაღალდე
 @msg	open a document with data sets	გახსენით დოკუმენტი მონაცემთა ნაკრებებით
 @msg	the action has no steps	მოქმედებას ნაბიჯები არ აქვს
+	Convert to Straight Lines	სწორ ხაზებად გარდაქმნა
+	Corner Point Angle Threshold:	კუთხოვანი წერტილის კუთხის ზღვარი:
+	Decrease Font Size by Five Steps	შრიფტის შემცირება ხუთი საფეხურით
+	A File per Object	ცალკე ფაილი თითოეული ობიექტისთვის
+	Example: {name}	მაგალითი: {name}
+	Export Preset:	ექსპორტის პრესეტი:
+	Folders:	საქაღალდეები:
+	Insert	ჩასმა
+	Nothing is selected. Select the art to export, then open this tab again.	არაფერია მონიშნული. მონიშნეთ საექსპორტო ნახატი და ეს ჩანართი ხელახლა გახსენით.
+	One File of the Selection	მონიშნული ერთ ფაილად
+	Start at:	დაწყება:
+	{n} objects selected	მონიშნული ობიექტი: {n}
+	Delete Export Preset	ექსპორტის პრესეტის წაშლა
+	Export Presets	ექსპორტის პრესეტები
+	Save Export Preset	ექსპორტის პრესეტის შენახვა
+	Export Layer	შრის ექსპორტირება
+	Export Selection	მონიშნულის ექსპორტირება
+	All in One Folder	ყველა ერთ საქაღალდეში
+	By Size or Row	ზომის ან სტრიქონის მიხედვით
+	By Format	ფორმატის მიხედვით
+	By Artboard or Item	სამუშაო დაფის ან ელემენტის მიხედვით
+	By Item, Then Format	ელემენტის, შემდეგ ფორმატის მიხედვით
+	Document Name	დოკუმენტის სახელი
+	Artboard or Item Name	სამუშაო დაფის ან ელემენტის სახელი
+	Number (####)	ნომერი (####)
+	Date (YYYYMMDD)	თარიღი (YYYYMMDD)
+	Date (YYYY-MM-DD)	თარიღი (YYYY-MM-DD)
+	Time (hhmmss)	დრო (hhmmss)
+	PDF Print	PDF ბეჭდვისთვის
+	Merge only with selection	შერწყმა მხოლოდ მონიშნულთან
+	Words Longer Than:	სიტყვები, რომელთა სიგრძე აღემატება:
+	After First:	პირველის შემდეგ:
+	Before Last:	ბოლომდე:
+	Hyphen Limit:	გადატანების ზღვარი:
+	Hyphenation Zone:	გადატანის ზონა:
+	letters	ასო
+	hyphens	გადატანა
+	Hyphenate Capitalized Words	დიდი ასოთი დაწყებული სიტყვების გადატანა
+	Increase Font Size by Five Steps	შრიფტის გაზრდა ხუთი საფეხურით
+	Load Texture…	ტექსტურის ჩატვირთვა…
+	Loaded Texture	ჩატვირთული ტექსტურა
+	Outline Object	ობიექტის კონტურებად გარდაქმნა
+	Reset Horizontal Scale	ჰორიზონტალური მასშტაბის ჩამოყრა
+	Rotate View to Selection	ხედის შემობრუნება მონიშნულის მიხედვით
+	Update Selection	მონიშნულის განახლება
+	Show Original Path	საწყისი ტრაექტორიის ჩვენება
+	Texture Image	ტექსტურის გამოსახულება
+@msg	check a layer to export	მონიშნეთ საექსპორტო შრე
+@msg	select the art to export first	ჯერ მონიშნეთ საექსპორტო ნახატი
+	Accent Color	აქცენტის ფერი
+	Amber	ქარვისფერი
+	Coral	მარჯნისფერი
+	Violet	იისფერი
+	Sketch	ესკიზი
+	Halftone Pattern…	ნახევარტონური პატერნი…
+	Halftone Pattern	ნახევარტონური პატერნი
+	Pattern Type	პატერნის ტიპი
+	Dot	წერტილი
+	Color Scheme	ფერის სქემა
+	Modern	თანამედროვე
+	Export Type:	ექსპორტის ტიპი:
+	Movie Clip	ანიმაციური კლიპი
+@msg	name is empty	სახელი ცარიელია
+@msg	no symbol named `{n}`	სიმბოლო სახელით `{n}` არ არის
+@msg	no saved selection recalled	შენახული მონიშვნა გამოძახებული არ არის
+@msg	The last start of VectorCraft ended on {name} before its window appeared, so it started on {summary}. To try that graphics processor again, change Preferences › Performance › Graphics Processor or start with WGPU_BACKEND set	VectorCraft-ის ბოლო გაშვება ფანჯრის გამოჩენამდე შეწყდა (გრაფიკული პროცესორი: {name}), ამიტომ VectorCraft გაეშვა: {summary}. ამ გრაფიკული პროცესორის ხელახლა საცდელად შეცვალეთ პარამეტრები › წარმადობა › გრაფიკული პროცესორი ან გაუშვით WGPU_BACKEND ცვლადის მითითებით
+@msg	The last start of VectorCraft ended while it listed the graphics processors, so it started on {summary} with OpenGL alone. To try the other graphics backends again, change Preferences › Performance › Graphics Processor or start with WGPU_BACKEND set	VectorCraft-ის ბოლო გაშვება გრაფიკული პროცესორების ჩამოთვლისას შეწყდა, ამიტომ VectorCraft გაეშვა მხოლოდ OpenGL-ით: {summary}. სხვა გრაფიკული ინტერფეისების ხელახლა საცდელად შეცვალეთ პარამეტრები › წარმადობა › გრაფიკული პროცესორი ან გაუშვით WGPU_BACKEND ცვლადის მითითებით
+@msg	the image can't be read as a texture	გამოსახულების ტექსტურად წაკითხვა ვერ ხერხდება
