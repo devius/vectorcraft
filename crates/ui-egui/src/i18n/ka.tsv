@@ -4872,7 +4872,7 @@ imageTrace	Outline	კონტური
 	Date (YYYYMMDD)	თარიღი (YYYYMMDD)
 	Date (YYYY-MM-DD)	თარიღი (YYYY-MM-DD)
 	Time (hhmmss)	დრო (hhmmss)
-	PDF Print	PDF ბეჭდვისთვის
+	PDF Print	PDF (ბეჭდვა)
 	Merge only with selection	შერწყმა მხოლოდ მონიშნულთან
 	Words Longer Than:	სიტყვები, რომელთა სიგრძე აღემატება:
 	After First:	პირველის შემდეგ:
@@ -5029,7 +5029,7 @@ imageTrace	Outline	კონტური
 	Scale in Perspective	პერსპექტივაში მასშტაბირება
 	Set History Limit…	ისტორიის ლიმიტის დაყენება…
 	Shape Builder Delete	ფიგურების კონსტრუქტორით წაშლა
-	Sliding	მცოცავი
+	Sliding	სრიალა
 	Small Gaps	პატარა ღრეჩოები
 	Sort Swatches	ფერის ნიმუშების დალაგება
 	Step Backward	ნაბიჯით უკან
