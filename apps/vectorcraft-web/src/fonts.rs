@@ -24,20 +24,6 @@ thread_local! {
     static BACKGROUND_STARTED: Cell<bool> = const { Cell::new(false) };
 }
 
-/// The Georgian interface face, when the site serves one (`fonts/NotoSansGeorgian.ttf`, not a
-/// craft-fonts face): the bundled UI fonts have none. Fetched before the app starts, so a
-/// Georgian interface draws from the first frame; without it Georgian is left to the installed-
-/// font search, as before.
-pub async fn load_georgian_font() {
-    const URL: &str = "fonts/NotoSansGeorgian.ttf";
-    match fetch(URL, "", STARTUP_TIMEOUT_MS).await {
-        // A host may answer a missing file with its index page.
-        Ok(bytes) if matches!(bytes.get(..4), Some([0, 1, 0, 0] | b"OTTO" | b"true")) => vectorcraft_ui_egui::theme::set_georgian_font(bytes),
-        Ok(_) => log::info!("{URL} is not a font file"),
-        Err(e) => log::info!("no Georgian interface font: {e}"),
-    }
-}
-
 /// Fetch and register the `startup` faces (one after the other). Returns how many loaded.
 pub async fn load_startup_fonts() -> usize {
     let mut loaded = 0;

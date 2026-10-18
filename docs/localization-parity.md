@@ -17,7 +17,7 @@ in-app help, and the docs are English.
 
 **Native review:** every catalog was written clean-room from the English meaning, most of it by agents
 (`bflatastic`), with community contributors adding or correcting (German by `dwetscher`, Japanese and Traditional
-Chinese by `imachus`). None is recorded as reviewed by a native speaker; the catalog headers ask for one.
+Chinese by `imachus`). Only Georgian is recorded as reviewed by a native speaker; the other catalog headers ask for one.
 
 ## The twelve key languages
 
