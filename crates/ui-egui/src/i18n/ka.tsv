@@ -4754,7 +4754,7 @@ imageTrace	Outline	კონტური
 # Dimension tool and Object › Dimensions. A drafting dimension is ზომა (ზომის დასმა), like a dimension on a technical drawing.
 	Dimension	ზომა
 	Drawing : real size — 1:10 labels 1 unit on the page as 10.	ნახაზი : რეალური ზომა — 1:10 გვერდზე 1 ერთეულს 10-ად აწერს.
-	Preview (1 inch on the page)	წინასწარი ნახვა (1 დიუმი გვერდზე)
+	Preview (1 inch on the page)	წინასწარი ნახვა (1 დუიმი გვერდზე)
 	Set as Default	ნაგულისხმევად დაყენება
 	 out from a highlighted edge to place its dimension  |  	 — გამოკვეთილი კიდიდან გარეთ, მისი ზომის დასასმელად  |  
 	 cancels  |  Double-click the tool for options	 — გაუქმება  |  პარამეტრებისთვის ორჯერ დაწკაპეთ ხელსაწყოზე
