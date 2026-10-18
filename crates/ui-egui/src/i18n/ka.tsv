@@ -4912,3 +4912,178 @@ imageTrace	Outline	კონტური
 @msg	The last start of VectorCraft ended on {name} before its window appeared, so it started on {summary}. To try that graphics processor again, change Preferences › Performance › Graphics Processor or start with WGPU_BACKEND set	VectorCraft-ის ბოლო გაშვება ფანჯრის გამოჩენამდე შეწყდა (გრაფიკული პროცესორი: {name}), ამიტომ VectorCraft გაეშვა: {summary}. ამ გრაფიკული პროცესორის ხელახლა საცდელად შეცვალეთ პარამეტრები › წარმადობა › გრაფიკული პროცესორი ან გაუშვით WGPU_BACKEND ცვლადის მითითებით
 @msg	The last start of VectorCraft ended while it listed the graphics processors, so it started on {summary} with OpenGL alone. To try the other graphics backends again, change Preferences › Performance › Graphics Processor or start with WGPU_BACKEND set	VectorCraft-ის ბოლო გაშვება გრაფიკული პროცესორების ჩამოთვლისას შეწყდა, ამიტომ VectorCraft გაეშვა მხოლოდ OpenGL-ით: {summary}. სხვა გრაფიკული ინტერფეისების ხელახლა საცდელად შეცვალეთ პარამეტრები › წარმადობა › გრაფიკული პროცესორი ან გაუშვით WGPU_BACKEND ცვლადის მითითებით
 @msg	the image can't be read as a texture	გამოსახულების ტექსტურად წაკითხვა ვერ ხერხდება
+# Upstream sync 2026-10-18 (5e681065): SVG Interactivity, Live Paint gaps, graph column designs, Cutout/Neon Glow/Poster Edges, undo step names, blend spine errors.
+	Add Event	მოვლენის დამატება
+	Add JavaScript File	JavaScript ფაილის დამატება
+	Add Light	სინათლის დამატება
+	Apply Data Set	მონაცემთა ნაკრების გამოყენება
+	Cancel Pattern Editing	პატერნის რედაქტირების გაუქმება
+	Change to Artboard Rulers	სამუშაო დაფის სახაზავებზე გადართვა
+	Chop Design	დიზაინის მოჭრა
+	Clear Events	მოვლენების გასუფთავება
+	Close Gaps With Paths	ღრეჩოების დახურვა ტრაექტორიებით
+	Color wheel	ფერთა წრე
+	Column Type:	სვეტის ტიპი:
+	Connect	დაკავშირება
+	Copy Appearance	იერსახის კოპირება
+	Copy Guide	დამხმარე ხაზის კოპირება
+	Copy in Perspective	პერსპექტივაში კოპირება
+	Create Slice from Selection	ნაჭრის შექმნა მონიშნულიდან
+	Create Slices from Guides	ნაჭრების შექმნა დამხმარე ხაზებიდან
+	Cutout	აპლიკაცია
+	Cutout…	აპლიკაცია…
+	Delete All Slices	ყველა ნაჭრის წაშლა
+	Delete Data Sets	მონაცემთა ნაკრებების წაშლა
+	Delete Graphic Styles	გრაფიკული სტილების წაშლა
+	Delete Guide	დამხმარე ხაზის წაშლა
+	Delete Guides	დამხმარე ხაზების წაშლა
+	Delete Light	სინათლის წაშლა
+	Delete Slice	ნაჭრის წაშლა
+	Delete Style	სტილის წაშლა
+	Delete Variables	ცვლადების წაშლა
+	Delete View	ხედის წაშლა
+	Done Editing Pattern	პატერნის რედაქტირების დასრულება
+	Duplicate Rows	სტრიქონების დუბლირება
+	Each Design Represents:	თითოეული დიზაინი წარმოადგენს:
+	Edge Fidelity	კიდის სიზუსტე
+	Edge Intensity	კიდის ინტენსივობა
+	Edge Simplicity	კიდის სიმარტივე
+	Edge Thickness	კიდის სისქე
+	Edit Path	ტრაექტორიის რედაქტირება
+	Edit Perspective Grid	პერსპექტივის ბადის რედაქტირება
+	Enable Guides for 9-Slice Scaling	ცხრანაწილიანი მასშტაბირების დამხმარე ხაზების ჩართვა
+	Event:	მოვლენა:
+	Expand Blend	გადასვლის გაშლა
+	Expand Envelope	გარსის გაშლა
+	Expand Image Trace	გამოსახულების ვექტორიზაციის გაშლა
+	Expand Live Paint	ცოცხალი შეღებვის გაშლა
+	File or URL:	ფაილი ან URL:
+	First Artboard	პირველი სამუშაო დაფა
+	For Fractions:	წილადებისთვის:
+	Gap Detection	ღრეჩოების აღმოჩენა
+	Gap Options	ღრეჩოს პარამეტრები
+	Gap Preview Color:	ღრეჩოების წინასწარი ნახვის ფერი:
+	Glow Brightness	ნათების სიკაშკაშე
+	Glow Size	ნათების ზომა
+	Graph Column	დიაგრამის სვეტი
+	If a drawing tablet's pen doesn't draw, choose an X11 (XWayland) option.	თუ გრაფიკული პლანშეტის კალამი არ ხატავს, აირჩიეთ X11 (XWayland)-ის ვარიანტი.
+	JavaScript Files	JavaScript ფაილები
+	JavaScript:	JavaScript:
+	Large Gaps	დიდი ღრეჩოები
+	Last Artboard	ბოლო სამუშაო დაფა
+	Levels	დონეები
+	Library Panel Options	ბიბლიოთეკის პანელის პარამეტრები
+	Lights	სინათლის წყაროები
+	Link JavaScript Files…	JavaScript ფაილების დაკავშირება…
+	Live Shape	ცოცხალი ფიგურა
+	Lock Variables	ცვლადების ჩაკეტვა
+	Make Blend	გადასვლის შექმნა
+	Make Dynamic	დინამიკურად ქცევა
+	Make Intertwine	გადახლართვის შექმნა
+	Make Live Paint	ცოცხალი შეღებვის შექმნა
+	Make Pattern	პატერნის შექმნა
+	Make Slice	ნაჭრის შექმნა
+	Medium Gaps	საშუალო ღრეჩოები
+	Merge Live Paint	ცოცხალი შეღებვის შერწყმა
+	Mesh Point Color	ბადის წერტილის ფერი
+	Move Envelope Point	გარსის წერტილის გადაადგილება
+	Move Plane and Copy Objects	სიბრტყის გადაადგილება და ობიექტების კოპირება
+	Move Plane and Objects	სიბრტყისა და ობიექტების გადაადგილება
+	Move Slice	ნაჭრის გადაადგილება
+	Move Type on a Path	ტრაექტორიაზე ტექსტის გადაადგილება
+	Neon Glow	ნეონის ნათება
+	Neon Glow…	ნეონის ნათება…
+	New Artboard Options…	ახალი სამუშაო დაფის პარამეტრები…
+	New Guide	ახალი დამხმარე ხაზი
+	Next Artboard	შემდეგი სამუშაო დაფა
+	Paint Stops At:	შეღებვა ჩერდება:
+	Persistent	მუდმივი
+	Place from Library	ბიბლიოთეკიდან განთავსება
+	Poster Edges	პოსტერის კიდეები
+	Poster Edges…	პოსტერის კიდეები…
+	Posterization	პოსტერიზაცია
+	Previous Artboard	წინა სამუშაო დაფა
+	Rearrange Artboards	სამუშაო დაფების გადალაგება
+	Release Blend	გადასვლის მოხსნა
+	Release Envelope	გარსის მოხსნა
+	Release Intertwine	გადახლართვის მოხსნა
+	Release Live Paint	ცოცხალი შეღებვის მოხსნა
+	Release Repeat	გამეორების მოხსნა
+	Release Slice	ნაჭრის მოხსნა
+	Release Threaded Text	დაკავშირებული ტექსტის მოხსნა
+	Remove Color Profile…	ფერის პროფილის მოცილება…
+	Remove JavaScript File	JavaScript ფაილის მოცილება
+	Remove Selected Entry	მონიშნული ჩანაწერის მოცილება
+	Rename Design	დიზაინის სახელის შეცვლა
+	Rename Style	სტილის სახელის შეცვლა
+	Rename View	ხედის სახელის შეცვლა
+	Reorder Appearance	იერსახის გადალაგება
+	Reorder Artboards	სამუშაო დაფების თანმიმდევრობის შეცვლა
+	Repeating	განმეორებადი
+	Reshape Spine	ხერხემლის ფორმის შეცვლა
+	Resize	ზომის შეცვლა
+	Resize Artboard	სამუშაო დაფის ზომის შეცვლა
+	Resize Slice	ნაჭრის ზომის შეცვლა
+	Resize Type Area	ტექსტის არის ზომის შეცვლა
+	Scale Design	დიზაინის მასშტაბირება
+	Scale in Perspective	პერსპექტივაში მასშტაბირება
+	Set History Limit…	ისტორიის ლიმიტის დაყენება…
+	Shape Builder Delete	ფიგურების კონსტრუქტორით წაშლა
+	Sliding	მცოცავი
+	Small Gaps	პატარა ღრეჩოები
+	Sort Swatches	ფერის ნიმუშების დალაგება
+	Step Backward	ნაბიჯით უკან
+	Step Forward	ნაბიჯით წინ
+	Step up or down	ბიჯით გაზრდა ან შემცირება
+	Symbol Screener	სიმბოლოების გამჭვირვალობა
+	Symbol Scruncher	სიმბოლოების შეკუმშვა
+	Symbol Shifter	სიმბოლოების გადაადგილება
+	Symbol Sizer	სიმბოლოების ზომის შეცვლა
+	Symbol Spinner	სიმბოლოების შემობრუნება
+	Symbol Stainer	სიმბოლოების შეფერადება
+	Symbol Styler	სიმბოლოების სტილიზაცია
+	Text Orientation	ტექსტის ორიენტაცია
+	The name in the save panel was “{typed}”; VectorCraft added the file type's extension. Replacing the file overwrites its contents.	შენახვის პანელში სახელი იყო „{typed}“; VectorCraft-მა ფაილის ტიპის გაფართოება დაამატა. ფაილის ჩანაცვლება მის შიგთავსს გადააწერს.
+	Thread Text	ტექსტის დაკავშირება
+	Trackpad Gesture to Rotate View	ხედის შემობრუნება ტრეკპადის ჟესტით
+	Typing	აკრეფა
+	Uniformly Scaled	თანაბრად მასშტაბირებული
+	Unlock Variables	ცვლადების განბლოკვა
+	Use Document Raster Effects Resolution	დოკუმენტის რასტრული ეფექტების გარჩევადობის გამოყენება
+	Variable Font	ცვლადი შრიფტი
+	Vertically Scaled	ვერტიკალურად მასშტაბირებული
+	X11 (XWayland) When a Pen Is Attached	X11 (XWayland), როცა კალამი მიერთებულია
+	“{name}” already exists. Replace it?	„{name}“ უკვე არსებობს. ჩავანაცვლოთ?
+3d	Light	სინათლე
+@msg	Edit Original opens image and document files only; “{name}” is not one	ორიგინალის რედაქტირება მხოლოდ გამოსახულებისა და დოკუმენტის ფაილებს ხსნის; „{name}“ ასეთი არ არის
+@msg	Persistent libraries not found: {files}	მუდმივი ბიბლიოთეკები ვერ მოიძებნა: {files}
+@msg	Save writes {_1}, not {_2}: use file.saveAsTemplate to write it	„შენახვა“ წერს ფორმატს {_1} და არა {_2}: ამისთვის გამოიყენეთ file.saveAsTemplate
+@msg	The image is {_1} × {_2} pixels, more than {LARGE_TRACE_SIDE} on a side: it is traced, but more slowly. A lower-fidelity preset or a smaller copy of the image traces faster.	გამოსახულება არის {_1} × {_2} პიქსელი, ანუ ერთ მხარეზე {LARGE_TRACE_SIDE}-ზე მეტი: ის ვექტორიზდება, მაგრამ უფრო ნელა. ნაკლები სიზუსტის პრესეტი ან გამოსახულების უფრო პატარა ასლი უფრო სწრაფად ვექტორიზდება.
+@msg	The image was traced at {_1} × {_2} pixels, scaled down from {_3} × {_4} ({_5} megapixels at most).	გამოსახულება ვექტორიზდა {_1} × {_2} პიქსელზე, შემცირდა {_3} × {_4}-დან (მაქსიმუმ {_5} მეგაპიქსელი).
+@msg	`{given}` isn't a library panel (see window.swatchLibrary)	`{given}` ბიბლიოთეკის პანელი არ არის (იხ. window.swatchLibrary)
+@msg	`{key}` must be a #rrggbb color	`{key}` უნდა იყოს #rrggbb ფერი
+@msg	a key object sits on that point	ამ წერტილზე საკვანძო ობიექტი მდებარეობს
+@msg	a linked image can't become a gradient mesh: embed it first	დაკავშირებული გამოსახულება გრადიენტულ ბადედ ვერ გადაიქცევა: ჯერ ჩააშენეთ ის
+@msg	a mask has more than one art block	ნიღაბს ერთზე მეტი ნახატის ბლოკი აქვს
+@msg	a spine keeps at least two points	ხერხემალს მინიმუმ ორი წერტილი უნდა ჰქონდეს
+@msg	cancelled; nothing was changed	გაუქმდა; არაფერი შეცვლილა
+@msg	handle must be in or out	handle უნდა იყოს in ან out
+@msg	index must be ≥ 0	index უნდა იყოს ≥ 0
+@msg	library panel `{given}` isn't open	ბიბლიოთეკის პანელი `{given}` გახსნილი არ არის
+@msg	mask art ends outside a mask dictionary	ნიღბის ნახატი ნიღბის ლექსიკონის გარეთ მთავრდება
+@msg	missing number `{key}`	აკლია რიცხვი `{key}`
+@msg	no such spine point	ხერხემლის ასეთი წერტილი არ არსებობს
+@msg	no such spine segment	ხერხემლის ასეთი სეგმენტი არ არსებობს
+@msg	not a blend	ეს გადასვლა არ არის
+@msg	only http, https and mailto URLs open in the browser, not “{url}”	ბრაუზერში მხოლოდ http, https და mailto URL-ები იხსნება და არა „{url}“
+@msg	select a blend or give `id`	მონიშნეთ გადასვლა ან მიუთითეთ `id`
+@msg	t, dx and dy must be finite	t, dx და dy სასრული უნდა იყოს
+@msg	the blend has no spine	გადასვლას ხერხემალი არ აქვს
+@msg	the image has no usable size or position	გამოსახულებას არ აქვს გამოსადეგი ზომა ან პოზიცია
+@msg	the image's pixels can't be read	გამოსახულების პიქსელების წაკითხვა ვერ ხერხდება
+@msg	the spine has no segments	ხერხემალს სეგმენტები არ აქვს
+@msg	too many library panels were opened in this session	ამ სესიაში ზედმეტად ბევრი ბიბლიოთეკის პანელი გაიხსნა
+@msg	variables are locked	ცვლადები ჩაკეტილია
+@msg	x and y must be finite	x და y სასრული უნდა იყოს
+@msg	{id} opens another app: only the person at the keyboard can run it	{id} სხვა აპს ხსნის: მისი გაშვება მხოლოდ კლავიატურასთან მყოფ ადამიანს შეუძლია
+@msg	“{name}” is not a file	„{name}“ ფაილი არ არის
