@@ -1,6 +1,6 @@
 # Georgian interface
 
-> **Last reviewed:** 2026-10-13 · **Last updated:** 2026-10-17 · **Change:** minor (68 rows for strings added upstream: Export for Screens presets and file naming, hyphenation options, Simplify options, interface color scheme, Glass texture, Halftone Pattern) · **Target:** Adobe Illustrator 2026 (30.x)
+> **Last reviewed:** 2026-10-13 · **Last updated:** 2026-10-18 · **Change:** minor (174 rows for strings added upstream: SVG Interactivity, Live Paint gap options, graph column designs, Cutout, Neon Glow and Poster Edges, history and undo step names, blend spine messages) · **Target:** Adobe Illustrator 2026 (30.x)
 
 Choose **Edit › Preferences… › User Interface › Language › ქართული** (on macOS also
 **VectorCraft › Language › ქართული**), or follow a Georgian system language (`ka`, `ka-GE`,
@@ -9,7 +9,7 @@ is `auto`). The catalog code is `ka`; `app.language` with `{"lang":"ka"}` select
 choice is saved as the `interfaceLanguage` preference. Document text, command ids, menu paths used by
 scripts, CLI/MCP/control responses and file paths do not change.
 
-`crates/ui-egui/src/i18n/ka.tsv` has about 4,890 rows: every menu string, command label and `tl!`
+`crates/ui-egui/src/i18n/ka.tsv` has about 5,070 rows: every menu string, command label and `tl!`
 literal (panels, dialogs, tooltips, Preferences), the `@plural` rows and the `@msg` status and error
 messages, held complete by the tests. Left in English on purpose (`MENU_KEEP_AS_IS`): the product name,
 language names, OpenType, the built-in workspace names and the bracketed perspective grid preset names;
@@ -86,3 +86,4 @@ status and error messages, `@plural` for `one|other` sources, `@id` for a comman
 | 2026-10-13 | minor | Georgian notes and terminology; 194 rows for strings added upstream (graphs, relinking, 3D and Materials, grid tool options, file filters) |
 | 2026-10-14 | minor | 63 rows for strings added upstream (shortcut-set import and import matches, toolbar controls, Revolve lighting, corner radius); 3 retired Revolve rows removed |
 | 2026-10-17 | minor | 68 rows for strings added upstream (Export for Screens presets, folders and file-name tokens, hyphenation options, Simplify options, interface color scheme and accent color, Glass loaded texture, Halftone Pattern, graphics-processor fallback messages) |
+| 2026-10-18 | minor | 174 rows for strings added upstream (SVG Interactivity events and JavaScript files, Live Paint gap options, graph column designs, Cutout, Neon Glow and Poster Edges, History panel step commands and undo step names, artboard task bar, blend spine and library panel messages) |
