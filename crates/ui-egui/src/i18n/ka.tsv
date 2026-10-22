@@ -3843,6 +3843,7 @@ effect	Regular	ჩვეულებრივი
 @msg	no file system here	აქ ფაილური სისტემა არ არის
 @msg	no file writer	ფაილის ჩამწერი არ არის
 @msg	no files to place	განსათავსებელი ფაილები არ არის
+@msg	`{file}` isn't a VectorCraft document, a PDF or a PDF-compatible .ai file	`{file}` არ არის VectorCraft-ის დოკუმენტი, PDF ან PDF-თან თავსებადი .ai ფაილი
 @msg	no format to export to	ექსპორტის ფორმატი არ არის
 @msg	no free recovery area	აღდგენის თავისუფალი არე არ არის
 @msg	no gradient stop or freeform point is selected	გრადიენტის გადასვლის წერტილი ან თავისუფალი წერტილი მონიშნული არ არის
@@ -4109,6 +4110,7 @@ effect	Regular	ჩვეულებრივი
 @msg	Saving	შენახვა
 @msg	Saving {_1}	{_1}-ის შენახვა
 @msg	Exporting {_1}	ექსპორტირდება: {_1}
+@msg	Packaging {_1}	იფუთება: {_1}
 @msg	Saving recovery data for {_1}	{_1}-ის აღდგენის მონაცემების შენახვა
 @msg	Discarded {_1} recovered document(s)	უარყოფილია აღდგენილი დოკუმენტები: {_1}
 @msg	Restored {_1} recovered document(s): save them to keep them	აღდგენილია დოკუმენტები: {_1}: შესანარჩუნებლად შეინახეთ ისინი
@@ -4186,7 +4188,9 @@ effect	Regular	ჩვეულებრივი
 @msg	automation filesystem access is not granted: read authority is absent: {path}	ავტომატიზაციას ფაილურ სისტემაზე წვდომა არ აქვს: წაკითხვის უფლება არ არის: {path}
 @msg	automation filesystem access is not granted: write authority is absent: {path}	ავტომატიზაციას ფაილურ სისტემაზე წვდომა არ აქვს: ჩაწერის უფლება არ არის: {path}
 @msg	automation path rejected: outside the read root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირის {root} გარეთაა: {path}
+@msg	automation path rejected: outside the read roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირების {roots} გარეთაა: {path}
 @msg	automation path rejected: outside the write root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირის {root} გარეთაა: {path}
+@msg	automation path rejected: outside the write roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირების {roots} გარეთაა: {path}
 @msg	automation path rejected: path is empty	ავტომატიზაციის გზა უარყოფილია: გზა ცარიელია
 @msg	automation path rejected: a link that leads nowhere: {path}	ავტომატიზაციის გზა უარყოფილია: ბმული არსად მიდის: {path}
 @msg	automation path rejected: cannot resolve {path}: {e}	ავტომატიზაციის გზა უარყოფილია: {path} ვერ გაირკვა: {e}
@@ -5004,6 +5008,10 @@ imageTrace	Outline	კონტური
 	Halftone Pattern	ნახევარტონური პატერნი
 	Torn Edges…	დაგვერძნილი კიდეები…
 	Torn Edges	დაგვერძნილი კიდეები
+	Conté Crayon…	კონტე ფანქარი…
+	Conté Crayon	კონტე ფანქარი
+	Foreground Level	წინა პლანის დონე
+	Background Level	ფონის დონე
 	Pattern Type	პატერნის ტიპი
 	Dot	წერტილი
 	Color Scheme	ფერის სქემა
