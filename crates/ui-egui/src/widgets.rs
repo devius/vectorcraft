@@ -1099,10 +1099,16 @@ pub fn popover<R>(resp: &Response, toggle: bool, content: impl FnOnce(&mut Ui) -
         !was_open
     } else {
         // Popups (this one and those it opened) are on foreground layers; a click anywhere
-        // else closes it.
-        let clicked_elsewhere = ctx
-            .input(|i| i.pointer.any_click().then(|| i.pointer.interact_pos()).flatten())
-            .is_some_and(|pos| ctx.layer_id_at(pos).is_none_or(|l| l.order != egui::Order::Foreground));
+        // else closes it. While the pointer is down or a panel paint drag is active, keep the
+        // popover open so a Fill/Stroke proxy drag can finish (#3440).
+        let pointer_down = ctx.input(|i| i.pointer.any_down());
+        let panel_drag = egui::DragAndDrop::payload::<PanelDrag>(ctx).is_some();
+        let click_pos = ctx.input(|i| i.pointer.any_click().then(|| i.pointer.interact_pos()).flatten());
+        let clicked_anchor = click_pos.is_some_and(|pos| resp.rect.contains(pos));
+        let clicked_elsewhere = !pointer_down
+            && !panel_drag
+            && !clicked_anchor
+            && click_pos.is_some_and(|pos| ctx.layer_id_at(pos).is_none_or(|l| l.order != egui::Order::Foreground));
         was_open && !clicked_elsewhere
     };
     let inner =
@@ -1167,6 +1173,22 @@ pub fn strip_scroll<R>(ui: &mut Ui, id: &str, add_contents: impl FnOnce(&mut Ui)
             ..egui::style::ScrollStyle::floating()
         };
         egui::ScrollArea::vertical().id_salt(id).auto_shrink([false, true]).show(ui, add_contents).inner
+    })
+    .inner
+}
+
+/// A panel's scrolling body (Properties, a dock column, a panel in the shared dock): `area` with
+/// the scroll bar of a menu's list ([`list_scroll_style`]), in a column of its own at the right
+/// edge, so it never covers the controls there, such as a dropdown's arrow (#3093). The scroll
+/// areas inside the body keep their own style.
+pub fn panel_scroll<R>(ui: &mut Ui, area: egui::ScrollArea, add_contents: impl FnOnce(&mut Ui) -> R) -> R {
+    ui.scope(|ui| {
+        let inner = std::mem::replace(&mut ui.spacing_mut().scroll, list_scroll_style());
+        area.show(ui, |ui| {
+            ui.spacing_mut().scroll = inner;
+            add_contents(ui)
+        })
+        .inner
     })
     .inner
 }

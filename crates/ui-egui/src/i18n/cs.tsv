@@ -781,7 +781,7 @@
 	Units	Jednotky
 	Guides & Grid	Vodítka a mřížka
 	Hyphenation	Dělení slov
-	Performance & Storage	Výkon a úložiště
+	Plug-ins & Scratch Disks	Zásuvné moduly & Odkládací disky
 	User Interface	Uživatelské rozhraní
 	Performance	Výkon
 	File Handling	Práce se soubory
@@ -5402,6 +5402,16 @@ mark-style	Japanese	Japonské
 	Fresco	Freska
 	Effect Gallery…	Galerie efektů…
 	Effect Gallery Dialog	Dialog Galerie efektů
+	Arc Segment Tool Options	Možnosti nástroje Obloukový segment
+	Base Along:	Základna podél:
+	Closed	Uzavřený
+	Convex	Konvexní
+	Fill Arc	Výplň oblouku
+	Length X-Axis:	Délka na ose X:
+	Length Y-Axis:	Délka na ose Y:
+	Slope:	Sklon:
+axis	X Axis	osa X
+axis	Y Axis	osa Y
 @msg	Packaged {n} file(s) in {folder}	Zabaleno souborů: {n} do {folder}
 @msg	Packaged {n} file(s) {note}	Zabaleno souborů: {n} {note}
 @msg	Packaged {n} file(s)	Zabaleno souborů: {n}
