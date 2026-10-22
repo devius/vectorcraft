@@ -5321,3 +5321,7 @@ imageTrace	Outline	კონტური
 	Packaged {n} file(s) in {folder}	შეფუთულია ფაილი ({n}) საქაღალდეში {folder}
 	Packaged {n} file(s) {note}	შეფუთულია ფაილი ({n}) {note}
 	{count} file(s) in {folder}. Show the package folder?	ფაილები: {count}, ადგილი: {folder}. ვაჩვენოთ შეფუთვის საქაღალდე?
+	Create PDF layers from top-level layers	PDF-ის ფენების შექმნა ზედა დონის ფენებიდან
+@msg	this kind of brush has no options dialog yet	ამ ტიპის ფუნჯს პარამეტრების დიალოგი ჯერ არ აქვს
+	Drag art, colors and text styles here to reuse them across documents. Libraries are stored on this machine — no account required.	გადმოათრიეთ აქ გრაფიკა, ფერები და ტექსტის სტილები, რომ სხვა დოკუმენტებშიც გამოიყენოთ. ბიბლიოთეკები ამ კომპიუტერზე ინახება — ანგარიში არ არის საჭირო.
+	Choose a filter	ფილტრის არჩევა
