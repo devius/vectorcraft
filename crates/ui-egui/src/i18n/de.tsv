@@ -169,6 +169,8 @@
 	Anti-aliased Artwork	Geglättete Grafik
 	Anti-aliasing:	Glättung:
 	Any Kind	Beliebige Art
+	Font Technology	Schrifttechnologie
+font-technology	Variable	Variabel
 	Appearance	Aussehen
 	Appearance Attribute	Aussehensattribut
 	Appearance Item	Aussehenselement
@@ -3751,6 +3753,7 @@ theme	Appearance	Erscheinungsbild
 @msg	Opened {url}	{url} geöffnet
 @msg	Outline Stroke: no stroked paths selected	Konturlinie: keine Pfade mit Kontur ausgewählt
 @msg	PDF settings are not an object	die PDF-Einstellungen sind kein Objekt
+@msg	PDF security settings are not an object	die PDF-Sicherheitseinstellungen sind kein Objekt
 @msg	PDF writer error: {0}	Fehler beim Schreiben der PDF-Datei: {0}
 @msg	Packaged {n} file(s) in {folder} {note}	{n} Datei(en) in {folder} verpackt{note}
 @msg	Packaged {n} file(s){note}	{n} Datei(en) verpackt{note}
