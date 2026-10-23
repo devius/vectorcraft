@@ -505,4 +505,41 @@ fn dimension_colours_follow_the_document_colour_model() {
     let line = edge(&mut s);
     let id = dim(&mut s, line);
     assert!(colours(&s, id).iter().all(|c| *c == vectorcraft_color::Color::rgb8(0, 0, 0)));
+    // Document Color Mode redraws dimensions in the new mode: K-only black in CMYK, RGB black back
+    // in RGB (not a profile conversion of the old art).
+    let k = vectorcraft_color::Color::cmyk(0.0, 0.0, 0.0, 1.0);
+    run(&mut s, "file.documentColorMode", json!({"mode":"cmyk"}));
+    let after = colours(&s, id);
+    assert!(!after.is_empty() && after.iter().all(|c| *c == k), "{after:?}");
+    run(&mut s, "file.documentColorMode", json!({"mode":"rgb"}));
+    assert!(colours(&s, id).iter().all(|c| *c == vectorcraft_color::Color::rgb8(0, 0, 0)), "{:?}", colours(&s, id));
+    // A CMYK file saved with RGB dimension art (before dimensions followed the colour mode) opens
+    // with its dimensions redrawn in CMYK.
+    let mut old = (*s.doc().unwrap().doc).clone();
+    old.color_mode = vectorcraft_doc::ColorMode::Cmyk;
+    s.add_document(old, None);
+    let opened = colours(&s, id);
+    assert!(!opened.is_empty() && opened.iter().all(|c| *c == k), "{opened:?}");
+    // Only the label's characters in RGB (their fill is saved apart from the node's): redrawn too.
+    let mut old = (*s.doc().unwrap().doc).clone();
+    let label = {
+        let mut found = None;
+        old.node(NodeId(id)).unwrap().walk(&mut |n| {
+            if matches!(n.kind, vectorcraft_doc::NodeKind::Text(_)) {
+                found = Some(n.id);
+            }
+        });
+        found.expect("a dimension label")
+    };
+    if let Some(vectorcraft_doc::NodeKind::Text(t)) = old.node_mut(label).map(|n| &mut n.kind) {
+        for r in &mut t.runs {
+            r.style.fill = vectorcraft_color::Paint::solid(vectorcraft_color::Color::rgb8(0, 0, 0));
+        }
+    }
+    s.add_document(old, None);
+    let runs = |s: &Session| match &s.doc().unwrap().doc.node(label).unwrap().kind {
+        vectorcraft_doc::NodeKind::Text(t) => t.runs.iter().filter_map(|r| r.style.fill.color()).collect::<Vec<_>>(),
+        _ => Vec::new(),
+    };
+    assert!(!runs(&s).is_empty() && runs(&s).iter().all(|c| *c == k), "{:?}", runs(&s));
 }

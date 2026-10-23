@@ -28,8 +28,10 @@ use vectorcraft_tools::{PaintDefaults, Tool};
 
 pub use cmd::EyedropperOptions;
 pub use cmd::clipboard::Clipboard;
+pub use cmd::create::constrain_click;
 pub use cmd::distortcmds::perspective_click;
 pub use cmd::params::{check_keys, check_params};
+pub use cmd::pathops::auto_simplify_level;
 pub use cmd::rasterfx::{export_pdf, flatten_raster_effects};
 pub use cmd::{CommandInfo, CommandSpec, command_specs, find_command};
 pub use journal::Journal;
@@ -1373,6 +1375,9 @@ pub struct Session {
     /// Where the plug-ins `plugin.install` installs are kept; `None`: only for the process
     /// ([`Session::attach_plugin_store`]).
     plugin_dir: Option<std::path::PathBuf>,
+    /// A filter's output that a run made in the background handed in for `plugin.run` to apply
+    /// ([`cmd::plugin::FilterRun::hand_in`]); the next `plugin.run` takes it.
+    plugin_output: Option<cmd::plugin::HandedIn>,
     /// URLs recently given in the Attributes panel (`attributes.set {url}`), newest first; not saved.
     pub recent_urls: Vec<String>,
     /// The language the UI is drawn in (a language code, never `auto`), set by the UI each frame;
@@ -1388,9 +1393,23 @@ pub struct Session {
     /// While `command.batch` runs: the documents its steps closed or replaced (Revert), which an
     /// error brings back; `None` otherwise.
     pub(crate) batch_stash: Option<Vec<DocState>>,
+    /// While [`Session::place_read`] runs `file.place`: the file read for it, which the command
+    /// places instead of reading the file; `None` otherwise.
+    pub(crate) place_hand_off: Option<cmd::place::PlaceRead>,
+    /// While [`Session::place_queue_read`] runs `file.place.queue`: the files read for it, which
+    /// the command loads the place cursor with instead of reading them; `None` otherwise.
+    pub(crate) queue_hand_off: Option<cmd::place::QueueRead>,
+    /// Whether a click or drag of the place cursor asks the frontend to place its file
+    /// ([`UiRequest::Place`]) instead of running `file.place`: the desktop app sets it to read the
+    /// file off the UI thread. False: the file is placed at once.
+    pub place_cursor_requests: bool,
     /// While [`Session::prepare_package`] runs `file.package`: the package the command prepared,
     /// which it leaves here instead of writing it; `None` otherwise.
     pub(crate) package_hand_off: Option<Option<cmd::package::Package>>,
+    /// While [`Session::prepare_screen_export`] runs `document.exportForScreens` or
+    /// `assets.export`: the export the command prepared, which it leaves here instead of writing
+    /// it; `None` otherwise.
+    pub(crate) screens_hand_off: Option<Option<cmd::fileio::ScreenExport>>,
     /// Where Data Recovery keeps its copies ([`cmd::recovery`]).
     pub recovery: cmd::recovery::Recovery,
     /// While the active tool's actions run: their commands aren't "a command from outside the
@@ -1439,12 +1458,17 @@ impl Default for Session {
 }
 
 impl Session {
+    /// A session with no document open, the default preferences and the Selection tool. It also
+    /// installs the hooks the document crate calls back into: the loader and file reader of placed
+    /// documents, and where an image's effects draw its fills and strokes, for clicks.
     pub fn new() -> Self {
         // Placed documents are read by the native format's loader.
         vectorcraft_doc::placed_document::set_loader(cmd::place::document::read_document);
         vectorcraft_doc::placed_document::set_file_reader(cmd::place::document::read_file_again);
         // Clicks find an image's own fills and strokes where their effects draw them.
         vectorcraft_doc::hit::set_image_paint(vectorcraft_render::effects::image_paint);
+        // OpenType SVG glyphs are drawn as the SVG importer reads their documents.
+        vectorcraft_text::set_svg_glyph_reader(vectorcraft_svg::glyph_art);
         Self {
             docs: vec![],
             active: None,
@@ -1479,12 +1503,17 @@ impl Session {
             pdf_preset_dir: None,
             profile_dir: None,
             plugin_dir: None,
+            plugin_output: None,
             recent_urls: vec![],
             ui_language: None,
             journal_note: Default::default(),
             note_depth: 1,
             batch_stash: None,
+            place_hand_off: None,
+            queue_hand_off: None,
+            place_cursor_requests: false,
             package_hand_off: None,
+            screens_hand_off: None,
             recovery: Default::default(),
             in_tool_actions: false,
             previewing: false,
@@ -1587,6 +1616,7 @@ impl Session {
         Self::refresh_text_bounds(&mut doc);
         // Guides from files saved before guides had layers go on a layer.
         doc.adopt_guides();
+        cmd::dimension::conform(&mut doc);
         self.reset_tool_for_doc_switch();
         let mut st = DocState::new(doc, path);
         st.history.limit = self.prefs.history_states as usize;
@@ -1604,6 +1634,7 @@ impl Session {
         doc.limit_depth();
         Self::refresh_text_bounds(&mut doc);
         doc.adopt_guides();
+        cmd::dimension::conform(&mut doc);
         if self.active == Some(index) {
             // Pending tool work (typing, a drag) belongs to the content being thrown away.
             self.reset_tool_for_doc_switch();
@@ -2321,7 +2352,13 @@ mod tests_colormgmt;
 #[cfg(test)]
 mod tests_colorthemes;
 #[cfg(test)]
+mod tests_colourfonts;
+#[cfg(test)]
 mod tests_compoundpaint;
+#[cfg(test)]
+mod tests_constrain_new;
+#[cfg(test)]
+mod tests_constrain_tools;
 #[cfg(test)]
 mod tests_containers;
 #[cfg(test)]
@@ -2572,6 +2609,8 @@ mod tests_tileedge;
 mod tests_tints;
 #[cfg(test)]
 mod tests_toolsettings;
+#[cfg(test)]
+mod tests_transformfx;
 #[cfg(test)]
 mod tests_transparencygrid;
 #[cfg(test)]
