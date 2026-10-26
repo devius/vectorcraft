@@ -5526,8 +5526,8 @@ axis	Y Axis	Y ღერძი
 @msg	the document has no brushes to save	დოკუმენტში შესანახი ფუნჯები არ არის
 @msg	no empty artboards to delete	წასაშლელი ცარიელი სამუშაო დაფები არ არის
 	Scale Presets	მასშტაბის წინასწარ დაყენებული მნიშვნელობები
-@msg	a {width}×{height} screenshot's byte count overflows	{width}×{height} ეკრანის სურათის ბაიტების რაოდენობა გადაივსო
-@msg	the window's {what} ({points} points × {scale} DPI) cannot size a screenshot	ფანჯრის {what} ({points} პუნქტი × {scale} DPI) ეკრანის სურათის ზომას ვერ განსაზღვრავს
+@msg	a {width}×{height} screenshot's byte count overflows	{width}×{height} ეკრანის ანაბეჭდის ბაიტების რაოდენობა გადაივსო
+@msg	the window's {what} ({points} points × {scale} DPI) cannot size a screenshot	ფანჯრის {what} ({points} პუნქტი × {scale} DPI) ეკრანის ანაბეჭდის ზომას ვერ განსაზღვრავს
 	Live preview	ცოცხალი წინასწარი ნახვა
 # Batch dialog, PDF presets, Dimension Tool Options and the built-in swatch names (swatches.rs: t_name("swatch", …)).
 	Gutter	შუალედი
