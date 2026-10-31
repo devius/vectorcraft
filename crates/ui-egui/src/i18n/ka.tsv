@@ -5783,7 +5783,7 @@ anchor	Points:	წერტილები:
 	Close Path:	ტრაექტორიის შეკვრა:
 	Keep Handles	სახელურების შენარჩუნება
 	Straight	სწორი
-	Stretch Curve	მრუდის გაჭიმვა
+	Stretch Curve	მრუდის გაწელვა
 @msg	direct-select the anchor points to remove	პირდაპირ მონიშნეთ მოსაცილებელი საყრდენი წერტილები
 @msg	select segments, or paths, to add points to	მონიშნეთ სეგმენტები ან ტრაექტორიები წერტილების დასამატებლად
 @msg	select open paths to close	მონიშნეთ შესაკრავი ღია ტრაექტორიები
@@ -5901,7 +5901,7 @@ anchor	Points:	წერტილები:
 	Combine Point Text	წერტილის ტექსტის გაერთიანება
 	Remove Breaks	წყვეტების წაშლა
 	Split Text at Cursor	ტექსტის დაყოფა კურსორთან
-	Set Alignment, Keep Position	სწორების დაყენება მდებარეობის შენარჩუნებით
+	Set Alignment, Keep Position	სწორების დაყენება პოზიციის შენარჩუნებით
 	Reset Text Transform	ტექსტის გარდაქმნის ჩამოყრა
 	Replace Missing Fonts…	დაკარგული შრიფტების ჩანაცვლება…
 	Replace Missing Fonts	დაკარგული შრიფტების ჩანაცვლება
@@ -5912,7 +5912,7 @@ anchor	Points:	წერტილები:
 	Break Text into Words	ტექსტის დაყოფა სიტყვებად
 	Break Text into Glyphs	ტექსტის დაყოფა გლიფებად
 	Reset Text Transform and Scale	ტექსტის გარდაქმნისა და მასშტაბის ჩამოყრა
-	Set Alignment, Keep Position:	სწორების დაყენება მდებარეობის შენარჩუნებით:
+	Set Alignment, Keep Position:	სწორების დაყენება პოზიციის შენარჩუნებით:
 	Break Text into:	ტექსტის დაყოფა:
 	Split at Cursor	დაყოფა კურსორთან
 	Reset Transform	გარდაქმნის ჩამოყრა
@@ -5921,7 +5921,7 @@ anchor	Points:	წერტილები:
 breakText	Lines	სტრიქონები
 breakText	Words	სიტყვები
 breakText	Glyphs	გლიფები
-@msg	Click in type with a Type tool to split it	დასაყოფად დააწკაპუნეთ ტექსტში ტექსტის ხელსაწყოთი
+@msg	Click in type with a Type tool to split it	დასაყოფად დაწკაპეთ ტექსტში ტექსტის ხელსაწყოთი
 @msg	Too many type objects to change at once	ერთდროულად შესაცვლელად ძალიან ბევრი ტექსტური ობიექტია
 @msg	Too many pieces to make at once	ერთდროულად შესაქმნელად ძალიან ბევრი ნაწილია
 @msg	Select horizontal point or area type whose text fits	აირჩიეთ ჰორიზონტალური წერტილის ან არის ტექსტი, რომლის ტექსტიც ეტევა
@@ -5979,3 +5979,22 @@ breakText	Glyphs	გლიფები
 	Gap 4	შუალედი 4
 	Dash 5	ტირე 5
 	Gap 5	შუალედი 5
+	Check for Updates…	განახლებების შემოწმება…
+	Checking for updates…	განახლებების შემოწმება…
+	Could not check for updates:\n{error}	განახლებების შემოწმება ვერ მოხერხდა:\n{error}
+	VectorCraft Updates	VectorCraft-ის განახლებები
+	VectorCraft {version} is currently the newest version available.	VectorCraft {version} ამჟამად უახლესი ხელმისაწვდომი ვერსიაა.
+	Preparing the image…	გამოსახულების მომზადება…
+	Tracing the colors…	ფერების ვექტორიზაცია…
+	Invalid panel layout; restored the default dock	პანელების განლაგება არასწორია; აღდგენილია ნაგულისხმევი დოკი
+	Include All Subdirectories	ყველა ქვესაქაღალდის ჩართვა
+	Save and Close	შენახვა და დახურვა
+	Load Variable Library	ცვლადების ბიბლიოთეკის ჩატვირთვა
+shape	Open	ღია
+font-script	Japanese	იაპონური
+	Japanese Postcard	იაპონური ღია ბარათი
+	Japanese Double Postcard	იაპონური ორმაგი ღია ბარათი
+	Japanese Envelope #3	იაპონური კონვერტი #3
+	Japanese Envelope #4	იაპონური კონვერტი #4
+@msg	image '{key}' has no pixels and was left out	გამოსახულებას '{key}' პიქსელები არ აქვს და გამოტოვდა
+@msg	not an RTF file: it doesn't start with {\\rtf	RTF ფაილი არ არის: არ იწყება {\\rtf-ით
