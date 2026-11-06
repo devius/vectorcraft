@@ -392,6 +392,14 @@ fn work_on_the_longest_dash_pattern_ends_soon() {
 }
 
 #[test]
+fn a_chain_of_filters_over_the_program_is_bounded() {
+    let r = read_soon("0 0 10 10 rectfill currentfile 100 { 0 (x) /SubFileDecode filter } repeat pop 20 20 10 10 rectfill");
+    assert!(r.warnings.iter().any(|w| w.contains("too many filters")), "{:?}", r.warnings);
+    let r = read_soon("0 0 10 10 rectfill currentfile 3 { 0 (x) /SubFileDecode filter } repeat pop 20 20 10 10 rectfill");
+    assert!(r.warnings.is_empty(), "{:?}", r.warnings);
+}
+
+#[test]
 fn procedures_bind_def_loops_and_dictionaries() {
     let r = read(
         "/bd {bind def} bind def /sq {newpath moveto 10 0 rlineto 0 10 rlineto -10 0 rlineto closepath fill} bd \
@@ -1391,4 +1399,11 @@ fn stored_graphics_states_use_up_the_memory_budget() {
         let r = read_soon(&format!("0 0 10 10 rectfill {path} {body}"));
         assert!(r.warnings.iter().any(|w| w.contains("uses too much memory")), "{body}: {:?}", r.warnings);
     }
+}
+
+/// `bitshift` by the most negative integer shifts right by everything, not a negation overflow.
+#[test]
+fn bitshift_by_the_most_negative_integer_does_not_panic() {
+    let r = read("0 0 10 10 rectfill 1 -9223372036854775808 bitshift pop -1 -9223372036854775808 bitshift pop");
+    assert_eq!(objects(&r.document).len(), 1, "{:?}", r.warnings);
 }

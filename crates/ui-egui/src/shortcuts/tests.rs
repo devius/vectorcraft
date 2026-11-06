@@ -902,6 +902,30 @@ fn press(key: Key, m: Modifiers) -> Vec<egui::Event> {
     vec![egui::Event::ModifiersChanged(m), egui::Event::Key { key, physical_key: Some(key), pressed: true, repeat: false, modifiers: m }]
 }
 
+#[test]
+fn enclosing_lasso_escape_cancels_and_q_returns_to_anchor_lasso() {
+    use vectorcraft_tools::{PointerEvent, PointerKind};
+
+    let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Default::default());
+    crate::shortcut_editor::sync(&app.ui);
+    app.run("file.new", json!({"width": 400, "height": 300})).unwrap();
+    let id = app.run("shape.rectangle", json!({"x": 100, "y": 100, "width": 100, "height": 100})).unwrap()["id"].as_u64().unwrap();
+    app.run("select.set", json!({"ids": [id]})).unwrap();
+    app.select_tool(vectorcraft_tools::addons::enclosing_lasso::ID);
+    let view = app.view_info();
+    app.session.pointer(&PointerEvent::new(PointerKind::Down, 90.0, 90.0), view).unwrap();
+    app.session.pointer(&PointerEvent::new(PointerKind::Drag, 210.0, 90.0), view).unwrap();
+    assert!(app.session.tool_busy());
+    frame(&mut app, press(Key::Escape, Modifiers::NONE));
+    assert!(!app.session.tool_busy());
+    app.session.pointer(&PointerEvent::new(PointerKind::Up, 90.0, 210.0), view).unwrap();
+    assert_eq!(app.session.active().unwrap().selection.objects, vec![vectorcraft_doc::NodeId(id)]);
+    let mut keys = press(Key::Q, Modifiers::NONE);
+    keys.push(egui::Event::Text("q".into()));
+    frame(&mut app, keys);
+    assert_eq!(app.session.tool_id(), "lasso");
+}
+
 /// Binds Show Grid to `chord`, or with `None` leaves every command its default shortcut.
 fn bind_grid(app: &mut VectorcraftApp, chord: Option<&str>) {
     app.ui.shortcut_overrides.clear();
@@ -1943,7 +1967,7 @@ fn parses() {
 
 /// An IME replacement on the Type tool arrives as `DeleteSurroundingBytes` + `Commit` events
 /// and is taken once, in order: the marked text is dropped, the committed text replaces it, and
-/// the events never reach `route_type_input` as typed characters.
+/// the events are never typed as characters.
 #[test]
 fn ime_delete_surrounding_bytes_edits_the_type_tool_once() {
     use vectorcraft_tools::{PointerEvent, PointerKind};
