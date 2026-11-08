@@ -74,7 +74,7 @@
 	CMYK Color	CMYK ფერი
 	RGB Color	RGB ფერი
 	File Info…	ფაილის ინფორმაცია…
-	Print…	დაბეჭდვა…
+	Print…	ბეჭდვა…
 	Edit	რედაქტირება
 	Undo	დაბრუნება
 	Redo	ხელახლა შესრულება
@@ -3386,7 +3386,7 @@ effect	Points	წერტილები
 	Discard Empty Type	ცარიელი ტექსტის მოცილება
 	Copyright	საავტორო უფლება
 	Other	სხვა
-	Print	დაბეჭდვა
+	Print	ბეჭდვა
 	Solid	მთლიანი
 	Difference	სხვაობა
 	Flatten Transparency	გამჭვირვალობის გაბრტყელება
@@ -3621,7 +3621,7 @@ font-technology	Variable	ცვლადი
 	Flip:	არეკვლა:
 	Spacing:	ინტერვალი:
 	Output	გამოტანა
-	Export…	ექსპორტი…
+	Export…	ექსპორტირება…
 	Import…	იმპორტი…
 	Load Profile…	პროფილის ჩატვირთვა…
 	Embedded	ჩაშენებული
@@ -4627,7 +4627,7 @@ font-technology	Variable	ცვლადი
 	Bicubic	ბიკუბური
 	Minimum	მინიმალური
 	Run Length	Run Length
-	Roman	ლათინური
+	Roman	რომაული
 	No conversion	გარდაქმნის გარეშე
 	Convert to destination	სამიზნეში გარდაქმნა
 	Convert to destination (preserve numbers)	სამიზნეში გარდაქმნა (რიცხვების შენარჩუნებით)
