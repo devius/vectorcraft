@@ -1604,12 +1604,14 @@ fn create_in_path(s: &mut Session, p: &Value) -> Result<Value> {
         path_spacing: 0.0,
         wrap: Vec::new(),
         optical_margin: false,
+        anti_alias: Default::default(),
         system_layout: false,
         fractional_widths: true,
         list_count: 0,
         list_level_counts: Vec::new(),
         cached_bounds: None,
         cached_baselines: Vec::new(),
+        cached_ink: None,
     };
     super::create::new_type_alignment(s, p, C, &mut t)?;
     if !on_path {
@@ -1893,12 +1895,14 @@ fn headline_tracking(t: &TextObject, target: f64) -> Option<f64> {
             path_spacing: 0.0,
             wrap: Vec::new(),
             optical_margin: false,
+            anti_alias: Default::default(),
             system_layout: t.system_layout,
             fractional_widths: t.fractional_widths,
             list_count: 0,
             list_level_counts: Vec::new(),
             cached_bounds: None,
             cached_baselines: Vec::new(),
+            cached_ink: None,
         };
         for r in &mut h.runs {
             r.style.tracking = tr;

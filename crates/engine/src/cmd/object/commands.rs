@@ -251,7 +251,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Object Properties",
             [],
             None,
-            "{ids?|id?, name?, visible?, locked? (visible: false or locked: true deselects every selected object hidden or locked after the call, the key object included), opacity?: 0..100, blend?: \"Multiply\"…, isolate?, knockout?: \"on\"|\"off\"|\"neutral\"|bool (true = on, false = neutral), knockoutShape?: bool, data?: {key: \"value\" | null (removes it)} (the object's own data, SVG data-* attributes: {pivot: \"100,180\"} is data-pivot; document.node → attrs.data)}",
+            "{ids?|id?, name?, visible?, locked? (visible: false or locked: true deselects every selected object hidden or locked after the call, the key object included), opacity?: 0..100, blend?: \"Multiply\"…, isolate?, knockout?: \"on\"|\"off\"|\"neutral\"|bool (true = on, false = neutral), knockoutShape?: bool, data?: {key: \"value\" | null (removes it)} (the object's own data, SVG data-* attributes: {pivot: \"100,180\"} is data-pivot; document.node → attrs.data)}. On a path directly in a graph series, the graph also stores the object's opacity and blend mode (exceptions: docs/mcp.md)",
             has_doc,
             set_props
         ),
@@ -287,7 +287,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Set Bounds",
             [],
             None,
-            "{x?, y?, width?, height?, reference?: 0..8 (9-point grid; a number past 8 is read as 8), proportional?, strokes?, corners?, copy?: bool, patterns?: bool (Transform Patterns), typeAreas?: bool (area type: the frame is reshaped and the text reflows at its size), objects?: bool (Transform Objects, as object.move)} (Transform panel; width/height and the reference point follow the bounding box, rotated with rotated objects; x, y are page coordinates; with Use Preview Bounds the values measure the visual bounds; strokes/corners as object.scale; with anchor points selected (Direct Selection) and no copy, the values are the box around those points, square to the page, and only they move or scale, as with object.move (#1824))",
+            "{x?, y?, width?, height?, reference?: 0..8 (9-point grid; a number past 8 is read as 8), proportional?, strokes?, corners?, copy?: bool, patterns?: bool (Transform Patterns), typeAreas?: bool (area type: the frame is reshaped and the text reflows at its size), objects?: bool (Transform Objects, as object.move)} (Transform panel; width/height and the reference point follow the bounding box, rotated with rotated objects; x, y are page coordinates; with Use Preview Bounds the values measure the visual bounds; with the typeGlyphBounds preference, each point type object selected as an object (not inside a selected group) is measured by its glyphs' ink (underline and strikethrough included), which the scale gives the size asked for; strokes/corners as object.scale; with anchor points selected (Direct Selection) and no copy, the values are the box around those points, square to the page, and only they move or scale, as with object.move (#1824))",
             has_selection,
             set_bounds
         ),

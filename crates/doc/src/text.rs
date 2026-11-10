@@ -23,10 +23,10 @@ pub use composite::{
     CompositeParts,
 };
 pub use para_style::{
-    Burasagari, Composer, FirstBaseline, HyphenationOptions, JustificationOptions, Justify, Kashida, Kinsoku, LeadingModel, Mojikumi, ParaDirection,
-    ParaStyle, SingleWordJustify,
+    Burasagari, Composer, FirstBaseline, HyphenationOptions, JustificationOptions, Justify, Kashida, Kinsoku, KinsokuShoriType, LeadingModel,
+    Mojikumi, ParaDirection, ParaStyle, SingleWordJustify,
 };
-pub use runs::{INLINE_CHAR, INLINE_MAX_SCALE, InlineArt, RubyAlign, RubyPosition, RubySpan, TextKind, TextRun, TextStyleDef};
+pub use runs::{INLINE_CHAR, INLINE_MAX_SCALE, InlineArt, RubyAlign, RubyPosition, RubySpan, TextKind, TextRun, TextStyleDef, TypeAntiAlias};
 pub use tabs_lists::{
     Bullet, DEFAULT_TAB_INTERVAL, LIST_HANGING_INDENT, LIST_LEVEL_INDENT, LIST_LEVELS, ListAlign, ListCounts, NumberStyle, ParaList, TabAlign,
     TabStop,
@@ -86,6 +86,11 @@ pub struct TextObject {
     /// Off for new type and for documents from before it, and saved only when on.
     #[serde(default, rename = "opticalMarginAlignment", skip_serializing_if = "crate::skip::is_default")]
     pub optical_margin: bool,
+    /// Character panel › Anti-aliasing Method: how the type's edges are drawn as pixels. Each
+    /// frame of a thread keeps its own method. Sharp for new type and for documents from before it,
+    /// and saved only when it is another method.
+    #[serde(default, rename = "antiAlias", skip_serializing_if = "crate::skip::is_default")]
+    pub anti_alias: TypeAntiAlias,
     /// Character panel menu › System Layout, copied from the document: when on, each character
     /// that takes space advances by a whole number of points. Off by default, and saved only when
     /// on. The document setting is [`crate::DocSetup::system_layout`].
@@ -116,6 +121,12 @@ pub struct TextObject {
     /// vertical column's centre line), filled in with `cached_bounds` (not serialized).
     #[serde(skip)]
     pub cached_baselines: Vec<(Point, Point)>,
+    /// Cached ink of the glyphs in text space, underline and strikethrough bars included
+    /// (`vectorcraft_effects::preview::laid_out_ink`, `None` when nothing draws),
+    /// with the `cached_bounds` it was measured with: filled in with `cached_bounds` by the engine's
+    /// text edits, and stale once `cached_bounds` differs ([`Self::ink`]). Not serialized.
+    #[serde(skip)]
+    pub cached_ink: Option<(Rect, Option<Rect>)>,
 }
 
 /// Conversion from stored character attributes to document-space type controls.
