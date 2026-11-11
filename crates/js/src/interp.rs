@@ -181,10 +181,22 @@ pub(crate) struct Interp {
     pub(crate) held: Rc<HeldCount>,
     /// Set by the host to end the current slice of a resumable run at the next safe point.
     pub(crate) pause: Rc<std::cell::Cell<bool>>,
+    /// The outermost loop of a resumable run is running ([`crate::Realm::advance`]).
+    pub(crate) in_slice: bool,
+    /// True while a host function runs where it may wait ([`crate::HostError::Wait`]).
+    pub(crate) can_wait: Rc<std::cell::Cell<bool>>,
+    /// A host function's call waits for its result: the value on top of the stack stands in for it.
+    pub(crate) waiting: bool,
     /// The message of the uncatchable error a host function ended the run with.
     pub(crate) host_abort: Option<String>,
     /// How much a value passed to or from a host function may carry.
     pub(crate) data_limits: crate::DataLimits,
+    /// The tag the source compiled next gets ([`crate::Realm::error_source`]).
+    pub(crate) source_tag: u32,
+    /// The sources [`crate::HostItem::Evaluator`] functions have given in this realm.
+    pub(crate) evaluated: u32,
+    /// The tag of the source the last run's error was raised in.
+    pub(crate) error_tag: u32,
 }
 
 /// The bytes all live [`HeldBytes`] hold, and the bytes dropped holders released that the heap's
@@ -374,8 +386,14 @@ impl Interp {
             date_host: crate::date_builtins::DateHost::default(),
             held: Rc::default(),
             pause: Rc::default(),
+            in_slice: false,
+            can_wait: Rc::default(),
+            waiting: false,
             host_abort: None,
             data_limits: crate::DataLimits::default(),
+            source_tag: crate::realm::UNKNOWN_SOURCE,
+            evaluated: 0,
+            error_tag: crate::realm::UNKNOWN_SOURCE,
         };
         crate::builtins::install(&mut interp);
         interp.fuel = limits.fuel;
@@ -414,7 +432,7 @@ impl Interp {
 
     // ---- the operand stack ----
 
-    fn push(&mut self, v: Value) -> JsResult<()> {
+    pub(crate) fn push(&mut self, v: Value) -> JsResult<()> {
         self.stack.push(v);
         Ok(())
     }
@@ -1846,11 +1864,12 @@ impl Interp {
                     self.temp_roots.truncate(mark);
                     return Ok(Prepared::Done(r?));
                 }
-                Func::Data { f, name } => {
+                Func::Data { f, name, read } => {
                     // The arguments are read before the function runs, and a result being built
                     // keeps itself reachable.
-                    return Ok(Prepared::Done(self.call_data(&f, &name, &args)?));
+                    return Ok(Prepared::Done(self.call_data(&f, &name, &args, &read)?));
                 }
+                Func::Eval { f, end, name } => return Ok(Prepared::Done(self.call_evaluator(&f, &end, &name, &args)?)),
                 Func::Host { f: host, .. } => {
                     let js_args: Vec<crate::JsValue> = args.iter().map(|v| self.to_js_value(v)).collect();
                     return match host(&js_args) {
@@ -2123,7 +2142,7 @@ impl Interp {
         let remaining = self.options.max_source_units.saturating_sub(self.source_units.saturating_sub(units.len()));
         let options = Options { strict, max_source_units: remaining, ..self.options.clone() };
         let program = crate::parse_utf16(units, &options).map_err(CompileError::Syntax)?;
-        let source = Rc::new(Source { lines: program.lines.clone(), text: units.into() });
+        let source = Rc::new(Source { lines: program.lines.clone(), text: units.into(), tag: self.source_tag });
         compile_program(&program, &source, kind).map_err(|e| match e {
             CompileFail::Syntax(s) => CompileError::Syntax(s),
             CompileFail::Internal(m) => CompileError::Internal(m),

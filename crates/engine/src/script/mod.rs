@@ -20,7 +20,27 @@
 //! The values here are VectorCraft's own limits: [`MAX_SOURCE_BYTES`], [`DEFAULT_FUEL`],
 //! [`MAX_FUEL`], [`SLICE_FUEL`], [`HEAP_BYTES`], [`MAX_HOST_CALLS`], [`GROWTH_OBJECTS`],
 //! [`GROWTH_BYTES`], [`MAX_CONTINUES`], [`MAX_LOG_LINES`], [`MAX_LOG_BYTES`], [`MAX_ARGS_BYTES`],
-//! and the 64 levels, 16 MiB and 1,048,576 entries of [`vectorcraft_js::DataLimits`]'s default.
+//! and the 64 levels, 16 MiB and 1,048,576 entries of [`vectorcraft_js::DataLimits`]'s default,
+//! and the console's ([`console`]).
+//!
+//! Before a run starts, its preprocessor lines are read ([`include`]): included files take the
+//! place of their lines, and an error in one is reported at its own file, line and column.
+//! `$.evalFile(path)` runs another file in the same global environment and gives its last value,
+//! `$.fileName` is the file being run and `$.includePath` the `#includepath` list.
+//!
+//! A run writes to the Script Console with `$.write` and `$.writeln`, and `vc.log` adds a line
+//! there too. The session's console gets a start line, the run's output, its uncaught error, an end
+//! line and a report line; the run's report holds its own output and error, its time, its host
+//! calls by kind and its slowest commands.
+//!
+//! `alert`, `confirm` and `prompt` open dialogs ([`dialogs`]): in the app the run waits for the
+//! person's answer, and a run with nobody to ask takes its answers from `script.run`'s `answers`.
+
+pub mod console;
+pub mod dialogs;
+pub mod include;
+
+pub use dialogs::{DialogAnswer, DialogKind, ScriptDialog};
 
 use std::cell::{Cell, RefCell};
 use std::collections::HashMap;
@@ -35,6 +55,8 @@ use vectorcraft_js::{
 use crate::{
     Clipboard, DocState, DrawMode, EngineError, Journal, NodeId, PaintDefaults, Result, Session, cmd, command_specs, guard, waits_for_tool_edit,
 };
+
+pub mod folder;
 
 /// The most bytes of source a run takes, as a file or as `source`.
 pub const MAX_SOURCE_BYTES: usize = 8 << 20;
@@ -72,7 +94,9 @@ const MAX_BRIDGE_BYTES: u64 = 4 << 30;
 /// The version `vc.api.version` gives.
 pub const API_VERSION: &str = "1.0";
 /// The features `vc.api.has` knows.
-pub const API_FEATURES: &[&str] = &["run", "document", "commands", "log", "args"];
+pub const API_FEATURES: &[&str] = &["run", "document", "commands", "log", "args", "console", "dialogs"];
+/// The most commands a run's report lists in `slowestCommands`.
+pub const SLOWEST_COMMANDS: usize = 5;
 
 /// What the step of a run's one undo step is called.
 pub const STEP_LABEL: &str = "Run Script";
@@ -121,10 +145,16 @@ pub(crate) fn refused_text(id: &str) -> String {
 
 /// A request to run a script.
 pub(crate) struct Request {
+    /// The run's name; unless `name_given`, a `#script` line in the script replaces it.
     pub name: String,
+    pub name_given: bool,
+    /// The file the script was read from, which its included files are read beside.
+    pub file: Option<String>,
     pub source: String,
     pub args: Map<String, Value>,
     pub fuel: u64,
+    /// The answers to the dialogs of a run with nobody to ask, in order.
+    pub answers: Vec<DialogAnswer>,
 }
 
 thread_local! {
@@ -446,9 +476,106 @@ struct Host {
     log: RefCell<Vec<Value>>,
     log_bytes: Cell<usize>,
     written: RefCell<Vec<String>>,
+    /// The run's number in its session, and the script's name, which its console lines carry.
+    run: u64,
+    name: Arc<str>,
+    /// The run's own output and error, for its report.
+    console: RefCell<console::Console>,
+    /// The line `$.write` has not ended yet.
+    pending: RefCell<console::Pending>,
+    counts: Counts,
+    /// Each command `vc.run` ran: its calls, its total time and its longest call, in nanoseconds.
+    commands: RefCell<HashMap<&'static str, (u64, u128, u128)>>,
+    /// The time the run's slices took, in nanoseconds.
+    run_nanos: Cell<u128>,
+    /// `alert`, `confirm` and `prompt`: their answers and the list the report gives.
+    dialogs: dialogs::Dialogs,
+    /// The files the run reads: its includes and `$.evalFile`'s.
+    files: RefCell<include::Files>,
+    /// Where the lines of the script's expanded source came from.
+    script_map: RefCell<include::SourceMap>,
+    /// The same for each source `$.evalFile` gave, in order.
+    eval_maps: RefCell<Vec<include::SourceMap>>,
+    /// The last error `$.evalFile` raised for a file it could not run, with the file, line and
+    /// column that error is at.
+    eval_failure: RefCell<Option<EvalFailure>>,
+}
+
+/// An error `$.evalFile` raised, as thrown, and the file, line and column it is at.
+type EvalFailure = (String, Arc<str>, u32, u32);
+
+/// A run's host calls by kind, as its report gives them in `hostCallCounts`.
+#[derive(Default)]
+struct Counts {
+    vc_run: Cell<u64>,
+    document_reads: Cell<u64>,
+    command_list_reads: Cell<u64>,
+    vc_log: Cell<u64>,
+    console_writes: Cell<u64>,
+}
+
+impl Counts {
+    fn json(&self) -> Value {
+        json!({
+            "vcRun": self.vc_run.get(),
+            "documentReads": self.document_reads.get(),
+            "commandListReads": self.command_list_reads.get(),
+            "vcLog": self.vc_log.get(),
+            "consoleWrites": self.console_writes.get(),
+        })
+    }
+}
+
+fn bump(c: &Cell<u64>) {
+    c.set(c.get().saturating_add(1));
+}
+
+/// Now, where the platform has a clock (not in a wasm build).
+fn clock() -> Option<std::time::Instant> {
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        Some(std::time::Instant::now())
+    }
+    #[cfg(target_arch = "wasm32")]
+    {
+        None
+    }
+}
+
+/// Whole milliseconds, rounded down.
+fn millis(nanos: u128) -> u64 {
+    u64::try_from(nanos / 1_000_000).unwrap_or(u64::MAX)
+}
+
+/// The [`SLOWEST_COMMANDS`] commands of `times` that took longest in all, longest first and then by
+/// id.
+pub(crate) fn slowest(times: &HashMap<&'static str, (u64, u128, u128)>) -> Vec<console::Slow> {
+    let mut all: Vec<(&&str, &(u64, u128, u128))> = times.iter().collect();
+    all.sort_by(|a, b| b.1.1.cmp(&a.1.1).then_with(|| a.0.cmp(b.0)));
+    all.into_iter()
+        .take(SLOWEST_COMMANDS)
+        .map(|(id, &(calls, total, max))| console::Slow { id: (*id).to_string(), calls, total_ms: millis(total), max_ms: millis(max) })
+        .collect()
 }
 
 impl Host {
+    /// Adds a line to the run's console and, during a slice, to the session's.
+    fn line(&self, entry: console::Entry, cut: bool) {
+        let line = console::ConsoleLine { run: self.run, name: self.name.clone(), entry };
+        if let Ok(mut s) = self.session.try_borrow_mut() {
+            s.script_console.push(line.clone(), cut);
+        }
+        self.console.borrow_mut().push(line, cut);
+    }
+
+    /// `$.write` and `$.writeln`: `text`, then with `end` a line break.
+    fn write(&self, text: &str, end: bool) {
+        let mut pending = self.pending.borrow_mut();
+        pending.write(text, |line, cut| self.line(console::Entry::Output(line), cut));
+        if end {
+            pending.end_line(|line, cut| self.line(console::Entry::Output(line), cut));
+        }
+    }
     fn over(&self, limit: &str) -> HostError {
         HostError::Abort(limit.to_string())
     }
@@ -502,6 +629,8 @@ struct Job {
     /// The documents open when the run began, by [`DocState::uid`].
     start_uids: Vec<u64>,
     name: String,
+    /// The file-access scope `script.run` came in, which every slice runs in.
+    scope: crate::file_access::ScopeHandle,
 }
 
 /// The `Data` for a JSON value, within `limits`. When it does not fit, the error is the place in
@@ -704,11 +833,20 @@ fn vc_run(host: &Rc<Host>, args: Vec<Data>) -> std::result::Result<Data, HostErr
     };
     let bytes = args.iter().map(data_size).sum();
     host.charge_call(bytes)?;
+    bump(&host.counts.vc_run);
     let session = host.session.clone();
+    let started = clock();
     let r = {
         let mut s = session.borrow_mut();
         step(&mut s, host, &id, &params)
     };
+    // Only commands that exist are timed, so the table holds at most one row per command.
+    if let (Some(started), Some(spec)) = (started, crate::find_command(&id)) {
+        let nanos = started.elapsed().as_nanos();
+        let mut times = host.commands.borrow_mut();
+        let row = times.entry(spec.id).or_insert((0, 0, 0));
+        *row = (row.0 + 1, row.1.saturating_add(nanos), row.2.max(nanos));
+    }
     let (value, objects, added, save) = match r {
         Ok(done) => done,
         // A bug is not something a script can handle, and neither is a request to stop.
@@ -776,8 +914,99 @@ fn vc_log(host: &Host, args: Vec<Data>) -> std::result::Result<Data, HostError> 
         return Err(HostError::Range(LOG_FULL.to_string()));
     }
     host.log_bytes.set(host.log_bytes.get() + bytes);
-    host.log.borrow_mut().push(to_json(entry));
+    let value = to_json(entry);
+    let text = match &value {
+        Value::String(s) => s.clone(),
+        v => v.to_string(),
+    };
+    host.log.borrow_mut().push(value);
+    each_line(&text, |line, cut| host.line(console::Entry::Log(line), cut));
     Ok(Data::Undefined)
+}
+
+/// Calls `done` with each console line of `text` and whether that line was cut, one at a time.
+fn each_line(text: &str, mut done: impl FnMut(String, bool)) {
+    let mut pending = console::Pending::default();
+    pending.write(text, &mut done);
+    pending.end_line(done);
+}
+
+/// The `$` object: `$.write(...values)` writes the values to the Script Console as `String(value)`
+/// gives them, one after another, and `$.writeln(...values)` does the same and ends the line.
+/// `$.evalFile(path[, timeout])` runs a file and gives its last value, `$.fileName` is the file
+/// being run and `$.includePath` the `#includepath` list.
+fn dollar_object(host: &Rc<Host>) -> Vec<(String, HostItem)> {
+    let writer = |end: bool| {
+        let h = host.clone();
+        HostItem::TextFunction(function(move |a| {
+            let text: String = a.iter().map(|d| if let Data::String(s) = d { s.as_str() } else { "" }).collect();
+            h.charge_call(text.len() as u64 + 2)?;
+            bump(&h.counts.console_writes);
+            h.write(&text, end);
+            Ok(Data::Undefined)
+        }))
+    };
+    let getter = |read: fn(&include::Files) -> String| {
+        let h = host.clone();
+        HostItem::Getter(function(move |_| {
+            let text = read(&h.files.borrow());
+            h.charge_call(text.len() as u64 + 2)?;
+            Ok(Data::String(text))
+        }))
+    };
+    let eval_file = {
+        let h = host.clone();
+        let end = host.clone();
+        HostItem::Evaluator { source: function(move |a| eval_file(&h, a)), end: Rc::new(move || end.files.borrow_mut().end_eval()) }
+    };
+    vec![
+        ("write".into(), writer(false)),
+        ("writeln".into(), writer(true)),
+        ("evalFile".into(), eval_file),
+        ("fileName".into(), getter(include::Files::file_name)),
+        ("includePath".into(), getter(include::Files::include_path)),
+    ]
+}
+
+/// `$.evalFile(path[, timeout])`: the source of the file `path` names, relative to the file being
+/// run, with its preprocessor lines read, which the interpreter then runs. `timeout`, in
+/// milliseconds, is taken and not waited on: the file is read at once.
+fn eval_file(host: &Host, args: Vec<Data>) -> std::result::Result<Data, HostError> {
+    let Some(Data::String(path)) = args.first().filter(|p| !matches!(p, Data::String(s) if s.is_empty())) else {
+        return Err(HostError::Type(EVAL_NO_PATH.to_string()));
+    };
+    match args.get(1) {
+        None | Some(Data::Undefined) => {}
+        Some(Data::Number(ms)) if ms.is_finite() && *ms >= 0.0 => {}
+        Some(Data::Number(_)) => return Err(HostError::Range(EVAL_TIMEOUT.to_string())),
+        Some(_) => return Err(HostError::Type(EVAL_TIMEOUT.to_string())),
+    }
+    if args.len() > 2 {
+        return Err(HostError::Type(EVAL_ARGUMENTS.to_string()));
+    }
+    host.charge_call(path.len() as u64 + 2)?;
+    let expanded = host.files.borrow_mut().eval_file(path).map_err(|f| {
+        let message = if f.line > 0 { format!("{}:{}:{}: {}", f.file, f.line, f.column, f.message) } else { f.message };
+        if f.line > 0 {
+            *host.eval_failure.borrow_mut() = Some((message.clone(), f.file.clone(), f.line, f.column));
+        }
+        match f.kind {
+            include::FailKind::Limit => HostError::Abort(message),
+            include::FailKind::Syntax => HostError::Syntax(message),
+            include::FailKind::Error => HostError::Error(message),
+        }
+    })?;
+    // A file without preprocessor lines is parsed here first, so its syntax error names its place.
+    let options = vectorcraft_js::Options { max_source_units: include::MAX_TOTAL_BYTES, ..vectorcraft_js::Options::default() };
+    if let Err(e) = vectorcraft_js::parse(&expanded.source, &options) {
+        host.files.borrow_mut().end_eval();
+        let (_, file, line, column) = expanded.map.locate(e.line, e.column);
+        let message = format!("{file}:{line}:{column}: {}", e.message);
+        *host.eval_failure.borrow_mut() = Some((message.clone(), file, line, column));
+        return Err(HostError::Syntax(message));
+    }
+    host.eval_maps.borrow_mut().push(expanded.map);
+    Ok(Data::String(expanded.source))
 }
 
 fn function(f: impl Fn(Vec<Data>) -> std::result::Result<Data, HostError> + 'static) -> HostFunction {
@@ -793,6 +1022,7 @@ fn vc_object(host: &Rc<Host>, args: Data) -> Vec<(String, HostItem)> {
         let h = host.clone();
         function(move |_| {
             h.charge_call(64)?;
+            bump(&h.counts.document_reads);
             vc_document(&h)
         })
     };
@@ -802,6 +1032,7 @@ fn vc_object(host: &Rc<Host>, args: Data) -> Vec<(String, HostItem)> {
         let size = data_size(&list);
         function(move |_| {
             h.charge_call(size)?;
+            bump(&h.counts.command_list_reads);
             Ok((*list).clone())
         })
     };
@@ -809,6 +1040,7 @@ fn vc_object(host: &Rc<Host>, args: Data) -> Vec<(String, HostItem)> {
         let h = host.clone();
         function(move |a| {
             h.charge_call(data_size(a.first().unwrap_or(&Data::Undefined)))?;
+            bump(&h.counts.vc_log);
             vc_log(&h, a)
         })
     };
@@ -838,19 +1070,64 @@ fn kind_id(kind: &RunErrorKind) -> &'static str {
 }
 
 /// `message`, with what to do about a failure that comes from a script written for another program.
-fn explained(kind: &RunErrorKind, message: &str, source: &str, line: u32) -> String {
-    const HOST_OBJECTS: &[&str] =
-        &["app", "$", "alert", "confirm", "prompt", "File", "Folder", "Window", "BridgeTalk", "activeDocument", "documents"];
+fn explained(kind: &RunErrorKind, message: &str) -> String {
+    const HOST_OBJECTS: &[&str] = &["app", "File", "Folder", "Window", "BridgeTalk", "activeDocument", "documents"];
     let names_host_object =
         message.strip_prefix("ReferenceError: ").is_some_and(|m| HOST_OBJECTS.iter().any(|o| m.split_whitespace().next() == Some(o)));
-    let directive =
-        *kind == RunErrorKind::Syntax && line > 0 && source.lines().nth(line as usize - 1).is_some_and(|l| l.trim_start().starts_with('#'));
     if *kind == RunErrorKind::Thrown && names_host_object {
         format!("{message} (scripts here use the `vc` object; objects other applications give their scripts are not available)")
-    } else if directive {
-        format!("{message} (preprocessor lines such as `#target` and `#include` are not read yet)")
     } else {
         message.to_string()
+    }
+}
+
+/// The error of a run that stopped in its preprocessor lines (`f`), as the realm gives its own.
+fn preprocessor_error(f: include::Failure) -> (RunError, Option<Arc<str>>) {
+    let (kind, message) = match f.kind {
+        include::FailKind::Syntax if f.line > 0 => {
+            (RunErrorKind::Syntax, format!("SyntaxError: {} (line {}, column {})", f.message, f.line, f.column))
+        }
+        include::FailKind::Syntax => (RunErrorKind::Syntax, format!("SyntaxError: {}", f.message)),
+        include::FailKind::Error => (RunErrorKind::Thrown, format!("Error: {}", f.message)),
+        include::FailKind::Limit => (RunErrorKind::Limit(LimitKind::Host), f.message),
+    };
+    let file = (f.index > 0).then_some(f.file);
+    (RunError { kind, message, line: f.line, column: f.column }, file)
+}
+
+/// `e`, which the realm raised in source `tag` ([`Realm::error_source`]), at the line and column of
+/// the file it is in, with that file's name unless it is the script's own.
+fn located(host: &Host, tag: u32, e: &RunError) -> (RunError, Option<Arc<str>>) {
+    let map = |m: &include::SourceMap, own: bool| {
+        let (index, file, line, column) = m.locate(e.line, e.column);
+        let message = if e.kind == RunErrorKind::Syntax { relocated(&e.message, e.line, e.column, line, column) } else { e.message.clone() };
+        (RunError { kind: e.kind.clone(), message, line, column }, (!own || index > 0).then_some(file))
+    };
+    // An error `$.evalFile` raised for a file it could not run is at that file's place.
+    if let Some((_, file, line, column)) = host.eval_failure.borrow().as_ref().filter(|(thrown, ..)| e.message.contains(thrown.as_str())) {
+        let message = if e.kind == RunErrorKind::Syntax { relocated(&e.message, e.line, e.column, *line, *column) } else { e.message.clone() };
+        return (RunError { kind: e.kind.clone(), message, line: *line, column: *column }, Some(file.clone()));
+    }
+    if e.line == 0 {
+        return (e.clone(), None);
+    }
+    match tag {
+        0 => map(&host.script_map.borrow(), true),
+        n if n != vectorcraft_js::UNKNOWN_SOURCE => match host.eval_maps.borrow().get(n as usize - 1) {
+            Some(m) => map(m, false),
+            None => (e.clone(), None),
+        },
+        _ => (e.clone(), None),
+    }
+}
+
+/// A syntax error's `message`, which ends with its place `(line L, column C)`, with the place
+/// given as `line`, `column`.
+fn relocated(message: &str, old_line: u32, old_column: u32, line: u32, column: u32) -> String {
+    let old = format!(" (line {old_line}, column {old_column})");
+    match message.strip_suffix(&old) {
+        Some(m) => format!("{m} (line {line}, column {column})"),
+        None => message.to_string(),
     }
 }
 
@@ -871,6 +1148,19 @@ impl Session {
         self.script_report.as_ref()
     }
 
+    /// The Script Console: the lines of this session's runs, oldest first.
+    pub fn script_console(&self) -> &console::Console {
+        &self.script_console
+    }
+
+    /// Empties the Script Console and sets its counts to zero. The last run's report, and the
+    /// report of a running script, keep their lines. → the lines removed.
+    pub fn clear_script_console(&mut self) -> usize {
+        let n = self.script_console.lines().len();
+        self.script_console.clear();
+        n
+    }
+
     /// The error text of the last run when it failed: its name, place, message and kind, and the
     /// files it left written.
     pub fn script_failure_text(&self) -> Option<String> {
@@ -881,6 +1171,23 @@ impl Session {
     /// to stop no longer waits: the next [`Session::script_pump`] ends it.
     pub fn script_waiting(&self) -> bool {
         !self.script_stop.is_set() && self.script_key.as_ref().and_then(|k| with_job(k, |j| j.host.waiting.get())).unwrap_or(false)
+    }
+
+    /// The dialog (`alert`, `confirm` or `prompt`) the running script waits at for the person's
+    /// answer. A run asked to stop no longer waits: the next [`Session::script_pump`] ends it.
+    pub fn script_dialog(&self) -> Option<ScriptDialog> {
+        if self.script_stop.is_set() {
+            return None;
+        }
+        self.script_key.as_ref().and_then(|k| with_job(k, |j| j.host.dialogs.waiting())).flatten()
+    }
+
+    /// Gives the dialog the running script waits at its answer; the next [`Session::script_pump`]
+    /// goes on from the call. → false when nothing waits, the answer is for another kind of
+    /// dialog, or a prompt's text is longer than [`dialogs::MAX_PROMPT_BYTES`].
+    pub fn script_answer(&mut self, answer: DialogAnswer) -> bool {
+        let Some(k) = self.script_key.as_ref().filter(|_| !self.script_stop.is_set()) else { return false };
+        with_job(k, |j| j.host.dialogs.answer(&mut j.realm, answer)).unwrap_or(false)
     }
 
     /// The name of the running script.
@@ -943,8 +1250,8 @@ impl Session {
         Ok(())
     }
 
-    /// Begins a run of `request`.
-    pub(crate) fn script_start(&mut self, request: Request) -> Result<()> {
+    /// Begins a run of `request`. → the run's name.
+    pub(crate) fn script_start(&mut self, request: Request) -> Result<String> {
         self.settle_for_script()?;
         // In a build where a fault ends the program, every unsaved document has a copy first.
         if self.script_copy_first && self.docs.iter().any(DocState::is_dirty) && cmd::recovery::save_copies(self).is_err() {
@@ -955,11 +1262,18 @@ impl Session {
         self.script_high_water.retain(|uid, _| open.contains(uid));
         self.script_stop.clear();
         self.script_report = None;
+        let mut files = include::Files::new(request.file.as_deref(), include::Files::jsinclude_env());
+        let expanded = files.expand_script(&request.source);
+        let name = match &expanded {
+            Ok(include::Expanded { name: Some(name), .. }) if !request.name_given => name.clone(),
+            _ => request.name,
+        };
         let limits = Limits { fuel: request.fuel, heap_bytes: HEAP_BYTES, ..Limits::default() };
-        let options = Options { max_source_units: MAX_SOURCE_BYTES.saturating_mul(2), ..Options::default() };
+        let options = Options { max_source_units: include::MAX_TOTAL_BYTES.saturating_mul(2), ..Options::default() };
         let mut realm = Realm::with_options(options, limits);
         realm.share_interrupt(&self.script_stop);
         realm.set_data_limits(DataLimits::default());
+        self.script_runs += 1;
         let host = Rc::new(Host {
             session: Rc::new(RefCell::new(Session::new())),
             pause: realm.pause_flag(),
@@ -976,21 +1290,48 @@ impl Session {
             log: RefCell::new(Vec::new()),
             log_bytes: Cell::new(0),
             written: RefCell::new(Vec::new()),
+            run: self.script_runs,
+            name: console::line_name(&name),
+            console: RefCell::default(),
+            pending: RefCell::default(),
+            counts: Counts::default(),
+            commands: RefCell::default(),
+            run_nanos: Cell::new(0),
+            dialogs: dialogs::Dialogs::new(self.script_frames, &realm, request.answers),
+            files: RefCell::new(files),
+            script_map: RefCell::default(),
+            eval_maps: RefCell::default(),
+            eval_failure: RefCell::default(),
         });
         let args = to_data(&Value::Object(request.args), &DataLimits::default(), 0, &mut (0, 0))
             .map_err(|place| EngineError::BadParams { cmd: "script.run".into(), msg: format!("`args{place}` is nested more than 64 levels deep") })?;
-        let started = realm.define_host_object("vc", vc_object(&host, args)).and_then(|()| realm.start(&request.source));
-        if let Err(e) = started {
-            let report = failure_report(&request.name, &e, &request.source, &host, 0);
+        let line = console::ConsoleLine { run: host.run, name: host.name.clone(), entry: console::Entry::Start };
+        self.script_console.push(line, false);
+        let started = match expanded {
+            Err(f) => Err(preprocessor_error(f)),
+            Ok(expanded) => {
+                *host.script_map.borrow_mut() = expanded.map;
+                realm
+                    .define_host_object("vc", vc_object(&host, args))
+                    .and_then(|()| realm.define_host_object("$", dollar_object(&host)))
+                    .and_then(|()| dialogs::install(&mut realm, &host))
+                    .and_then(|()| realm.start(&expanded.source))
+                    .map_err(|e| located(&host, realm.error_source(), &e))
+            }
+        };
+        if let Err((e, file)) = started {
+            let mut report = failure_report(&name, &e, file.as_deref(), &host, 0, 0);
+            close_run(self, &host, &mut report, ending(&e.kind));
             let message = failure_text(&report);
             self.script_report = Some(report);
             return Err(EngineError::Other(message));
         }
-        let job = Job { realm, host, world: World::working(self), start_uids: open, name: request.name };
+        let scope = crate::file_access::ScopeHandle::capture();
+        let job = Job { realm, host, world: World::working(self), start_uids: open, name: name.clone(), scope };
         let id = NEXT_JOB.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
         JOBS.with(|jobs| jobs.borrow_mut().insert(id, job));
         self.script_key = Some(JobKey(id));
-        Ok(())
+        Ok(name)
     }
 
     /// Advances the running script by one slice. `None` while it is still running; otherwise the
@@ -1000,10 +1341,19 @@ impl Session {
         let Some(mut job) = JOBS.with(|jobs| jobs.borrow_mut().remove(&key.0)) else {
             return Some(Err(EngineError::Other(JOB_GONE.to_string())));
         };
-        if job.host.waiting.get() && !self.script_stop.is_set() {
+        if let Some(e) = job.host.dialogs.take_failure() {
+            return Some(self.script_failed(job, &e));
+        }
+        if (job.host.waiting.get() || job.host.dialogs.is_waiting()) && !self.script_stop.is_set() {
             JOBS.with(|jobs| jobs.borrow_mut().insert(key.0, job));
             self.script_key = Some(key);
             return None;
+        }
+        // A stop while a dialog waits ends the run there; the interpreter cannot go on from the call.
+        if job.realm.waits() {
+            let kind = LimitKind::Interrupted;
+            let e = RunError { kind: RunErrorKind::Limit(kind), message: format!("limit reached: {kind:?}"), line: 0, column: 0 };
+            return Some(self.script_failed(job, &e));
         }
         if vectorcraft_doc::cancel::check().is_err() {
             self.script_stop.set();
@@ -1021,12 +1371,26 @@ impl Session {
                 self.script_key = Some(key);
                 None
             }
-            Ok(Ok(Progress::Done(_))) => Some(self.script_commit(job)),
+            Ok(Ok(Progress::Done(_))) if job.host.dialogs.unused() > 0 => {
+                let n = job.host.dialogs.unused();
+                let kind = LimitKind::Host;
+                let message = format!("`answers` has {n} answer{} the script did not use", if n == 1 { "" } else { "s" });
+                Some(self.script_failed(job, &RunError { kind: RunErrorKind::Limit(kind), message, line: 0, column: 0 }))
+            }
+            Ok(Ok(Progress::Done(_))) => {
+                let r = self.script_commit(job);
+                self.trim_histories();
+                Some(r)
+            }
         }
     }
 
     fn script_failed(&mut self, job: Job, e: &RunError) -> Result<Value> {
-        let report = failure_report(&job.name, e, "", &job.host, job.realm.fuel_left());
+        job.host.dialogs.stopped();
+        let fuel_left = job.realm.fuel_left();
+        let (e, file) = located(&job.host, job.realm.error_source(), e);
+        let mut report = failure_report(&job.name, &e, file.as_deref(), &job.host, fuel_left, job.realm.limits().fuel.saturating_sub(fuel_left));
+        close_run(self, &job.host, &mut report, ending(&e.kind));
         drop(job);
         raise_ids(self);
         self.script_stop.clear();
@@ -1099,7 +1463,7 @@ impl Session {
         self.reset_tool();
         cmd::compositefonts::sync(self);
         let host = &job.host;
-        let report = json!({
+        let mut report = json!({
             "ok": true,
             "name": job.name,
             "changed": changed_names,
@@ -1108,6 +1472,7 @@ impl Session {
             "fuelUsed": job.realm.limits().fuel - job.realm.fuel_left(),
             "hostCalls": host.calls.get(),
         });
+        close_run(self, host, &mut report, console::Ending::Finished);
         self.script_report = Some(report.clone());
         Ok(report)
     }
@@ -1118,7 +1483,7 @@ impl Session {
             if let Some(result) = self.script_pump() {
                 return result;
             }
-            if self.script_waiting() {
+            if self.script_waiting() || self.script_dialog().is_some() {
                 self.script_stop.set();
             }
         }
@@ -1138,27 +1503,100 @@ const TOO_MANY_ARGUMENTS: &str = "vc.run: takes a command id and an object of pa
 const PARAMS_NOT_OBJECT: &str = "vc.run: the parameters must be an object";
 const LOG_FULL: &str = "vc.log: the log of this run is full";
 const NO_RECOVERY_COPY: &str = "a recovery copy could not be written, so the script was not run";
+const EVAL_NO_PATH: &str = "$.evalFile requires a file path";
+const EVAL_TIMEOUT: &str = "$.evalFile: the timeout must be a finite number of milliseconds, 0 or more";
+const EVAL_ARGUMENTS: &str = "$.evalFile: takes a file path and a timeout";
 
-/// The report of a run that failed.
-fn failure_report(name: &str, e: &RunError, source: &str, host: &Host, fuel_left: u64) -> Value {
-    json!({
+/// The report of a run that failed; `file` is the included file the error is in.
+fn failure_report(name: &str, e: &RunError, file: Option<&str>, host: &Host, fuel_left: u64, fuel_used: u64) -> Value {
+    let mut report = json!({
         "ok": false,
         "kind": kind_id(&e.kind),
-        "message": explained(&e.kind, &e.message, source, e.line),
+        "message": explained(&e.kind, &e.message),
         "name": name,
         "line": e.line,
         "column": e.column,
         "written": *host.written.borrow(),
         "log": *host.log.borrow(),
         "fuelLeft": fuel_left,
-    })
+        "fuelUsed": fuel_used,
+        "hostCalls": host.calls.get(),
+    });
+    if let (Some(file), Some(o)) = (file, report.as_object_mut()) {
+        o.insert("file".into(), json!(file));
+    }
+    report
+}
+
+/// How the run that failed with `kind` ended, as its console end line gives it.
+fn ending(kind: &RunErrorKind) -> console::Ending {
+    match kind {
+        RunErrorKind::Syntax | RunErrorKind::Thrown => console::Ending::Error,
+        RunErrorKind::Limit(LimitKind::Fuel) => console::Ending::Fuel,
+        RunErrorKind::Limit(LimitKind::Host) => console::Ending::HostLimit,
+        RunErrorKind::Limit(LimitKind::Interrupted) => console::Ending::Stopped,
+        RunErrorKind::Limit(_) => console::Ending::Limit,
+        RunErrorKind::Internal => console::Ending::Internal,
+    }
+}
+
+/// Adds a line of `host`'s run to the session's console and to the run's own.
+fn line_to(s: &mut Session, host: &Host, entry: console::Entry, cut: bool) {
+    let line = console::ConsoleLine { run: host.run, name: host.name.clone(), entry };
+    s.script_console.push(line.clone(), cut);
+    host.console.borrow_mut().push(line, cut);
+}
+
+/// Ends the console lines of `host`'s run: the line `$.write` left unended, then for a failed run
+/// (`report["ok"]` false) its error as `name:line:column: message`, then an end line and a report
+/// line in the session's console. Adds the run's time, host calls by kind, slowest commands,
+/// console and dialogs to `report`.
+fn close_run(s: &mut Session, host: &Host, report: &mut Value, ending: console::Ending) {
+    let mut pending = std::mem::take(&mut *host.pending.borrow_mut());
+    if !pending.is_empty() {
+        let mut last = None;
+        pending.end_line(|line, cut| last = Some((line, cut)));
+        if let Some((line, cut)) = last {
+            line_to(s, host, console::Entry::Output(line), cut);
+        }
+    }
+    if report["ok"] == false {
+        let (line, column) = (report["line"].as_u64().unwrap_or(0), report["column"].as_u64().unwrap_or(0));
+        let message = report["message"].as_str().unwrap_or_default();
+        let text = match report["file"].as_str() {
+            Some(file) if line > 0 => format!("{}: {file}:{line}:{column}: {message}", host.name),
+            _ if line > 0 => format!("{}:{line}:{column}: {message}", host.name),
+            _ => format!("{}: location unavailable: {message}", host.name),
+        };
+        each_line(&text, |line, cut| line_to(s, host, console::Entry::Error(line), cut));
+    }
+    let timing = clock().is_some();
+    let ms = millis(host.run_nanos.get());
+    let slow = slowest(&host.commands.borrow());
+    let slow_json: Vec<Value> = slow.iter().map(|c| json!({"id": c.id, "calls": c.calls, "totalMs": c.total_ms, "maxMs": c.max_ms})).collect();
+    let line = |entry| console::ConsoleLine { run: host.run, name: host.name.clone(), entry };
+    s.script_console.push(line(console::Entry::End(ending)), false);
+    let summary = console::Entry::Report { ms: timing.then_some(ms), host_calls: host.calls.get(), slowest: slow };
+    s.script_console.push(line(summary), false);
+    if let Some(o) = report.as_object_mut() {
+        o.insert("runTimeMs".into(), json!(if timing { ms } else { 0 }));
+        o.insert("timingAvailable".into(), json!(timing));
+        o.insert("hostCallCounts".into(), host.counts.json());
+        o.insert("slowestCommands".into(), Value::Array(slow_json));
+        o.insert("console".into(), host.console.borrow().report());
+        host.dialogs.report(o);
+    }
 }
 
 /// The text of a failed run's error.
 fn failure_text(report: &Value) -> String {
     let s = |k: &str| report[k].as_str().unwrap_or_default();
     let (line, column) = (report["line"].as_u64().unwrap_or(0), report["column"].as_u64().unwrap_or(0));
-    let at = if line > 0 { format!(" line {line}, column {column}") } else { String::new() };
+    let at = match report["file"].as_str() {
+        Some(file) if line > 0 => format!(" line {line}, column {column} of {file}"),
+        _ if line > 0 => format!(" line {line}, column {column}"),
+        _ => String::new(),
+    };
     let written = report["written"].as_array().map_or(0, Vec::len);
     let kept = if written > 0 {
         let paths: Vec<&str> = report["written"].as_array().into_iter().flatten().filter_map(Value::as_str).collect();
@@ -1170,21 +1608,29 @@ fn failure_text(report: &Value) -> String {
 }
 
 /// A run's slice: the working copy in, the real session lent to the host functions, one measured
-/// slice run, and everything back. A panic in the interpreter is the outer `Err`.
+/// slice run in the file-access scope the run began in, and everything back. A panic in the
+/// interpreter is the outer `Err`.
 fn run_slice(s: &mut Session, job: &mut Job) -> std::result::Result<std::result::Result<Progress, RunError>, String> {
     let depth = std::mem::replace(&mut s.depth, 0);
     job.world.swap(s);
     s.script_in_run = true;
     let cell = job.host.session.clone();
     std::mem::swap(s, &mut *cell.borrow_mut());
+    let scope = job.scope.clone();
     let realm = &mut job.realm;
-    let r = guard::catch_panic(|| {
-        #[cfg(test)]
-        if PANIC_IN_SLICE.with(Cell::get) {
-            panic!("a slice failed");
-        }
-        realm.advance(SLICE_FUEL)
+    let started = clock();
+    let r = scope.run(|| {
+        guard::catch_panic(|| {
+            #[cfg(test)]
+            if PANIC_IN_SLICE.with(Cell::get) {
+                panic!("a slice failed");
+            }
+            realm.advance(SLICE_FUEL)
+        })
     });
+    if let Some(started) = started {
+        job.host.run_nanos.set(job.host.run_nanos.get().saturating_add(started.elapsed().as_nanos()));
+    }
     std::mem::swap(s, &mut *cell.borrow_mut());
     s.script_in_run = false;
     job.world.swap(s);
@@ -1218,4 +1664,6 @@ thread_local! {
     pub(crate) static PANIC_IN_SLICE: Cell<bool> = const { Cell::new(false) };
     /// Tests: the objects a run may add in place of [`GROWTH_OBJECTS`].
     pub(crate) static TEST_GROWTH: Cell<Option<u64>> = const { Cell::new(None) };
+    /// Tests: the `JSINCLUDE` folders in place of the environment's.
+    pub(crate) static TEST_JSINCLUDE: RefCell<Option<Vec<std::path::PathBuf>>> = const { RefCell::new(None) };
 }

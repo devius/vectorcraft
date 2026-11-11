@@ -87,7 +87,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Expand Appearance",
             ["Object"],
             None,
-            "{ids?|id?: [..], target?} turn each object's appearance into objects: every fill and stroke becomes an object of its own (a stroke stays a stroke, with its weight, dashes, arrowheads and width profile, on its own copy of the path, which object.expand or object.path.outlineStroke outline; brushed strokes become their brush art) grouped in paint order under the object's id and transparency, geometry effects are baked, raster effects become an embedded image (shadows and outer glows below the art; blur, feather and inner glow replace it; an object whose only raster effect is its own Rasterize becomes the image object.rasterize makes with the effect's options), type with effects or fills of its own is outlined; Crop Marks become a group of the object and its marks; Vector Halftone (addon.color.halftone) becomes a group of its dot paths, one per ink; a group's or layer's own fills and strokes become objects among its members, which are expanded too. An outlined frame of threaded text leaves its thread with the text it shows, and a frame kept as type in a group stays in its thread. A dimension whose art it changes, or one selected with the art it measures when that art is replaced, becomes a plain group of its art. Hidden fills, strokes and effects are dropped. In Safe Mode, an object with a visible plug-in effect (in it, or in a symbol it places) is an error and nothing changes. Enabled when a selected or targeted object's appearance isn't basic (`ids` then pick which objects) → {ids, warning? (an image in the art couldn't be decoded, as object.rasterize says)}",
+            "{ids?|id?: [..], target?} turn each object's appearance into objects: every fill and stroke becomes an object of its own (a stroke stays a stroke, with its weight, dashes, arrowheads and width profile, on its own copy of the path, which object.expand or object.path.outlineStroke outline; brushed strokes become their brush art) grouped in paint order under the object's id and transparency, geometry effects are baked, raster effects become an embedded image (shadows and outer glows below the art; blur, feather and inner glow replace it; an object whose only raster effect is its own Rasterize becomes the image object.rasterize makes with the effect's options), type with effects or fills of its own is outlined; Crop Marks become a group of the object and its marks; Vector Halftone (addon.color.halftone) becomes a group of its dot paths, one per ink; a group's or layer's own fills and strokes become objects among its members, which are expanded too. An outlined frame of threaded text leaves its thread with the text it shows, and a frame kept as type in a group stays in its thread. A dimension whose art it changes becomes a plain group of its art, except one selected with art it measures, directly or in groups without fills, strokes or effects of their own: its lines and label stay as they are, and if the new art no longer fits its link it stays where it was, no longer linked. Hidden fills, strokes and effects are dropped. In Safe Mode, an object with a visible plug-in effect (in it, or in a symbol it places) is an error and nothing changes. Enabled when a selected or targeted object's appearance isn't basic (`ids` then pick which objects) → {ids, warning? (an image in the art couldn't be decoded, as object.rasterize says)}",
             can_expand,
             expand_appearance
         ),
@@ -282,11 +282,12 @@ pub(crate) fn apply(s: &mut Session, p: &Value) -> Result<Value> {
     if effects::is_three_d(id) {
         let targets = appearance_targets(s, p)?;
         for (target, at) in targets.iter().copied().zip(item.per_target(s, &targets)) {
-            let n = s.doc()?.doc.node(target).ok_or(EngineError::NoNode(target))?;
+            let d = &s.doc()?.doc;
+            let n = d.node(target).ok_or(EngineError::NoNode(target))?;
             // A new effect goes after the item's others.
             let on = at.and_then(|at| at.effects_item(&n.appearance, C).ok()).flatten();
             let on = on.and_then(|i| Some((i, n.appearance.items.get(i)?.effects().len())));
-            effects::validate_three_d_at(n, id, &effect.params, on).map_err(|e| bad(C, e))?;
+            effects::validate_three_d_at_in(Some(d), n, id, &effect.params, on).map_err(|e| bad(C, e))?;
             if id == effects::REVOLVE && effects::has_revolve(n) {
                 return Err(bad(C, "A profile supports one Revolve effect. Edit the existing effect's options instead."));
             }
@@ -575,7 +576,8 @@ fn set_params(s: &mut Session, p: &Value) -> Result<Value> {
         params["name"] = json!(svg_filter_name(s, xml, C)?);
     }
     for &(id, target, index) in &targets {
-        let n = s.doc()?.doc.node(id).ok_or(EngineError::NoNode(id))?;
+        let d = &s.doc()?.doc;
+        let n = d.node(id).ok_or(EngineError::NoNode(id))?;
         let effect = n.appearance.effects_at(target).and_then(|fx| fx.get(index));
         if warp_id.is_some() && effect.is_some_and(|e| e.id.strip_prefix("warp.").and_then(effects::WarpStyle::from_id).is_none()) {
             return Err(bad(C, "warpStyle can only edit an applied Warp effect"));
@@ -593,7 +595,7 @@ fn set_params(s: &mut Session, p: &Value) -> Result<Value> {
                 cur.extend(new);
             }
             if visible != Some(false) {
-                effects::validate_three_d_at(n, to, &prospective, target.map(|item| (item, index))).map_err(|e| bad(C, e))?;
+                effects::validate_three_d_at_in(Some(d), n, to, &prospective, target.map(|item| (item, index))).map_err(|e| bad(C, e))?;
             } else {
                 // Hidden, the effect draws nothing, so its object need not fit. The values given are
                 // checked, and after a change of 3D type so is every value it keeps.
@@ -672,11 +674,19 @@ fn load_texture(params: &mut Value, cmd: &str) -> Result<()> {
 /// fills, strokes or effects of its own or such members, other objects with effects, or type with
 /// fills or strokes of its own?
 pub(crate) fn expandable(n: &Node) -> bool {
+    expandable_except(n, &[])
+}
+
+/// [`expandable`], leaving out the objects `skip` lists and what they hold.
+pub(crate) fn expandable_except(n: &Node, skip: &[NodeId]) -> bool {
+    if skip.contains(&n.id) {
+        return false;
+    }
     match &n.kind {
         NodeKind::Path { clipping: true, .. } | NodeKind::Path { guide: true, .. } => false,
         NodeKind::Path { .. } | NodeKind::Compound { .. } => !n.appearance.is_basic() || vectorcraft_brush::has_brush(n),
         NodeKind::Group { children, .. } | NodeKind::Layer { children, .. } => {
-            !n.appearance.items.is_empty() || !n.appearance.effects.is_empty() || children.iter().any(|c| expandable(c))
+            !n.appearance.items.is_empty() || !n.appearance.effects.is_empty() || children.iter().any(|c| expandable_except(c, skip))
         }
         NodeKind::Text(_) => !n.appearance.items.is_empty() || !n.appearance.effects.is_empty(),
         NodeKind::Image(_) => effects::has_item_geometry(n) || !n.appearance.effects.is_empty(),
@@ -686,9 +696,11 @@ pub(crate) fn expandable(n: &Node) -> bool {
 
 fn can_expand(s: &Session) -> std::result::Result<(), String> {
     has_doc(s)?;
-    let d = &s.doc().map_err(|e| e.to_string())?.doc;
     let ids = appearance_targets(s, &Value::Null).map_err(|e| e.to_string())?;
-    if ids.iter().filter_map(|id| d.node(*id)).any(expandable) {
+    let d = &s.doc().map_err(|e| e.to_string())?.doc;
+    // A dimension selected with the art it measures is left as it is.
+    let kept = super::dimension::with_their_art(d, &ids);
+    if ids.iter().filter_map(|id| d.node(*id)).any(|n| expandable_except(n, &kept)) {
         Ok(())
     } else {
         Err("select (or target) objects whose appearance isn't basic".into())
@@ -812,8 +824,15 @@ fn expanded_node(d: &mut Document, mut n: Node, brushes: &[vectorcraft_brush::Br
     let mut changed = false;
     // Is `n` in `out` yet?
     let mut listed_n = false;
+    // A symbol instance's fill tints its art before the adjustment, as the canvas draws it.
+    let symbol_art = match &n.kind {
+        NodeKind::SymbolInstance { symbol, .. } if effects::has_adjustment(&n) => {
+            d.symbols.iter().find(|s| s.name == *symbol).map(|s| vectorcraft_render::instance_art(&s.art, &n))
+        }
+        _ => None,
+    };
     if effects::has_adjustment(&n)
-        && let Some(m) = effects::adjust_in_document(d, &n)
+        && let Some(m) = effects::adjust_in_document(d, &n, symbol_art)
     {
         out.push((id, 0));
         listed_n = true;
@@ -966,7 +985,8 @@ fn expand_appearance(s: &mut Session, p: &Value) -> Result<Value> {
     // In Safe Mode a plug-in effect draws nothing: expanding it would drop the effect and keep the
     // geometry it hasn't changed.
     if vectorcraft_plugins::safe_mode::active() {
-        let d = &s.doc()?.doc;
+        // A dimension selected with the art it measures is left as it is.
+        let d = &*super::dimension::without_kept(&s.doc()?.doc, &roots);
         let mut seen = std::collections::HashSet::new();
         if roots.iter().filter_map(|id| d.node(*id)).any(|n| holds_plugin_effect(d, n, false, &mut seen)) {
             return Err(EngineError::Other("Expand Appearance: a plug-in effect in the selection can't be expanded in Safe Mode".into()));
@@ -976,20 +996,24 @@ fn expand_appearance(s: &mut Session, p: &Value) -> Result<Value> {
     let colorized_ok = super::paint::check_colorized(&s.doc()?.doc).is_ok();
     let ids = s.edit("Expand Appearance", |d, _| {
         let before = d.clone();
-        let mut ended = super::dimension::end_links(d, &roots);
+        // A dimension selected with the art it measures keeps its own lines and label: it is out
+        // of the document while the art expands.
+        let lifted = super::dimension::lift(d, &roots);
+        let kept = !lifted.is_empty();
+        let ended = super::dimension::end_links(d, &roots);
         let brushes = vectorcraft_brush::library(d);
         let mut out = vec![];
         let threaded = super::threads::frames(d);
         for id in &roots {
             expand_node(d, *id, &brushes, &mut out);
         }
-        // A dimension whose source was replaced stays plain: its link no longer fits that art.
-        ended.retain(|e| e.source_kept(&before, d));
-        super::dimension::restore_unchanged(d, ended);
+        super::dimension::put_back(d, lifted);
+        // A dimension whose source was replaced stays where it was, no longer linked.
+        super::dimension::restore_unchanged(&before, d, ended);
         // Outlined frames of threaded text leave their threads with the text they show; type that
         // stays type under a new id takes its frame's place.
         super::threads::leave_threads(d, &threaded);
-        if out.is_empty() {
+        if out.is_empty() || (kept && d.layers == before.layers) {
             return Err(EngineError::Other("Expand Appearance: the selection has a basic appearance".into()));
         }
         super::paint::check_colorized_kept(colorized_ok, d).map_err(|e| bad("Expand Appearance", e))?;
@@ -1005,6 +1029,9 @@ fn expand_appearance(s: &mut Session, p: &Value) -> Result<Value> {
 
 #[cfg(test)]
 mod lighting_presets_tests;
+
+#[cfg(test)]
+mod three_d_source_tests;
 
 #[cfg(test)]
 mod three_d_type_tests;
