@@ -374,12 +374,48 @@ pub(crate) struct Snapshot {
 /// a live-effect or filter plug-in installed later has its row, and one removed has none.
 pub(crate) fn snapshot() -> Arc<Snapshot> {
     static LAST: Mutex<Option<Arc<Snapshot>>> = Mutex::new(None);
-    let revision = menus::plugin_revision();
+    let mut revision = menus::plugin_revision();
     let last = LAST.lock().unwrap_or_else(|e| e.into_inner()).clone();
-    if let Some(s) = last.filter(|s| s.revision == revision) {
+    // A test's walk hook runs even when a snapshot of this revision is already stored.
+    #[cfg(test)]
+    let hooked = {
+        let f = tests::WHILE_WALKING.take();
+        let hooked = f.is_some();
+        tests::WHILE_WALKING.set(f);
+        hooked
+    };
+    #[cfg(not(test))]
+    let hooked = false;
+    if let Some(s) = last.filter(|s| s.revision == revision && !hooked) {
         return s;
     }
+    // When a plug-in is installed or removed during the walk, the entries may not match
+    // `revision`, and the keymap cached for it would lack rows or hold extra ones. The menus are
+    // walked again at the new revision, and a snapshot that still doesn't match is not cached.
+    let mut s = build_snapshot(revision);
+    for _ in 0..8 {
+        let now = menus::plugin_revision();
+        if now == revision {
+            let mut last = LAST.lock().unwrap_or_else(|e| e.into_inner());
+            // A newer snapshot another thread stored meanwhile stays.
+            if last.as_ref().is_none_or(|l| l.revision <= revision) {
+                *last = Some(s.clone());
+            }
+            return s;
+        }
+        revision = now;
+        s = build_snapshot(revision);
+    }
+    s
+}
+
+/// The snapshot of the menus as they are now, under plug-in revision `revision`.
+fn build_snapshot(revision: u64) -> Arc<Snapshot> {
     // Built without the lock held: the Effect menu is walked anew.
+    #[cfg(test)]
+    if let Some(f) = tests::WHILE_WALKING.take() {
+        f();
+    }
     let effects: Arc<[EffectItem]> = build_effect_items().into();
     let filters: Arc<[FilterItem]> = build_filter_items().into();
     let (head, tail) = fixed_entries();
@@ -396,13 +432,7 @@ pub(crate) fn snapshot() -> Arc<Snapshot> {
         }))
         .chain(tail.iter().cloned())
         .collect();
-    let s = Arc::new(Snapshot { revision, effects, filters, entries });
-    let mut last = LAST.lock().unwrap_or_else(|e| e.into_inner());
-    // A newer snapshot another thread stored meanwhile stays.
-    if last.as_ref().is_none_or(|l| l.revision <= revision) {
-        *last = Some(s.clone());
-    }
-    s
+    Arc::new(Snapshot { revision, effects, filters, entries })
 }
 
 /// Every tool, command and panel the editor can give a shortcut; [`listed`] says which it lists.
@@ -623,23 +653,31 @@ const NEEDS_A_PARAM: [&str; 20] = [
 
 /// The (label, params) of each menu bar item, by command id.
 fn menu_bar_items() -> &'static HashMap<&'static str, Vec<(&'static str, Value)>> {
+    static ITEMS: OnceLock<HashMap<&'static str, Vec<(&'static str, Value)>>> = OnceLock::new();
+    ITEMS.get_or_init(|| bar_items(&menus::menu_tree()))
+}
+
+/// The (label, params) of each item of the menus `tree`, by command id. Items that list an
+/// installed plug-in ([`menus::lists_plugin`]) or show a name that is user data
+/// ([`menus::shows_a_name`]: a custom toolbar, a script, a recent file, a saved selection) are left
+/// out: [`menu_bar_items`] is built once, and such items come and go after that.
+fn bar_items(tree: &[(&'static str, Vec<menus::Item>)]) -> HashMap<&'static str, Vec<(&'static str, Value)>> {
     fn walk(items: &[menus::Item], out: &mut HashMap<&'static str, Vec<(&'static str, Value)>>) {
         for it in items {
             match it {
-                menus::Item::Cmd(label, id, p) => out.entry(*id).or_default().push((*label, p.clone())),
+                menus::Item::Cmd(label, id, p) if !menus::lists_plugin(id, p) && !menus::shows_a_name(id, label) => {
+                    out.entry(*id).or_default().push((*label, p.clone()))
+                }
                 menus::Item::Sub(_, children) => walk(children, out),
                 _ => {}
             }
         }
     }
-    static ITEMS: OnceLock<HashMap<&'static str, Vec<(&'static str, Value)>>> = OnceLock::new();
-    ITEMS.get_or_init(|| {
-        let mut out = HashMap::new();
-        for (_, items) in menus::menu_tree() {
-            walk(&items, &mut out);
-        }
-        out
-    })
+    let mut out = HashMap::new();
+    for (_, items) in tree {
+        walk(items, &mut out);
+    }
+    out
 }
 
 fn is_bare(p: &Value) -> bool {
@@ -654,6 +692,25 @@ pub(crate) fn menu_target(id: &str) -> Option<(String, Value)> {
     let items = menu_bar_items().get(id)?;
     let (label, p) = items.first().filter(|(_, p)| !is_bare(p))?;
     items.iter().all(|(_, q)| q == p).then(|| menus::click_target(label, id, p))
+}
+
+/// What a command search pick, or a shortcut without params, of command `id` runs now: `Ok` with
+/// what a click on its menu bar item runs ([`menu_target`]), or `None` when no such item gives it
+/// params. While that item is dimmed ([`menus::enabled`]), no dialog opens for it: `Err` holds the
+/// status line ([`dimmed`]), as for Remove Background… with no image selected.
+pub(crate) fn menu_target_now(app: &VectorcraftApp, id: &str) -> Option<Result<(String, Value), String>> {
+    let target = menu_target(id)?;
+    Some(if menus::enabled(app, id) { Ok(target) } else { dimmed(app, id) })
+}
+
+/// What [`menu_target_now`] gives for command `id` while its menu bar item is dimmed: the status
+/// line, with the engine's reason when it gives one. The app's own rules ([`menus::enabled`]) dim
+/// UI commands, and some commands the engine would run, without giving a reason.
+fn dimmed(app: &VectorcraftApp, id: &str) -> Result<(String, Value), String> {
+    let Some(why) = vectorcraft_engine::find_command(id).and_then(|c| (c.enabled)(&app.session).err()) else {
+        return Err(format!("command `{id}` is not available right now"));
+    };
+    Err(vectorcraft_engine::EngineError::Disabled(id.to_string(), why).to_string())
 }
 
 /// Is `key` a command with no default shortcut that a key press can't run: no item of the menu
@@ -1496,6 +1553,39 @@ mod tests {
         panic!("the installed plug-ins kept changing");
     }
 
+    thread_local! {
+        /// Run by [`snapshot`] on this thread once, after it reads the plug-in revision and before
+        /// it walks the menus.
+        pub(super) static WHILE_WALKING: std::cell::Cell<Option<Box<dyn FnOnce()>>> = const { std::cell::Cell::new(None) };
+    }
+
+    /// A plug-in installed while the menus are walked doesn't leave a snapshot under the revision
+    /// read before the walk: the keymap built for that revision would then lack the plug-in's row.
+    #[test]
+    fn a_plugin_installed_while_the_menus_are_walked_gets_a_new_snapshot() {
+        use vectorcraft_plugins::wat as tpl;
+        let install = |id: &str| {
+            let manifest = format!(r#"{{"id":"{id}","name":"{id}","version":"1","kind":"filter","params":{{}}}}"#);
+            vectorcraft_plugins::registry::install_bytes(&wat::parse_str(tpl::returning(&manifest, r#"{"objects":[]}"#)).unwrap()).unwrap();
+        };
+        let (before, during) = ("test.ui.walk-before", "test.ui.walk-during");
+        install(before);
+        // Stores the snapshot of this revision, as another test thread may already have done.
+        snapshot();
+        WHILE_WALKING.set(Some(Box::new(move || {
+            // Another caller builds the snapshot and keymap of the revision read before the walk.
+            crate::keymap::template_for(&snapshot());
+            install(during);
+        })));
+        let s = snapshot();
+        let keys: Vec<&str> = s.entries.iter().map(|e| e.key.as_str()).collect();
+        let catalog = crate::keymap::template_for(&s).catalog().len();
+        vectorcraft_plugins::registry::remove(before);
+        vectorcraft_plugins::registry::remove(during);
+        assert!(keys.contains(&"plugin:test.ui.walk-during"), "the walk lists the plug-in");
+        assert_eq!(catalog, s.entries.len(), "the keymap of the snapshot's revision has every entry");
+    }
+
     #[test]
     fn format_parse_round_trip_for_every_default() {
         for e in entries().iter() {
@@ -2205,6 +2295,47 @@ mod tests {
         assert_eq!(menu_target("edit.findReplace").map(|(id, _)| id).as_deref(), Some("ui.paramDialog"));
         assert_eq!(menu_target("object.align"), None, "seven items, each with its own params");
         assert_eq!(menu_target("edit.undo"), None, "runs without params");
+    }
+
+    /// The menu bar items a shortcut or a command search pick reads leave out items that list an
+    /// installed plug-in (a File › Open With importer, an Object › Plug-ins filter) or show a name
+    /// that is user data (a custom toolbar, a script of the Scripts folder), which come and go after
+    /// the items are read; the other items stay.
+    #[test]
+    fn menu_bar_items_leave_out_installed_plug_ins_and_user_data() {
+        let tree = vec![(
+            "File",
+            vec![
+                menus::Item::Sub("Open With", vec![menus::Item::Cmd("Spins…", "file.openWith", json!({"importer": "plugin.test.spins"}))]),
+                menus::Item::Cmd("Filter…", "plugin.dialog", json!({"id": "test.filter"})),
+                menus::Item::Cmd("Mine", "window.toolbar.custom", json!({"name": "Mine"})),
+                menus::Item::Cmd("tidy.js", crate::scripts_menu::COMMAND, json!({"path": "/scripts/tidy.js"})),
+                menus::Item::Cmd("Clean Up…", "object.path.cleanUp", json!({"strayPoints": true})),
+            ],
+        )];
+        let items = bar_items(&tree);
+        assert!(!items.contains_key("file.openWith"), "{items:?}");
+        assert!(!items.contains_key("plugin.dialog"), "{items:?}");
+        assert!(!items.contains_key("window.toolbar.custom"), "{items:?}");
+        assert!(!items.contains_key(crate::scripts_menu::COMMAND), "{items:?}");
+        assert_eq!(items.get("object.path.cleanUp"), Some(&vec![("Clean Up…", json!({"strayPoints": true}))]));
+    }
+
+    /// While a menu item is dimmed, a pick or a shortcut gets a status line and no target: with the
+    /// engine's reason when it gives one, and without one when the app's own rules dim the item (an
+    /// Appearance command with nothing targeted, a UI command).
+    #[test]
+    fn a_dimmed_item_gives_a_status_line_with_or_without_a_reason() {
+        use vectorcraft_testkit::fixtures::Fixture;
+        let none = VectorcraftApp::new(vectorcraft_engine::Session::new(), crate::Services::default());
+        assert!(!menus::enabled(&none, "edit.findReplace"));
+        assert_eq!(dimmed(&none, "edit.findReplace"), Err("command `edit.findReplace` is not available right now: no document open".into()));
+        let empty = VectorcraftApp::new(Fixture::Empty.session(), crate::Services::default());
+        for id in ["appearance.addFill", "ui.cropImage"] {
+            assert!(!menus::enabled(&empty, id), "{id}");
+            assert!(vectorcraft_engine::find_command(id).is_none_or(|c| (c.enabled)(&empty.session).is_ok()), "{id}: the engine gives no reason");
+            assert_eq!(dimmed(&empty, id), Err(format!("command `{id}` is not available right now")));
+        }
     }
 
     /// Every command the editor lists, run as a key press runs it on a document with one or with

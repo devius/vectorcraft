@@ -525,6 +525,51 @@ fn many_objects_of_one_name_are_numbered_in_turn() {
     assert!(text.contains("(Dot_00000000000000019999_)"));
 }
 
+/// A document with one top-level layer for each of the 27 layer colour presets, named after its
+/// position.
+fn every_layer_preset() -> Document {
+    let mut doc = Document::new(100.0, 100.0);
+    doc.layers.clear();
+    for i in 0..vectorcraft_doc::LAYER_COLORS.len() {
+        let id = doc.alloc_id();
+        doc.layers.push(Arc::new(Node::layer(id, &format!("P{i}"), LayerColor::Preset(u8::try_from(i).unwrap()))));
+    }
+    doc
+}
+
+/// #6502: Yellow, Magenta and Cyan (presets 4, 5 and 6) are written as the file's indexes 6, 4
+/// and 5, with their own RGB beside them; every other preset keeps its position.
+#[test]
+fn layer_presets_are_written_with_the_files_colour_index() {
+    let text = program(&every_layer_preset());
+    for (i, (_, [r, g, b])) in vectorcraft_doc::LAYER_COLORS.iter().enumerate() {
+        let index = match i {
+            4 => 6,
+            5 => 4,
+            6 => 5,
+            i => i,
+        };
+        let want = format!(" {index} {r} {g} {b} 0 50 0 Lb\n(P{i}) Ln\n");
+        assert!(text.contains(&want), "missing {want:?}");
+    }
+}
+
+/// #6502: every preset comes back as itself after a save and an open.
+#[test]
+fn layer_presets_survive_a_round_trip() {
+    let doc = read_back(&every_layer_preset());
+    let colors: Vec<LayerColor> = doc
+        .layers
+        .iter()
+        .map(|l| match l.kind {
+            NodeKind::Layer { color, .. } => color,
+            _ => panic!("{:?}", l.kind),
+        })
+        .collect();
+    let want: Vec<LayerColor> = (0..27u8).map(LayerColor::Preset).collect();
+    assert_eq!(colors, want);
+}
+
 #[test]
 fn layers_have_fourteen_operands() {
     let text = program(&sample());
@@ -3740,6 +3785,34 @@ fn an_unstroked_run_with_a_stroke_style_loses_nothing() {
     }
 }
 
+/// The text document has no Korean Line Break Anywhere: a paragraph with it on and Hangul in it
+/// is reported as left out, and comes back off; with it off, or with no Hangul, nothing is
+/// reported.
+#[test]
+fn korean_line_break_anywhere_is_reported_only_for_korean_paragraphs() {
+    use vectorcraft_doc::TextObject;
+    for (text, on, reported) in [("가나다 라마", true, true), ("가나다 라마", false, false), ("Plain", true, false)] {
+        let mut t = TextObject::point(vectorcraft_geom::Point::new(20.0, 40.0), text, style(14.0, Color::BLACK));
+        t.para.korean_line_break_anywhere = on;
+        let mut doc = Document::new(200.0, 200.0);
+        let layer = doc.layers[0].id;
+        let n = text_node(&mut doc, t);
+        doc.insert(Some(layer), usize::MAX, n).unwrap();
+        let out = export_ai_editing(&doc, &opts()).unwrap();
+        assert_eq!(!out.warnings.is_empty(), reported, "{text} {on}: {:?}", out.warnings);
+        let mut all = vec![];
+        paths(&read_back(&doc).layers, &mut all);
+        let paras: Vec<bool> = all
+            .iter()
+            .filter_map(|n| match &n.kind {
+                NodeKind::Text(t) => Some(t.para_at(0).korean_line_break_anywhere),
+                _ => None,
+            })
+            .collect();
+        assert_eq!(paras, [false], "{text} {on}");
+    }
+}
+
 #[test]
 fn type_is_written_again_as_the_same_bytes() {
     let doc = typed();
@@ -4291,6 +4364,49 @@ fn scaled_area_type_and_type_on_a_path_stay_type() {
     doc.insert(Some(layer), usize::MAX, first).unwrap();
     doc.insert(Some(layer), usize::MAX, second).unwrap();
     assert!(!program(&doc).contains("/AI11Text"));
+}
+
+/// Type on a path with Dynamic Text is written as type at the sizes it is drawn at, with a warning
+/// that the setting is not written.
+#[test]
+fn dynamic_text_is_written_at_its_drawn_sizes() {
+    use vectorcraft_doc::{TextKind, TextObject};
+    let mut doc = Document::new(600.0, 300.0);
+    let layer = doc.layers[0].id;
+    let mut t = TextObject::point(vectorcraft_geom::Point::ZERO, "Grow", style(12.0, Color::BLACK));
+    t.kind = TextKind::OnPath {
+        path: shapes::line(vectorcraft_geom::Point::new(50.0, 200.0), vectorcraft_geom::Point::new(550.0, 200.0)),
+        start: 0.0,
+        end: None,
+    };
+    t.xf = Affine::IDENTITY;
+    t.dynamic_text = true;
+    let drawn = 12.0 * vectorcraft_text::layout(vectorcraft_text::FontDb::global(), &t).fit_scale;
+    assert!(drawn > 50.0, "{drawn}");
+    let node = text_node(&mut doc, t);
+    doc.insert(Some(layer), usize::MAX, node).unwrap();
+    let out = export_ai_editing(&doc, &opts()).unwrap();
+    assert!(out.warnings.iter().any(|w| w == writer::DYNAMIC_TEXT), "{:?}", out.warnings);
+    let back = read_back(&doc);
+    let texts: Vec<&TextObject> =
+        back.layers[0].children().unwrap().iter().filter_map(|n| if let NodeKind::Text(t) = &n.kind { Some(t.as_ref()) } else { None }).collect();
+    assert_eq!(texts.len(), 1);
+    assert!(!texts[0].dynamic_text);
+    let k = texts[0].xf.as_coeffs()[0];
+    assert_eq!(r3(texts[0].runs[0].style.size * k), r3(drawn));
+    // Type written as outlines (here on an open path whose ends meet) loses the setting too, and
+    // says so.
+    let mut doc = Document::new(600.0, 300.0);
+    let layer = doc.layers[0].id;
+    let mut t = TextObject::point(vectorcraft_geom::Point::ZERO, "Grow", style(12.0, Color::BLACK));
+    let ends_meet = [(50.0, 200.0).into(), (550.0, 200.0).into(), (300.0, 50.0).into(), (50.0, 200.0).into()];
+    t.kind = TextKind::OnPath { path: PathData::new(vec![vectorcraft_geom::SubPath::polyline(&ends_meet, false)]), start: 0.0, end: None };
+    t.xf = Affine::IDENTITY;
+    t.dynamic_text = true;
+    let node = text_node(&mut doc, t);
+    doc.insert(Some(layer), usize::MAX, node).unwrap();
+    let out = export_ai_editing(&doc, &opts()).unwrap();
+    assert!(out.warnings.iter().any(|w| w == writer::TYPE) && out.warnings.iter().any(|w| w == writer::DYNAMIC_TEXT), "{:?}", out.warnings);
 }
 
 /// See-through type with the knockout shape flag comes back with the flag and writes no warning.
@@ -6552,6 +6668,7 @@ fn every_effect_a_graphic_style_holds_is_read_back() {
     for id in &ids {
         cases.push((id, json!({"bend": 30.0, "horizontal": -10.0, "vertical": 20.0, "orientation": "vertical"})));
         cases.push((id, json!({"bend": -30.0, "horizontal": 0.0, "vertical": 0.0, "orientation": "horizontal"})));
+        cases.push((id, json!({"bend": 45.0, "horizontal": 15.0, "vertical": -5.0, "orientation": "horizontal", "version": 1})));
     }
     for (id, params) in cases {
         let effect = fx(id, params.clone());
@@ -6568,6 +6685,10 @@ fn every_effect_a_graphic_style_holds_is_read_back() {
         let got = &back.graphic_styles[0].appearance.effects;
         assert_eq!(got.len(), 1, "{id} {params}");
         assert_eq!(got[0].id, effect.id);
+        // A warp read from a file bends as its style's Bézier net.
+        if id.starts_with("warp.") {
+            assert_eq!(got[0].params["version"], json!(vectorcraft_doc::live::WARP_NET), "{id} {params}");
+        }
         let (g, w) = (vectorcraft_effects::merged_params(&got[0].id, &got[0].params), vectorcraft_effects::merged_params(&effect.id, &effect.params));
         for (key, value) in w.as_object().unwrap() {
             // Random isn't written, and a style with it isn't read; its seed is the default.
@@ -6588,6 +6709,19 @@ fn every_effect_a_graphic_style_holds_is_read_back() {
             }
         }
     }
+    // A warp saved before the map version existed is written with its settings too, and reads back on
+    // the nets' map.
+    let old = vectorcraft_doc::Effect { id: "warp.flag".into(), params: json!({"bend": 40.0, "horizontal": 10.0}), visible: true };
+    let mut doc = Document::new(200.0, 100.0);
+    let mut g = vectorcraft_doc::GraphicStyle::new("Old", Appearance { effects: vec![old], ..Appearance::basic(black_fill(), Paint::None, 0.0) });
+    g.id = 3;
+    *doc.graphic_styles = vec![g];
+    let out = export_ai_editing(&doc, &opts()).unwrap();
+    assert!(!out.warnings.iter().any(|w| w == writer::PANEL_STYLES), "{:?}", out.warnings);
+    let back = read_back(&doc);
+    let [warp] = back.graphic_styles[0].appearance.effects.as_slice() else { panic!("{:?}", back.graphic_styles) };
+    assert_eq!((warp.id.as_str(), &warp.params["bend"], &warp.params["horizontal"]), ("warp.flag", &json!(40.0), &json!(10.0)));
+    assert_eq!(warp.params["version"], json!(vectorcraft_doc::live::WARP_NET));
     // A Zig Zag with its 0 to 1 settings written under the size's own key, and a turn in radians.
     let mut doc = Document::new(200.0, 100.0);
     let effects = vec![
@@ -7460,4 +7594,226 @@ fn variable_font_instances_name_their_design_space() {
 
 fn style_of(size: f64) -> vectorcraft_doc::CharStyle {
     style(size, Color::BLACK)
+}
+
+/// The data has no conic gradient: a conic fill is a linear gradient along its vector, with the
+/// same stops, and so is a conic gradient swatch, with a warning.
+#[test]
+fn conic_gradients_are_written_as_linear_gradients_with_their_stops() {
+    let stops =
+        vec![GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(0.6, SKY), GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0))];
+    let mut g = GradientPaint::new(Gradient::new(GradientKind::Conic, stops.clone()));
+    let (start, end) = (vectorcraft_geom::Point::new(100.0, 50.0), vectorcraft_geom::Point::new(150.0, 50.0));
+    g.geom = Some(vectorcraft_color::GradientGeom { start, end, aspect: -0.5, focal: None });
+    let mut doc = Document::new(200.0, 100.0);
+    let id = doc.alloc_id();
+    let l = doc.layers[0].id;
+    let fill = Paint::Gradient(Box::new(g.clone()));
+    doc.insert(Some(l), 0, Node::path(id, shapes::rectangle(Rect::new(20.0, 10.0, 180.0, 90.0)), Appearance::basic(fill.clone(), Paint::None, 0.0)))
+        .unwrap();
+    let mut swatches: Vec<Swatch> = doc.swatches.iter().cloned().collect();
+    swatches.push(Swatch { name: "Sweep".into(), paint: Paint::Gradient(Box::new(GradientPaint { geom: None, ..g })), global: false, spot: false });
+    doc.swatches = swatches.into();
+    let out = export_ai_editing(&doc, &opts()).unwrap();
+    assert!(out.warnings.iter().any(|w| w.contains("conic gradients are written as linear gradients")), "{:?}", out.warnings);
+    let back = read_back(&doc);
+    let mut read = None;
+    back.walk(|n| {
+        if let Paint::Gradient(g) = n.appearance.fill_paint() {
+            read = Some(g.clone());
+        }
+    });
+    let read = read.expect("a gradient fill");
+    assert_eq!(read.gradient.kind, GradientKind::Linear);
+    assert_eq!(
+        read.gradient.stops.iter().map(|s| (s.offset, s.color.to_hex())).collect::<Vec<_>>(),
+        stops.iter().map(|s| (s.offset, s.color.to_hex())).collect::<Vec<_>>()
+    );
+    let geom = read.geom.unwrap();
+    assert!(geom.start.distance(start) < 0.01 && geom.end.distance(end) < 0.01, "{geom:?}");
+    let Some(Paint::Gradient(swatch)) = back.swatch("Sweep").map(|s| &s.paint) else { panic!("the swatch is lost") };
+    assert_eq!(swatch.gradient.kind, GradientKind::Linear);
+}
+
+/// The data has no diamond gradient: a diamond fill is the radial gradient through its square's
+/// corners (centered on it, its vector and the aspect across it), with the same stops, and so is
+/// a diamond gradient swatch, with a warning.
+#[test]
+fn diamond_gradients_are_written_as_radial_gradients_through_their_corners() {
+    let stops =
+        vec![GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(0.6, SKY), GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0))];
+    let mut g = GradientPaint::new(Gradient::new(GradientKind::Diamond, stops.clone()));
+    let (start, end) = (vectorcraft_geom::Point::new(100.0, 50.0), vectorcraft_geom::Point::new(150.0, 50.0));
+    // A focal point (a plug-in's or a file's) draws nothing on a diamond and isn't written.
+    let focal = Some(vectorcraft_geom::Point::new(110.0, 55.0));
+    g.geom = Some(vectorcraft_color::GradientGeom { start, end, aspect: 0.5, focal });
+    let mut doc = Document::new(200.0, 100.0);
+    let id = doc.alloc_id();
+    let l = doc.layers[0].id;
+    let fill = Paint::Gradient(Box::new(g.clone()));
+    doc.insert(Some(l), 0, Node::path(id, shapes::rectangle(Rect::new(20.0, 10.0, 180.0, 90.0)), Appearance::basic(fill, Paint::None, 0.0))).unwrap();
+    let mut swatches: Vec<Swatch> = doc.swatches.iter().cloned().collect();
+    swatches.push(Swatch { name: "Gem".into(), paint: Paint::Gradient(Box::new(GradientPaint { geom: None, ..g })), global: false, spot: false });
+    doc.swatches = swatches.into();
+    let out = export_ai_editing(&doc, &opts()).unwrap();
+    assert!(out.warnings.iter().any(|w| w.contains("diamond gradients are written as radial gradients")), "{:?}", out.warnings);
+    let back = read_back(&doc);
+    let mut read = None;
+    back.walk(|n| {
+        if let Paint::Gradient(g) = n.appearance.fill_paint() {
+            read = Some(g.clone());
+        }
+    });
+    let read = read.expect("a gradient fill");
+    assert_eq!(read.gradient.kind, GradientKind::Radial);
+    assert_eq!(
+        read.gradient.stops.iter().map(|s| (s.offset, s.color.to_hex())).collect::<Vec<_>>(),
+        stops.iter().map(|s| (s.offset, s.color.to_hex())).collect::<Vec<_>>()
+    );
+    let geom = read.geom.unwrap();
+    assert!(geom.start.distance(start) < 0.01 && geom.end.distance(end) < 0.01 && (geom.aspect - 0.5).abs() < 0.01, "{geom:?}");
+    assert!(geom.focal.is_none_or(|f| f.distance(start) < 0.01), "{geom:?}");
+    let Some(Paint::Gradient(swatch)) = back.swatch("Gem").map(|s| &s.paint) else { panic!("the swatch is lost") };
+    assert_eq!(swatch.gradient.kind, GradientKind::Radial);
+}
+
+/// The data has no spread: a fill that repeats or reflects holds its stops repeated across the
+/// shape and reads back looking as the canvas paints it; a swatch holds its stops repeated along
+/// its vector; both with a warning.
+#[test]
+fn spread_gradients_are_written_with_their_stops_repeated() {
+    use vectorcraft_color::GradientSpread;
+    for kind in [GradientKind::Linear, GradientKind::Radial] {
+        let stops = vec![GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0))];
+        let mut g = GradientPaint::new(Gradient { spread: GradientSpread::Reflect, repeats: 2, ..Gradient::new(kind, stops) });
+        let (start, end) = (vectorcraft_geom::Point::new(60.0, 50.0), vectorcraft_geom::Point::new(120.0, 50.0));
+        g.geom = Some(vectorcraft_color::GradientGeom { start, end, aspect: 1.0, focal: None });
+        let mut doc = Document::new(200.0, 100.0);
+        let id = doc.alloc_id();
+        let l = doc.layers[0].id;
+        let fill = Paint::Gradient(Box::new(g.clone()));
+        doc.insert(Some(l), 0, Node::path(id, shapes::rectangle(Rect::new(20.0, 10.0, 180.0, 90.0)), Appearance::basic(fill, Paint::None, 0.0)))
+            .unwrap();
+        let mut swatches: Vec<Swatch> = doc.swatches.iter().cloned().collect();
+        swatches.push(Swatch {
+            name: "Bands".into(),
+            paint: Paint::Gradient(Box::new(GradientPaint { geom: None, ..g })),
+            global: false,
+            spot: false,
+        });
+        doc.swatches = swatches.into();
+        let out = export_ai_editing(&doc, &opts()).unwrap();
+        assert!(
+            out.warnings.iter().any(|w| w.contains("gradients that repeat or reflect are written with their stops repeated")),
+            "{:?}",
+            out.warnings
+        );
+        let back = read_back(&doc);
+        let st = vectorcraft_testkit::raster::perceptual_diff(
+            &vectorcraft_testkit::raster::render_artboard(&doc),
+            &vectorcraft_testkit::raster::render_artboard(&back),
+            8.0,
+        );
+        assert!((st.bad_pixels as f64) < 0.02 * st.pixels as f64, "{kind:?}: {} of {} pixels differ", st.bad_pixels, st.pixels);
+        let Some(Paint::Gradient(swatch)) = back.swatch("Bands").map(|s| &s.paint) else { panic!("the swatch is lost") };
+        let colors: Vec<String> = swatch.gradient.stops.iter().map(|s| s.color.to_hex()).collect();
+        assert_eq!(colors, ["#ff0000", "#0000ff", "#0000ff", "#ff0000"], "{kind:?}");
+    }
+}
+
+/// A stroke's gradient that repeats is written with its stops repeated as far as the stroke's
+/// miter joins reach, past the box the gradient is placed on, so a sharp join's tip shows the next
+/// run rather than the color the gradient pads with; a straight line, which has no joins, keeps
+/// every run within the stops the reader reads.
+#[test]
+fn a_stroke_spread_gradient_runs_on_into_its_miter_tips() {
+    use vectorcraft_color::GradientSpread;
+    let stops = vec![GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0))];
+    let mut g = GradientPaint::new(Gradient { spread: GradientSpread::Repeat, repeats: 3, ..Gradient::new(GradientKind::Linear, stops) });
+    // From the top of the box the gradient is placed on (the path's box grown by half the width).
+    let (start, end) = (vectorcraft_geom::Point::new(100.0, 15.0), vectorcraft_geom::Point::new(100.0, 85.0));
+    g.geom = Some(vectorcraft_color::GradientGeom { start, end, aspect: 1.0, focal: None });
+    let mut app = Appearance::basic(Paint::None, Paint::Gradient(Box::new(g)), 10.0);
+    for item in &mut app.items {
+        if let AppearanceItem::Stroke(s) = item {
+            (s.join, s.miter_limit) = (LineJoin::Miter, 10.0);
+        }
+    }
+    // A V whose apex's miter reaches about 10 pt above it, to y = 9.9.
+    let pts = [vectorcraft_geom::Point::new(60.0, 90.0), vectorcraft_geom::Point::new(100.0, 20.0), vectorcraft_geom::Point::new(140.0, 90.0)];
+    let mut doc = Document::new(200.0, 100.0);
+    let id = doc.alloc_id();
+    let l = doc.layers[0].id;
+    doc.insert(Some(l), 0, Node::path(id, PathData::new(vec![vectorcraft_geom::SubPath::polyline(&pts, false)]), app)).unwrap();
+    let back = read_back(&doc);
+    let mut geom = None;
+    back.walk(|n| {
+        if let Paint::Gradient(g) = n.appearance.stroke_paint() {
+            geom = g.geom;
+        }
+    });
+    let geom = geom.expect("the stroke keeps a gradient");
+    assert!(geom.start.y.min(geom.end.y) < 9.9, "the runs start at {:?}", geom);
+    // A straight line has no joins: its 100 runs, 200 stops, fit the 256 the reader reads.
+    let stops = vec![GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0))];
+    let mut g = GradientPaint::new(Gradient { spread: GradientSpread::Repeat, repeats: 100, ..Gradient::new(GradientKind::Linear, stops) });
+    let (start, end) = (vectorcraft_geom::Point::new(50.0, 50.0), vectorcraft_geom::Point::new(150.0, 50.0));
+    g.geom = Some(vectorcraft_color::GradientGeom { start, end, aspect: 1.0, focal: None });
+    let line = PathData::new(vec![vectorcraft_geom::SubPath::polyline(&[start, end], false)]);
+    let mut doc = Document::new(200.0, 100.0);
+    let id = doc.alloc_id();
+    let l = doc.layers[0].id;
+    doc.insert(Some(l), 0, Node::path(id, line, Appearance::basic(Paint::None, Paint::Gradient(Box::new(g)), 10.0))).unwrap();
+    let mut stops = None;
+    read_back(&doc).walk(|n| {
+        if let Paint::Gradient(g) = n.appearance.stroke_paint() {
+            stops = Some(g.gradient.stops.len());
+        }
+    });
+    assert_eq!(stops, Some(200));
+}
+
+/// A conic fill (written linear, its stops repeated around its turn), a diamond fill (written
+/// radial) and a swatch whose stops repeat more times than the 256 stops the reader reads stay
+/// gradients: each holds its stops repeated as far as 256 stops go.
+#[test]
+fn spread_gradients_past_the_stops_the_reader_reads_stay_gradients() {
+    use vectorcraft_color::GradientSpread;
+    let three = || {
+        vec![
+            GradientStop::new(0.0, Color::rgb(1.0, 0.0, 0.0)),
+            GradientStop::new(0.5, Color::rgb(0.0, 1.0, 0.0)),
+            GradientStop::new(1.0, Color::rgb(0.0, 0.0, 1.0)),
+        ]
+    };
+    for kind in [GradientKind::Conic, GradientKind::Diamond] {
+        let mut g = GradientPaint::new(Gradient { spread: GradientSpread::Repeat, repeats: 100, ..Gradient::new(kind, three()) });
+        let c = vectorcraft_geom::Point::new(100.0, 50.0);
+        g.geom = Some(vectorcraft_color::GradientGeom { start: c, end: c + vectorcraft_geom::Vec2::new(40.0, 0.0), aspect: 1.0, focal: None });
+        let mut doc = Document::new(200.0, 100.0);
+        let id = doc.alloc_id();
+        let l = doc.layers[0].id;
+        let fill = Paint::Gradient(Box::new(g));
+        doc.insert(Some(l), 0, Node::path(id, shapes::rectangle(Rect::new(20.0, 10.0, 180.0, 90.0)), Appearance::basic(fill, Paint::None, 0.0)))
+            .unwrap();
+        let back = read_back(&doc);
+        let mut stops = None;
+        back.walk(|n| {
+            if let Paint::Gradient(g) = n.appearance.fill_paint() {
+                stops = Some(g.gradient.stops.len());
+            }
+        });
+        let stops = stops.unwrap_or_else(|| panic!("{kind:?}: the gradient is written as a solid color"));
+        assert!((200..=crate::import::MAX_GRADIENT_STOPS).contains(&stops), "{kind:?}: {stops} stops");
+    }
+    // Stops at 0.1 and 0.9 run from 0 to 1 as four: 70 runs are 280 stops.
+    let stops = vec![GradientStop::new(0.1, Color::rgb(1.0, 0.0, 0.0)), GradientStop::new(0.9, Color::rgb(0.0, 0.0, 1.0))];
+    let g = GradientPaint::new(Gradient { spread: GradientSpread::Reflect, repeats: 70, ..Gradient::new(GradientKind::Linear, stops) });
+    let mut doc = Document::new(200.0, 100.0);
+    let mut swatches: Vec<Swatch> = doc.swatches.iter().cloned().collect();
+    swatches.push(Swatch { name: "Bands".into(), paint: Paint::Gradient(Box::new(g)), global: false, spot: false });
+    doc.swatches = swatches.into();
+    let back = read_back(&doc);
+    let Some(Paint::Gradient(swatch)) = back.swatch("Bands").map(|s| &s.paint) else { panic!("the swatch is lost") };
+    assert!((200..=crate::import::MAX_GRADIENT_STOPS).contains(&swatch.gradient.stops.len()), "{} stops", swatch.gradient.stops.len());
 }

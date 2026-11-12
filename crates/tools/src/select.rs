@@ -47,7 +47,9 @@ use vectorcraft_geom::{Affine, Point, Rect, Vec2};
 use crate::bbox::{Handle, hit_handle, in_rotate_zone, move_delta, rotate_for_drag, scale_for_drag};
 use crate::corners::{self, CornerDrag, over_widget};
 use crate::guides::{PointSnap, Targets, distance_guides, hold_on_path};
-use crate::objects_on_path::{RotateAllDrag, SpaceDrag, over_rotate_all, over_space};
+use crate::objects_on_path::{
+    MemberDrag, MoveAllDrag, RotateAllDrag, SpaceDrag, member_hover, over_member, over_move_all, over_rotate_all, over_space,
+};
 use crate::pathtype::{self, BracketDrag, over_bracket};
 use crate::pie::{self, PieDrag};
 use crate::rulerguide::GuideEdit;
@@ -133,6 +135,10 @@ enum State {
     RotateAll(RotateAllDrag),
     /// Dragging an Objects on Path group's Space widget.
     Space(SpaceDrag),
+    /// Dragging an Objects on Path group's Move All widget.
+    MoveAll(MoveAllDrag),
+    /// Pressing or dragging the Select/Move widget of an object of an Objects on Path group.
+    Member(MemberDrag),
     /// Move or rotate a live mirror axis.
     Mirror(crate::mirror::MirrorDrag),
     /// Drag a grid repeat's row, column or corner handle or a spacing slider.
@@ -367,6 +373,14 @@ impl MoveSnap {
             let (q, ov) = t.snap_point_along(start + d, u, cx.tol(cx.snap_tolerance));
             if q != start + d {
                 d = q - start;
+                guides = ov;
+            } else if guides.is_empty()
+                && let Some(b) = self.bounds
+            {
+                // Nothing else lined up: the bounds slide along the line onto a ruler guide, as
+                // they do without Shift (#4312).
+                let (adj, ov) = t.snap_moved_along_to_rulers(start + d, b + d, u, cx.tol(cx.snap_tolerance));
+                d += adj;
                 guides = ov;
             }
         }
@@ -743,7 +757,7 @@ impl Tool for SelectionTool {
 
     /// E during a marquee drag switches the marquee between the objects it touches and only the
     /// objects inside it. Escape during a drag (a move or an Alt-drag copy, a bounding-box scale or
-    /// rotation, a marquee, a corner widget, a pie widget, the Rotate All or Space widget, the brackets of type on a path, a mirror
+    /// rotation, a marquee, a corner widget, a pie widget, the Rotate All, Space, Move All or Select/Move widget, the brackets of type on a path, a mirror
     /// axis, a grid repeat's handles, a ruler guide) cancels it: what it changed goes back, no copy
     /// is left, and the tool waits for the next press. With the pointer loaded with text, Escape
     /// drops the text.
@@ -834,6 +848,8 @@ impl Tool for SelectionTool {
             State::Pie(d) => d.adjusting(),
             State::RotateAll(d) => d.adjusting(),
             State::Space(d) => d.adjusting(),
+            State::MoveAll(d) => d.adjusting(),
+            State::Member(d) => d.adjusting(),
             State::Bracket(b) => b.adjusting(),
             State::Mirror(d) => d.adjusting(),
             State::GridRepeat(d) => d.adjusting(),
@@ -1022,6 +1038,24 @@ impl Tool for SelectionTool {
                 self.state = State::Idle;
                 d.finish()
             }
+            (PointerKind::Drag, State::MoveAll(mut d)) => {
+                let out = d.drag(cx, p);
+                self.state = State::MoveAll(d);
+                out
+            }
+            (PointerKind::Up, State::MoveAll(d)) => {
+                self.state = State::Idle;
+                d.finish()
+            }
+            (PointerKind::Drag, State::Member(mut d)) => {
+                let out = d.drag(cx, p);
+                self.state = State::Member(d);
+                out
+            }
+            (PointerKind::Up, State::Member(d)) => {
+                self.state = State::Idle;
+                d.finish()
+            }
             (PointerKind::Drag, State::Bracket(mut b)) => {
                 let out = b.drag(cx, p, m.cmd);
                 self.state = State::Bracket(b);
@@ -1086,8 +1120,12 @@ impl Tool for SelectionTool {
             State::Pie(d) => o.extend(d.overlays(cx)),
             State::RotateAll(d) => o.extend(d.overlays(cx)),
             State::Space(d) => o.extend(d.overlays(cx)),
+            State::MoveAll(d) => o.extend(d.overlays(cx)),
             State::Loaded { press: Some((start, cur)), .. } => o.push(Overlay::Marquee(Rect::from_points(*start, *cur))),
             _ => {}
+        }
+        if let (Some(p), State::Idle) = (self.bracket_hover, &self.state) {
+            o.extend(member_hover(cx, p));
         }
         o.extend(self.guides.iter().cloned());
         o.extend(self.guide.overlays(cx));
@@ -1137,6 +1175,7 @@ impl Tool for SelectionTool {
             State::Pie(_) => return Cursor::ArrowHollow,
             State::RotateAll(_) => return Cursor::Rotate,
             State::Space(_) => return Cursor::ArrowHollow,
+            State::MoveAll(_) | State::Member(_) => return Cursor::Move,
             State::Bracket(_) => return Cursor::PathBracket,
             State::Loaded { .. } => return Cursor::LoadedText,
             _ => {}
@@ -1161,6 +1200,9 @@ impl Tool for SelectionTool {
         }
         if over_space(cx, p) {
             return Cursor::ArrowHollow;
+        }
+        if over_move_all(cx, p) || over_member(cx, p) {
+            return Cursor::Move;
         }
         if over_bracket(cx, p) {
             return Cursor::PathBracket;
@@ -1511,7 +1553,7 @@ impl SelectionTool {
             self.state = State::Loaded { from, before: port == crate::text::Port::In, press: None };
             return Some(vec![]);
         }
-        // 1. Live Corners widgets, pie widgets, the Rotate All and Space widgets and type on a path's brackets, then the
+        // 1. Live Corners widgets, pie widgets, the Rotate All, Space, Move All and Select/Move widgets and type on a path's brackets, then the
         // bounding-box handles of the current selection.
         if let Some(c) = CornerDrag::hit(cx, ev, false) {
             self.state = State::Corner(c);
@@ -1527,6 +1569,14 @@ impl SelectionTool {
         }
         if let Some(d) = SpaceDrag::hit(cx, ev) {
             self.state = State::Space(d);
+            return Some(vec![]);
+        }
+        if let Some(d) = MoveAllDrag::hit(cx, ev) {
+            self.state = State::MoveAll(d);
+            return Some(vec![]);
+        }
+        if let Some(d) = MemberDrag::hit(cx, ev) {
+            self.state = State::Member(d);
             return Some(vec![]);
         }
         if let Some(b) = BracketDrag::hit(cx, ev) {
