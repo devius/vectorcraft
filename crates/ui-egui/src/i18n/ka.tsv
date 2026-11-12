@@ -166,7 +166,7 @@
 	Remove Background…	ფონის მოშორება…
 	Remove Background	ფონის მოშორება
 	Background	ფონი
-	Edge Color	კიდის ფერი
+	Edge Color	კიდეების ფერი
 	Picked Colors	არჩეული ფერები
 	Corner Color	კუთხეების ფერი
 	Contiguous	მომიჯნავე
@@ -349,7 +349,7 @@
 	Create Outlines	კონტურებად გარდაქმნა
 	Optical Margin Alignment	ოპტიკური არშიის სწორება
 	Dynamic Text	დინამიკური ტექსტი
-	Dynamic Text Presets	დინამიკური ტექსტის წინასწარი პარამეტრები
+	Dynamic Text Presets	დინამიკური ტექსტის პრესეტები
 	Arch	თაღი
 @msg	select point type or type on a path	აირჩიეთ წერტილოვანი ტექსტი ან ტრაექტორიაზე ტექსტი
 @msg	type on a path in a thread cannot use Dynamic Text: {frames}	დაკავშირებულ ტექსტში ტრაექტორიაზე ტექსტი ვერ გამოიყენებს დინამიკურ ტექსტს: {frames}
@@ -722,7 +722,7 @@
 	Cracked Glaze	დამსკდარი მინანქარი
 	Mosaic Floor	მოზაიკის იატაკი
 	Quilted Squares	ქვილთის კვადრატები
-	Leaded Glass	ტყვიის მინა
+	Leaded Glass	ტყვიის ვიტრაჟი
 	Damp Paper	ნესტიანი ქაღალდი
 	Outlines and Rules	კონტურები და ხაზები
 	Hand-Drawn	ხელით დახატული
@@ -1583,7 +1583,7 @@ digits	Malayalam	მალაიალამური
 	Points: clicks add free points	წერტილები: დაწკაპუნებები ამატებს თავისუფალ წერტილებს
 	Radial Gradient	რადიალური გრადიენტი
 	Conic Gradient	კონუსური გრადიენტი
-	Diamond Gradient	რომბული გრადიენტი
+	Diamond Gradient	ბრილიანტისებრი გრადიენტი
 	Reset to White, Black	თეთრზე და შავზე დაბრუნება
 	Reverse Gradient	გრადიენტის შებრუნება
 	Gradient Presets	გრადიენტის პრესეტები
@@ -5536,7 +5536,7 @@ imageTrace	Outline	კონტური
 @msg	span must be "object" or "selection", got {v}	span უნდა იყოს "object" ან "selection", მიღებულია {v}
 @msg	span: "selection" places a `gradient`, not a swatch	span: "selection" ათავსებს `gradient`-ს და არა ფერის ნიმუშს
 @msg	span: "selection" places a gradient: give `gradient`	span: "selection" ათავსებს გრადიენტს: მიუთითეთ `gradient`
-@msg	span: "selection" places a linear, radial, conic or diamond gradient, not a freeform one	span: "selection" ათავსებს წრფივ, რადიალურ, კონუსურ ან რომბულ გრადიენტს და არა თავისუფალი ფორმისას
+@msg	span: "selection" places a linear, radial, conic or diamond gradient, not a freeform one	span: "selection" ათავსებს წრფივ, რადიალურ, კონუსურ ან ბრილიანტისებრ გრადიენტს და არა თავისუფალი ფორმისას
 @msg	span: "selection" places the gradient itself: leave out `start` and `end` (they already place it in document coordinates)	span: "selection" თავად ათავსებს გრადიენტს: გამოტოვეთ `start` და `end` (ისინი მას უკვე დოკუმენტის კოორდინატებში ათავსებენ)
 	Make Image Dynamic	გამოსახულების დინამიკურად ქცევა
 	Import Data Sets…	მონაცემთა ნაკრებების იმპორტი…
@@ -6050,7 +6050,7 @@ axis	Y Axis	Y ღერძი
 @msg	`method` must be classic or perceptual	`method` უნდა იყოს classic ან perceptual
 @msg	`spread` must be pad, repeat or reflect	`spread` უნდა იყოს pad, repeat ან reflect
 @msg	`repeats` must be a whole number from 1 to {MAX_REPEATS}	`repeats` უნდა იყოს მთელი რიცხვი 1-დან {MAX_REPEATS}-მდე
-@msg	`spread` applies to linear, radial, conic and diamond gradients	`spread` ეხება წრფივ, რადიალურ, კონუსურ და რომბულ გრადიენტებს
+@msg	`spread` applies to linear, radial, conic and diamond gradients	`spread` ეხება წრფივ, რადიალურ, კონუსურ და ბრილიანტისებრ გრადიენტებს
 # Heavy plug-in filters (plugin.inspect, plug-in runs)
 	Install “{name}”, which asks for a heavy budget?	დავაყენოთ „{name}“, რომელიც დიდ გამოთვლით ბიუჯეტს ითხოვს?
 	Each run may take up to {minutes} minutes and do {times} times the work other plug-ins may. It runs in the background, and you can cancel it.	თითოეულ გაშვებას შეიძლება {minutes} წუთამდე დასჭირდეს და სხვა პლაგინებისთვის დაშვებულზე {times}-ჯერ მეტი სამუშაო შეასრულოს. ის ფონურ რეჟიმში მუშაობს და შეგიძლიათ გააუქმოთ.
@@ -6575,7 +6575,7 @@ anchor	Points:	წერტილები:
 @msg	{label} must be a number of at least 0.1	{label} უნდა იყოს მინიმუმ 0,1
 	Advanced Character Formats	სიმბოლოს დამატებითი ფორმატები
 	Basic Paragraph Formats	აბზაცის ძირითადი ფორმატები
-	Composition	კომპოზიცია
+	Composition	აწყობა
 	Horizontal Scale	ჰორიზონტალური მასშტაბი
 	Vertical Scale	ვერტიკალური მასშტაბი
 @msg	{label} must be a number from {min} to {max}	{label} უნდა იყოს რიცხვი {min}-დან {max}-მდე
