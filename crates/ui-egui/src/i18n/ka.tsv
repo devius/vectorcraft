@@ -439,7 +439,7 @@
 	Revolve (Classic)…	ბრუნვა (კლასიკური)…
 	Rotate (Classic)…	შემობრუნება (კლასიკური)…
 	Surface	ზედაპირი
-	Wireframe	მავთულის ჩარჩო
+	Wireframe	კარკასი
 	No Shading	დაჩრდილვის გარეშე
 	Plastic	პლასტიკური
 	Highlight Intensity	ელვარების ინტენსივობა
@@ -1463,14 +1463,14 @@ digits	Telugu	ტელუგუ
 digits	Kannada	კანადა
 digits	Malayalam	მალაიალამური
 	Reset Panel	პანელის ჩამოყრა
-	Roman Baseline	ლათინური საბაზისო ხაზი
+	Roman Baseline	რომაული საბაზისო ხაზი
 	Select a text object to edit its character attributes.	სიმბოლოების ატრიბუტების რედაქტირებისთვის მონიშნეთ ტექსტური ობიექტი.
 	Show Options	პარამეტრების ჩვენება
 	Show Recent Colors	ბოლოდროინდელი ფერების ჩვენება
 	Toggle RGB Percent	RGB-ის პროცენტებში ჩვენების გადართვა
 	Small Caps	პატარა მთავრული
 	Small Caps (on the roadmap)	პატარა მთავრული (სამომავლო გეგმაშია)
-	Standard Vertical Roman Alignment	სტანდარტული ვერტიკალური ლათინური სწორება
+	Standard Vertical Roman Alignment	სტანდარტული ვერტიკალური რომაული სწორება
 	Strikethrough	გადახაზული
 	Character:	სიმბოლო:
 	Paragraph:	აბზაცი:
@@ -1584,7 +1584,7 @@ digits	Malayalam	მალაიალამური
 	{glyph} is not an alternate of {sel} (U+{code}) as it stands in its word.	{glyph} არ არის {sel} (U+{code})-ის ალტერნატივა იმ სახით, როგორც ის თავის სიტყვაშია.
 	Double-click to insert {base} (U+{code}) instead: a presentation form does not join, the letter does.	ორჯერ დაწკაპეთ ამის ნაცვლად {base} (U+{code}) ჩასასმელად: გამოსახვის ფორმა არ უკავშირდება, ასო უკავშირდება.
 	Inserted {base} (U+{code}) instead of a presentation form: the font joins it to its neighbors by position.	გამოსახვის ფორმის ნაცვლად ჩასმულია {base} (U+{code}): შრიფტი მას მეზობლებს პოზიციის მიხედვით აკავშირებს.
-	No OpenType feature draws this glyph here, so it replaces the character's glyph and may not join its neighbors.	აქ არც ერთი OpenType ფუნქცია არ ხატავს ამ გლიფს, ამიტომ ის ანაცვლებს სიმბოლოს გლიფს და შეიძლება არ დაუკავშირდეს მეზობელ სიმბოლოებს.
+	No OpenType feature draws this glyph here, so it replaces the character's glyph and may not join its neighbors.	აქ არც ერთი OpenType შესაძლებლობა არ ხატავს ამ გლიფს, ამიტომ ის ანაცვლებს სიმბოლოს გლიფს და შეიძლება არ დაუკავშირდეს მეზობელ სიმბოლოებს.
 	Double-click to insert	ორჯერ დაწკაპეთ ჩასასმელად
 	Entire Font	მთელი შრიფტი
 	glyph {id}	გლიფი {id}
@@ -1795,7 +1795,7 @@ digits	Malayalam	მალაიალამური
 	Hard	მკაცრი
 	Right Indent	მარჯვენა შეწევა
 	Right-to-Left Paragraph Direction	აბზაცის მიმართულება მარჯვნიდან მარცხნივ
-	Roman Hanging Punctuation	ლათინური გამოწეული პუნქტუაცია
+	Roman Hanging Punctuation	რომაული გამოწეული პუნქტუაცია
 	Korean Line Break Anywhere	კორეული სტრიქონის გადატანა ნებისმიერ ადგილას
 	Bunri-Kinshi	Bunri-Kinshi
 	East Asian Composition Settings	აღმოსავლეთ აზიური აწყობის პარამეტრები
@@ -2381,7 +2381,7 @@ digits	Malayalam	მალაიალამური
 @plural	{n} folder|{n} folders	{n} საქაღალდე
 @plural	{n} file|{n} files	{n} ფაილი
 @plural	{n} folder skipped, such as another app's or the system's folder or a hidden one|{n} folders skipped, such as other apps' and the system's folders and hidden ones	გამოტოვებული საქაღალდეები: {n} — მაგ. სხვა აპლიკაციების, სისტემის და დამალული საქაღალდეები
-@plural	{n} folder or file couldn't be read|{n} folders or files couldn't be read	ვერ წაიკითხა საქაღალდეები ან ფაილები: {n}
+@plural	{n} folder or file couldn't be read|{n} folders or files couldn't be read	საქაღალდეების ან ფაილების წაკითხვა ვერ მოხერხდა: {n}
 	The search stopped at its limit: search a smaller folder.	ძიება ზღვარზე შეჩერდა: მოძებნეთ უფრო პატარა საქაღალდეში.
 	Copy only fonts you own or are licensed to install.	დააკოპირეთ მხოლოდ ის შრიფტები, რომლებიც გეკუთვნით ან რომელთა დაყენების ლიცენზია გაქვთ.
 	VectorCraft copies the fonts to {folder}.	VectorCraft შრიფტებს აკოპირებს აქ: {folder}.
@@ -2538,7 +2538,7 @@ digits	Malayalam	მალაიალამური
 	Printer	პრინტერი
 	Printer profile:	პრინტერის პროფილი:
 	Printer:	პრინტერი:
-	Rendering intent:	რენდერინგის მიზანი:
+	Rendering intent:	რენდერინგის განზრახვა:
 	Same As Source	წყაროს მსგავსად
 	Save these settings as a print preset	ამ პარამეტრების შენახვა ბეჭდვის პრესეტად
 	Scaling:	მასშტაბირება:
@@ -3174,9 +3174,9 @@ theme	Appearance	იერსახე
 	Split Freeform Line	თავისუფალი ხაზის გაყოფა
 	Gradient Vector	გრადიენტის ვექტორი
 	Select Gradient Stop	გრადიენტის გადასვლის წერტილის მონიშვნა
-	Create Graph	გრაფიკის შექმნა
-	Graph Data	გრაფიკის მონაცემები
-	Graph Type	გრაფიკის ტიპი
+	Create Graph	დიაგრამის შექმნა
+	Graph Data	დიაგრამის მონაცემები
+	Graph Type	დიაგრამის ტიპი
 	Vector Halftone	ვექტორული ნახევარტონი
 	spot	სპოტ
 	Text	ტექსტი
@@ -3865,7 +3865,7 @@ font-technology	Variable	ცვლადი
 	The defaults are applied when you click OK in Preferences. Cancel there keeps your current preferences.	ნაგულისხმევი მნიშვნელობები გამოიყენება, როცა პარამეტრებში OK-ს დააჭერთ. იქ გაუქმება ინარჩუნებს თქვენს მიმდინარე პარამეტრებს.
 	Smaller ↔ Larger	უფრო პატარა ↔ უფრო დიდი
 	Smart Guides (View → Smart Guides)	ჭკვიანი დამხმარე ხაზები (ხედი → ჭკვიანი დამხმარე ხაზები)
-	Couldn't save recovery data: {e}	აღდგენის მონაცემები ვერ შეინახა: {e}
+	Couldn't save recovery data: {e}	აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}
 	Saved recovery data for {title}	შენახულია აღდგენის მონაცემები: {title}
 	Saving recovery data for {}	ინახება აღდგენის მონაცემები: {}
 	Alt	Alt
@@ -4087,12 +4087,12 @@ font-technology	Variable	ცვლადი
 @msg	Couldn't place {name}: the document it was dropped on was reverted	{name} ვერ განთავსდა: დოკუმენტი, რომელზეც ის ჩამოაგდეს, წინა ვერსიაზე დაბრუნდა
 @msg	Couldn't place {name}: the document it was placed in was reverted	{name} ვერ განთავსდა: დოკუმენტი, რომელშიც ის თავსდებოდა, წინა ვერსიაზე დაბრუნდა
 @msg	Couldn't paste: the document it was pasted in was reverted	ჩასმა ვერ მოხერხდა: დოკუმენტი, რომელშიც ის ჩაისმებოდა, წინა ვერსიაზე დაბრუნდა
-@msg	Couldn't read {name}: {e}	{name} ვერ წაიკითხა: {e}
-@msg	Couldn't save recovery data: {e}	აღდგენის მონაცემები ვერ შეინახა: {e}
-@msg	Couldn't save recovery data for {title}: {e}. Copies go to {folder}, the default recovery folder; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	დოკუმენტის {title} აღდგენის მონაცემები ვერ შეინახა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც აღდგენის ნაგულისხმევი საქაღალდეა; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
-@msg	Couldn't save recovery data for {title}: {e}. Copies go to {folder}, the folder set in Preferences; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	დოკუმენტის {title} აღდგენის მონაცემები ვერ შეინახა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც პარამეტრებშია მითითებული; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
-@msg	Couldn't save recovery data: {e}. Copies go to {folder}, the default recovery folder; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	აღდგენის მონაცემები ვერ შეინახა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც აღდგენის ნაგულისხმევი საქაღალდეა; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
-@msg	Couldn't save recovery data: {e}. Copies go to {folder}, the folder set in Preferences; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	აღდგენის მონაცემები ვერ შეინახა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც პარამეტრებშია მითითებული; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
+@msg	Couldn't read {name}: {e}	ფაილის წაკითხვა ვერ მოხერხდა ({name}): {e}
+@msg	Couldn't save recovery data: {e}	აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}
+@msg	Couldn't save recovery data for {title}: {e}. Copies go to {folder}, the default recovery folder; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	დოკუმენტის {title} აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც აღდგენის ნაგულისხმევი საქაღალდეა; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
+@msg	Couldn't save recovery data for {title}: {e}. Copies go to {folder}, the folder set in Preferences; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	დოკუმენტის {title} აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც პარამეტრებშია მითითებული; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
+@msg	Couldn't save recovery data: {e}. Copies go to {folder}, the default recovery folder; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც აღდგენის ნაგულისხმევი საქაღალდეა; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
+@msg	Couldn't save recovery data: {e}. Copies go to {folder}, the folder set in Preferences; to use another folder, set Preferences → File Handling → Data Recovery → Folder (recoveryFolder)	აღდგენის მონაცემების შენახვა ვერ მოხერხდა: {e}. ასლები ინახება საქაღალდეში {folder}, რომელიც პარამეტრებშია მითითებული; სხვა საქაღალდის გამოსაყენებლად მიუთითეთ პარამეტრები → ფაილების დამუშავება → მონაცემთა აღდგენა → საქაღალდე (recoveryFolder)
 @msg	Create Outlines: select text objects	კონტურების შექმნა: მონიშნეთ ტექსტური ობიექტები
 @msg	Create from Guides: the document has no artboard	დამხმარე ხაზებიდან შექმნა: დოკუმენტს სამუშაო დაფა არ აქვს
 @msg	Create from Guides: the guides make more than {MAX_PIECES} slices	დამხმარე ხაზებიდან შექმნა: დამხმარე ხაზები {MAX_PIECES}-ზე მეტ ნაჭერს ქმნის
@@ -4461,7 +4461,7 @@ font-technology	Variable	ცვლადი
 @msg	not a VectorCraft file: {0}	ეს არ არის VectorCraft-ის ფაილი: {0}
 @msg	not a VectorCraft shortcut set (missing `overrides`)	ეს არ არის VectorCraft-ის მალსახმობების ნაკრები (აკლია `overrides`)
 @msg	not a graphic style library (format `{_1}`)	ეს არ არის გრაფიკული სტილების ბიბლიოთეკა (ფორმატი `{_1}`)
-@msg	not a stored central record	ეს არ არის შენახული ცენტრალური ჩანაწერი
+@msg	not a stored central record	ეს არ არის შეუკუმშავი (stored) ცენტრალური ჩანაწერი
 @msg	not a valid plug-in module: {0}	ეს არ არის პლაგინის სწორი მოდული: {0}
 @msg	not an EMF or WMF file	ეს არ არის EMF ან WMF ფაილი
 @msg	not an HP-GL file	ეს არ არის HP-GL ფაილი
@@ -4522,7 +4522,7 @@ font-technology	Variable	ცვლადი
 @msg	select a blend	მონიშნეთ გადასვლა
 @msg	select a clip group	მონიშნეთ მომჭრელი ჯგუფი
 @msg	select a gradient mesh	მონიშნეთ გრადიენტული ბადე
-@msg	select a linked image: an embedded one has no file	მონიშნეთ მიბმული გამოსახულება: ჩაშენებულს ფაილი არ აქვს
+@msg	select a linked image: an embedded one has no file	მონიშნეთ დაკავშირებული გამოსახულება: ჩაშენებულს ფაილი არ აქვს
 @msg	select a repeat	მონიშნეთ გამეორება
 @msg	select a stroke with a variable width	მონიშნეთ ცვლადი სიგანის კონტური
 @msg	select a symbol instance	მონიშნეთ სიმბოლოს ეგზემპლარი
@@ -4539,7 +4539,7 @@ font-technology	Variable	ცვლადი
 @msg	`match` must be distance or channels	`match` უნდა იყოს distance ან channels
 @msg	`{key}` must be from 0 to 100	`{key}` უნდა იყოს 0-დან 100-მდე
 @msg	`colors` must list 1 to 16 colors, each hex (#rrggbb or #rgb) or black, white, red, green or blue	`colors` უნდა შეიცავდეს 1-დან 16-მდე ფერს, თითოეულს თექვსმეტობით ფორმატში (#rrggbb ან #rgb) ან როგორც black, white, red, green ან blue
-@msg	the linked image shows its preview: embed or relink it first	დაკავშირებული გამოსახულება გადახედვას აჩვენებს: ჯერ ჩააშენეთ ან ხელახლა მიაბით
+@msg	the linked image shows its preview: embed or relink it first	დაკავშირებული გამოსახულება გადახედვას აჩვენებს: ჯერ ჩააშენეთ ან ხელახლა დააკავშირეთ
 @msg	a CMYK image has no transparency to set	CMYK გამოსახულებას არ აქვს დასაყენებელი გამჭვირვალობა
 @msg	every pixel matches the background: no image would be left	ყველა პიქსელი ემთხვევა ფონს: გამოსახულება აღარ დარჩებოდა
 @msg	an image of {w} × {h} pixels is too large to change	{w} × {h} პიქსელის გამოსახულება შესაცვლელად ზედმეტად დიდია
@@ -4707,7 +4707,7 @@ font-technology	Variable	ცვლადი
 @msg	{name}: CRC mismatch	{name}: CRC არ ემთხვევა
 @msg	{name}: no local header	{name}: ლოკალური სათაური არ არის
 @msg	{name}: no such recovery entry	{name}: ასეთი აღდგენის ჩანაწერი არ არის
-@msg	{path} can't be found: relink it first	{path} ვერ მოიძებნა: ჯერ ხელახლა მიაბით
+@msg	{path} can't be found: relink it first	{path} ვერ მოიძებნა: ჯერ ხელახლა დააკავშირეთ
 @msg	{path}: no file system here (pass dataBase64 to open; omit the path to get dataBase64)	{path}: აქ ფაილური სისტემა არ არის (გასახსნელად გადაეცით dataBase64; dataBase64-ის მისაღებად გამოტოვეთ path)
 @msg	{path}: {e}	{path}: {e}
 @msg	{status} ({e})	{status} ({e})
@@ -4730,7 +4730,7 @@ font-technology	Variable	ცვლადი
 @msgplural	Opened with {n} note: {first}|Opened with {n} notes: {first}	გაიხსნა, შენიშვნები: {n}: {first}
 @msgplural	{notice}. Opened with {n} note: {first}|{notice}. Opened with {n} notes: {first}	{notice}. გაიხსნა, შენიშვნები: {n}: {first}
 @msgplural	Saved {path} with {n} note: {first}|Saved {path} with {n} notes: {first}	შენახულია {path}, შენიშვნები: {n}: {first}
-@msgplural	Embedded {n} image; {missing} missing: relink them first|Embedded {n} images; {missing} missing: relink them first	ჩაშენებულია გამოსახულებები: {n}; აკლია {missing}: ჯერ ხელახლა მიაბით
+@msgplural	Embedded {n} image; {missing} missing: relink them first|Embedded {n} images; {missing} missing: relink them first	ჩაშენებულია გამოსახულებები: {n}; აკლია {missing}: ჯერ ხელახლა დააკავშირეთ
 @msgplural	Embedded {n} image|Embedded {n} images	ჩაშენებულია გამოსახულებები: {n}
 @msgplural	Relinked {n} image|Relinked {n} images	ხელახლა მიბმულია გამოსახულებები: {n}
 @msgplural	Relinked {n} image; not in that folder: {names}|Relinked {n} images; not in that folder: {names}	ხელახლა მიბმულია გამოსახულებები: {n}; იმ საქაღალდეში არ არის: {names}
@@ -4738,10 +4738,10 @@ font-technology	Variable	ცვლადი
 @msgplural	Updated {n} image|Updated {n} images	განახლებულია გამოსახულებები: {n}
 @msgplural	Replaced {n} image|Replaced {n} images	ჩანაცვლებულია გამოსახულებები: {n}
 @msgplural	Broke {n} link|Broke {n} links	გაწყვეტილია ბმულები: {n}
-@msgplural	Broke {n} link; {missing} can't be read: relink or update them first|Broke {n} links; {missing} can't be read: relink or update them first	გაწყვეტილია ბმულები: {n}; ვერ იკითხება {missing}: ჯერ ხელახლა მიაბით ან განაახლეთ
-@msgplural	{n} linked file can't be read here: its preview shows|{n} linked files can't be read here: their previews show	მიბმული ფაილების წაკითხვა აქ ვერ ხერხდება ({n}): ჩანს მათი გადახედვა
+@msgplural	Broke {n} link; {missing} can't be read: relink or update them first|Broke {n} links; {missing} can't be read: relink or update them first	გაწყვეტილია ბმულები: {n}; ვერ იკითხება {missing}: ჯერ ხელახლა დააკავშირეთ ან განაახლეთ
+@msgplural	{n} linked file can't be read here: its preview shows|{n} linked files can't be read here: their previews show	დაკავშირებული ფაილების წაკითხვა აქ ვერ ხერხდება ({n}): ჩანს მათი გადახედვა
 @msgplural	{n} image couldn't be decoded and shows as a crossed box|{n} images couldn't be decoded and show as crossed boxes	სურათების დეკოდირება ვერ მოხერხდა ({n}): ისინი ჯვრით გადახაზული ჩარჩოებით ჩანს
-@msgplural	{n} linked image changed on disk: Update Links shows the new version|{n} linked images changed on disk: Update Links shows the new versions	მიბმული გამოსახულებები შეიცვალა დისკზე ({n}): ბმულების განახლება აჩვენებს ახალ ვერსიებს
+@msgplural	{n} linked image changed on disk: Update Links shows the new version|{n} linked images changed on disk: Update Links shows the new versions	დაკავშირებული გამოსახულებები შეიცვალა დისკზე ({n}): ბმულების განახლება აჩვენებს ახალ ვერსიებს
 @msgplural	Updated {n} linked file changed on disk|Updated {n} linked files changed on disk	განახლდა დისკზე შეცვლილი დაკავშირებული ფაილები: {n}
 @msg	the document sets a bleed that this PDF/X file leaves out: turn on Use document bleed settings	დოკუმენტი ადგენს ჭრისპირა არეს, რომელსაც ეს PDF/X ფაილი გამოტოვებს: ჩართეთ „დოკუმენტის ჭრისპირა არის პარამეტრების გამოყენება“
 @msgplural	Exported {what} with {n} note: {first}|Exported {what} with {n} notes: {first}	ექსპორტირებულია {what}, შენიშვნები: {n}: {first}
@@ -4840,10 +4840,10 @@ font-technology	Variable	ცვლადი
 @msg	id {value} is a layer, not an object; move layers with layer.move	id {value} შრეა და არა ობიექტი; შრეების გადასატანად გამოიყენეთ layer.move
 @msg	automation filesystem access is not granted: read authority is absent: {path}	ავტომატიზაციას ფაილურ სისტემაზე წვდომა არ აქვს: წაკითხვის უფლება არ არის: {path}
 @msg	automation filesystem access is not granted: write authority is absent: {path}	ავტომატიზაციას ფაილურ სისტემაზე წვდომა არ აქვს: ჩაწერის უფლება არ არის: {path}
-@msg	automation path rejected: outside the read root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირის {root} გარეთაა: {path}
-@msg	automation path rejected: outside the read roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირების {roots} გარეთაა: {path}
-@msg	automation path rejected: outside the write root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირის {root} გარეთაა: {path}
-@msg	automation path rejected: outside the write roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირების {roots} გარეთაა: {path}
+@msg	automation path rejected: outside the read root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირეული საქაღალდის {root} გარეთაა: {path}
+@msg	automation path rejected: outside the read roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: წაკითხვის ძირეული საქაღალდეების {roots} გარეთაა: {path}
+@msg	automation path rejected: outside the write root {root}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირეული საქაღალდის {root} გარეთაა: {path}
+@msg	automation path rejected: outside the write roots {roots}: {path}	ავტომატიზაციის გზა უარყოფილია: ჩაწერის ძირეული საქაღალდეების {roots} გარეთაა: {path}
 @msg	automation path rejected: path is empty	ავტომატიზაციის გზა უარყოფილია: გზა ცარიელია
 @msg	automation path rejected: a link that leads nowhere: {path}	ავტომატიზაციის გზა უარყოფილია: ბმული არსად მიდის: {path}
 @msg	automation path rejected: cannot resolve {path}: {e}	ავტომატიზაციის გზა უარყოფილია: {path} ვერ გაირკვა: {e}
@@ -5585,7 +5585,7 @@ imageTrace	Outline	კონტური
 @msg	vc.document{place} is too large for a script	vc.document{place} ზედმეტად დიდია სკრიპტისთვის
 @msg	vc.log: the log of this run is full	vc.log: ამ გაშვების ჟურნალი სავსეა
 @msg	this function's script run has ended	ამ ფუნქციის სკრიპტის გაშვება დასრულდა
-@msg	the script made more host calls than one run may make	სკრიპტმა იმაზე მეტი მასპინძლის გამოძახება შეასრულა, ვიდრე ერთ გაშვებას შეუძლია
+@msg	the script made more host calls than one run may make	სკრიპტმა ჰოსტის იმაზე მეტი გამოძახება შეასრულა, ვიდრე ერთ გაშვებაშია დასაშვები
 @msg	the script passed more data to and from commands than one run may pass	სკრიპტმა ბრძანებებს და ბრძანებებიდან იმაზე მეტი მონაცემი გადასცა, ვიდრე ერთ გაშვებას შეუძლია
 @msg	the script added more objects and data to the documents than one run may add	სკრიპტმა დოკუმენტებს იმაზე მეტი ობიექტი და მონაცემი დაამატა, ვიდრე ერთ გაშვებას შეუძლია
 @msg	{what}: the object is not a File or a Folder	{what}: ობიექტი არც File-ია და არც Folder
@@ -5708,8 +5708,8 @@ imageTrace	Outline	კონტური
 	PDF-compatible	PDF-თან თავსებადი
 	Panels Except Tools and Control	პანელები, ხელსაწყოებისა და მართვის პანელის გარდა
 	Isolate Selected Object	მონიშნული ობიექტის იზოლირება
-@msg	the file's layers weren't read ({_1}): it comes in as its page, in one layer	ფაილის შრეები ვერ წაიკითხა ({_1}): ის გაიხსნება როგორც მისი გვერდი, ერთ შრეში
-@msg	the file's layers weren't read from its editing data ({_1}): they come from its PDF part	ფაილის შრეები რედაქტირების მონაცემებიდან ვერ წაიკითხა ({_1}): ისინი მისი PDF ნაწილიდან აიღება
+@msg	the file's layers weren't read ({_1}): it comes in as its page, in one layer	ფაილის შრეების წაკითხვა ვერ მოხერხდა ({_1}): ის გაიხსნება როგორც მისი გვერდი, ერთ შრეში
+@msg	the file's layers weren't read from its editing data ({_1}): they come from its PDF part	ფაილის შრეების წაკითხვა რედაქტირების მონაცემებიდან ვერ მოხერხდა ({_1}): ისინი მისი PDF ნაწილიდან აიღება
 @msg	the Color Picker is not open	ფერის ამრჩევი გახსნილი არ არის
 @msg	the Simplify slider is not open	გამარტივების სლაიდერი გახსნილი არ არის
 @msg	the Smooth slider is not open	გაგლუვების სლაიდერი გახსნილი არ არის
@@ -7672,7 +7672,7 @@ font-script	Japanese	იაპონური
 @msg	Contour: select paths or shapes	მოხაზულობა: მონიშნეთ ტრაექტორიები ან ფიგურები
 @msg	Contour: the Offset Path effect is not available	მოხაზულობა: ეფექტი „ტრაექტორიის წანაცვლება“ მიუწვდომელია
 @msg	Create needs fills, strokes or both	„შექმნას“ სჭირდება შევსებები, კონტურები ან ორივე
-@msg	DCS files can only be placed linked: use File › Place with Link on	DCS ფაილების განთავსება მხოლოდ ბმულით შეიძლება: გამოიყენეთ ფაილი › განთავსება, ჩართული „ბმულით“
+@msg	DCS files can only be placed linked: use File › Place with Link on	DCS ფაილების განთავსება მხოლოდ ბმულით შეიძლება: გამოიყენეთ ფაილი › განთავსება და ჩართეთ „ბმული“
 @msg	DXF options: {e}	DXF-ის პარამეტრები: {e}
 @msg	DXF scale must be a positive number up to {_1}, not {scale}	DXF-ის მასშტაბი უნდა იყოს დადებითი რიცხვი, არაუმეტეს {_1}-ისა, და არა {scale}
 @msg	DXF {field} `{s}`: {allowed}	DXF {field} `{s}`: {allowed}
@@ -7745,7 +7745,7 @@ font-script	Japanese	იაპონური
 @msg	SVG is not UTF-8, UTF-16 or ISO 8859-1	SVG არ არის UTF-8, UTF-16 ან ISO 8859-1
 @msg	SVG options: {e}	SVG-ის პარამეტრები: {e}
 @msg	Save for Web settings: {e}	„ვებისთვის შენახვის“ პარამეტრები: {e}
-@msg	Save writes one artboard: name one, or export several with document.export	შენახვა ერთ სამუშაო დაფას წერს: მიუთითეთ ერთი ან რამდენიმის ექსპორტისთვის გამოიყენეთ document.export
+@msg	Save writes one artboard: name one, or export several with document.export	შენახვა ერთ სამუშაო დაფას წერს: მიუთითეთ ერთი, ან რამდენიმის ექსპორტისთვის გამოიყენეთ document.export
 @msg	Select a dimension first	ჯერ მონიშნეთ ზომა
 @msg	Select dimensions to update	მონიშნეთ განსაახლებელი ზომები
 @msg	Select only dimensions	მონიშნეთ მხოლოდ ზომები
@@ -7763,7 +7763,7 @@ font-script	Japanese	იაპონური
 @msg	The 3D projection is not finite	3D პროექცია სასრული არ არის
 @msg	The 3D shadow is too complex; turn Shadows off or simplify the art	3D ჩრდილი ზედმეტად რთულია; გამორთეთ ჩრდილები ან გაამარტივეთ ნახატი
 @msg	The shape contains invalid coordinates	ფიგურა არასწორ კოორდინატებს შეიცავს
-@msg	The {name} profile could not be read, so the new document has the default settings: {reason}	პროფილი „{name}“ ვერ წაიკითხა, ამიტომ ახალ დოკუმენტს ნაგულისხმევი პარამეტრები აქვს: {reason}
+@msg	The {name} profile could not be read, so the new document has the default settings: {reason}	პროფილის „{name}“ წაკითხვა ვერ მოხერხდა, ამიტომ ახალ დოკუმენტს ნაგულისხმევი პარამეტრები აქვს: {reason}
 @msg	Too many Revolve faces for visibility evaluation	ხილვადობის შესაფასებლად ბრუნვას ზედმეტად ბევრი წახნაგი აქვს
 @msg	Trap: more than {_1} pairs of objects lie close enough to trap, or too many objects share a horizontal range; trap fewer objects at a time	ტრეპინგი: ობიექტების {_1}-ზე მეტი წყვილი ტრეპინგისთვის საკმარისად ახლოს მდებარეობს, ან ზედმეტად ბევრ ობიექტს საერთო ჰორიზონტალური დიაპაზონი აქვს; ერთდროულად ნაკლებ ობიექტზე გამოიყენეთ ტრეპინგი
 @msg	VectorCraft reads at most {ASE_MAX_ENTRIES} colors and groups from a swatch exchange file, and this library has {entries}	VectorCraft ფერის ნიმუშების გაცვლის ფაილიდან კითხულობს მაქსიმუმ {ASE_MAX_ENTRIES} ფერსა და ჯგუფს, ამ ბიბლიოთეკაში კი არის {entries}
@@ -8062,12 +8062,12 @@ font-script	Japanese	იაპონური
 @msg	`{name}` can't be duplicated	`{name}`: დუბლირება შეუძლებელია
 @msg	`{name}` can't be edited	`{name}`: რედაქტირება შეუძლებელია
 @msg	`{name}` can't be edited this way	`{name}`: ამგვარად რედაქტირება შეუძლებელია
-@msg	`{name}` can't be renamed	`{name}`: სახელის გადარქმევა შეუძლებელია
+@msg	`{name}` can't be renamed	`{name}`: სახელის შეცვლა შეუძლებელია
 @msg	`{name}` can't name a folder	`{name}` საქაღალდის სახელად ვერ გამოდგება
 @msg	`{name}` has no art to place	`{name}`: განსათავსებელი ნახატი არ არის
 @msg	`{name}` has no text to place	`{name}`: განსათავსებელი ტექსტი არ არის
 @msg	`{name}` in the Word document is not UTF-8 or UTF-16 text	`{name}` Word-ის დოკუმენტში არ არის UTF-8 ან UTF-16 ტექსტი
-@msg	`{name}` in the Word document is not well-formed XML: {e}	`{name}` Word-ის დოკუმენტში სწორად ფორმირებული XML არ არის: {e}
+@msg	`{name}` in the Word document is not well-formed XML: {e}	`{name}` Word-ის დოკუმენტში სწორად აგებული XML არ არის: {e}
 @msg	`{name}` in the Word document nests elements more than {MAX_NESTING} deep	`{name}` Word-ის დოკუმენტში შეიცავს {MAX_NESTING} დონეზე ღრმად ჩადგმულ ელემენტებს
 @msg	`{name}` is a built-in preset and is read-only: save it under another name	`{name}` ჩაშენებული პრესეტია და მხოლოდ წასაკითხია: შეინახეთ სხვა სახელით
 @msg	`{name}` is a built-in preset: save under another name	`{name}` ჩაშენებული პრესეტია: შეინახეთ სხვა სახელით
@@ -8080,7 +8080,7 @@ font-script	Japanese	იაპონური
 @msg	`{name}`: Minimum must not exceed Desired, nor Desired Maximum	`{name}`: მინიმალური არ უნდა აღემატებოდეს სასურველს, ხოლო სასურველი — მაქსიმალურს
 @msg	`{name}`: {_1}: {e}	`{name}`: {_1}: {e}
 @msg	`{n}` can't be deleted	`{n}`: წაშლა შეუძლებელია
-@msg	`{n}` can't be merged	`{n}`: გაერთიანება შეუძლებელია
+@msg	`{n}` can't be merged	`{n}`: შერწყმა შეუძლებელია
 @msg	`{n}` can't be moved	`{n}`: გადატანა შეუძლებელია
 @msg	`{n}` is not a colour swatch	`{n}` ფერის ნიმუში არ არის
 @msg	`{n}` isn't a solid colour	`{n}` მყარი ფერი არ არის
@@ -8120,7 +8120,7 @@ font-script	Japanese	იაპონური
 @msg	a graph has at most {_1} series, so it transposes with at most that many categories	დიაგრამას აქვს მაქსიმუმ {_1} სერია, ამიტომ ტრანსპოზიცია შესაძლებელია მაქსიმუმ ამდენი კატეგორიით
 @msg	a host value has too many entries	ჰოსტის მნიშვნელობას ზედმეტად ბევრი ჩანაწერი აქვს
 @msg	a host value is nested too deep	ჰოსტის მნიშვნელობა ზედმეტად ღრმადაა ჩადგმული
-@msg	a layer can't be merged into its own sublayer	შრე საკუთარ ქვეშრესთან ვერ გაერთიანდება
+@msg	a layer can't be merged into its own sublayer	შრე საკუთარ ქვეშრეს ვერ შეერწყმება
 @msg	a layer's form box isn't an array	შრის ფორმის საზღვრების ჩარჩო მასივი არ არის
 @msg	a layer's form can't be read	შრის ფორმა ვერ იკითხება
 @msg	a layer's form has no box	შრის ფორმას საზღვრების ჩარჩო არ აქვს
@@ -8128,7 +8128,7 @@ font-script	Japanese	იაპონური
 @msg	a legend draws at most {MAX_CHIPS} swatches	ლეგენდა ხატავს მაქსიმუმ {MAX_CHIPS} ფერის ნიმუშს
 @msg	a line can't run from a point to itself	ხაზი წერტილიდან იმავე წერტილამდე ვერ გაივლის
 @msg	a line needs at least two points	ხაზს სჭირდება მინიმუმ ორი წერტილი
-@msg	a linked JavaScript file is outside the read roots	დაკავშირებული JavaScript ფაილი წაკითხვის ძირების გარეთაა
+@msg	a linked JavaScript file is outside the read roots	დაკავშირებული JavaScript ფაილი წაკითხვის ძირეული საქაღალდეების გარეთაა
 @msg	a name names one asset: give multiple: false, or one object	სახელი ერთ რესურსს აღნიშნავს: მიუთითეთ multiple: false ან ერთი ობიექტი
 @msg	a namespace declaration uses a reserved prefix or URI	სახელთა სივრცის გამოცხადება დაჯავშნილ პრეფიქსს ან URI-ს იყენებს
 @msg	a namespace qualifier is undefined	სახელთა სივრცის კვალიფიკატორი განსაზღვრული არ არის
@@ -8306,7 +8306,7 @@ font-script	Japanese	იაპონური
 @msg	cannot convert undefined or null to an object	undefined-ის ან null-ის ობიექტად გარდაქმნა შეუძლებელია
 @msg	cannot distort a zero-size or non-finite bounding box	ნულოვანი ზომის ან არასასრული შემომსაზღვრელი ჩარჩოს დეფორმაცია შეუძლებელია
 @msg	cannot move an object into itself	ობიექტის საკუთარ თავში გადატანა შეუძლებელია
-@msg	cannot open the automation {kind} root `{_1}`: {e}	ავტომატიზაციის ძირის ({kind}) `{_1}` გახსნა ვერ ხერხდება: {e}
+@msg	cannot open the automation {kind} root `{_1}`: {e}	ავტომატიზაციის ძირეული საქაღალდის ({kind}) `{_1}` გახსნა ვერ ხერხდება: {e}
 @msg	cannot read profile: {0}	პროფილის წაკითხვა ვერ ხერხდება: {0}
 @msg	case must be upper|lower|title|sentence	case უნდა იყოს upper|lower|title|sentence
 @msg	category `{c}`: one of {_1}	კატეგორია `{c}`: დასაშვებია ერთ-ერთი: {_1}
@@ -8330,7 +8330,7 @@ font-script	Japanese	იაპონური
 @msg	column {column}: `{cell}` names `{name}`, which is a {_1} variable	სვეტი {column}: `{cell}` ასახელებს ცვლადს `{name}`, რომელიც {_1} ტიპისაა
 @msg	column {column}: `{cell}` names no variable	სვეტი {column}: `{cell}` არცერთ ცვლადს არ ასახელებს
 @msg	column {column}: the variable name is longer than {MAX_NAME} characters	სვეტი {column}: ცვლადის სახელი {MAX_NAME} სიმბოლოზე გრძელია
-@msg	column: true floats the whole column and takes no onto, above or below	column: true მთელ სვეტს მცურავს ხდის და onto, above ან below არ მიიღება
+@msg	column: true floats the whole column and takes no onto, above or below	column: true მთელ სვეტს მცურავს ხდის და არ იღებს onto, above ან below პარამეტრებს
 @msg	command must be a shape.* command	command უნდა იყოს shape.* ბრძანება
 @msg	commands[{i}]: missing `command`	commands[{i}]: აკლია `command`
 @msg	composer must be "singleLine" or "everyLine"	composer უნდა იყოს "singleLine" ან "everyLine"
@@ -8350,7 +8350,7 @@ font-script	Japanese	იაპონური
 @msg	corners must be 4 [x, y] points (TL, TR, BR, BL)	corners უნდა იყოს 4 [x, y] წერტილი (TL, TR, BR, BL)
 @msg	counterPer `{c}`: item or file	counterPer `{c}`: item ან file
 @msg	crop `{_1}`: only PDF pages have art, trim, bleed and media boxes; use "crop" or "bounding"	crop `{_1}`: art, trim, bleed და media ჩარჩოები მხოლოდ PDF გვერდებს აქვს; გამოიყენეთ "crop" ან "bounding"
-@msg	crop rectangle doesn't overlap the image	მოსაჭრელი მართკუთხედი გამოსახულებას არ გადაფარავს
+@msg	crop rectangle doesn't overlap the image	ჩამოჭრის მართკუთხედი გამოსახულებას არ კვეთს
 @msg	cross-reference and object streams aren't supported	ჯვარედინი მიმართვებისა და ობიექტების ნაკადები მხარდაჭერილი არ არის
 @msg	damaged compressed data: {e}	დაზიანებული შეკუმშული მონაცემები: {e}
 @msg	dash lengths must be numbers, got {v}	ტირეების სიგრძეები უნდა იყოს რიცხვები, მიღებულია {v}
@@ -8467,7 +8467,7 @@ font-script	Japanese	იაპონური
 @msg	give at least one of clip, invert, disabled, linked	მიუთითეთ მინიმუმ ერთი: clip, invert, disabled, linked
 @msg	give color, none, swatch or gradient	მიუთითეთ color, none, swatch ან gradient
 @msg	give dataBase64	მიუთითეთ dataBase64
-@msg	give either at (a click) or area (a path drawn around the overlaps)	მიუთითეთ ან at (დაწკაპება), ან area (გადაფარვების გარშემო დახატული ტრაექტორია)
+@msg	give either at (a click) or area (a path drawn around the overlaps)	მიუთითეთ ან at (დაწკაპუნება), ან area (გადაფარვების გარშემო დახატული ტრაექტორია)
 @msg	give exactly one of `at`, `rect` and `points`	მიუთითეთ ზუსტად ერთი: `at`, `rect` ან `points`
 @msg	give exactly one of `path`, `data` and `dataBase64`	მიუთითეთ ზუსტად ერთი: `path`, `data` ან `dataBase64`
 @msg	give formats or a preset, not both	მიუთითეთ formats ან პრესეტი, ორივე არა
@@ -8521,7 +8521,7 @@ font-script	Japanese	იაპონური
 @msg	image has no bounds	გამოსახულებას საზღვრები არ აქვს
 @msg	image {_1} is linked already	გამოსახულება {_1} უკვე დაკავშირებულია
 @msg	imageMap `{m}`: none, client or server	imageMap `{m}`: none, client ან server
-@msg	images in a spot ink whose samples couldn't be read were imported in RGB	სპოტ-მელნის გამოსახულებები, რომელთა სემპლების წაკითხვა ვერ მოხერხდა, RGB-ში იმპორტირდა
+@msg	images in a spot ink whose samples couldn't be read were imported in RGB	სპოტ-მელნის გამოსახულებები, რომელთა პიქსელური მნიშვნელობების წაკითხვა ვერ მოხერხდა, RGB-ში იმპორტირდა
 @msg	images past the most pixels one file may hold were left out	გამოსახულებები, რომლებიც ერთ ფაილში დასაშვებ პიქსელების მაქსიმუმს აჭარბებს, გამოტოვებულია
 @msg	images too large to read were left out	წასაკითხად ზედმეტად დიდი გამოსახულებები გამოტოვებულია
 @msg	index out of range	ინდექსი დიაპაზონს გარეთაა
@@ -8754,7 +8754,7 @@ font-script	Japanese	იაპონური
 @msg	no item at index {from}	ინდექსზე {from} ელემენტი არ არის
 @msg	no item at one of the indices {idx}	ერთ-ერთ ინდექსზე ელემენტი არ არის: {idx}
 @msg	no layer	შრე არ არის
-@msg	no layer to rename	გადასარქმევი შრე არ არის
+@msg	no layer to rename	სახელის შესაცვლელი შრე არ არის
 @msg	no layer {id} (see layer.list)	შრე {id} არ არის (იხ. layer.list)
 @msg	no layers to export	საექსპორტო შრეები არ არის
 @msg	no library `{key}`	ბიბლიოთეკა `{key}` არ არის
@@ -8845,7 +8845,7 @@ font-script	Japanese	იაპონური
 @msg	not a print presets file (format `{_1}`)	ეს არ არის ბეჭდვის პრესეტების ფაილი (ფორმატი `{_1}`)
 @msg	not a print presets file: {e}	ეს არ არის ბეჭდვის პრესეტების ფაილი: {e}
 @msg	not a regular expression	ეს არ არის რეგულარული გამოსახულება
-@msg	not a stored or deflated central record	ეს არ არის შენახული ან deflate-ით შეკუმშული ცენტრალური ჩანაწერი
+@msg	not a stored or deflated central record	ეს არ არის შეუკუმშავი (stored) ან deflate-ით შეკუმშული ცენტრალური ჩანაწერი
 @msg	not a swatch library (.vcswatches or .gpl)	ეს არ არის ფერის ნიმუშების ბიბლიოთეკა (.vcswatches ან .gpl)
 @msg	not a swatch library (format `{_1}`)	ეს არ არის ფერის ნიმუშების ბიბლიოთეკა (ფორმატი `{_1}`)
 @msg	not a swatch library: {e}	ეს არ არის ფერის ნიმუშების ბიბლიოთეკა: {e}
@@ -8868,7 +8868,7 @@ font-script	Japanese	იაპონური
 @msg	nothing to print: the document has no art that prints	დასაბეჭდი არაფერია: დოკუმენტს დასაბეჭდი ნახატი არ აქვს
 @msg	nothing to repeat	გასამეორებელი არაფერია
 @msg	object is not a path	ობიექტი ტრაექტორია არ არის
-@msg	object transparency cannot be sampled onto highlighted characters; disable Transparency in Eyedropper Options or select the whole object	ობიექტის გამჭვირვალობის აღება მონიშნულ სიმბოლოებზე შეუძლებელია; გამორთეთ „გამჭვირვალობა“ პიპეტის პარამეტრებში ან მონიშნეთ მთელი ობიექტი
+@msg	object transparency cannot be sampled onto highlighted characters; disable Transparency in Eyedropper Options or select the whole object	ობიექტის გამჭვირვალობა მონიშნულ სიმბოლოებზე ვერ გადავა; გამორთეთ „გამჭვირვალობა“ პიპეტის პარამეტრებში ან მონიშნეთ მთელი ობიექტი
 @msg	object {_1} can't be set as point type	ობიექტი {_1} წერტილოვან ტექსტად ვერ დაყენდება
 @msg	object {_1} has lost its file's contents: relink it	ობიექტმა {_1} დაკარგა თავისი ფაილის შიგთავსი: ხელახლა დააკავშირეთ
 @msg	object {_1} has no path	ობიექტს {_1} ტრაექტორია არ აქვს
@@ -8897,8 +8897,8 @@ font-script	Japanese	იაპონური
 @msg	only interior mesh lines can be deleted	შეიძლება მხოლოდ ბადის შიდა ხაზების წაშლა
 @msg	only solid colours can be added (not gradients or patterns)	შეიძლება მხოლოდ მყარი ფერების დამატება (არა გრადიენტების ან პატერნების)
 @msg	only solid-colour swatches can be spot colours	სპოტ-ფერი შეიძლება იყოს მხოლოდ მყარი ფერის ნიმუში
-@msg	only this Affinity file's embedded preview could be read: use File › Open to see it with its warning, or export SVG or PDF from Affinity first	Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა: მის სანახავად გაფრთხილებით გამოიყენეთ ფაილი › გახსნა, ან ჯერ Affinity-დან გააკეთეთ SVG-ის ან PDF-ის ექსპორტი
-@msg	only this Affinity file's embedded preview could be read; use File › Open to see it with its warning	Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა; მის სანახავად გაფრთხილებით გამოიყენეთ ფაილი › გახსნა
+@msg	only this Affinity file's embedded preview could be read: use File › Open to see it with its warning, or export SVG or PDF from Affinity first	Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა: გაფრთხილებასთან ერთად მის სანახავად გამოიყენეთ ფაილი › გახსნა, ან ჯერ Affinity-დან გააკეთეთ SVG-ის ან PDF-ის ექსპორტი
+@msg	only this Affinity file's embedded preview could be read; use File › Open to see it with its warning	Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა; გაფრთხილებასთან ერთად მის სანახავად გამოიყენეთ ფაილი › გახსნა
 @msg	onto, above, below, icon and a column place belong to window.panel.float and window.panel.dock	onto, above, below, icon და სვეტის ადგილი ეკუთვნის window.panel.float-სა და window.panel.dock-ს
 @msg	onto, above, below, icon and a column place take no anchor, side, zone or before	onto, above, below, icon და სვეტის ადგილი არ იღებს anchor, side, zone ან before
 @msg	onto, above, below, icon and a column place take no x, y, width or height	onto, above, below, icon და სვეტის ადგილი არ იღებს x, y, width ან height
@@ -8921,7 +8921,7 @@ font-script	Japanese	იაპონური
 @msg	output.outputIntent: “{name}” is a grey profile, which can't be a {std} output intent	output.outputIntent: „{name}“ ნაცრისფრის პროფილია და {std} გამოტანის მიზანი ვერ იქნება
 @msg	overlap: {o} pt is half a tile or more	overlap: {o} pt ფილის ნახევარი ან მეტია
 @msg	overlapping Shaper paths must be in the same layer or group	გადაფარული ფორმირების ტრაექტორიები ერთ შრეში ან ჯგუფში უნდა იყოს
-@msg	overlapping edits	გადაფარული ჩასწორებები
+@msg	overlapping edits	ცვლილებები ერთმანეთს ფარავს
 @msg	page art conflicts with image data for {key}	გვერდის ნახატი ეწინააღმდეგება გამოსახულების მონაცემებს: {key}
 @msg	page art conflicts with pattern {name}	გვერდის ნახატი ეწინააღმდეგება პატერნს: {name}
 @msg	page art conflicts with swatch {name}	გვერდის ნახატი ეწინააღმდეგება ფერის ნიმუშს: {name}
@@ -8996,7 +8996,7 @@ font-script	Japanese	იაპონური
 @msg	registration must be 0..8	registration უნდა იყოს 0..8
 @msg	regular expression flag '{_1}' given twice	რეგულარული გამოსახულების ალამი '{_1}' ორჯერაა მითითებული
 @msg	regular expression too large	რეგულარული გამოსახულება ზედმეტად დიდია
-@msg	release a layer or a group	მოხსენით შრე ან ჯგუფი
+@msg	release a layer or a group	შრეებად გასათავისუფლებლად მიუთითეთ შრე ან ჯგუფი
 @msg	replace keeps the replaced object's place and transform: drop template, at and rect	replace ინარჩუნებს ჩანაცვლებული ობიექტის ადგილს და გარდაქმნას: ამოიღეთ template, at და rect
 @msg	replace: select the one object to replace	replace: მონიშნეთ ერთი ჩასანაცვლებელი ობიექტი
 @msg	resolution must be a number or screen|medium|high	resolution უნდა იყოს რიცხვი ან screen|medium|high
@@ -9045,7 +9045,7 @@ font-script	Japanese	იაპონური
 @msg	select objects to align to the guide	მონიშნეთ დამხმარე ხაზზე გასასწორებელი ობიექტები
 @msg	select one Intertwine group	მონიშნეთ ერთი გადახლართვის ჯგუფი
 @msg	select one image or pass id	მონიშნეთ ერთი გამოსახულება ან მიუთითეთ id
-@msg	select one layer, group or object to rename	მონიშნეთ გადასარქმევი ერთი შრე, ჯგუფი ან ობიექტი
+@msg	select one layer, group or object to rename	სახელის შესაცვლელად მონიშნეთ ერთი შრე, ჯგუფი ან ობიექტი
 @msg	select paths	მონიშნეთ ტრაექტორიები
 @msg	select paths or compound paths	მონიშნეთ ტრაექტორიები ან შედგენილი ტრაექტორიები
 @msg	select rows or objects to collect	მონიშნეთ შესაგროვებელი სტრიქონები ან ობიექტები
@@ -9117,7 +9117,7 @@ font-script	Japanese	იაპონური
 @msg	the Layers panel is not shown	შრეების პანელი არ ჩანს
 @msg	the Layers panel's search, filter or Show Layers Only hides its row	შრეების პანელის ძიება, ფილტრი ან „მხოლოდ შრეების ჩვენება“ მის სტრიქონს მალავს
 @msg	the Objects on Path group is hidden or locked	ტრაექტორიაზე ობიექტების ჯგუფი დამალული ან ჩაკეტილია
-@msg	the PDF security settings were saved without their passwords: give openPassword or permissionsPassword again, or security without passwordRequired to export unprotected	PDF-ის უსაფრთხოების პარამეტრები პაროლების გარეშე შეინახა: კვლავ მიუთითეთ openPassword ან permissionsPassword, ან დაუცველი ექსპორტისთვის მიუთითეთ security passwordRequired-ის გარეშე
+@msg	the PDF security settings were saved without their passwords: give openPassword or permissionsPassword again, or security without passwordRequired to export unprotected	PDF-ის უსაფრთხოების პარამეტრები პაროლების გარეშეა შენახული: კვლავ მიუთითეთ openPassword ან permissionsPassword, ან დაუცველი ექსპორტისთვის მიუთითეთ security passwordRequired-ის გარეშე
 @msg	the RTF file has too many paragraphs or formatting changes to place as type (at most {MAX_PARAGRAPHS} paragraphs and {MAX_RUNS} runs)	RTF ფაილს ზედმეტად ბევრი აბზაცი ან ფორმატირების ცვლილება აქვს ტექსტად განსათავსებლად (მაქსიმუმ {MAX_PARAGRAPHS} აბზაცი და {MAX_RUNS} ფრაგმენტი)
 @msg	the RTF file is too large to place as type (at most {_1} MB)	RTF ფაილი ზედმეტად დიდია ტექსტად განსათავსებლად (მაქსიმუმ {_1} MB)
 @msg	the SVG expands to more than {0} nested SVG images	SVG იშლება {0}-ზე მეტ ჩადგმულ SVG გამოსახულებად
@@ -9132,7 +9132,7 @@ font-script	Japanese	იაპონური
 @msg	the Word document has too much text to place as type (at most {_1} MB)	Word-ის დოკუმენტს ზედმეტად ბევრი ტექსტი აქვს ტექსტად განსათავსებლად (მაქსიმუმ {_1} MB)
 @msg	the Word document is encrypted or protected with a password; save it without one to place it	Word-ის დოკუმენტი დაშიფრული ან პაროლით დაცულია; განსათავსებლად შეინახეთ ის პაროლის გარეშე
 @msg	the Word document is too large to place (its {name} stream holds more than {_1} MB)	Word-ის დოკუმენტი ზედმეტად დიდია განსათავსებლად (ნაკადი {name} {_1} MB-ზე მეტს შეიცავს)
-@msg	the Word document was last saved with fast save, which VectorCraft doesn't read; save it again with fast save turned off	Word-ის დოკუმენტი ბოლოს სწრაფი შენახვით შეინახა, რომელსაც VectorCraft ვერ კითხულობს; ხელახლა შეინახეთ სწრაფი შენახვის გამორთვით
+@msg	the Word document was last saved with fast save, which VectorCraft doesn't read; save it again with fast save turned off	Word-ის დოკუმენტი ბოლოს სწრაფი შენახვით არის შენახული, რასაც VectorCraft ვერ კითხულობს; ხელახლა შეინახეთ ის გამორთული სწრაფი შენახვით
 @msg	the Word document was saved by Word 6.0 or Word 95, which VectorCraft doesn't read; save it as a Word 97-2003 document	Word-ის დოკუმენტი შენახულია Word 6.0-ით ან Word 95-ით, რომელსაც VectorCraft ვერ კითხულობს; შეინახეთ ის Word 97-2003 დოკუმენტად
 @msg	the Word document's text is made of more than {MAX_PIECES} pieces, too many to place	Word-ის დოკუმენტის ტექსტი {MAX_PIECES}-ზე მეტი ნაწილისგან შედგება, განსათავსებლად ზედმეტად ბევრი
 @msg	the XML operation needs an XML or XMLList value	XML ოპერაციას XML ან XMLList მნიშვნელობა სჭირდება
@@ -9204,7 +9204,7 @@ font-script	Japanese	იაპონური
 @msg	the guide is hidden or locked	დამხმარე ხაზი დამალული ან ჩაკეტილია
 @msg	the header `{cell}` for `{name}` would read back as the variable `{other}`: rename one of them	სათაური `{cell}` (ცვლადისთვის `{name}`) წაკითხვისას ცვლადად `{other}` აღიქმება: ერთ-ერთს სახელი გადაარქვით
 @msg	the hem is too deep for the banner	ნაკეცი ბანერისთვის ზედმეტად ღრმაა
-@msg	the image `{path}` isn't followed: {r}	გამოსახულების ბმულს `{path}` არ მივყვებით: {r}
+@msg	the image `{path}` isn't followed: {r}	გამოსახულების ბმული `{path}` არ გაიხსნება: {r}
 @msg	the image has no embedded pixels	გამოსახულებას ჩაშენებული პიქსელები არ აქვს
 @msg	the image is empty	გამოსახულება ცარიელია
 @msg	the image is fully transparent	გამოსახულება სრულად გამჭვირვალეა
@@ -9224,7 +9224,7 @@ font-script	Japanese	იაპონური
 @msg	the library has no item `{other}`	ბიბლიოთეკას არ აქვს ელემენტი `{other}`
 @msg	the library holds {MAX_GROUPS} groups already	ბიბლიოთეკა უკვე შეიცავს {MAX_GROUPS} ჯგუფს
 @msg	the library holds {MAX_ITEMS} items of this kind already	ბიბლიოთეკა უკვე შეიცავს ამ სახის {MAX_ITEMS} ელემენტს
-@msg	the library's file is outside the read roots	ბიბლიოთეკის ფაილი წაკითხვის ძირების გარეთაა
+@msg	the library's file is outside the read roots	ბიბლიოთეკის ფაილი წაკითხვის ძირეული საქაღალდეების გარეთაა
 @msg	the line is too long, or the paths it passes too many, to check	ხაზი ზედმეტად გრძელია, ან მის მიერ გადაკვეთილი ტრაექტორიები ზედმეტად ბევრია შესამოწმებლად
 @msg	the method needs an XML value	მეთოდს XML მნიშვნელობა სჭირდება
 @msg	the name is empty	სახელი ცარიელია
@@ -9367,8 +9367,8 @@ font-script	Japanese	იაპონური
 @msg	unexpected resources	მოულოდნელი რესურსები
 @msg	unknown CMYK profile `{name}`	უცნობი CMYK პროფილი `{name}`
 @msg	unknown File Info field `{k}`	ფაილის ინფორმაციის უცნობი ველი `{k}`
-@msg	unknown OpenType feature `{t}` (liga, calt, dlig, smcp, frac, onum, tnum, ordn, swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom, aalt; prefix - to turn off; swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom and aalt take an alternate's number as `tag=N` with N from 0 to {_1}, as `salt=2`)	უცნობი OpenType ფუნქცია `{t}` (liga, calt, dlig, smcp, frac, onum, tnum, ordn, swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom, aalt; გამოსართავად წინ დაურთეთ -; swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom და aalt იღებს ალტერნატივის ნომერს ფორმით `tag=N`, სადაც N არის 0-დან {_1}-მდე, მაგალითად `salt=2`)
-@msg	unknown OpenType feature `{t}` in featureChanges (the tags `features` takes)	უცნობი OpenType ფუნქცია `{t}` featureChanges-ში (ის ტეგები, რომლებსაც `features` იღებს)
+@msg	unknown OpenType feature `{t}` (liga, calt, dlig, smcp, frac, onum, tnum, ordn, swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom, aalt; prefix - to turn off; swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom and aalt take an alternate's number as `tag=N` with N from 0 to {_1}, as `salt=2`)	უცნობი OpenType შესაძლებლობა `{t}` (liga, calt, dlig, smcp, frac, onum, tnum, ordn, swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom, aalt; გამოსართავად წინ დაურთეთ -; swsh, ss01–ss20, salt, titl, pnum, lnum, sups, subs, numr, dnom და aalt იღებს ალტერნატივის ნომერს ფორმით `tag=N`, სადაც N არის 0-დან {_1}-მდე, მაგალითად `salt=2`)
+@msg	unknown OpenType feature `{t}` in featureChanges (the tags `features` takes)	უცნობი OpenType შესაძლებლობა `{t}` featureChanges-ში (ის ტეგები, რომლებსაც `features` იღებს)
 @msg	unknown PDF preset `{name}` (presets: {_1})	უცნობი PDF პრესეტი `{name}` (პრესეტები: {_1})
 @msg	unknown Warp style	გაღუნვის უცნობი სტილი
 @msg	unknown alignToPath `{a}`	უცნობი alignToPath `{a}`
@@ -9479,20 +9479,20 @@ font-script	Japanese	იაპონური
 @msg	{_1} MB of document, at most {_2} MB	დოკუმენტი: {_1} MB, მაქსიმუმ {_2} MB
 @msg	{_1} MB of images, at most {_2} MB	გამოსახულებები: {_1} MB, მაქსიმუმ {_2} MB
 @msg	{_1} bytes of RGBA data for a {width} × {height} image	RGBA მონაცემები: {_1} ბაიტი {width} × {height} გამოსახულებისთვის
-@msg	{_1} can't be read, or changed since it was read: relink or update it first	{_1} ვერ იკითხება ან წაკითხვის შემდეგ შეიცვალა: ჯერ ხელახლა მიაბით ან განაახლეთ
+@msg	{_1} can't be read, or changed since it was read: relink or update it first	{_1} ვერ იკითხება ან წაკითხვის შემდეგ შეიცვალა: ჯერ ხელახლა დააკავშირეთ ან განაახლეთ
 @msg	{_1} can't go into {into}	{_1} ვერ მოთავსდება აქ: {into}
 @msg	{_1} can't limit printing to low resolution: choose PDF 1.4 or later, or allow high-resolution printing	{_1}: ბეჭდვის დაბალი გარჩევადობით შეზღუდვა შეუძლებელია: აირჩიეთ PDF 1.4 ან უფრო ახალი, ან დაუშვით მაღალი გარჩევადობით ბეჭდვა
 @msg	{_1} clashes with a built-in profile name	{_1} ჩაშენებული პროფილის სახელს ემთხვევა
 @msg	{_1} files can't be opened yet	{_1} ფაილების გახსნა ჯერ შეუძლებელია
-@msg	{_1} files can't be password-protected: remove the passwords or choose no standard	{_1} ფაილებს პაროლით დაცვა არ შეუძლია: მოხსენით პაროლები ან აირჩიეთ „სტანდარტის გარეშე“
-@msg	{_1} files can't be {_2}	{_1} ფაილებისთვის შეუძლებელია: {_2}
+@msg	{_1} files can't be password-protected: remove the passwords or choose no standard	{_1} ფაილების პაროლით დაცვა შეუძლებელია: მოხსენით პაროლები ან არ აირჩიოთ სტანდარტი
+@msg	{_1} files can't be {_2}	{_1} ფაილები ვერ იქნება {_2}
 @msg	{_1} files can't carry editing data: turn off preserveEditing	{_1} ფაილები რედაქტირების მონაცემებს ვერ შეიცავს: გამორთეთ preserveEditing
 @msg	{_1} files can't have PDF layers: turn off createLayers	{_1} ფაილებს PDF შრეები ვერ ექნება: გამორთეთ createLayers
 @msg	{_1} files need a creation date, and this platform has no clock to give one	{_1} ფაილებს შექმნის თარიღი სჭირდება, ამ პლატფორმას კი საათი არ აქვს, რომ ის მისცეს
 @msg	{_1} is not a folder: {e}	{_1} საქაღალდე არ არის: {e}
 @msg	{_1} isn't a path	{_1} ტრაექტორია არ არის
 @msg	{_1} options: {e}	{_1} პარამეტრები: {e}
-@msg	{_1} paints nothing to rasterize	{_1} დასარასტრად არაფერს ხატავს
+@msg	{_1} paints nothing to rasterize	{_1} არაფერს ხატავს, რასტრირებისთვის არაფერია
 @msg	{_1} passwords can have up to {MAX_LEGACY_PASSWORD} ASCII characters (PDF 1.7 and later take any)	{_1} პაროლები შეიძლება შეიცავდეს მაქსიმუმ {MAX_LEGACY_PASSWORD} ASCII სიმბოლოს (PDF 1.7 და უფრო ახალი ნებისმიერს იღებს)
 @msg	{_1} with linked images or an image map writes several files: use document.export	{_1} დაკავშირებული გამოსახულებებით ან გამოსახულების რუკით რამდენიმე ფაილს წერს: გამოიყენეთ document.export
 @msg	{_1} writes one file per artboard here: use document.export, or name one artboard	{_1} აქ თითო სამუშაო დაფაზე ერთ ფაილს წერს: გამოიყენეთ document.export, ან დაასახელეთ ერთი სამუშაო დაფა
@@ -9500,7 +9500,7 @@ font-script	Japanese	იაპონური
 @msg	{_1} × {_2} pixels is too large for {_3} (at most {max} pixels a side): lower the scale	{_1} × {_2} პიქსელი ზედმეტად დიდია ფორმატისთვის {_3} (მაქსიმუმ {max} პიქსელი თითო მხარეზე): შეამცირეთ მასშტაბი
 @msg	{_1}: belongs to another account	{_1}: სხვა ანგარიშს ეკუთვნის
 @msg	{_1}: no usable transform to/from sRGB	{_1}: sRGB-ში ან sRGB-დან გამოსაყენებელი გარდაქმნა არ არის
-@msg	{_1}: not a folder of its own	{_1}: ცალკე საქაღალდე არ არის
+@msg	{_1}: not a folder of its own	{_1}: თავად საქაღალდე არ არის
 @msg	{_1}: not a plain file	{_1}: ჩვეულებრივი ფაილი არ არის
 @msg	{_1}: {_2} and {_3} are in the way	{_1}: ხელს უშლის {_2} და {_3}
 @msg	{code}: {0}	{code}: {0}
@@ -9527,7 +9527,7 @@ font-script	Japanese	იაპონური
 @msg	{key} must name a registered panel	{key} უნდა ასახელებდეს რეგისტრირებულ პანელს
 @msg	{kind} files have no transparency, and the file would have {what}: flatten it first (object.flattenTransparency)	{kind} ფაილებს გამჭვირვალობა არ აქვს, ფაილს კი ექნებოდა: {what}: ჯერ გააბრტყელეთ (object.flattenTransparency)
 @msg	{kind} images can't be opened (see document.formats)	{kind} გამოსახულებების გახსნა შეუძლებელია (იხ. document.formats)
-@msg	{k} `{v}` is not one of the choices	{k} `{v}` არჩევანებიდან არცერთი არ არის
+@msg	{k} `{v}` is not one of the choices	{k} `{v}` შემოთავაზებულ ვარიანტებში არ არის
 @msg	{k} has control characters{_1}	{k} შეიცავს მმართველ სიმბოლოებს{_1}
 @msg	{k} is too long (at most {MAX_TEXT} characters)	{k} ზედმეტად გრძელია (მაქსიმუმ {MAX_TEXT} სიმბოლო)
 @msg	{k} must be > 0	{k} უნდა იყოს > 0
@@ -9553,16 +9553,16 @@ font-script	Japanese	იაპონური
 @msg	{name} must be a number	{name} რიცხვი უნდა იყოს
 @msg	{name} must be {lo}–{hi}{unit} (got {v})	{name} უნდა იყოს {lo}–{hi}{unit} (მიღებულია {v})
 @msg	{name}: CRC or size mismatch	{name}: CRC ან ზომა არ ემთხვევა
-@msg	{name}: only this Affinity file's embedded preview could be read; use File › Open to see it with its warning, or export SVG or PDF from Affinity before placing	{name}: Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა; მის სანახავად გაფრთხილებით გამოიყენეთ ფაილი › გახსნა, ან განთავსებამდე Affinity-დან გააკეთეთ SVG-ის ან PDF-ის ექსპორტი
+@msg	{name}: only this Affinity file's embedded preview could be read; use File › Open to see it with its warning, or export SVG or PDF from Affinity before placing	{name}: Affinity-ის ამ ფაილიდან მხოლოდ ჩაშენებული წინასწარი ხედის წაკითხვა მოხერხდა; გაფრთხილებასთან ერთად მის სანახავად გამოიყენეთ ფაილი › გახსნა, ან განთავსებამდე Affinity-დან გააკეთეთ SVG-ის ან PDF-ის ექსპორტი
 @msg	{name}: {e}	{name}: {e}
 @msg	{native}; its embedded preview can't be read either ({e})	{native}; მისი ჩაშენებული წინასწარი ხედის წაკითხვაც ვერ ხერხდება ({e})
-@msg	{path}: copy takes a DCS file only when its plates are inside it; relink to it where its plate files are	{path}: ასლი DCS ფაილს მხოლოდ მაშინ იღებს, როცა მისი ფირფიტები მის შიგნითაა; ხელახლა მიაბით იქ, სადაც მისი ფირფიტების ფაილებია
+@msg	{path}: copy takes a DCS file only when its plates are inside it; relink to it where its plate files are	{path}: copy DCS ფაილს მხოლოდ მაშინ იღებს, როცა მისი ფირფიტები მის შიგნითაა; ხელახლა დააკავშირეთ იქ, სადაც მისი ფირფიტების ფაილებია
 @msg	{path}: could not be read	{path}: წაკითხვა ვერ მოხერხდა
 @msg	{path}: larger than {_1} MB	{path}: {_1} MB-ზე დიდია
 @msg	{shown} is not an XPath 1.0 function	{shown} XPath 1.0 ფუნქცია არ არის
 @msg	{std} files are CMYK, and the file would have colours in {_1}	{std} ფაილები CMYK-ია, ფაილში კი იქნებოდა ფერები სივრცეში {_1}
 @msg	{std} files embed their fonts, and the file would have one that isn't	{std} ფაილები შრიფტებს ჩაშენებით შეიცავს, ფაილში კი იქნებოდა ჩაუშენებელი შრიფტი
-@msg	{target} is the file this document was read from, and reading it left things out ({what}): writing over it would lose them for good. Write another file instead, or pass acknowledgeLoss: true to replace it anyway	{target} არის ფაილი, საიდანაც ეს დოკუმენტი წაიკითხა, და წაკითხვისას ზოგი რამ გამოტოვდა ({what}): მასზე გადაწერა მათ სამუდამოდ დაკარგავს. ჩაწერეთ სხვა ფაილში, ან მაინც ჩასანაცვლებლად გადაეცით acknowledgeLoss: true
+@msg	{target} is the file this document was read from, and reading it left things out ({what}): writing over it would lose them for good. Write another file instead, or pass acknowledgeLoss: true to replace it anyway	{target} არის ფაილი, საიდანაც ეს დოკუმენტია წაკითხული, და წაკითხვისას ზოგი რამ გამოტოვდა ({what}): მასზე გადაწერისას ისინი სამუდამოდ დაიკარგება. ჩაწერეთ სხვა ფაილში, ან თუ მაინც გსურთ ჩანაცვლება, გადაეცით acknowledgeLoss: true
 @msg	{ty} brushes need selected art (or params.{k})	{ty} ფუნჯებს მონიშნული ნახატი სჭირდება (ან params.{k})
 @msg	{v} is not an asset id	{v} რესურსის იდენტიფიკატორი არ არის
 @msg	{v} names no layer or sublayer	{v} არცერთ შრეს ან ქვეშრეს არ ასახელებს
