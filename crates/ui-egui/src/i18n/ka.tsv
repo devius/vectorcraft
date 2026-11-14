@@ -9354,7 +9354,7 @@ font-script	Japanese	იაპონური
 @msg	too many layers for PSD (at most 32767)	PSD-ისთვის ზედმეტად ბევრი შრეა (მაქსიმუმ 32767)
 @msg	too many overlapping paths for Shaper	ფორმირებისთვის ზედმეტად ბევრი გადაფარვადი ტრაექტორიაა
 @msg	too many quantifiers	ზედმეტად ბევრი კვანტიფიკატორი
-@msg	too many saved clips	ზედმეტად ბევრი შენახული მოჭრის არე
+@msg	too many saved clips	ზედმეტად ბევრი შენახული მომჭრელი ტრაექტორია
 @msg	too many saved graphics states	ზედმეტად ბევრი შენახული გრაფიკული მდგომარეობა
 @msg	too many swatch exchange blocks	ფერის ნიმუშების გაცვლის ზედმეტად ბევრი ბლოკი
 @msg	toolbar (a toolbar's name) must be a string	toolbar (ხელსაწყოთა ზოლის სახელი) სტრიქონი უნდა იყოს
