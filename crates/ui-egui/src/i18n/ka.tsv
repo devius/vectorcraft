@@ -9663,3 +9663,50 @@ font-script	Japanese	იაპონური
 	Nest Shapes…	ფორმების განლაგება…
 	Nest Shapes	ფორმების განლაგება
 	Roll	რულონი
+	Automatic Plane Positioning	სიბრტყის ავტომატური პოზიციონირება
+	Emboss	რელიეფი
+	Glow	ნათება
+	Hard Shadow	მკვეთრი ჩრდილი
+	Heavy Blur	ძლიერი გაბუნდოვნება
+	Rough Edges	უსწორმასწორო კიდეები
+	Soft Blur	რბილი გაბუნდოვნება
+	Soft Shadow	რბილი ჩრდილი
+	Thicken	გასქელება
+	Thin	გათხელება
+	Anchor Point of Perspective Artwork	პერსპექტიული გრაფიკის საყრდენი წერტილი
+	Intersection of Gridlines	ბადის ხაზების გადაკვეთა
+@msg	Automatic Plane Positioning is off: turn on anchorPoint or gridlineIntersection (perspective.widget.options)	სიბრტყის ავტომატური პოზიციონირება გამორთულია: ჩართეთ anchorPoint ან gridlineIntersection (perspective.widget.options)
+@msg	`artboard` must be a whole number	`artboard` უნდა იყოს მთელი რიცხვი
+@msg	`artboard` must be an artboard's index	`artboard` უნდა იყოს სამუშაო დაფის ინდექსი
+@msg	`artboards` must contain whole numbers	`artboards` უნდა შეიცავდეს მთელ რიცხვებს
+@msg	`glyphForm` must be one of {_1}	`glyphForm` უნდა იყოს ერთ-ერთი: {_1}
+@msg	`index` must be the index of an applied SVG filter	`index` უნდა იყოს გამოყენებული SVG ფილტრის ინდექსი
+@msg	`{key}` must be a list of artboard indices	`{key}` უნდა იყოს სამუშაო დაფების ინდექსების სია
+@msg	`{key}` must be a non-empty list of artboard indices	`{key}` უნდა იყოს სამუშაო დაფების ინდექსების არაცარიელი სია
+@msg	`{key}` must be from 0 to {max} pt	`{key}` უნდა იყოს 0-დან {max} pt-მდე
+@msg	`{key}` must contain whole numbers	`{key}` უნდა შეიცავდეს მთელ რიცხვებს
+@msg	`{k}` isn't an export setting: {_1}, openLocation	`{k}` ექსპორტის პარამეტრი არ არის: {_1}, openLocation
+@msg	a document holds at most {_1} SVG filters, and applying a default filter adds it	დოკუმენტი მაქსიმუმ {_1} SVG ფილტრს იტევს, ნაგულისხმევი ფილტრის გამოყენება კი მას დოკუმენტს უმატებს
+@msg	a new document has no artboard	ახალ დოკუმენტს სამუშაო დაფა არ აქვს
+@msg	anchorPoint must be true or false	anchorPoint უნდა იყოს true ან false
+@msg	can't open `{_1}`: not a PDF	`{_1}` ვერ გაიხსნა: PDF არ არის
+@msg	give `at` or `clear`, not both	მიუთითეთ `at` ან `clear`, ორივე არა
+@msg	gridlineIntersection must be true or false	gridlineIntersection უნდა იყოს true ან false
+@msg	linkPages can't be used with textAs: outlines: linked pages show the file's own type	linkPages ვერ გამოიყენება textAs: outlines-თან ერთად: დაკავშირებული გვერდები ფაილის საკუთარ ტექსტს აჩვენებს
+@msg	linkPages can't open a file with a password: linked pages are read again without it	linkPages პაროლით დაცულ ფაილს ვერ ხსნის: დაკავშირებული გვერდები ხელახლა პაროლის გარეშე იკითხება
+@msg	linkPages must be true or false	linkPages უნდა იყოს true ან false
+@msg	linkPages needs the file's path: linked pages are read from it	linkPages-ს ფაილის გზა სჭირდება: დაკავშირებული გვერდები ამ ფაილიდან იკითხება
+@msg	linkPages: `{file}` is over {_1} MB	linkPages: `{file}` {_1} MB-ზე მეტია
+@msg	linkPages: `{file}` isn't a PDF or a PDF-compatible .ai file	linkPages: `{file}` არ არის PDF ან PDF-თან თავსებადი .ai ფაილი
+@msg	no selected object fits on the sheet	მონიშნული ობიექტებიდან არცერთი ფურცელზე არ ეტევა
+@msg	select at most {MAX_SHAPES} objects to nest	განსალაგებლად მონიშნეთ მაქსიმუმ {MAX_SHAPES} ობიექტი
+@msg	sort `{x}`: name, kind, status or size	დალაგების უცნობი გასაღები `{x}`: name, kind, status ან size
+@msg	the margin leaves no room on the sheet	ზღვარი ფურცელზე ადგილს აღარ ტოვებს
+@msg	the perspective grid is hidden	პერსპექტივის ბადე დამალულია
+@msg	the selection has nothing to nest	მონიშნულში განსალაგებელი არაფერია
+@msg	the {_1} file holds no records	{_1} ფაილი ჩანაწერებს არ შეიცავს
+@msg	the {_1} header is damaged	{_1} ფაილის სათაური დაზიანებულია
+@msg	there is no artboard for the sheet	ფურცლისთვის სამუშაო დაფა არ არის
+@msg	there is no artboard {i}	სამუშაო დაფა {i} არ არსებობს
+@msg	tolerance must be 0 or more	tolerance უნდა იყოს 0 ან მეტი
+@msg	{name} is a default SVG filter, and the document holds no copy of it to delete	{name} ნაგულისხმევი SVG ფილტრია და დოკუმენტში მისი წასაშლელი ასლი არ არის
