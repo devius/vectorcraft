@@ -3568,43 +3568,43 @@ digits	Malayalam	მალაიალამური
 @msg	each font must be {name, parts}	თითოეული შრიფტი უნდა იყოს {name, parts}
 @msg	unknown key `{k}`; a font takes name and parts	უცნობი გასაღები `{k}`; შრიფტი იღებს name-სა და parts-ს
 @msg	each font needs a name	თითოეულ შრიფტს სახელი სჭირდება
-@msg	`{raw}` can't name a composite font (1 to {COMPOSITE_NAME_MAX} characters, no control characters)	`{raw}` კომპოზიტური შრიფტის სახელი ვერ იქნება (1-დან {COMPOSITE_NAME_MAX}-მდე სიმბოლო, მმართველი სიმბოლოების გარეშე)
-@msg	`{name}`: parts must be an object	`{name}`: parts ობიექტი უნდა იყოს
-@msg	`{name}`: unknown class `{k}`; the classes are kanji, kana, punctuation, symbols, roman and numerals	`{name}`: უცნობი კლასი `{k}`; კლასებია kanji, kana, punctuation, symbols, roman და numerals
-@msg	`{name}`: {_1} must be an object	`{name}`: {_1} ობიექტი უნდა იყოს
-@msg	`{name}`: unknown key `{k}` in {_1}	`{name}`: უცნობი გასაღები `{k}` აქ: {_1}
-@msg	`{name}`: give the kanji part	`{name}`: მიუთითეთ კანძის ნაწილი
-@msg	a document keeps at most {COMPOSITE_FONTS_MAX} composite fonts	დოკუმენტი მაქსიმუმ {COMPOSITE_FONTS_MAX} კომპოზიტურ შრიფტს ინახავს
-@msg	two composite fonts are named `{_1}`	ორ კომპოზიტურ შრიფტს ერთი სახელი აქვს: `{_1}`
-@msg	`{_1}` is the name of an installed font	`{_1}` დაყენებული შრიფტის სახელია
-@msg	`{_1}`: {_2} is set in `{font}`, a composite font	`{_1}`: {_2} აწყობილია კომპოზიტური შრიფტით `{font}`
+@msg	`{raw}` can't name a composite font (1 to {COMPOSITE_NAME_MAX} characters, no control characters)	`{raw}` ვერ იქნება კომპოზიტური შრიფტის სახელი (1-დან {COMPOSITE_NAME_MAX} სიმბოლომდე, მმართველი სიმბოლოების გარეშე)
+@msg	`{name}`: parts must be an object	`{name}`: parts უნდა იყოს ობიექტი
+@msg	`{name}`: unknown class `{k}`; the classes are kanji, kana, punctuation, symbols, roman and numerals	`{name}`: უცნობი კლასი `{k}`; კლასებია: kanji, kana, punctuation, symbols, roman და numerals
+@msg	`{name}`: {_1} must be an object	`{name}`: {_1} უნდა იყოს ობიექტი
+@msg	`{name}`: unknown key `{k}` in {_1}	`{name}`: უცნობი გასაღები `{k}` ნაწილში {_1}
+@msg	`{name}`: give the kanji part	`{name}`: მიუთითეთ ნაწილი kanji
+@msg	a document keeps at most {COMPOSITE_FONTS_MAX} composite fonts	დოკუმენტი შეიცავს არაუმეტეს {COMPOSITE_FONTS_MAX} კომპოზიტურ შრიფტს
+@msg	two composite fonts are named `{_1}`	ორ კომპოზიტურ შრიფტს ჰქვია `{_1}`
+@msg	`{_1}` is the name of an installed font	`{_1}` დაინსტალირებული შრიფტის სახელია
+@msg	`{_1}`: {_2} is set in `{font}`, a composite font	`{_1}`: {_2} იყენებს `{font}`-ს, რომელიც კომპოზიტური შრიფტია
 @msg	give fonts: [{name, parts}…]	მიუთითეთ fonts: [{name, parts}…]
 @msg	path is empty	path ცარიელია
-@msg	fonts must be a list of composite fonts	fonts კომპოზიტური შრიფტების სია უნდა იყოს
-@msg	names must be strings	names სტრიქონები უნდა იყოს
-@msg	no composite font named `{n}`	კომპოზიტური შრიფტი სახელით `{n}` არ არის
-@msg	names must be a list of names	names სახელების სია უნდა იყოს
+@msg	fonts must be a list of composite fonts	fonts უნდა იყოს კომპოზიტური შრიფტების სია
+@msg	names must be strings	names უნდა იყოს სტრიქონები
+@msg	no composite font named `{n}`	კომპოზიტური შრიფტი სახელით `{n}` არ არსებობს
+@msg	names must be a list of names	names უნდა იყოს სახელების სია
 @msg	no composite fonts to export	საექსპორტო კომპოზიტური შრიფტები არ არის
-@msg	not a composite fonts file: {e}	ეს კომპოზიტური შრიფტების ფაილი არ არის: {e}
-@msg	not a composite fonts file: no compositeFonts list	ეს კომპოზიტური შრიფტების ფაილი არ არის: compositeFonts სია არ არის
-@msg	the file holds more than {COMPOSITE_FONTS_MAX} composite fonts	ფაილი {COMPOSITE_FONTS_MAX}-ზე მეტ კომპოზიტურ შრიფტს შეიცავს
+@msg	not a composite fonts file: {e}	ეს არ არის კომპოზიტური შრიფტების ფაილი: {e}
+@msg	not a composite fonts file: no compositeFonts list	ეს არ არის კომპოზიტური შრიფტების ფაილი: სია compositeFonts არ არის
+@msg	the file holds more than {COMPOSITE_FONTS_MAX} composite fonts	ფაილი შეიცავს {COMPOSITE_FONTS_MAX}-ზე მეტ კომპოზიტურ შრიფტს
 @msg	the file is larger than 4 MB	ფაილი 4 MB-ზე დიდია
-@msg	dataBase64 is not base64	dataBase64 base64 არ არის
-@msg	give one of path, data or dataBase64	მიუთითეთ ერთ-ერთი: path, data ან dataBase64
+@msg	dataBase64 is not base64	dataBase64 არ არის base64
+@msg	give one of path, data or dataBase64	მიუთითეთ path, data ან dataBase64
 @msg	the file holds no composite fonts	ფაილი კომპოზიტურ შრიფტებს არ შეიცავს
 @msg	the file holds two composite fonts named `{_1}`	ფაილი შეიცავს ორ კომპოზიტურ შრიფტს სახელით `{_1}`
-@msg	`{_1}` can't name a composite font	`{_1}` კომპოზიტური შრიფტის სახელი ვერ იქნება
+@msg	`{_1}` can't name a composite font	`{_1}` ვერ იქნება კომპოზიტური შრიფტის სახელი
 @msg	{k}: give a font	{k}: მიუთითეთ შრიფტი
 @msg	`{name}`: {k}: give a font	`{name}`: {k}: მიუთითეთ შრიფტი
-@msg	{k}: size must be {_1} to {_2}%	{k}: ზომა უნდა იყოს {_1}-დან {_2}%-მდე
+@msg	{k}: size must be {_1} to {_2}%	{k}: size უნდა იყოს {_1}-დან {_2}%-მდე
 @msg	`{name}`: {k}: size must be {_1} to {_2}%	`{name}`: {k}: size უნდა იყოს {_1}-დან {_2}%-მდე
-@msg	{k}: baseline must be {_1} to {_2}%	{k}: საბაზისო ხაზი უნდა იყოს {_1}-დან {_2}%-მდე
+@msg	{k}: baseline must be {_1} to {_2}%	{k}: baseline უნდა იყოს {_1}-დან {_2}%-მდე
 @msg	`{name}`: {k}: baseline must be {_1} to {_2}%	`{name}`: {k}: baseline უნდა იყოს {_1}-დან {_2}%-მდე
 @msg	{k}: scale must be {_1} to {_2}%	{k}: მასშტაბი უნდა იყოს {_1}-დან {_2}%-მდე
 @msg	`{name}`: {k}: scale must be {_1} to {_2}%	`{name}`: {k}: მასშტაბი უნდა იყოს {_1}-დან {_2}%-მდე
-@msg	{k}: only kana, roman and numerals can be scaled	{k}: მასშტაბირება მხოლოდ კანას, რომაულს და ციფრებს შეიძლება
+@msg	{k}: only kana, roman and numerals can be scaled	{k}: მასშტაბირება შეიძლება მხოლოდ kana, roman და numerals ნაწილებში
 @msg	`{name}`: {k}: only kana, roman and numerals can be scaled	`{name}`: {k}: მასშტაბირება შეიძლება მხოლოდ kana, roman და numerals ნაწილებში
-@msg	{k}: only kana can be scaled at the center	{k}: ცენტრიდან მასშტაბირება მხოლოდ კანას შეიძლება
+@msg	{k}: only kana can be scaled at the center	{k}: ცენტრიდან მასშტაბირება შეიძლება მხოლოდ kana ნაწილში
 @msg	`{name}`: {k}: only kana can be scaled at the center	`{name}`: {k}: ცენტრიდან მასშტაბირება შეიძლება მხოლოდ kana ნაწილში
 @msg	no composite font	კომპოზიტური შრიფტი არ არის
 	Delete Font	შრიფტის წაშლა
