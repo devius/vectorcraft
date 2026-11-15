@@ -2064,6 +2064,41 @@
 @msg	{var_key} must be 0 or more	{var_key} უნდა იყოს 0 ან მეტი
 @msg	{var_key} must be at most {most}	{var_key} უნდა იყოს მაქსიმუმ {most}
 @msg	a linked image file is outside the read roots	დაკავშირებული გამოსახულების ფაილი წაკითხვის ძირეული საქაღალდეების გარეთაა
+	Neon & Glow	ნეონი და ნათება
+	Show Hidden Panels at Edge	დამალული პანელების ჩვენება კიდესთან
+@msg	`anchor` must be a [subpath, anchor] pair	`anchor` უნდა იყოს წყვილი [subpath, anchor]
+@msg	`anchor` needs `id`, the path the point is on	`anchor`-ს სჭირდება `id`: ტრაექტორია, რომელზეც წერტილია
+@msg	`side` must be left, right or null	`side` უნდა იყოს left, right ან null
+@msg	`{_1}`: U+{_2} is a control character or past U+FFFF	`{_1}`: U+{_2} მმართველი სიმბოლოა ან U+FFFF-ს სცდება
+@msg	`{_1}`: a character set keeps at most {CUSTOM_CHARS_MAX} characters	`{_1}`: სიმბოლოთა ნაკრები მაქსიმუმ {CUSTOM_CHARS_MAX} სიმბოლოს იტევს
+@msg	`{code}` is not a code from U+0000 to U+FFFF	`{code}` არ არის კოდი U+0000-დან U+FFFF-მდე
+@msg	`{font}`: `{name}`: a character set keeps at most {CUSTOM_CHARS_MAX} characters	`{font}`: `{name}`: სიმბოლოთა ნაკრები მაქსიმუმ {CUSTOM_CHARS_MAX} სიმბოლოს იტევს
+@msg	`{font}`: `{name}`: characters must be a string	`{font}`: `{name}`: characters უნდა იყოს სტრიქონი
+@msg	`{font}`: `{name}`: {e}	`{font}`: `{name}`: {e}
+@msg	`{font}`: each character set must be {{name, characters, font…}}	`{font}`: თითოეული სიმბოლოთა ნაკრები უნდა იყოს {{name, characters, font…}}
+@msg	`{font}`: each character set needs a name	`{font}`: თითოეულ სიმბოლოთა ნაკრებს სახელი სჭირდება
+@msg	`{font}`: unknown key `{k}` in a character set	`{font}`: უცნობი გასაღები `{k}` სიმბოლოთა ნაკრებში
+@msg	`{name}` can't name a character set	`{name}` ვერ იქნება სიმბოლოთა ნაკრების სახელი
+@msg	`{name}`: U+{code} is a control character or past U+FFFF	`{name}`: U+{code} მმართველი სიმბოლოა ან U+FFFF-ს სცდება
+@msg	`{name}`: U+{code} is listed twice	`{name}`: U+{code} ორჯერაა ჩამოთვლილი
+@msg	`{name}`: a character set keeps at most {CUSTOM_CHARS_MAX} characters	`{name}`: სიმბოლოთა ნაკრები მაქსიმუმ {CUSTOM_CHARS_MAX} სიმბოლოს იტევს
+@msg	`{name}`: a composite font keeps at most {CUSTOM_SETS_MAX} character sets	`{name}`: კომპოზიტური შრიფტი მაქსიმუმ {CUSTOM_SETS_MAX} სიმბოლოთა ნაკრებს იტევს
+@msg	`{name}`: custom must be a list of character sets	`{name}`: custom უნდა იყოს სიმბოლოთა ნაკრებების სია
+@msg	`{raw}` can't name a character set (1 to {COMPOSITE_NAME_MAX} characters, no control characters)	`{raw}` ვერ იქნება სიმბოლოთა ნაკრების სახელი (1-დან {COMPOSITE_NAME_MAX}-მდე სიმბოლო, მმართველი სიმბოლოების გარეშე)
+@msg	a composite font keeps at most {CUSTOM_SETS_MAX} character sets	კომპოზიტური შრიფტი მაქსიმუმ {CUSTOM_SETS_MAX} სიმბოლოთა ნაკრებს იტევს
+@msg	anchor [{_1}, {_2}] of object {id} is not a selected anchor point	ობიექტის {id} საყრდენი წერტილი [{_1}, {_2}] მონიშნული არ არის
+@msg	give `anchor` or `guide`, not both	მიუთითეთ `anchor` ან `guide`, ორივე არა
+@msg	missing `newName` or `kind`	აკლია `newName` ან `kind`
+@msg	no character set	სიმბოლოთა ნაკრები არ არის
+@msg	no panels are docked on the {_1} side	{_1} მხარეს პანელები მიმაგრებული არ არის
+@msg	select another anchor point to align to the key anchor	საკვანძო საყრდენ წერტილზე გასასწორებლად მონიშნეთ კიდევ ერთი საყრდენი წერტილი
+@msg	the RGB policy can't be {_1}	RGB-ის პოლიტიკა ვერ იქნება {_1}
+@msg	the composite fonts make a file larger than 4 MB, which Import can't read; export fewer of them	კომპოზიტური შრიფტებით ფაილი 4 MB-ზე დიდი ხდება, რასაც იმპორტი ვერ წაიკითხავს; გააკეთეთ ნაკლები შრიფტის ექსპორტი
+@msg	the panels are not hidden	პანელები დამალული არ არის
+@msg	the place cursor that asked for these import options is no longer loaded	განთავსების კურსორი, რომელმაც იმპორტის ეს პარამეტრები მოითხოვა, აღარ არის ჩატვირთული
+@msg	two character sets are named `{name}`	ორ სიმბოლოთა ნაკრებს ერთი სახელი აქვს: `{name}`
+@msg	unknown key `{k}`; a font takes name, parts and custom	უცნობი გასაღები `{k}`; შრიფტი იღებს name, parts და custom
+@msg	{label} failed: {e}	{label} ვერ შესრულდა: {e}
 
 	Glowing Edges…	მანათობელი კიდეები…
 	About VectorCraft	VectorCraft-ის შესახებ
