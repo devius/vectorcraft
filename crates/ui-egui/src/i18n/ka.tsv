@@ -2461,7 +2461,7 @@
 @msg	type on an open or compound path cannot be centered on its top or bottom: {open}	ღია ან შედგენილ ტრაექტორიაზე ტექსტი ვერ მოთავსდება ზემოთ ან ქვემოთ ცენტრში: {open}
 @msg	type on a path with no length or no height cannot be centered: {flat}	ტექსტი ვერ მოთავსდება ცენტრში ტრაექტორიაზე, რომელსაც არ აქვს სიგრძე ან სიმაღლე: {flat}
 @msg	type on a path in a thread cannot be centered on its top or bottom: {frames}	დაკავშირებულ ტექსტში ტრაექტორიაზე ტექსტი ვერ მოთავსდება ზემოთ ან ქვემოთ ცენტრში: {frames}
-@msg	select type on a closed path	მონიშნეთ დახურულ ტრაექტორიაზე ტექსტი
+@msg	select type on a closed path	მონიშნეთ შეკრულ ტრაექტორიაზე ტექსტი
 	Fill with Placeholder Text	შემავსებელი ტექსტით შევსება
 	Insert Inline Symbol	ჩადგმული სიმბოლოს ჩასმა
 	Show Hidden Characters	დამალული სიმბოლოების ჩვენება
@@ -3456,7 +3456,7 @@ lighting	Light	სინათლე
 	Load Actions…	მოქმედებების ჩატვირთვა…
 	Reset Actions	მოქმედებების ჩამოყრა
 	Replace the current actions with the default set?	ჩანაცვლდეს მიმდინარე მოქმედებები ნაგულისხმევი ნაკრებით?
-	Append adds the default set after the current sets instead.	დამატება ამის ნაცვლად ნაგულისხმევ ნაკრებს მიმდინარე ნაკრებების შემდეგ ამატებს.
+	Append adds the default set after the current sets instead.	„დამატება“ ამის ნაცვლად ნაგულისხმევ ნაკრებს მიმდინარე ნაკრებების შემდეგ ამატებს.
 	Append	დამატება
 	Reflect Horizontal	ჰორიზონტალურად არეკვლა
 	Rotate 90° CW	90°-ით შემობრუნება საათის ისრის მიმართულებით
@@ -3945,8 +3945,8 @@ digits	Malayalam	მალაიალამური
 	Titling Alternates	სათაურის ალტერნატივები
 	Middle Eastern & South Asian Single-line Composer	სტრიქონის მიხედვით აწყობა (შუა აღმოსავლეთი და სამხრეთ აზია)
 	Middle Eastern & South Asian Every-line Composer	აბზაცის მიხედვით აწყობა (შუა აღმოსავლეთი და სამხრეთ აზია)
-	Standard Single-line Composer	სტანდარტული სტრიქონის მიხედვით აწყობა
-	Standard Every-line Composer	სტანდარტული აბზაცის მიხედვით აწყობა
+	Standard Single-line Composer	სტრიქონის მიხედვით აწყობა (სტანდარტული)
+	Standard Every-line Composer	აბზაცის მიხედვით აწყობა (სტანდარტული)
 	First-line Left Indent	პირველი სტრიქონის მარცხენა შეწევა
 	Hyphenation…	სიტყვების გადატანა…
 	Justification…	სწორება…
@@ -4468,9 +4468,9 @@ digits	Malayalam	მალაიალამური
 @msg	the template name can't be empty	შაბლონის სახელი ცარიელი ვერ იქნება
 @msg	the template name isn't usable as a file name	შაბლონის სახელი ფაილის სახელად ვერ გამოდგება
 @msg	no metadata templates folder here	აქ მეტამონაცემების შაბლონების საქაღალდე არ არის
-@msg	give `name` or `path`, not both	მიუთითეთ `name` ან `path`, არა ორივე
-@msg	give one of `path`, `name` and `data`	მიუთითეთ ერთ-ერთი: `path`, `name` და `data`
-@msg	mode must be replace, keep or append	რეჟიმი უნდა იყოს replace, keep ან append
+@msg	give `name` or `path`, not both	მიუთითეთ `name` ან `path`, ორივე არა
+@msg	give one of `path`, `name` and `data`	მიუთითეთ ერთ-ერთი: `path`, `name` ან `data`
+@msg	mode must be replace, keep or append	mode უნდა იყოს replace, keep ან append
 @msg	the file is not an XMP metadata template	ფაილი არ არის XMP მეტამონაცემების შაბლონი
 	Copyright Notice:	საავტორო უფლების შენიშვნა:
 	Copyright Status:	საავტორო უფლების სტატუსი:
@@ -4798,7 +4798,7 @@ digits	Malayalam	მალაიალამური
 	Add Color Tool	ფერის დამატების ხელსაწყო
 	Remove Color Tool	ფერის წაშლის ხელსაწყო
 	Remove Color	ფერის წაშლა
-	Find the selected colors in the artwork	არჩეული ფერების პოვნა ნახატში
+	Find the selected colors in the artwork	მონიშნული ფერების ძებნა ნახატში
 	Keep this row's colors (exclude)	ამ სტრიქონის ფერების შენარჩუნება (გამორიცხვა)
 	Limit to Library:	ბიბლიოთეკით შეზღუდვა:
 	Link harmony colors	ჰარმონიის ფერების დაკავშირება
@@ -5385,9 +5385,9 @@ theme	Appearance	იერსახე
 	Create Graph	დიაგრამის შექმნა
 	Graph Data	დიაგრამის მონაცემები
 	Graph Type	დიაგრამის ტიპი
-	Graph Type…	გრაფიკის ტიპი…
-	Graph Data…	გრაფიკის მონაცემები…
-	Graph Options	გრაფიკის პარამეტრები
+	Graph Type…	დიაგრამის ტიპი…
+	Graph Data…	დიაგრამის მონაცემები…
+	Graph Options	დიაგრამის პარამეტრები
 	Left Axis	მარცხენა ღერძი
 	Right Axis	მარჯვენა ღერძი
 	Category Axis	კატეგორიების ღერძი
@@ -5404,7 +5404,7 @@ theme	Appearance	იერსახე
 	Connect Data Points	მონაცემთა წერტილების შეერთება
 	Edge-to-Edge Lines	ხაზები კიდიდან კიდემდე
 	Draw Filled Lines	შევსებული ხაზების დახატვა
-	Line Width	ხაზის სიგანე
+	Line Width	ხაზის სისქე
 	Tick Values	დანაყოფების მნიშვნელობები
 	Override Calculated Values	გამოთვლილი მნიშვნელობების შეცვლა
 	Divisions	დანაყოფები
@@ -5413,15 +5413,15 @@ theme	Appearance	იერსახე
 	Draw Tick Marks Between Labels	ნიშნების დახატვა წარწერებს შორის
 	Add Labels	წარწერების დამატება
 	Maximum must be more than Minimum.	მაქსიმუმი მინიმუმზე მეტი უნდა იყოს.
-	Column Graph	სვეტოვანი გრაფიკი
-	Stacked Column Graph	დაწყობილი სვეტოვანი გრაფიკი
-	Bar Graph	ზოლოვანი გრაფიკი
-	Stacked Bar Graph	დაწყობილი ზოლოვანი გრაფიკი
-	Line Graph	ხაზოვანი გრაფიკი
-	Area Graph	არეების გრაფიკი
-	Scatter Graph	გაფანტული გრაფიკი
-	Pie Graph	წრიული გრაფიკი
-	Radar Graph	რადარული გრაფიკი
+	Column Graph	სვეტოვანი დიაგრამა
+	Stacked Column Graph	დასტად სვეტოვანი დიაგრამა
+	Bar Graph	ზოლოვანი დიაგრამა
+	Stacked Bar Graph	დასტად ზოლოვანი დიაგრამა
+	Line Graph	ხაზოვანი დიაგრამა
+	Area Graph	ფართობითი დიაგრამა
+	Scatter Graph	წერტილოვანი დიაგრამა
+	Pie Graph	წრიული დიაგრამა
+	Radar Graph	რადარული დიაგრამა
 	Vector Halftone	ვექტორული ნახევარტონი
 	spot	სპოტ
 	Text	ტექსტი
@@ -6097,8 +6097,8 @@ font-technology	Variable	ცვლადი
 	Saving	შენახვა
 	Saving {}	ინახება: {}
 	Search commands and tools…	ბრძანებებისა და ხელსაწყოების ძიება…
-	Recent Commands	ბოლო ბრძანებები
-	No recent commands	ბოლო ბრძანებები არ არის
+	Recent Commands	ბოლოდროინდელი ბრძანებები
+	No recent commands	ბოლოდროინდელი ბრძანებები არ არის
 	Dashed Line	ტირეებიანი ხაზი
 	Panel menu	პანელის მენიუ
 	Unembed…	ჩაშენების მოხსნა…
@@ -6109,12 +6109,12 @@ font-technology	Variable	ცვლადი
 	Preferences	პარამეტრები
 	Previous	წინა
 	Restore every preference to its default (applied on OK)	ყველა პარამეტრის ნაგულისხმევ მნიშვნელობაზე დაბრუნება (გამოიყენება OK-ზე დაჭერისას)
-	The unit for new documents from built-in sizes other than pixel sizes and for opened files that record no unit; choosing one here and clicking OK also sets the active document's units.	ახალი დოკუმენტების ერთეული ჩაშენებული ზომებით, პიქსელური ზომების გარდა, და გახსნილი ფაილებისა, რომლებიც ერთეულს არ ინახავს; თუ აქ აირჩევთ და OK-ს დააწკაპუნებთ, ის აქტიური დოკუმენტის ერთეულიც გახდება.
+	The unit for new documents from built-in sizes other than pixel sizes and for opened files that record no unit; choosing one here and clicking OK also sets the active document's units.	ერთეული ახალი დოკუმენტებისთვის, რომლებიც ჩაშენებული ზომებით იქმნება (პიქსელური ზომების გარდა), და გახსნილი ფაილებისთვის, რომლებშიც ერთეული არ არის ჩაწერილი; თუ აქ ერთეულს აირჩევთ და OK-ს დააჭერთ, აქტიური დოკუმენტის ერთეულებიც შეიცვლება.
 	Stroke weights, dashes and gaps show in this unit, and numbers typed for them are read in it.	კონტურის სისქე, ტირეები და შუალედები ამ ერთეულში ჩანს, და მათთვის აკრეფილი რიცხვები ამ ერთეულში იკითხება.
 	Type sizes, leading and baseline shift show in this unit, and numbers typed for them are read in it.	ტექსტის ზომა, სტრიქონთა დაშორება და საბაზისო ხაზის წანაცვლება ამ ერთეულში ჩანს, და მათთვის აკრეფილი რიცხვები ამ ერთეულში იკითხება.
 	The unit for East Asian type measurements, which no field uses yet.	აღმოსავლეთაზიური ტექსტის ზომების ერთეული, რომელსაც ჯერჯერობით არცერთი ველი არ იყენებს.
 	When on, a number typed without a unit into a field in picas is read in points.	ჩართვისას პიკებში მოცემულ ველში ერთეულის გარეშე აკრეფილი რიცხვი პუნქტებში იკითხება.
-	With XML ID, object names show as XML IDs in the Layers panel, the Variables panel and Layer Options.	XML ID-ის არჩევისას ობიექტების სახელები შრეებში, ცვლადებსა და შრის პარამეტრებში XML ID-ად ჩანს.
+	With XML ID, object names show as XML IDs in the Layers panel, the Variables panel and Layer Options.	XML ID-ის არჩევისას ობიექტების სახელები შრეების პანელში, ცვლადების პანელსა და შრის პარამეტრებში XML ID-ებად ჩანს.
 	Reset all preferences to their defaults?	დავაბრუნოთ ყველა პარამეტრი ნაგულისხმევ მნიშვნელობებზე?
 	The defaults are applied when you click OK in Preferences. Cancel there keeps your current preferences.	ნაგულისხმევი მნიშვნელობები გამოიყენება, როცა პარამეტრებში OK-ს დააჭერთ. იქ გაუქმება ინარჩუნებს თქვენს მიმდინარე პარამეტრებს.
 	Smaller ↔ Larger	უფრო პატარა ↔ უფრო დიდი
@@ -7870,7 +7870,7 @@ imageTrace	Outline	კონტური
 @msg	{name}: the next answer in `answers` is for {_1}, not {name}	{name}: შემდეგი პასუხი `answers`-ში არის {_1}-ისთვის და არა {name}-ისთვის
 @msg	{name}: `answers` has no answer left for this dialog	{name}: `answers`-ში ამ დიალოგისთვის პასუხი აღარ დარჩა
 @msgplural	`answers` has {n} answer the script did not use|`answers` has {n} answers the script did not use	`answers`-ში დარჩა {n} პასუხი, რომელიც სკრიპტს არ გამოუყენებია
-@msgplural	{_1} left {n} object under the brush as it was ({_2}): it reshapes paths only|{_1} left {n} objects under the brush as they were ({_2}): it reshapes paths only	{_1}-მა ფუნჯის ქვეშ უცვლელი დატოვა {n} ობიექტი ({_2}): ის მხოლოდ ტრაექტორიებს ცვლის
+@msgplural	{_1} left {n} object under the brush as it was ({_2}): it reshapes paths only|{_1} left {n} objects under the brush as they were ({_2}): it reshapes paths only	ხელსაწყომ „{_1}“ ფუნჯის ქვეშ {n} ობიექტი უცვლელად დატოვა ({_2}): ის მხოლოდ ტრაექტორიების ფორმას ცვლის
 liquify-tool	Warp	გაღუნვა
 liquify-tool	Twirl	დახვევა
 liquify-tool	Pucker	შეკუმშვა
@@ -8324,14 +8324,14 @@ liquify-list-end	{0}, {1}	{0} და {1}
 	JavaScript:	JavaScript:
 	Large Gaps	დიდი ღრეჩოები
 	Last Artboard	ბოლო სამუშაო დაფა
-	Status Bar Show	ჩვენება მდგომარეობის ზოლში
+	Status Bar Show	სტატუსის ზოლში ჩვენება
 	Artboard Name	სამუშაო დაფის სახელი
 	Current Tool	მიმდინარე ხელსაწყო
 	Date and Time	თარიღი და დრო
 	Number of Undos	დაბრუნებების რაოდენობა
 	Document Color Profile	დოკუმენტის ფერის პროფილი
-	Undos	დაბრუნებები
-	Redos	ხელახლა შესრულებები
+	Undos	დაბრუნება
+	Redos	ხელახლა შესრულება
 	Levels	დონეები
 	Library Panel Options	ბიბლიოთეკის პანელის პარამეტრები
 	Locate Library…	ბიბლიოთეკის მოძებნა…
@@ -9582,15 +9582,15 @@ breakText	Glyphs	გლიფები
 	Common Tangents…	საერთო მხებები…
 	Common Tangents	საერთო მხებები
 	Tangents	მხებები
-	Centerline	ცენტრალური ხაზი
+	Centerline	ცენტრების შემაერთებელი ხაზი
 	External	გარე
 	Internal	შიდა
-@msg	select two closed paths	აირჩიეთ ორი დახურული ტრაექტორია
-@msg	a selected path is open	არჩეული ტრაექტორია ღიაა
-@msg	a selected path is not convex	არჩეული ტრაექტორია არ არის ამოზნექილი
-@msg	a selected path has no area	არჩეულ ტრაექტორიას ფართობი არ აქვს
-@msg	a selected path has more than 10000 segments	არჩეულ ტრაექტორიას 10000-ზე მეტი სეგმენტი აქვს
-@msg	the two paths have the same outline	ორივე ტრაექტორიას ერთნაირი კონტური აქვს
+@msg	select two closed paths	მონიშნეთ ორი შეკრული ტრაექტორია
+@msg	a selected path is open	ერთ-ერთი მონიშნული ტრაექტორია ღიაა
+@msg	a selected path is not convex	ერთ-ერთი მონიშნული ტრაექტორია არ არის ამოზნექილი
+@msg	a selected path has no area	ერთ-ერთ მონიშნულ ტრაექტორიას ფართობი არ აქვს
+@msg	a selected path has more than 10000 segments	ერთ-ერთ მონიშნულ ტრაექტორიას 10000-ზე მეტი სეგმენტი აქვს
+@msg	the two paths have the same outline	ორივე ტრაექტორიას ერთნაირი მოხაზულობა აქვს
 @msg	One path lies inside the other, so they have no common tangents	ერთი ტრაექტორია მეორის შიგნითაა, ამიტომ მათ საერთო მხებები არ აქვთ
 @msg	The paths overlap, so they have no internal tangents	ტრაექტორიები ერთმანეთს ფარავს, ამიტომ მათ შიდა მხებები არ აქვთ
 @msg	One path lies inside the other, so they have no internal tangents	ერთი ტრაექტორია მეორის შიგნითაა, ამიტომ მათ შიდა მხებები არ აქვთ
@@ -9607,9 +9607,9 @@ breakText	Glyphs	გლიფები
 @msg	two shapes need a `radius`	ორ ფიგურას `radius` სჭირდება
 @msg	three shapes set the radius themselves: leave `radius` out	სამი ფიგურა რადიუსს თავად ადგენს: გამოტოვეთ `radius`
 @msg	`circle` must be from 0 to 64	`circle` უნდა იყოს 0-დან 64-მდე
-@msg	a shape has no outline	ერთ-ერთ ფიგურას კონტური არ აქვს
+@msg	a shape has no outline	ერთ-ერთ ფიგურას მოხაზულობა არ აქვს
 @msg	the shapes are too complex: at most 2000 segments in all	ფიგურები ზედმეტად რთულია: სულ არაუმეტეს 2000 სეგმენტი
-@msg	these shapes take too long to search	ამ ფიგურების ძიებას ზედმეტად დიდი დრო სჭირდება
+@msg	these shapes take too long to search	ამ ფიგურებისთვის ძიება ზედმეტად დიდ დროს მოითხოვს
 @msg	more than 64 circles touch these shapes: they may touch along a whole curve	ამ ფიგურებს 64-ზე მეტი წრე ეხება: შესაძლოა მთელი მრუდის გასწვრივ ეხებოდნენ
 @msg	no circle touches these shapes	ამ ფიგურებს არცერთი წრე არ ეხება
 @msg	`circle` is past the last circle found ({found})	`circle` ბოლო ნაპოვნი წრის შემდეგაა ({found})
@@ -10018,7 +10018,7 @@ font-script	Japanese	იაპონური
 	Partial Cut Line	ნაწილობრივი ჭრის ხაზი
 	Perforation Line	პერფორაციის ხაზი
 	No objects are selected.	ობიექტები არ არის მონიშნული.
-	Open a document to mark its fold lines.	გახსენით დოკუმენტი მისი მოკეცვის ხაზების მოსანიშნად.
+	Open a document to mark its fold lines.	გახსენით დოკუმენტი მისი მოკეცვის ხაზების მარკირებისთვის.
 	Remove Fold Line Role	ხაზის ტიპის მოხსნა
 	Check	შემოწმება
 	Check Fold Lines	მოკეცვის ხაზების შემოწმება
@@ -10038,6 +10038,6 @@ font-script	Japanese	იაპონური
 @msg	A gap between cut lines is too narrow to tell apart.	ჭრის ხაზებს შორის ღრეჩო ზედმეტად ვიწროა გასარჩევად.
 @msg	A cut-out area holds other fold lines or another blank.	ამოჭრილი არე სხვა მოკეცვის ხაზებს ან სხვა ნამზადს შეიცავს.
 @msg	A panel is not joined to the rest by a crease.	პანელი დანარჩენს არცერთი ბიგის ხაზით არ უერთდება.
-@msg	A fold line is on a non-printing layer.	მოკეცვის ხაზი არასაბეჭდ შრეზეა.
+@msg	A fold line is on a non-printing layer.	მოკეცვის ხაზი არაბეჭდვად შრეზეა.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	პანელები: {panels}, ანჯამები: {hinges}, შეცდომები: {errors}, გაფრთხილებები: {warnings}
 @msg	composer must be "singleLine", "everyLine", "standardSingleLine" or "standardEveryLine"	composer უნდა იყოს "singleLine", "everyLine", "standardSingleLine" ან "standardEveryLine"
