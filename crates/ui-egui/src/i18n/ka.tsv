@@ -6470,12 +6470,9 @@ font-technology	Variable	ცვლადი
 	The mouse wheel with Cmd/Ctrl held scrolls the canvas sideways.	დაჭერილი Cmd/Ctrl-ით მაუსის ბორბალი ტილოს გვერდულად გადაახვევს.
 	Dragging sideways on a numeric field's label changes the field's value.	რიცხვითი ველის წარწერაზე გვერდულად გადათრევა ველის მნიშვნელობას ცვლის.
 	A two-finger rotate gesture on a trackpad rotates the canvas view.	ტრეკპადზე ორი თითით მობრუნების ჟესტი ტილოს ხედს აბრუნებს.
-<<<<<<< HEAD
-=======
 	Holding a key runs the tool or command in its Hold column in Keyboard Shortcuts; a quick press runs its usual shortcut.	კლავიშის ხანგრძლივი დაჭერა უშვებს ხელსაწყოს ან ბრძანებას კლავიატურის მალსახმობების დაჭერის სვეტიდან; მოკლე დაჭერა უშვებს მის ჩვეულ მალსახმობს.
 	How long, in seconds, a key must be held before its hold shortcut runs instead of its usual shortcut.	რამდენი წამი უნდა იყოს კლავიში დაჭერილი, სანამ ჩვეული მალსახმობის ნაცვლად მისი ხანგრძლივი დაჭერის მალსახმობი გაეშვება.
 	When you move anchor points, each curve with one moved end keeps its shape relative to its ends.	როცა ღუზის წერტილებს გადაადგილებთ, ყოველი მრუდი, რომლის ერთი ბოლოც გადაადგილდა, ინარჩუნებს ფორმას თავის ბოლოებთან მიმართებით.
->>>>>>> origin/main
 	Holding a tool's shortcut key chooses the tool until you let go, and then the previous tool is chosen again.	სანამ ხელსაწყოს მალსახმობ კლავიშს დაჭერილს გიჭირავთ, ეს ხელსაწყოა არჩეული; კლავიშის აშვების შემდეგ ისევ წინა ხელსაწყო აირჩევა.
 	Shows the bounding box while you move the selection or draw a shape.	აჩვენებს შემომსაზღვრელ ჩარჩოს, სანამ მონიშნულს გადაადგილებთ ან ფიგურას ხატავთ.
 	Create Trim Marks draws Japanese-style marks instead of Roman ones.	ჭრის ნიშნების შექმნა რომაულის ნაცვლად იაპონური სტილის ნიშნებს ხატავს.
@@ -6484,10 +6481,7 @@ font-technology	Variable	ცვლადი
 	A live rectangle's properties show one Corner Radius field for all four corners; off, each corner has its own field.	ცოცხალი მართკუთხედის თვისებები ოთხივე კუთხისთვის კუთხის რადიუსის ერთ ველს აჩვენებს; გამორთვისას თითოეულ კუთხეს თავისი ველი აქვს.
 	What edits in the Transform panel transform: the object, its pattern tiles or both; Default follows Transform Pattern Tiles.	რას გარდაქმნის ცვლილებები გარდაქმნის პანელში: ობიექტს, მისი პატერნის ფილებს ან ორივეს; ნაგულისხმევი მისდევს პატერნის ფილების გარდაქმნას.
 	With one symbol instance selected, the Transform panel uses the symbol's registration point as its reference point.	როცა სიმბოლოს ერთი ეგზემპლარია მონიშნული, გარდაქმნის პანელი სიმბოლოს რეგისტრაციის წერტილს საბაზისო წერტილად იყენებს.
-<<<<<<< HEAD
-=======
 	Drawing a rectangle, ellipse, polygon, star or line opens the Transform panel if it is closed.	მართკუთხედის, ელიფსის, მრავალკუთხედის, ვარსკვლავის ან ხაზის დახატვა ხსნის გარდაქმნის პანელს, თუ ის დახურულია.
->>>>>>> origin/main
 	Darkens the canvas outside the artboards while the Artboard tool is active.	სანამ სამუშაო დაფის ხელსაწყო აქტიურია, სამუშაო დაფების გარეთ ტილოს აბნელებს.
 	With Fade Region Outside Artboard on, the area outside the artboards stays dark while you drag with the Artboard tool.	როცა სამუშაო დაფის გარეთ არის დაბნელება ჩართულია, სამუშაო დაფის ხელსაწყოთი გადათრევისას სამუშაო დაფების გარეთ არე ბნელი რჩება.
 	How near, in pixels, the pointer must be to an object, anchor or handle for a click to select it.	რამდენად ახლოს, პიქსელებში, უნდა იყოს მაჩვენებელი ობიექტთან, საყრდენ წერტილთან ან სახელურთან, რომ დაწკაპუნებამ ის მონიშნოს.
