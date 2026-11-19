@@ -570,6 +570,47 @@ fn objects_on_path_detach_strings_are_in_complete_catalogs() {
     }
 }
 
+/// The errors of Perspective Distort and Free Distort on an image, and of the image commands that
+/// refuse a distorted image, are in every complete-message catalog.
+#[test]
+fn distorted_image_messages_are_in_complete_catalogs() {
+    let literals = message_literals();
+    for msg in [
+        "object {_1} is an image changed by Perspective Distort or Free Distort, which this command does not work on",
+        "image {_1} cannot be distorted this way: its corners would not make a convex shape",
+        "image {_1} cannot be distorted this way: its corners would cross the warp's horizon",
+        "image {_1} cannot be distorted this way: its corners would be too close together for a perspective map",
+    ] {
+        assert!(literals.contains(msg), "{msg}");
+        let shown = msg.replace("{_1}", "7");
+        for code in COMPLETE_MESSAGES {
+            let lang = Lang::from_code(code).expect("registered");
+            assert_ne!(message(lang, &shown), shown, "{code}: {msg}");
+        }
+    }
+}
+
+/// View › Proof Setup › Customize's labels.
+#[test]
+fn proof_setup_dialog_labels_are_in_complete_catalogs() {
+    let labels = [
+        "Proof Setup",
+        "Device to Simulate:",
+        "Preserve CMYK Numbers",
+        "Preserve RGB Numbers",
+        "Rendering intent:",
+        "Simulate Paper Color",
+        "Simulate Black Ink",
+        "Save…",
+        "Load…",
+    ];
+    for lang in LANGUAGES.iter().filter(|lang| lang.complete_menus) {
+        for label in labels {
+            assert!(lang.catalog().plain(label).is_some(), "{} is missing {label}", lang.code);
+        }
+    }
+}
+
 /// The PSD Import Options dialog's labels, and the warnings and errors of opening and placing a
 /// PSD or PSB file with its layers and slices: each complete catalog translates every one, keeping
 /// its numbers, and translates a reason given inside one.
