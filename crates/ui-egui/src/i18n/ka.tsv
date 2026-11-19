@@ -2966,6 +2966,7 @@
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	წრის ხედი
 	Box View	კვადრატის ხედი
+	Show Out-of-Gamut Colors	ფერთა გამის გარეთ მყოფი ფერების ჩვენება
 	Box Channel	კვადრატის არხი
 	Color box	ფერის კვადრატი
 	Color Wheel Options	ფერთა წრის პარამეტრები
@@ -6484,6 +6485,7 @@ font-technology	Variable	ცვლადი
 	Recent Commands	ბოლოდროინდელი ბრძანებები
 	No recent commands	ბოლოდროინდელი ბრძანებები არ არის
 	Type to search commands, tools, panels and effects	აკრიფეთ ბრძანებების, ხელსაწყოების, პანელებისა და ეფექტების მოსაძებნად
+	Clear Recent Commands	ბოლო ბრძანებების სიის გასუფთავება
 	Dashed Line	ტირეებიანი ხაზი
 	Panel menu	პანელის მენიუ
 	Unembed…	ჩაშენების მოხსნა…
@@ -11079,6 +11081,10 @@ font-script	Japanese	იაპონური
 @msg	A joint does not close by {gap} pt.	შეერთება არ იხურება {gap} pt-ით.
 @msg	Two panels pass through each other.	ორი პანელი ერთმანეთში გადის.
 @msg	composer must be "singleLine", "everyLine", "standardSingleLine" or "standardEveryLine"	composer უნდა იყოს "singleLine", "everyLine", "standardSingleLine" ან "standardEveryLine"
+	Leaf Vine	ფოთლების ვაზი
+	Blossom Chain	ყვავილების ჯაჭვი
+	Pennant Garland	ალმების გირლანდა
+	Lantern String	ფარნების ჯაჭვი
 	Orbit Lines	ორბიტული ხაზები
 	Petal Garland	ფურცლების გირლანდა
 	Lattice Braid	ბადის ნაწნავი

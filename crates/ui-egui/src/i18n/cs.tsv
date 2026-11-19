@@ -831,6 +831,7 @@
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Zobrazení kola
 	Box View	Zobrazení čtverce
+	Show Out-of-Gamut Colors	Zobrazit barvy mimo gamut
 	Box Channel	Kanál čtverce
 	Color box	Barevný čtverec
 	Color Wheel Options	Možnosti barevného kola
@@ -4758,6 +4759,7 @@ font-technology	Variable	Variabilní
 	Recent Commands	Nedávné příkazy
 	No recent commands	Žádné nedávné příkazy
 	Type to search commands, tools, panels and effects	Pište pro hledání příkazů, nástrojů, panelů a efektů
+	Clear Recent Commands	Vymazat seznam nedávných příkazů
 	Dashed Line	Čárkovaná čára
 	Panel menu	Nabídka panelu
 	Unembed…	Zrušit vložení…
@@ -10768,6 +10770,10 @@ breakText	Glyphs	Glyfy
 @msg	A panel is not joined to the rest by a crease.	Panel není se zbytkem spojen žádnou linií bigu.
 @msg	A fold line is on a non-printing layer.	Linie skladu je na netisknutelné vrstvě.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	Panely: {panels}, panty: {hinges}, chyby: {errors}, upozornění: {warnings}
+	Leaf Vine	Listová liána
+	Blossom Chain	Květinový řetěz
+	Pennant Garland	Girlanda praporků
+	Lantern String	Řetěz luceren
 	Orbit Lines	Orbitální čáry
 	Petal Garland	Okvětní girlanda
 	Lattice Braid	Mřížkový cop

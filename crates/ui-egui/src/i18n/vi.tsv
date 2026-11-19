@@ -725,6 +725,7 @@ font-technology	Variable	Biến thiên
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Hiển thị bánh xe
 	Box View	Hiển thị hộp
+	Show Out-of-Gamut Colors	Hiện màu ngoài dải màu
 	Box Channel	Kênh của hộp
 	Color box	Hộp màu
 	Color Wheel Options	Tùy chọn bánh xe màu
@@ -4087,6 +4088,7 @@ mark-style	Japanese	Kiểu Nhật
 	Recent Commands	Lệnh gần đây
 	No recent commands	Không có lệnh gần đây
 	Type to search commands, tools, panels and effects	Nhập để tìm kiếm lệnh, công cụ, bảng và hiệu ứng
+	Clear Recent Commands	Xóa lệnh gần đây
 	Search commands	Tìm kiếm lệnh
 	Search Commands…	Tìm kiếm lệnh…
 	Search Fonts Folder	Tìm kiếm thư mục phông chữ
@@ -8616,6 +8618,10 @@ breakText	Glyphs	Glyph
 @msg	{width} × {height} pixels is too large for Targa (at most 65535 pixels a side): lower the resolution	{width} × {height} điểm ảnh quá lớn cho Targa (tối đa 65535 điểm ảnh mỗi cạnh): hãy giảm độ phân giải
 @msg	{w} × {h} pixels is too large for PSD (at most {MAX_SIDE} pixels a side): lower the resolution	{w} × {h} điểm ảnh quá lớn cho PSD (tối đa {MAX_SIDE} điểm ảnh mỗi cạnh): hãy giảm độ phân giải
 @msg	composer must be "singleLine", "everyLine", "standardSingleLine" or "standardEveryLine"	composer phải là "singleLine", "everyLine", "standardSingleLine" hoặc "standardEveryLine"
+	Leaf Vine	Dây leo lá
+	Blossom Chain	Chuỗi hoa
+	Pennant Garland	Dây cờ tam giác
+	Lantern String	Dây đèn lồng
 	Orbit Lines	Đường quỹ đạo
 	Petal Garland	Vòng hoa cánh
 	Lattice Braid	Bện lưới

@@ -675,19 +675,25 @@ objects' fills or strokes differ (`fillMixed` / `strokeMixed`, drawn as a "?" pr
 In the app's Color panel and Color Picker, RGB, HSB, hex and Web Safe RGB values describe the active working RGB
 space. RGB edits preserve the other native channels; HSB uses those same working RGB components. Colors outside
 display sRGB retain their native numeric values. `ui.colorPanel` selects the panel mode and `ui.colorPicker`
-opens the picker through `run_command` with the remote backend. `ui.colorPanel {"recentColors": false}` unchecks
-the panel menu's Show Recent Colors, which hides the Color panel's Recent Colors row, and `true` shows it again;
-applied colors still join the list while it is hidden. `ui.colorPanel {"rgbPercent": true}` shows the Color panel's
-RGB fields in percent, as a double-click right of an RGB field does, and `false` shows them from 0 to 255 again.
-`ui.colorRgbPercent` (Toggle RGB Percent in the command palette and Keyboard Shortcuts) switches between the two
-and answers true when the fields show in percent.
+opens the picker through `run_command` with the remote backend. Edit › Keyboard Shortcuts lists `ui.colorPicker` as
+Color Picker… with no default key; a key assigned there opens the picker for the proxy in front, as `{}` does.
+`ui.colorPanel {"recentColors": false}` unchecks the panel menu's Show Recent Colors, which hides the Color panel's
+Recent Colors row, and `true` shows it again; applied colors still join the list while it is hidden.
+`ui.colorPanel {"rgbPercent": true}` shows the Color panel's RGB fields in percent, as a double-click right of an RGB
+field does, and `false` shows them from 0 to 255 again. `ui.colorRgbPercent` (Toggle RGB Percent in the command
+palette and Keyboard Shortcuts) switches between the two and answers true when the fields show in percent.
 `ui.colorWheel {"view": "box", "channel": "red"}` shows the Color Wheel panel's box (a color field with the channel's
 strip at its right) in place of the wheel, as the panel menu's Box View and Box Channel do, and `"view": "wheel"`
-shows the wheel again. `{"harmony": true, "harmonyRule": "triad"}` puts a marker on the wheel's ring for each other
+shows the wheel again. `"gamut": true` grays out the parts of the wheel's square and the box's field whose colors
+the CMYK space cannot print, as the panel menu's Show Out-of-Gamut Colors does, and `false` shows them again. The
+test is the out-of-gamut warning's, which `color.gamutCheck` answers for one color. The shading is approximate: the
+panel tests the color at the center of each cell of a 16 by 16 grid over the square or the field and grays out the
+whole cell or none of it, so a grayed cell can hold printable colors and a clear cell can hold colors that cannot
+print. `{"harmony": true, "harmonyRule": "triad"}` puts a marker on the wheel's ring for each other
 color of a Color Guide harmony rule, as Show Harmony and Harmony Rule do; the wheel takes the 15 rules whose colors
 each have a hue of their own (not `monochromatic`, `shades`, `complementary2`, `triad2`, `triad3` or
 `highContrast2`). Keys left out keep their values. Params that are not an object, another key or a value off
-the list return an error and change nothing. The command returns `{view, channel, harmony, harmonyRule, vision}`,
+the list return an error and change nothing. The command returns `{view, channel, sliders, gamut, harmony, harmonyRule, vision}`,
 and the settings are kept with the preferences.
 
 `ui.colorWheel {"sliders": "oklch"}` shows the Color Wheel panel's OKLCH Sliders (L, C and H rows under the wheel or
@@ -3498,6 +3504,16 @@ enabled while the document has a saved view. In the desktop app the views are li
 checked when it opens: past 25, blank or repeated names, and views without a finite centre and a positive zoom are
 dropped.
 
+## Recent commands
+
+Help › Search Commands… keeps the last commands, tools, panels and effects picked from it, most recent first: an
+empty search lists them, and so does the Recent Commands list beside the search field. The desktop app saves the ids
+with the UI state, and also how many times each command was picked, which ranks the results.
+`help.clearRecentCommands {}` (Clear Recent Commands) empties the list, the saved ids and the pick counts, and
+returns `null`. A pick of it in the search is not kept as a recent pick or counted. It is a UI command, so it needs
+the desktop app (`--connect`); `command_list` gives it `enabled: false` while no ids and no counts are saved. Saved ids
+the list leaves out, such as those of a plug-in that is not loaded, count as saved and are cleared with the rest.
+
 ## Messages over the window
 
 `app.toast {message, level?, seconds?}` shows a short message over the desktop app's window without stopping work
@@ -5797,8 +5813,8 @@ error.
 
 ## Brush libraries
 
-Brush libraries are read-only sets of brushes: fourteen generated in code (Art Ribbons, Ink and Wash, Calligraphic Nibs, Pressure Sensitive with Flex Ribbon, Pulse Stroke, Round Flow and Chisel Flow, Bristle
-Brushes with one bristle brush for each tip shape, Pattern Borders, Scatter Shapes, Stipple with Fine, Dense, Soft and Bold dot textures, Game Trails, Energy Beams, and Dry Media with the Chalk Grain, Graphite Pencil, Wax Crayon and
+Brush libraries are read-only sets of brushes: fifteen generated in code (Art Ribbons, Ink and Wash, Calligraphic Nibs, Pressure Sensitive with Flex Ribbon, Pulse Stroke, Round Flow and Chisel Flow, Bristle
+Brushes with one bristle brush for each tip shape, Pattern Borders, Decorative with Leaf Vine, Blossom Chain, Pennant Garland and Lantern String, Scatter Shapes, Stipple with Fine, Dense, Soft and Bold dot textures, Game Trails, Energy Beams, and Dry Media with the Chalk Grain, Graphite Pencil, Wax Crayon and
 Charcoal Dust art brushes, id `dry-media`, Tech Circuit with Circuit Trace (art), Bus Lines and Terminal Nodes (pattern), id `tech-circuit`, Engraving with Fine Hatching, Dense Hatching, Tapered Hatching and Broken Hatching art brushes, id `engraving`, and Arrows with Solid, Open, Double, Chevron and Dashed Arrow art brushes, id `arrows`), the `.vectorcraft` files in the user library folder of the desktop app (User
 Defined) and the brushes of any document loaded with `brush.loadLibrary` (a document without brushes of its own has
 the default ones). `brush.libraries` lists them (`id`, `name`, `category`: `builtIn`, `user` or `loaded`, `count`) and
@@ -7514,7 +7530,7 @@ and files saved without it open with it off.
 
 ## Live Corners
 
-`object.setLiveShape {id?, ids?, radius?, kind?, corners?, items?}` sets the corners of any path (one undo step): a live
+`object.setLiveShape {id?, ids?, radius?, kind?, corners?, rectanglesOnly?, items?}` sets the corners of any path (one undo step): a live
 rectangle's or polygon's, a star's, a pen path's. A corner is an anchor where two sides, straight or curved, meet at an angle
 (not an open path's ends, not a smooth anchor, not one the sides run straight on through); a curved side is trimmed to
 what the cut leaves of it. `radius` (pt) and `kind`
@@ -7533,7 +7549,9 @@ or keeps its size with Scale Corners off), and a rectangle from a file that kept
 (elliptical corners) gets circular ones in document units when its corners are next set. Dragging a corner widget
 rounds the corners whose widgets show (every corner, or the Direct-Selected ones) on every selected path at once,
 outlining in red those that reach their limit; the Selection tool shows the widgets of live rectangles and polygons,
-the Direct Selection tool those of any path. Several objects each with their own corners are one call:
+the Direct Selection tool those of any path. `rectanglesOnly: true` sets them on the live rectangles among the targets
+alone and leaves the other objects as they are (the Rectangle Properties corner fields and menus send it with the
+selection, so an action that records them acts on the rectangles selected when it plays). Several objects each with their own corners are one call:
 `items: [{id, corners?}]` in place of `ids` and `corners`. Alt-clicking one cycles their kind and double-clicking one opens Corners (`ui.corners {id?, corners?}`,
 dialog `corners`: `kind`, `radius`; OK runs `object.setLiveShape`).
 `view.shapeWidgets {on?}` (desktop app, the Hide Shape Widgets and Show Shape Widgets button in the Control bar of the

@@ -612,6 +612,7 @@ font-technology	Variable	Variabili
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Vista ruota
 	Box View	Vista riquadro
+	Show Out-of-Gamut Colors	Mostra colori fuori gamma
 	Box Channel	Canale del riquadro
 	Color box	Riquadro colore
 	Color Wheel Options	Opzioni ruota dei colori
@@ -3741,6 +3742,7 @@ digits	Malayalam	Malayalam
 	Recent Commands	Comandi recenti
 	No recent commands	Nessun comando recente
 	Type to search commands, tools, panels and effects	Digita per cercare comandi, strumenti, pannelli ed effetti
+	Clear Recent Commands	Cancella comandi recenti
 	Search commands	Cerca comandi
 	Search Commands…	Cerca comandi…
 	Secondary	Secondario
@@ -10443,6 +10445,10 @@ breakText	Glyphs	Glifi
 @msg	A panel is not joined to the rest by a crease.	Un pannello non è unito al resto da alcuna linea di cordonatura.
 @msg	A fold line is on a non-printing layer.	Una linea di piega si trova su un livello non stampabile.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	Pannelli: {panels}, cerniere: {hinges}, errori: {errors}, avvisi: {warnings}
+	Leaf Vine	Tralcio di foglie
+	Blossom Chain	Catena di fiori
+	Pennant Garland	Ghirlanda di bandierine
+	Lantern String	Fila di lanterne
 	Orbit Lines	Linee orbitali
 	Petal Garland	Ghirlanda di petali
 	Lattice Braid	Intreccio a reticolo

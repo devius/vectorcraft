@@ -861,6 +861,7 @@ digits	Malayalam	말라얄람어
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	휠 보기
 	Box View	상자 보기
+	Show Out-of-Gamut Colors	색상 범위를 벗어난 색상 표시
 	Box Channel	상자 채널
 	Color box	색상 상자
 	Color Wheel Options	색상환 옵션
@@ -3599,6 +3600,7 @@ mark-style	Japanese	일본식
 	Recent Commands	최근 명령
 	No recent commands	최근 명령 없음
 	Type to search commands, tools, panels and effects	입력하여 명령, 도구, 패널 및 효과 검색
+	Clear Recent Commands	최근 명령 목록 지우기
 	Search commands	명령 검색
 	Secondary	보조
 	Select All Art on Layer	레이어의 모든 아트웍 선택
@@ -10406,6 +10408,10 @@ breakText	Glyphs	글리프
 @msg	A panel is not joined to the rest by a crease.	패널이 어떤 오시선으로도 나머지와 연결되어 있지 않습니다.
 @msg	A fold line is on a non-printing layer.	접는 선이 인쇄되지 않는 레이어에 있습니다.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	패널: {panels}, 힌지: {hinges}, 오류: {errors}, 경고: {warnings}
+	Leaf Vine	잎 덩굴
+	Blossom Chain	꽃사슬
+	Pennant Garland	깃발 장식
+	Lantern String	등불 줄
 	Orbit Lines	궤도 선
 	Petal Garland	꽃잎 화환
 	Lattice Braid	격자 땋기

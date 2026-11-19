@@ -593,6 +593,7 @@ font-technology	Variable	Variabla
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Hjulvy
 	Box View	Rutvy
+	Show Out-of-Gamut Colors	Visa färger utanför färgomfånget
 	Box Channel	Rutans kanal
 	Color box	Färgruta
 	Color Wheel Options	Alternativ för färghjulet
@@ -3597,6 +3598,7 @@ digits	Malayalam	Malayalam
 	Recent Commands	Senaste kommandon
 	No recent commands	Inga senaste kommandon
 	Type to search commands, tools, panels and effects	Skriv för att söka efter kommandon, verktyg, paneler och effekter
+	Clear Recent Commands	Rensa senaste kommandon
 	Search commands	Sök kommandon
 	Search Commands…	Sök kommandon…
 	Secondary	Sekundär
@@ -10861,6 +10863,10 @@ digits	Hindi	Hindi
 @msg	A joint does not close by {gap} pt.	En fog sluter inte med {gap} pt.
 @msg	Two panels pass through each other.	Två paneler går igenom varandra.
 @msg	{w} × {h} pixels is too large for PSD (at most {MAX_SIDE} pixels a side): lower the resolution	{w} × {h} pixlar är för stort för PSD (högst {MAX_SIDE} pixlar per sida): sänk upplösningen
+	Leaf Vine	Bladranka
+	Blossom Chain	Blomkedja
+	Pennant Garland	Vimpelgirlang
+	Lantern String	Lyktgirlang
 	Orbit Lines	Banlinjer
 	Petal Garland	Kronbladsgirlang
 	Lattice Braid	Gallerfläta

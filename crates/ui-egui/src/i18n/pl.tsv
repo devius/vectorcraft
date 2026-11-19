@@ -780,6 +780,7 @@
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Widok koła
 	Box View	Widok kwadratu
+	Show Out-of-Gamut Colors	Pokaż kolory poza gamutem
 	Box Channel	Kanał kwadratu
 	Color box	Kwadrat koloru
 	Color Wheel Options	Opcje koła kolorów
@@ -4601,6 +4602,7 @@ font-technology	Variable	Zmienne
 	Recent Commands	Ostatnie polecenia
 	No recent commands	Brak ostatnich poleceń
 	Type to search commands, tools, panels and effects	Pisz, aby szukać poleceń, narzędzi, paneli i efektów
+	Clear Recent Commands	Wyczyść listę ostatnich poleceń
 	Dashed Line	Linia przerywana
 	Panel menu	Menu panelu
 	Unembed…	Wyodrębnij…
@@ -10632,6 +10634,10 @@ breakText	Glyphs	Glify
 @msg	A panel is not joined to the rest by a crease.	Panel nie jest połączony z resztą żadną linią bigowania.
 @msg	A fold line is on a non-printing layer.	Linia zgięcia znajduje się na warstwie niedrukowanej.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	Panele: {panels}, zawiasy: {hinges}, błędy: {errors}, ostrzeżenia: {warnings}
+	Leaf Vine	Liściasta winorośl
+	Blossom Chain	Łańcuch kwiatów
+	Pennant Garland	Girlanda proporczyków
+	Lantern String	Łańcuch lampionów
 	Orbit Lines	Linie orbitalne
 	Petal Garland	Girlanda płatków
 	Lattice Braid	Plecionka kratowa

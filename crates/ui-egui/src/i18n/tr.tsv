@@ -591,6 +591,7 @@ font-technology	Variable	Değişken
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Tekerlek Görünümü
 	Box View	Kutu Görünümü
+	Show Out-of-Gamut Colors	Gamut Dışı Renkleri Göster
 	Box Channel	Kutu Kanalı
 	Color box	Renk kutusu
 	Color Wheel Options	Renk Tekerleği Seçenekleri
@@ -3477,6 +3478,7 @@ digits	Malayalam	Malayalam
 	Recent Commands	Son komutlar
 	No recent commands	Son komut yok
 	Type to search commands, tools, panels and effects	Komutları, araçları, panelleri ve efektleri aramak için yazın
+	Clear Recent Commands	Son Komutları Temizle
 	Search commands	Komutları arayın
 	Search Commands…	Arama Komutları…
 	Secondary	İkincil
@@ -10726,6 +10728,10 @@ breakText	Glyphs	Glifler
 @msg	A panel is not joined to the rest by a crease.	Bir panel geri kalanlara hiçbir pilyaj çizgisiyle bağlı değil.
 @msg	A fold line is on a non-printing layer.	Bir katlama çizgisi yazdırılmayan bir katmanda.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	Paneller: {panels}, menteşeler: {hinges}, hatalar: {errors}, uyarılar: {warnings}
+	Leaf Vine	Yapraklı sarmaşık
+	Blossom Chain	Çiçek zinciri
+	Pennant Garland	Bayrak süsü
+	Lantern String	Fener dizisi
 	Orbit Lines	Yörünge Çizgileri
 	Petal Garland	Taç Yaprağı Çelengi
 	Lattice Braid	Kafes Örgü

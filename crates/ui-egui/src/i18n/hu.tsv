@@ -814,6 +814,7 @@ arrowhead	Target	Céltábla
 	{name1} {value1}, {name2} {value2}	{name1} {value1}, {name2} {value2}
 	Wheel View	Körnézet
 	Box View	Négyzetnézet
+	Show Out-of-Gamut Colors	Színtartományon kívüli színek megjelenítése
 	Box Channel	Négyzet csatornája
 	Color box	Színnégyzet
 	Color Wheel Options	Színkör beállításai
@@ -4323,6 +4324,7 @@ mark-style	Japanese	Japán
 	Recent Commands	Legutóbbi parancsok
 	No recent commands	Nincsenek legutóbbi parancsok
 	Type to search commands, tools, panels and effects	Gépeljen parancsok, eszközök, panelek és effektusok kereséséhez
+	Clear Recent Commands	Legutóbbi parancsok listájának törlése
 	Search commands	Parancsok keresése
 	Search Commands…	Parancsok keresése…
 	Search Fonts Folder	Keresés betűtípusmappában
@@ -10757,6 +10759,10 @@ breakText	Glyphs	Glifák
 @msg	A panel is not joined to the rest by a crease.	Egy panelt egyetlen bigvonal sem köt a többihez.
 @msg	A fold line is on a non-printing layer.	Egy hajtásvonal nem nyomtatható rétegen van.
 @msg	Panels: {panels}, hinges: {hinges}, errors: {errors}, warnings: {warnings}	Panelek: {panels}, zsanérok: {hinges}, hibák: {errors}, figyelmeztetések: {warnings}
+	Leaf Vine	Leveles inda
+	Blossom Chain	Virágfüzér
+	Pennant Garland	Zászlófüzér
+	Lantern String	Lámpásfüzér
 	Orbit Lines	Pályavonalak
 	Petal Garland	Sziromfüzér
 	Lattice Braid	Rácsfonat
