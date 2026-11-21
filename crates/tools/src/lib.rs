@@ -226,6 +226,12 @@ pub trait Tool: Send {
     fn ends_on_escape(&self, _cx: &ToolContext) -> bool {
         false
     }
+    /// The point a path the tool is drawing goes on from, and the direction the path arrives there
+    /// in (none for a path of one point), while the tool draws one: the Quick Pen toolbar sits
+    /// beside it.
+    fn drawing_end(&self, _cx: &ToolContext) -> Option<(Point, Option<Vec2>)> {
+        None
+    }
     /// Does the tool want typed text (Type tool editing)? Single-key shortcuts are suppressed.
     fn wants_text(&self) -> bool {
         false
@@ -612,6 +618,26 @@ pub(crate) mod testutil {
         PaintDefaults::default()
     }
 
+    /// With the Selection tool, a widget pressed at `at` and dragged to `q`, then released at `r`, is
+    /// dragged to `r` before the drag ends: the release keeps what a drag to `r` shows. Switching
+    /// tools during the drag cancels it, and the release after it commits nothing.
+    pub fn check_widget_release_and_tool_switch(cx: &ToolContext, at: Point, q: Point, r: Point) {
+        let pressed = || {
+            let mut t = crate::select::SelectionTool::default();
+            t.pointer(cx, &PointerEvent::new(PointerKind::Down, at.x, at.y));
+            assert!(!t.pointer(cx, &PointerEvent::new(PointerKind::Drag, q.x, q.y)).is_empty(), "the drag to {q:?} changes the widget");
+            t
+        };
+        let mut want = pressed().pointer(cx, &PointerEvent::new(PointerKind::Drag, r.x, r.y));
+        assert!(!want.is_empty(), "the drag to {r:?} changes the widget");
+        want.push(Action::Commit);
+        assert_eq!(pressed().pointer(cx, &PointerEvent::new(PointerKind::Up, r.x, r.y)), want, "released at {r:?}");
+        let mut t = pressed();
+        assert_eq!(t.deactivate(cx), vec![Action::Cancel], "a tool switch cancels the drag");
+        assert!(!t.busy() && !t.transforming());
+        assert!(t.pointer(cx, &PointerEvent::new(PointerKind::Up, q.x, q.y)).is_empty(), "the release commits nothing");
+    }
+
     /// An 800 × 600 window on a view at 100% turned `deg` degrees clockwise (Rotate View): at 90°
     /// one pixel right on screen is one point up the page.
     pub fn turned_view(deg: f64) -> Option<ScreenFrame> {
@@ -699,14 +725,21 @@ pub(crate) mod testutil {
     /// and a count must not include a refresh another test caused.
     static LAYOUT_INPUTS: std::sync::RwLock<()> = std::sync::RwLock::new(());
 
-    pub fn steady_layout_inputs() -> std::sync::RwLockReadGuard<'static, ()> {
-        LAYOUT_INPUTS.read().unwrap_or_else(|e| e.into_inner())
+    /// Catalogs the installed fonts, then also holds back the font changes other tests make without
+    /// [`changing_layout_inputs`] (a system font loaded for a character no loaded font covers, a
+    /// rescan) until it is dropped.
+    pub fn steady_layout_inputs() -> (std::sync::RwLockReadGuard<'static, ()>, vectorcraft_text::test_fonts::SteadyFonts) {
+        let inputs = LAYOUT_INPUTS.read().unwrap_or_else(|e| e.into_inner());
+        (inputs, vectorcraft_text::test_fonts::steady_fonts(vectorcraft_text::FontDb::global()))
     }
 
     pub fn changing_layout_inputs() -> std::sync::RwLockWriteGuard<'static, ()> {
         LAYOUT_INPUTS.write().unwrap_or_else(|e| e.into_inner())
     }
 }
+
+#[cfg(test)]
+mod widget_order_tests;
 
 #[cfg(test)]
 mod cursor_tests {

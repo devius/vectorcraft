@@ -186,12 +186,13 @@ impl Session {
         let text_selection = ((id == "eyedropper" && is_type(self.tool.id())) || (self.tool.id() == "eyedropper" && is_type(id)))
             .then(|| self.tool.options())
             .filter(|o| o.get("editing").is_some_and(|v| !v.is_null()) && o.get("start") != o.get("end"));
-        // The gradient mesh points the Mesh tool, Direct Selection or the Lasso picked stay picked
-        // for the Eyedropper, which samples into them (#8090), and for the tool after it.
-        let mesh_points = (id == "eyedropper" || self.tool.id() == "eyedropper")
+        // The gradient mesh points the Mesh tool, Direct Selection, the Lasso or the Polygonal Lasso
+        // picked stay picked when another of these tools or the Eyedropper, which samples into
+        // them (#8090), is chosen: a fill color then recolors just them. None stay picked when
+        // none were.
+        let mesh_points = (Self::picks_mesh_points(id) && Self::picks_mesh_points(self.tool.id()))
             .then(|| self.tool.options().get("meshPoints").cloned())
-            .flatten()
-            .filter(|v| v.as_array().is_some_and(|a| !a.is_empty()));
+            .flatten();
         self.deactivate_tool(view)?;
         self.keep_tool_settings();
         self.tool = self.make_tool(id);
@@ -206,6 +207,13 @@ impl Session {
             self.select_whole_instance(id);
         }
         Ok(())
+    }
+
+    /// Does tool `id` pick gradient mesh points (its `meshPoints` option): the Mesh tool, Direct
+    /// Selection, the Lasso, the Polygonal Lasso and the Eyedropper? Group Selection, which
+    /// selects whole objects, does not.
+    fn picks_mesh_points(id: &str) -> bool {
+        matches!(id, "mesh" | "directSelection" | "lasso" | "polygonalLasso" | "eyedropper")
     }
 
     /// Deactivate the tool and apply the actions it returns. In a batch, a Cancel is left out: the
@@ -292,9 +300,9 @@ impl Session {
         // double-click or triple-click compares.
         self.tool.press_elsewhere();
         let mut lent = self.make_tool(id);
-        // The gradient mesh points the Eyedropper holds are the lent tool's picks, which a Shift
-        // click adds to (#8090).
-        if self.tool.id() == "eyedropper" {
+        // The gradient mesh points the lending tool picked (the Mesh tool's, the Lasso's, the
+        // Eyedropper's) are the lent tool's picks, which a Shift click adds to (#8090).
+        if Self::picks_mesh_points(self.tool.id()) && Self::picks_mesh_points(id) {
             let points = self.tool.options().get("meshPoints").cloned().unwrap_or_else(|| Value::Array(vec![]));
             lent.set_option("meshPoints", &points);
         }
@@ -312,10 +320,14 @@ impl Session {
     /// Cmd+click that takes the type being edited out of the selection ends its edit (#3779).
     pub(crate) fn give_back_tool(&mut self, view: ViewInfo) -> Result<()> {
         let Some(lender) = self.lender.take() else { return Ok(()) };
-        // The points the lent tool left picked go back to the Eyedropper, none when it unpicked
-        // them all (#8090). Group Selection picks no mesh points, so the Eyedropper keeps its own.
-        let mesh_points =
-            (lender.id() == "eyedropper" && self.tool.id() != "groupSelection").then(|| self.tool.options().get("meshPoints").cloned()).flatten();
+        // The points the lent tool left picked go back to the tool it was lent to when that tool
+        // picks mesh points, none when it unpicked them all (#8090). Group Selection and the
+        // Selection tool pick no mesh points, so the tool keeps its own. Unchanged picks are not
+        // set again, so the Mesh tool keeps the point whose handles it shows.
+        let mesh_points = (Self::picks_mesh_points(lender.id()) && Self::picks_mesh_points(self.tool.id()))
+            .then(|| self.tool.options().get("meshPoints").cloned())
+            .flatten()
+            .filter(|p| lender.options().get("meshPoints") != Some(p));
         let r = self.deactivate_tool(view);
         self.keep_tool_settings();
         self.tool = lender;
@@ -856,6 +868,12 @@ impl Session {
         self.ruler_origin = None;
     }
 
+    /// A guide is being dragged out of a ruler ([`Session::ruler_guide`]): its first event came
+    /// and its release has not.
+    pub fn ruler_guide_dragging(&self) -> bool {
+        self.ruler_guide.is_some()
+    }
+
     /// Time passed while the pointer button is held (`dt` seconds; see [`Tool::tick`]): the
     /// desktop app ticks every frame of a press, agents with `holdMs` on a pointer event.
     pub fn tool_tick(&mut self, dt: f64, view: ViewInfo) -> Result<Vec<UiRequest>> {
@@ -1256,6 +1274,12 @@ impl Session {
         self.with_tool_cx(view, |t, cx| t.ends_on_escape(cx))
     }
 
+    /// The point a path the active tool is drawing goes on from, and the direction the path
+    /// arrives there in (see `Tool::drawing_end`).
+    pub fn tool_drawing_end(&mut self, view: ViewInfo) -> Option<(Point, Option<vectorcraft_geom::Vec2>)> {
+        self.with_tool_cx(view, |t, cx| t.drawing_end(cx))
+    }
+
     pub fn overlays(&mut self, view: ViewInfo) -> Vec<Overlay> {
         // The Blend tool's first pick is not marked after an edit that dropped it.
         self.tell_tool_history_moved();
@@ -1478,6 +1502,9 @@ impl Session {
         }
         // Every value is checked before any is set, so an invalid one changes nothing.
         vectorcraft_tools::builder::check_builder_options(id, &values)?;
+        if id == vectorcraft_tools::circle::ID {
+            vectorcraft_tools::circle::check_options(&values)?;
+        }
         vectorcraft_tools::symbolism::check_options(id, &values)?;
         if id == vectorcraft_tools::cropimage::ID {
             use vectorcraft_tools::cropimage as crop;

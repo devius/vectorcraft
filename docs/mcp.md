@@ -692,8 +692,9 @@ whole cell or none of it, so a grayed cell can hold printable colors and a clear
 print. `{"harmony": true, "harmonyRule": "triad"}` puts a marker on the wheel's ring for each other
 color of a Color Guide harmony rule, as Show Harmony and Harmony Rule do; the wheel takes the 15 rules whose colors
 each have a hue of their own (not `monochromatic`, `shades`, `complementary2`, `triad2`, `triad3` or
-`highContrast2`). Keys left out keep their values. Params that are not an object, another key or a value off
-the list return an error and change nothing. The command returns `{view, channel, sliders, gamut, harmony, harmonyRule, vision}`,
+`highContrast2`). `{"documentColors": true}` shows the row the panel menu's Show Document Colors adds under the wheel
+or the box. Keys left out keep their values. Params that are not an object, another key or a value off
+the list return an error and change nothing. The command returns `{view, channel, sliders, gamut, harmony, harmonyRule, vision, documentColors}`,
 and the settings are kept with the preferences.
 
 `ui.colorWheel {"sliders": "oklch"}` shows the Color Wheel panel's OKLCH Sliders (L, C and H rows under the wheel or
@@ -711,6 +712,10 @@ does: a row of four chips under the wheel or the box shows the current color thr
 and tritanopia simulations of `view.proofSetup`, and for achromatopsia as the gray with the color's CIE L*. Each
 chip reports its name and hex value to screen readers, and a click on a chip does not apply its color. `false`
 hides the row, and `null` keeps the setting. Any other value returns an error and changes nothing.
+`ui.colorWheel {"documentColors": true}` shows the Color Wheel panel's row of the colors the selection uses, or with
+nothing selected the colors of the art `select.all` takes, in the order `color.used {}` lists them. A click on a color
+applies it to the active proxy, keeping its link to a global swatch. The answer includes `documentColors`
+with the other settings, and the setting is kept with the preferences.
 
 In remote desktop mode, `invoke_menu` with `{"command":"ui.sampleScreenColor","params":{}}` shows the system's
 screen color sampler and returns `null` before a color is picked: the system's sampler on macOS, the XDG desktop
@@ -952,7 +957,8 @@ link, and `graphicStyle.apply` with `add` unlinks the group. With `appearance.tr
 target group's paths keeps its look on a move, and a `source` that is the group's only path is an error.
 `graphicStyle.redefine` gives the style to the paths directly in a series group linked to it, whether or not the group
 has rows of its own, links them, and clears and unlinks the group; the source and the paths linked to the style whose
-look was edited keep their look. Read as a source, by `graphicStyle.new`, `graphicStyle.redefine` or
+look was edited keep their look, and a path in the group linked to another style keeps its look and its link. Read as a
+source, by `graphicStyle.new`, `graphicStyle.redefine` or
 `appearance.transfer`, a series group that has no fill, stroke, effect, opacity, blend mode, isolation, knockout or
 style link of its own gives the look and the style link of the topmost path directly in it, and a move with
 `appearance.transfer` clears each of those paths; a series group that has one of them is read itself.
@@ -2383,7 +2389,7 @@ and `type.fractionalWidths`; `flip` in `type.dynamicTextPreset`; `remove` and `o
 `swatch.addUsedColors`; `visible` in `appearance.setItem`; `copy` in `appearance.transfer`; `reverse` and `append` in
 `appearance.copyFrom`; `reverse` and `stroke` in `paint.editGradient`; `stroke` in `paint.setGradientGeom` and in
 `paint.freeform.addPoint`, `setPoint`, `deletePoint`, `addLine`, `splitLine` and `get`; `erase`,
-`openFilledAsClosed` and `splitStroke` in `shapeBuilder.merge`; `openFilledAsClosed` in `shapeBuilder.regions`; `closeGaps` in `livePaint.gapOptions`; and
+`openFilledAsClosed` and `splitStroke` in `shapeBuilder.merge`; `openFilledAsClosed` in `shapeBuilder.regions` and `shapeBuilder.copyRegion`; `closeGaps` in `livePaint.gapOptions`; and
 `enhanced` in `imageTrace.make` and `imageTrace.makeAndExpand`. A null is read as a key left out.
 
 These commands refuse a string or another value that is not a number with `` `radius` must be a number, not "2" ``,
@@ -2404,7 +2410,7 @@ and `fitMinPercent` in `text.areaOptions`; `x` and `y` in `symbol.place`; `radiu
 `symbol.spray`; `radius` and `intensity` in `symbol.adjust`; `to` in `swatch.move`; `weight` and `opacity` in
 `appearance.setItem`; `r`, `g`, `b`, `c`, `m`, `y`, `k`, `gray` and `tint` in `edit.colors.adjustBalance`; `steps`
 and `amount` in `color.harmony`; `angle` in `paint.editGradient` and in the `gradient` of a command that takes a paint; `t` in
-`paint.freeform.splitLine`; `tolerance` and `gap` in `shapeBuilder.merge`; `gap` in `shapeBuilder.regions`; and
+`paint.freeform.splitLine`; `tolerance` and `gap` in `shapeBuilder.merge`; `gap` in `shapeBuilder.regions` and `shapeBuilder.copyRegion`; and
 `width` and `tolerance` in `livePaint.strokeEdge`. A null is read as a key left out. A gradient stop that names a
 swatch refuses a `tint` that is not a number with `` stop 0: `tint` must be a number ``.
 
@@ -2551,10 +2557,10 @@ control character, in the first 8 KiB) or `tooLarge` (over 8 MiB). For a script,
 - `menuCommands.strings` lists the string literals the script passes to `executeMenuCommand`
   (`app.executeMenuCommand('…')`), each with a count and its lines, and `menuCommands.dynamic` counts the calls
   whose argument isn't a string literal.
-- `outside` lists what the script does outside the document: `filesWritten` (with the open modes used),
-  `filesOpened` (files opened in other apps), `network`, `nativeCode`, `otherApps` (messages to other apps),
-  `environment` (environment variables), `unseenCode` (`eval`, `new Function` and `$.evalFile`) and
-  `preferences` (the reference app's preferences changed).
+- `outside` lists what the script does outside the document: `filesWritten` (with the open modes used; setting a
+  File object's `length`, `hidden` or `readonly` counts too), `filesOpened` (files opened in other apps), `network`,
+  `nativeCode`, `otherApps` (messages to other apps), `environment` (environment variables), `unseenCode` (`eval`,
+  `new Function` and `$.evalFile`) and `preferences` (the reference app's preferences changed).
 - `problems` lists what would stop the script loading as written (strings, comments, regular expressions,
   template literals and XML literals that aren't closed, brackets that don't match, syntax newer than ES3 and
   unknown directives) and notes on its text (bytes that aren't valid UTF-8, mixed line endings, and nesting deeper
@@ -3880,7 +3886,10 @@ already walks Image Trace. Short agent entry points:
   art, where it is, snaps the art again after it is edited, and does not count
   instances in `select.object.notAlignedToPixelGrid`; `alignToPixelGrid` alone with the value the symbol already has
   adds no undo step),
-  `symbol.place {name?, x?, y?}`, `symbol.placeFromDocument {sourceDocument, name, x?, y?}` (an instance of a symbol
+  `symbol.place {name?, x?, y?}` (on top of the current layer; in Draw Behind directly below the bottommost selected
+  object, beside the compound path that holds it, or at the bottom of the current layer with nothing selected, above
+  a clipping path; `symbol.placeFromDocument` and `symbol.addFromLibrary` with `place` stack the instance the same
+  way), `symbol.placeFromDocument {sourceDocument, name, x?, y?}` (an instance of a symbol
   of another open document, as a symbol dragged from that document's Symbols panel onto the canvas places it: the
   symbol, the symbols it nests and the resources they use are added as `edit.dropSelection` adds them, in the same
   undo step, and a symbol with the same name but other art or Symbol Options is added under a free name; an error
@@ -4684,8 +4693,23 @@ already walks Image Trace. Short agent entry points:
   `builtIn: true`, then the saved ones with `builtIn: false`, and returns a `revision` that grows each time the saved
   presets change. `imageTrace.make {preset}` takes a saved preset's name, with ASCII letters matching in either case.
   Its journal entry records the saved preset's settings as `savedPreset`, so a replay traces with them after the preset
-  is changed, renamed or deleted. In the app,
-  `ui.imageTracePresetDialog {params?, rename?}` opens the Image Trace panel's Save as New Preset… or Rename… dialog.
+  is changed, renamed or deleted. `imageTrace.presets.export {names?, path?}` writes saved presets (default: every one;
+  a built-in preset's name is an error) as a `.vctracepresets` file, VectorCraft's own JSON layout
+  (`{"format": "vctracepresets", "version": 1, "presets": [{"name", "params"}]}`), to `path`, else returns its text as
+  `data`; it refuses more than 1,000 presets or a file over 4 MiB, the limits of the import.
+  `imageTrace.presets.import {path? | data? | dataBase64?, replace?}` adds the presets of such a file (at most
+  4 MiB and 1,000 presets) → `{imported, replaced, skipped}`: a preset with a saved preset's name is skipped unless
+  `replace` is true. Every preset in the file is checked first, and a file with a built-in preset's or `Custom`'s name,
+  two presets of one name, a preset without a name or `params`, settings `imageTrace.presets.save` refuses, or a newer
+  `version` changes nothing. In the app, opening a `.vctracepresets` file (File › Open, a drop, or the file picked
+  for Import… on the web) imports it as Import… does. Also in the app,
+  `ui.imageTracePresetDialog {params?, rename?}` opens the Image Trace panel's Save as New Preset… or Rename… dialog,
+  and `ui.tracingPresetsDialog {selected?}` opens Edit › Tracing Presets…: the built-in presets in brackets (read-only)
+  and the saved ones, with the selected preset's settings. Its New… (from the selected preset) and Edit… (a saved
+  preset) open an editor with the Image Trace panel's settings; OK saves with `imageTrace.presets.save` and Cancel saves
+  nothing, and a built-in preset's name, `Custom` or another saved preset's name keeps the editor open. Delete selects
+  the saved preset below the deleted one, else the one above it, else Default. Import… asks whether to replace saved presets whose names the file holds (Cancel
+  keeps them), and Export… writes every saved preset.
 - Live Paint: `livePaint.make`, `livePaint.merge`, `livePaint.fill {group?, point}`, `livePaint.strokeEdge`,
   `livePaint.info {group?|id?}`, `livePaint.release`, `livePaint.expand`, and `livePaint.gapOptions {ids?, detect?, size?,
   color?, closeGaps?}` (Object › Live Paint › Gap Options). Make gives each covered face the fill rows that draw of
@@ -4863,15 +4887,23 @@ already walks Image Trace. Short agent entry points:
   `paint.none` paint the faces or the edges. `paint.editGradient`, `paint.setGradientGeom` and the `paint.freeform`
   point and line edits change the faces' or the edges' gradients, `paint.invert` and `paint.complement` recolor the
   faces' fills or the edges' strokes, and `stroke.set`, `stroke.weightUp`, `stroke.weightDown` and
-  `stroke.setAdvanced` change the edges. The Fill proxy shows the faces' fill, and the Stroke proxy, the Stroke panel
-  and the Control bar show the edges' stroke. A face or edge selected or given together with its whole group follows
-  the group's rule: a fill does not reach an edge, and a stroke does not reach a face. `paint.swap` gives the faces
-  the stroke the edges share and gives the edges the fill the faces share, with a gradient fitted to each face or
-  edge. It leaves a group as it is when its faces' fills or its edges' strokes differ, when any of them is a freeform
-  gradient, or when it has no face or no edge. `paint.default` replaces each face's appearance with no fill and each
-  edge's appearance with a 0.5 pt black stroke, also when the document's Default Graphic Style is redefined. With
-  only Live Paint groups selected or given, the fill and stroke for new art become no fill and a 0.5 pt black stroke;
-  with New Art Has Basic Appearance off, new art then takes the selection's appearance, as after any command.
+  `stroke.setAdvanced` change the edges. `object.setOverprint` sets the faces' fill overprint and the edges' stroke
+  overprint. `appearance.copyFrom` (the Eyedropper) gives the picked fill attributes to the faces and the picked
+  stroke attributes to the edges, also onto a group given as `source` with `reverse`. A whole-appearance pick gives
+  each face every picked fill row and each edge every picked stroke row, and the faces and edges keep their rows of
+  the other kind and their effects; `append` adds the source's rows to them but not its object effects. A whole group
+  picked up as the source (given as `source`, or selected first with `reverse`) gives its first face's fills with its
+  first edge's strokes above them, and the group's own opacity, blend mode and effects. The Fill proxy shows the
+  faces' fill, and the Stroke proxy, the Stroke panel and the Control bar show the edges' stroke, whatever the order of
+  a selection that holds the group, directly or inside a selected group, and some of its parts. A face or edge
+  selected or given together with its whole group follows the group's rule: a fill does not reach an edge, and a
+  stroke does not reach a face. `paint.swap` gives the faces the stroke the edges share and gives the edges the fill
+  the faces share, with a gradient fitted to each face or edge. It leaves a group as it is when its faces' fills or its
+  edges' strokes differ, when any of them is a freeform gradient, or when it has no face or no edge. `paint.default`
+  replaces each face's appearance with no fill and each edge's appearance with a 0.5 pt black stroke, also when the
+  document's Default Graphic Style is redefined. With only Live Paint groups selected or given, the fill and stroke
+  for new art become no fill and a 0.5 pt black stroke; with New Art Has Basic Appearance off, new art then takes the
+  selection's appearance, as after any command.
 
 `brush.selectionArt {ids?|id?}` (a query) replies `{art}`: the object that `brush.new` given the same `ids` or `id`,
 or the same selection, takes as a new scatter or art brush's art and as a new pattern brush's side tile. Several
@@ -5119,7 +5151,7 @@ art", and a loaded file draws the source path, as it does for a solid past its l
 documentation names the controls and their ranges
 ([3D and Materials panel options](https://helpx.adobe.com/illustrator/desktop/special-effects-styles/create-3d-graphics/3d-materials-panel-options.html)).
 The settings are saved in the native file; SVG and PDF exports draw the shadow, and `effect.expandAppearance` keeps
-it as a path. Extrude & Bevel (Classic), Revolve (Classic) and Rotate (Classic) have no shadow. See [three-d.md](three-d.md#shadows).
+a hard shadow as a path and turns a blurred one into an image. Extrude & Bevel (Classic), Revolve (Classic) and Rotate (Classic) have no shadow. See [three-d.md](three-d.md#shadows).
 
 ```json
 {"name":"run_command","arguments":{"command":"effect.setParams","params":{"index":0,"item":null,"params":{"shadow":true,"shadowPosition":"below","shadowDistance":10,"shadowBounds":150}}}}
@@ -5139,7 +5171,8 @@ joins the edges, so with such an effect its paths can differ from the drawn ones
 draw the edges, and `effect.expandAppearance` keeps them as paths. Past 1,000,000 edges the source path is drawn, as
 it is for a solid past its limits. A `render` that is not an object, a key other than `mode`, another mode, and
 `render` on Extrude & Bevel (Classic), Revolve (Classic) or Rotate (Classic) are refused before the document
-changes. See [three-d.md](three-d.md#3d-and-materials-panel).
+changes. In wireframe mode the graphics' art is not checked against the graphics limits, so art too complex for the
+shaded surface does not refuse the wireframe. See [three-d.md](three-d.md#3d-and-materials-panel).
 
 ```json
 {"name":"run_command","arguments":{"command":"effect.setParams","params":{"index":0,"item":null,"params":{"render":{"mode":"wireframe"}}}}}
@@ -5172,19 +5205,22 @@ offset in points of the graphic's center from the center of the object's bounds 
 percentage of the symbol's size (1..10000; omitted, 100 or less so the graphic fits inside the object) and
 `rotation` is in degrees counterclockwise (-360..360). Without `index` each object's first 3D effect takes it, and `item` is refused.
 Every object's 3D effect must be Extrude & Bevel (front only at a depth of 0; `front` and `back` need Cap on, and
-`side`, its walls and bevels, does not), Rotate (the Plane type, front only) or Revolve (front only: its swept
-side), and `symbol` must name a document symbol; otherwise the command is refused and nothing changes. It returns `{ids, graphic}`.
+`side`, its walls and bevels, does not), Rotate (the Plane type, front only), Revolve (front only: its swept
+side) or Inflate (`front` or `back`, and `back` only with Both sides and Cap on), and `symbol` must name a document symbol; otherwise the command is refused and nothing changes. It returns `{ids, graphic}`.
 On Revolve and on Extrude & Bevel's side, `x` and `y` are measured on the side unrolled flat from its middle (on
 Extrude & Bevel, `x` along the outline, clockwise from its top, and `y` from the front toward the back), and a
 graphic that does not fit starts scaled to fit the part of Extrude & Bevel's side unrolled about `x` = 0 that does
 not reach its cut, or the half of Revolve's side seen from the front ([three-d.md](three-d.md#graphics)).
+On Inflate, `x` and `y` are measured in the art's plane, and the graphic is carried straight out onto the puffed
+face, Twist and Taper turning and shrinking the back's with it.
 
-The graphics are the `graphics` parameter of `threeD.extrude`, `threeD.rotate` and `threeD.revolve`, which `effect.setParams` also
+The graphics are the `graphics` parameter of `threeD.extrude`, `threeD.rotate`, `threeD.revolve` and `threeD.inflate`, which `effect.setParams` also
 edits: an array of up to 64 `{symbol, face, x, y, scale, rotation}` objects, drawn on the face turned,
 foreshortened and shaded with it and clipped to it ([Map artworks on 3D object](https://helpx.adobe.com/illustrator/desktop/special-effects-styles/create-3d-graphics/map-artwork-on-3d-objects.html)).
 Revolve takes graphics on its swept side and shades them with the object's light ([the archived reference, page 185](https://web.archive.org/web/20210601162814/https://helpx.adobe.com/pdf/illustrator_reference.pdf#page=185));
-how a graphic wraps around the side is VectorCraft's own rule. Extrude & Bevel takes graphics on its side, its
-walls and bevels unrolled as one surface; how they are unrolled is VectorCraft's own rule.
+how a graphic wraps around the side, and how one follows Inflate's puff, are VectorCraft's own rules. Extrude &
+Bevel takes graphics on its side, its walls and bevels unrolled as one surface; how they are unrolled is
+VectorCraft's own rule.
 A graphic naming a symbol the document does not have is refused, unless the effect already holds a graphic of it.
 The drawing rules are VectorCraft's own; see [three-d.md](three-d.md#graphics).
 
@@ -5230,7 +5266,7 @@ it, masks that member's solids ([three-d.md](three-d.md#groups)).
 `threeD.extrude`: `depth` (points, 0..2000, default 50), `twist` (degrees, 0..360, 0), `taper` (1..100%, 100),
 `cap` (true solid, false hollow), `bevel` (`none`, `classic`, `rounded`, `cove`, `step`, `ogee`), `bevelWidth`
 and `bevelHeight` (points, default 4), `bevelRepeat` (1..32), `bevelSpace` (0..90%), `bevelInside`,
-`bevelBothSides`. `threeD.inflate`: `depth` (points, default 0), `twist` (degrees, 0..360, 0), `taper` (1..100%, 100), `cap` (true
+`bevelBothSides`; `bevel` `custom` with `bevelName` and `bevelProfile` is a custom bevel (below). `threeD.inflate`: `depth` (points, default 0), `twist` (degrees, 0..360, 0), `taper` (1..100%, 100), `cap` (true
 solid, false open behind), `volume` (0..100%, default 50), `bothSides`.
 All three take `rotationX/Y/Z` (degrees, -180..180, default the Off-Axis Front position -21.88/-23.4/9.06),
 `perspectiveAngle` and the lighting parameters as Revolve. See [three-d.md](three-d.md) for the Position presets,
@@ -5242,12 +5278,47 @@ points returns "The shape is too complex for a 3D effect", and one whose faces d
 has so many points across so many of its grid's cells that filling the grid would pass its work limit. `threeD.rotate`
 takes up to 65,536 points.
 
+Custom bevels come from the bevels file, `Bevels.vectorcraft` next to the preferences (none on the web or in runs
+with `VECTORCRAFT_NO_PREFS`). `threeD.bevels.edit` (3D and Materials panel › Bevel Shape › Edit Bevels…) opens it,
+and first creates it with one example bevel when it is missing. Each symbol whose art is one open path is one bevel,
+named after the symbol and listed after the built-in shapes. These rules are VectorCraft's own: the path runs from its
+first anchor at the cap's edge to its last at the side wall, across the page across the bevel's width and down the
+page along its height, and curves are cut into straight lines of at most 64 points. The file is read when the app
+starts and again each time VectorCraft saves it; `threeD.bevels.reload` reads it again. A file larger than 64 MB is
+not read, at most 256 symbols are read, and a symbol that is not one open path, has more than 4,096 anchors, is cut
+into more than 8,192 straight lines, needs more point-to-line distances to simplify than are left of the 40,000,000
+the file may take, has ends that are not apart both across and down, or repeats an earlier name is
+listed in `skipped`. `threeD.bevels.list`
+returns each bevel's `name` and `points`, the `file` path, the `skipped` symbols and any read `error`.
+
+Under automation read roots, the bevels file counts as a path the client did not give. `threeD.bevels.list` returns
+`file` as `null` when the file is outside the read roots, and its `error` names the file by its file name; the bevels,
+`skipped` and the reason stay. `threeD.bevels.edit` and `threeD.bevels.reload` refuse a file outside the read roots
+with the root-check error, naming the file by its file name: `edit` then makes no folder or file and neither opens the
+file nor brings it to the front, and `reload` does not read it. Inside the read roots, `edit` opens the file under the
+client's roots. The 3D and Materials panel's Edit Bevels… is not confined.
+
+`threeD.extrude` and `threeD.classicExtrude` take `bevel: {"custom": name}` in `effect.apply` and `effect.setParams`,
+and store it as `bevel: "custom"` with `bevelName` and `bevelProfile`, a copy of the points (`[[x, y], …]`, 2 to 64
+shares 0..1 of the width and height from `[0, 0]` to `[1, 1]`), so the document draws the bevel without the file. An
+unknown name, `custom` without `bevelProfile`, points that do not run from `[0, 0]` to `[1, 1]` within 0..1, or a
+`bevelName` that is not a string is refused and the document is not changed. The command's journal entry records the
+points as `savedBevel`, and `savedBevel` given with `{"custom": name}` is used in place of the file's points, so a
+replay draws the same bevel after the file changes or drops the name. The help page
+[Add custom bevel paths](https://helpx.adobe.com/illustrator/desktop/special-effects-styles/create-3d-graphics/add-custom-bevel-paths.html)
+describes custom bevels drawn as open paths and kept as symbols in a bevels document.
+
+```json
+{"name":"run_command","arguments":{"command":"threeD.bevels.list","params":{}}}
+{"name":"run_command","arguments":{"command":"effect.apply","params":{"effect":"threeD.extrude","item":null,"params":{"bevel":{"custom":"Example Bevel"},"bevelWidth":8,"bevelHeight":8}}}}
+```
+
 ## Extrude & Bevel (Classic)
 
 `effect.apply {effect: "threeD.classicExtrude", params: {...}, ids?, item?}` is Effect › 3D and Materials ›
 3D (Classic) › Extrude & Bevel (Classic)…. It builds the same solid as `threeD.extrude` and draws its faces with the
 classic surfaces. Parameters: `depth` (points, 0..2000, default 50), `cap` (true solid, false hollow), `bevel` (`none`,
-`classic`, `rounded`, `cove`, `step`, `ogee`), `bevelHeight` (points, 1..100, default 4; the bevel is as wide as it
+`classic`, `rounded`, `cove`, `step`, `ogee`, or a custom bevel as for `threeD.extrude`), `bevelHeight` (points, 1..100, default 4; the bevel is as wide as it
 is tall), `bevelInside` (false adds the bevel around the shape, true carves it into the shape), `rotationX/Y/Z` and
 `perspectiveAngle` as above, and the surface:
 
@@ -5634,7 +5705,17 @@ fills and strokes above it paint over the members (characters), those below unde
 `contents` to say where the row ends up in the same undo step; `document.node` shows the slot as
 `appearance.contents_index`. The `appearance.*`, `effect.*` and `graphicStyle.apply` commands edit the selected
 objects themselves (a group's own stack; layers through `ids`) or, with `target: "contents"`, the objects inside the
-groups and layers. `appearance.targetContents` selects a group's members (double-clicking the Contents row).
+groups and layers. In a Live Paint group those are its faces and edges, not its hidden source paths.
+`appearance.addFill` adds a fill to the faces only, and `appearance.addStroke` adds a stroke to the edges only. On a
+selected group left with only its hidden source paths, either command changes nothing. A
+fill or stroke command with an `item` and `target: "contents"` (such as `paint.setFill`, `stroke.set`,
+`paint.invert`, `paint.setGradientGeom` and `object.setOverprint`) changes the faces for a fill row and the edges for
+a stroke row. The row commands (`appearance.setItem`, `appearance.removeItem` and the others) find their rows on each
+face and edge as on any other object in the contents. `graphicStyle.apply` gives each face only the style's fills and
+each edge only its strokes, with or without `add`, and links neither to the style. `appearance.clear` leaves a face
+one empty fill and an edge one empty stroke, and `appearance.reduceToBasic` keeps only a face's fill and only an
+edge's stroke.
+`appearance.targetContents` selects a group's members (double-clicking the Contents row).
 SVG and PDF export bake a group's own fills, strokes and geometry effects into paths; its raster effects stay a
 filter on the whole group in SVG and become an image of the whole group in PDF.
 A geometry effect on one of type's own fills or strokes (`effect.apply` with `item`) reshapes the whole outline that
@@ -5723,15 +5804,28 @@ document's swatches, as a library to add from. From an `.ase` file it reads RGB,
 spot or process swatches and keeps their color groups. A color book (such as a Pantone book you own) gives its RGB,
 CMYK or Lab colors named with the book's prefix and suffix ("PANTONE 185 C"), as spot colors unless the book marks
 them as process colors; `.acb` files are read, never written. A file in the user library folder, or a file with the
-same extension and bytes as one there, loads as that User Defined library (category `user`).
+same extension and bytes as one there, loads as that User Defined library (category `user`). A file larger than 256 MB
+is refused before it is read.
 From a document, such as a `.ai` or `.eps` swatch library, it reads the colors, tints, gradients and pattern swatches
 in the document's order and color groups; `swatch.library.add` brings a pattern swatch's pattern, with its tile and
 art, into the document as a pattern swatch under the library swatch's name and in its color group. A global or spot
 color the pattern's art links to keeps the library's color: when the document gives its name another color, it comes
 in under a numbered name ("Ink 2") and the pattern links to that. A document with
 no swatches, and a `.ai`, `.eps` or PostScript file whose swatches are only the default ones, are refused with
-"`<file>` has no swatches of its own". The Swatch Libraries filter of Other Library… lists `.ai`, `.ait` and `.eps`
-(`.epsf`) files as well as the library files.
+"`<file>` has no swatches of its own", unless the document has graph designs: it then loads with no swatches. The
+Swatch Libraries filter of Other Library… lists `.ai`, `.ait` and `.eps` (`.epsf`) files as well as the library files.
+A document's graph designs come with it: the reply's `graphDesigns` counts them, and
+`graph.column`, `graph.marker` and `graph.design` take the library's id as `library` until the app quits (a User
+Defined copy made with `swatch.library.copyToUser` holds the swatches alone, so the designs stay under the loaded id).
+`graph.column {design, library}` and `graph.marker {design, library}` copy a design the document lacks into it, with the
+swatches, patterns, symbols, styles, brushes and images its art uses, in the same undo step as the graph change.
+`graph.design {library, add: name | [names]}` copies designs without applying them and returns `{added, existing}`, and
+`graph.design {library}` lists the library's designs. A design the document already has under the same name stays as it
+is. `graph.column` and `graph.marker` with no `design`, and `graph.design {}`, list the loaded libraries that hold
+designs as `libraries: [{library, name, designs}]`. Copying a graph and pasting it into another document brings the designs its series
+draw with in the same way; a pasted graph is drawn again with the document's design of that name when that design
+would draw it otherwise. The graphs already in the document that draw with a design the copy or paste adds, one a copied
+design's art uses included, are drawn again with it.
 `swatch.library.copyToUser {library}` copies a loaded library into the user library folder of the desktop
 app (a library file as it is; a document's swatches or a library loaded from `data` or `dataBase64`
 as `.vcswatches`; a library with pattern swatches is refused) under a name no file there has, and lists it as User
@@ -5789,7 +5883,7 @@ left out.
 ## Symbol libraries
 
 Symbol libraries are read-only sets of symbols: seven generated in code (Basic Shapes, UI Frames, Map Markers,
-Inventory Icons, Skill Icons, Weather Icons, Media Controls), the `.vectorcraft` files in
+Inventory Icons, Skill Icons, Weather Icons, Nature Icons with Leaf, Flower, Tree, Mountain and Wave, Media Controls), the `.vectorcraft` files in
 the user library folder of the desktop app (User Defined) and the symbols of any document loaded with
 `symbol.loadLibrary`. `symbol.libraries` lists them (`id`, `name`, `category`: `builtIn`, `user` or `loaded`, `count`)
 and `symbol.library {library}` returns one's symbols (`name`, `size`, `registration`, `exportType`; `library` is an
@@ -6132,7 +6226,8 @@ Each Effect › Pathfinder effect (`pathfinder.add` … `pathfinder.softMix`, no
 in its params: `precision` (a number, 0.001–10 pt), `removeRedundantPoints` and `removeUnpainted` (true or false), which
 mean what they mean for the panel's operations; the other operations ignore `removeUnpainted`. With `removeUnpainted`
 on, a compound shape's area counts as filled when the shape has a visible fill of its own, and Divide keeps every piece
-when the group or compound shape has one. Outline strokes a compound shape's area in the shape's own fill. `effect.apply`
+when the group or compound shape has one. Outline strokes a compound shape's area in the shape's own fill, and gives
+the edges no paint when the shape has no fill (the shape's own strokes still draw over the result). `effect.apply`
 fills the ones `params` leave out from the current Pathfinder Options, and the values join its journal entry. An effect
 saved without them evaluates with precision 0.01 and both switches off, as before effects kept them. `effect.setParams
 {index, params: {precision?, removeRedundantPoints?, removeUnpainted?}}` edits them as one undo step; values the
@@ -7084,8 +7179,9 @@ slider back to the Auto-Smooth level.
 
 ## Circle through two or three points
 
-`shape.circleThroughPoints {points?: [[x, y], [x, y]] or [[x, y], [x, y], [x, y]]}` draws the circle whose edge passes
-through the points, as a live ellipse with the current paint, and selects it. Two points are the ends of a diameter.
+`shape.circleThroughPoints {points?: [[x, y], [x, y]] or [[x, y], [x, y], [x, y]], anchors?}` draws the circle whose
+edge passes through the points, with the current paint, and selects it: a live ellipse with the default
+`anchors: "standard"`, and a plain path with `anchors: "points"`. Two points are the ends of a diameter.
 Without `points`, it uses the two or three selected anchor points, from one path or several: anchor points selected with
 Direct Selection, or all the anchor points of a path selected whole, such as a triangle. The ends of selected segments
 do not count. The result is `{id, cx, cy, radius}`, and one undo removes the circle. The circle is not pixel-aligned,
@@ -7094,6 +7190,12 @@ through the points. The command returns an error and draws nothing when two poin
 one line (twice the triangle's area at most 10⁻¹⁰ of its longest side squared), when the circle would reach past the
 canvas (4,000,000 pt from the origin), when `points` is not two or three pairs of numbers, and when `points` is left
 out and the selection does not hold two or three anchor points of paths.
+
+`anchors` sets where the circle's anchors go. With `"standard"`, the default, the circle has four anchors at 0°, 90°,
+180° and 270°. With `"points"`, the circle is a plain path with an anchor exactly at each point, and more anchors
+between them, evenly spaced, so that no curve turns more than a quarter of the circle: two points give four anchors,
+and three points give four to six. Any other `anchors` value is an error (`` `anchors` must be one of standard, points ``), and nothing
+is drawn.
 
 The Circle tool, after the Ellipse tool in its toolbar group, draws with this command. A drag from one point to
 another, or a click on each, draws the circle with the two points as the ends of a diameter. A click on a first point,
@@ -7109,6 +7211,28 @@ A press let go within 2 screen points of where it was pressed is a click, also a
 Escape, a dropped press, and an edit, Undo or Redo made outside the tool drop the first point. A second press within 3
 screen points of the first point, or one that snaps to it, is a press on it: let go there (a double-click), it places no second point, and
 dragged out, it draws the circle on the diameter it drags out.
+
+Circle Tool Options (`tool.options {tool: "circle"}`, or a double-click on the tool, dialog `circleOptions`) sets the
+tool's options, which `tool.setOption {tool: "circle", values}` also sets and the preferences keep. All are on by
+default, and `color` is `"blue"`:
+
+- `center`, `radii` and `diameter` (Show Center, Show Radii, Show Diameter) show or hide the cross at the center, the
+  lines from the center to the points and the diameter label. The diameter label also needs Measurement Labels on.
+- `color` (Color) is the color of the cross and the lines: `"red"`, `"blue"`, `"magenta"`, `"green"`, `"black"` or
+  `"gray"`. The outline stays blue.
+- `standardAnchors` (Anchors at Standard Positions) off draws the circle with `anchors: "points"`, so its anchors are
+  at the points it was drawn through.
+- `dragThird` (Third Point by Dragging) off changes how the points are placed. A click on a second point places it, and
+  a click on a third point draws the circle through the three. A click on the second point again, as the second click
+  of a double-click there is, draws the circle on the two points. An Alt-click places the second point where Alt's
+  rounding of the diameter puts it, and both circles pass through it there. A click on the first point, or a second
+  point dragged back and let go on it, places nothing, and a click on the line through the first two points draws
+  nothing and keeps them. A drag from the first point still draws the circle on the diameter it drags out, and a drag
+  from a second point places it where it is let go. Switching `dragThird` drops the points placed so far.
+
+`tool.setOption` returns an error and changes none of the options when a value is not one the option takes
+(`` `radii` must be true or false ``, `` `color` must be one of red, blue, magenta, green, black, gray ``) or the key is
+not one of these (`` unknown Circle tool option `size` ``).
 
 With the Ellipse tool, the first two Shift-clicks place points, and the third draws the circle through the three with
 this command. After two points the tool previews the circle through them and the pointer as a dashed outline. Once a
@@ -7192,11 +7316,37 @@ path's last point, drawn with the tool's `action` option:
 Alt (Option on macOS) pressed and let go with no other key, click or wheel turn in between switches to the next action:
 Line, Continuous Arc, Sharp Corner Arc, and back to Line. C flips the last piece, while it is a sharp-corner arc, to
 the other side of its chord. `[` and `]` make the arc size 15° smaller or larger, for the last sharp-corner arc and the
-arcs after it. A click on the first point closes the path, and a click on an end of an open path goes on drawing from
-that end. Escape or Enter ends the path, and so does an edit made to it by another command. The path's points show as circles without handles, and a preview shows the
-piece the next click adds. Points snap to Smart Guides. Each piece, flip and size change is one undo step. The arc
-size of 180°, its 15° steps, the side an arc bulges to and Enter ending the path are VectorCraft's own rules. The
-tool keeps `action` and `turn` with the preferences (`tool.setOption {tool: "quickPen", key, value}`).
+arcs after it. During a drag, C and `[` `]` change the sharp-corner arc being dragged, and Alt switches its action. A
+dragged piece ends where the press is let go. A click on the first point closes the path, and a click on an end of an
+open path goes on drawing from that end. Escape or Enter ends the path, and so does an edit made to it by another
+command. An edit made by another command during a drag, to the path or to other art, also ends the path: the edit
+stays, and the piece stays as last shown. With the `realTimeDrawing` preference off, a press during which another
+command edits the document adds no piece, and the edit stays. The path's points show as circles without handles, and a
+preview shows the piece the next click adds. Points snap to Smart Guides. Each piece is one undo step, together with the
+flips and size changes made during its drag, and each flip or size change made between presses is one undo step. The
+arc size of 180°, its 15° steps, the side an arc bulges to, what C and `[` `]` do during a drag and Enter ending the
+path are VectorCraft's own rules. The tool keeps `action` and `turn` with the preferences
+(`tool.setOption {tool: "quickPen", key, value}`).
+
+Selecting the tool shows its toolbar on the canvas: Straight Line, Continuous Arc and Sharp Corner Arc set `action`,
+Flip Arc flips the last sharp-corner arc as C does (`tool.quickPen.flipArc {}`, which first finishes any pending tool edit,
+which can change the document, then returns false and changes nothing more when the Quick Pen tool is not active
+or the last piece is not a sharp-corner arc), and More Options (…) has Hide
+Toolbar (`window.quickPenToolbar`, which toggles; the toolbar stays hidden until the tool is selected again) and Reset
+Toolbar Position (`window.quickPenToolbar.reset`), as the help page describes.
+The handle at its left end drags it. While a path is being drawn, the toolbar sits beside the path's last point, 24
+screen points off it diagonally whatever the zoom, on the side the path heads toward (to the right and below for a path
+drawn right and down), away from what was drawn, as the
+[design write-up](https://adobe.design/ideas/behind-the-design-adobe-illustrator-s-quick-pen-tool) describes. The
+following are VectorCraft's own rules. Where the side the path heads toward runs off the canvas, the toolbar goes on the
+other side; with no path being drawn, it sits at the bottom center of the canvas. A drag's offset moves it from its
+place beside the drawing, or from its resting place, in the document it was made in, and not where it would cover the
+path's last point. More Options also has Pin Toolbar Position (`window.quickPenToolbar.pin {pinned?}`, omitted
+toggles), which holds the toolbar at its place in the canvas window while the view scrolls or zooms, and Window › Quick
+Pen Toolbar shows or hides it. It hides while a press drags on the canvas, and in a canvas pane narrower than the
+toolbar its controls wrap onto more rows. `ui.inspect` gives `quickPenToolbar` (`pinned`, and `rect` while it shows); its position,
+the pin and whether it shows are not saved. These commands run in the desktop app; the headless host does not run them,
+so they need `--connect`.
 
 `path.quickPen {start?: [x, y], id?, subpath?, keep?, pieces?, closed?}` draws such a path and selects it, as one
 undo step, and answers `{id}`. With `start`, it makes a new path with the current paint (a black stroke when the paint
@@ -7413,7 +7563,7 @@ and the weed box of Weed Box and Lines (`addon.cutting.weed`) read the image whe
 corners make a parallelogram, the image is placed by its transform as before. Otherwise the native file saves them in
 the image's `image_quad` field (top left, top right, bottom right and bottom left of its pixels, in page
 coordinates); files without the field open as before. The canvas, printing and every export except DXF, WMF and HP-GL
-(an HP-GL plot leaves images out) draw a distorted image as a mesh of affine image pieces, clipped by the corners; no warped copy of the pixels is stored. In
+(an HP-GL plot leaves images out) draw a distorted image as a mesh of affine image pieces, clipped by the corners; no warped copy of the pixels is stored. The `.ai` writers write the nearest parallelogram instead at their nesting limit (below). In
 printing and exports the mesh takes as many cells as it needs for the pieces to stay within 0.05 pt of the exact
 perspective at the points it checks, with cells at least 2 pt long on the corners' longest side, and each piece reaches
 0.5 pt into its neighbors. The canvas cuts the mesh for the zoom, by the view's largest stretch: within a quarter of a
@@ -7421,7 +7571,11 @@ screen pixel at the points it checks, with cells at least 4 pixels long, and eac
 neighbors. Either way the mesh takes no more than 64 by 64 cells, and no more cells across than the image has pixels on
 its longer side (or 8, if that is more). A stronger perspective, or a smaller image, is drawn with the cells it is
 allowed. In EMF each piece stores only the pixels inside its clip, with a pixel more on each side. DXF and WMF cannot
-clip, so they write the image as the parallelogram nearest its corners and warn. Corners that would fold the image over
+clip, so they write the image as the parallelogram nearest its corners and warn. The editing data a `.ai` file carries
+writes an image nested 8 deep in opacity masks, symbols, live objects and pattern tiles the same way, and a legacy
+`.ai` (version 7) does so for an image nested 8 deep in symbols and live objects; each warns that the image was
+written as the nearest parallelogram. Ordinary groups and layers do not count toward that depth. Neither writer
+writes an image nested deeper. Corners that would fold the image over
 itself, put three corners on one line, join two corners, cross the warp's horizon or lie too close together for a
 perspective map are an error, and nothing changes. A transform that squeezes the corners past what a perspective map
 can place leaves the image at the parallelogram nearest them. A file whose `image_quad` holds other than four points,
@@ -7429,16 +7583,22 @@ or breaks these rules, opens with the image placed by its transform. A drag is o
 the corners where they are records none. Image info (`image.info`) gives a distorted image's resolution at its middle, and Link
 Info (`links.info`) gives its scale and rotation there.
 
-Crop Image (`object.cropImage`), Image Trace (`imageTrace.make`, `imageTrace.makeAndExpand`), Relink (`links.relink`),
-Embed (`links.embed`), Unembed (`links.unembed`), Create Object Mosaic (`object.createObjectMosaic`) and Place with
-Replace (`file.place` with `replace`) of anything but a text file refuse a distorted image with an error that names the
-distortion; Place with Replace does not refuse a clipping group that holds a distorted image of a DCS file's plates. Relink and Unembed refuse a named or selected distorted image before they search a folder or write a file.
-Create Gradient Mesh (`object.mesh.create`) converts the other objects it is given and lists each distorted image it
-leaves as it is in `skipped`, with its `id` and the error as `reason`; with nothing else to convert, it returns that
-error. Update Links (`links.update`) puts a changed file's pixels between a distorted
-image's corners, without applying its Placement Options. Mask (`object.maskImage`) draws its clipping path through the
-image's corners. Rasterize (`object.rasterize`) draws the image between its corners and makes a plain image of the
-result. These rules are VectorCraft's own.
+Crop Image (`object.cropImage`), Image Trace (`imageTrace.make`, `imageTrace.makeAndExpand`), Create Object Mosaic
+(`object.createObjectMosaic`) and Place with Replace (`file.place` with `replace`) of anything but a text file refuse a
+distorted image with an error that names the distortion; Place with Replace does not refuse a clipping group that holds
+a distorted image of a DCS file's plates. Create Gradient Mesh (`object.mesh.create`) converts the other objects it is
+given and lists each distorted image it leaves as it is in `skipped`, with its `id` and the error as `reason`; with
+nothing else to convert, it returns that error. Update Links (`links.update`) and Relink
+(`links.relink`) put the file's pixels between a distorted image's corners, without applying its Placement Options or
+Relink's `preserve`. When `preserve` is given, Relink adds a `warnings` entry naming those images; without it, Relink
+adds none for them. The clipping path a PSD, PSB or DCS
+file names is drawn through the corners: the clip group of the old file's clipping path gets the new file's clipping
+path, or becomes a plain group when the new file names none. Embed (`links.embed`) and Unembed (`links.unembed`) keep
+the corners, each in one undo step. Unembed of a distorted image from a PSD or PSB file, written as stored (PNG, or
+TIFF for a CMYK file), keeps the clip group of that file's clipping path, and so do Relink and Update Links to the
+file it wrote; a path that converts the image writes no clipping path, and the clip group becomes a plain group. Mask
+(`object.maskImage`) draws its clipping path through the image's corners. Rasterize (`object.rasterize`) draws the
+image between its corners and makes a plain image of the result. These rules are VectorCraft's own.
 
 ```json
 {"name":"run_command","arguments":{"command":"object.distort","params":{"corners":[[40,0],[60,0],[100,100],[0,100]]}}}
@@ -7755,7 +7915,7 @@ commands are listed this way:
   (Object › Perspective), under Perspective;
 - `text.spelling.dictionary` (Edit › Edit Custom Dictionary…), under Text;
 - the UI commands `ui.recolorDialog` (Edit › Edit Colors › Recolor Artwork…), `ui.flattenerPresetsDialog`,
-  `ui.printPresetsDialog`, `ui.pdfPresetsDialog`, `ui.perspectivePresetsDialog`, `ui.svgFilterDialog`,
+  `ui.printPresetsDialog`, `ui.pdfPresetsDialog`, `ui.tracingPresetsDialog`, `ui.perspectivePresetsDialog`, `ui.svgFilterDialog`,
   `ui.saveSwatchLibrary`, `ui.saveBrushLibrary`, `ui.saveGraphicStyleLibrary` and `ui.saveSymbolLibrary`, under Ui;
   `file.exportAs` and `file.exportSelection`, under File; `links.editOriginal`, under Links; `type.applyBullets` and
   `type.applyNumbers`, under Type; and `window.toolbar.new`, `window.toolbarColumns`, `window.toolsBesideCanvas`,
@@ -8991,7 +9151,8 @@ undo step. When a matched layer, or a layer around it, is hidden or locked, the 
 Drawing modes (`view.drawMode`) apply
 too: in Draw Inside, `edit.paste`, `edit.pasteInPlace` and `edit.pasteOnAllArtboards` put the objects inside the
 object drawn into (its clip group, made on the first paste), whatever Paste Remembers Layers says; in Draw Behind,
-`edit.pasteInPlace` and `edit.pasteOnAllArtboards` put them just below the selection. `edit.pasteInFront` and
+`edit.pasteInPlace` and `edit.pasteOnAllArtboards` put them just below the selection, and a placed symbol instance
+(`symbol.place`) goes just below the selection too. `edit.pasteInFront` and
 `edit.pasteInBack` ignore the drawing mode. When the object drawn into is the one isolation mode isolates (`object.isolate`,
 or a double-click on it with the Selection tool), art drawn or pasted inside it takes isolation mode into its clip group,
 so the new art can be picked and isn't dimmed; `edit.undo` or `edit.redo` that removes the isolated object ends
@@ -10342,7 +10503,8 @@ its color, remove it or add one), Draw the Nearest Path Next (`sortPaths`) and D
 artboards, the bounds of the art, or the selection with Export Selection or Export Selected Art Only), or one black
 pen when that art draws nothing. When the export refuses the options or the artboard choice, One Pen per Color stays
 chosen and the dialog shows why. OK checks the options and the artboard choice, and remembers the options for the
-next export; a canceled save panel writes nothing and keeps the options remembered before.
+next export; a canceled save panel writes nothing and keeps the options remembered before. When another document has
+become the active one since the dialog opened, OK closes it and writes nothing.
 
 ## TIFF, BMP and Targa export
 
@@ -11279,6 +11441,47 @@ hidden state and stay live on the group; none of them is copied onto the glyph p
 (Warp, Free Distort, Transform) move its placed gradients with the whole outline, as they do on the type, not with each
 glyph.
 `object.expand` outlines type with this command, so Fill and Stroke expand those paths' gradients, patterns and strokes.
+
+`type.retype` (Type › Retype) turns outlined glyphs back into point text. By default a shape must be exactly a glyph of
+an available font. With `tolerance` (0 to 0.05), a shape of at most 8 contours that is no glyph exactly becomes the
+glyph it is closest to when its leftover distance from that glyph, relative to the shape's outline spread (the root
+mean square distance of its sampled outline points from their center), is at most the
+tolerance: an outline simplified, a curve split in two, or contours in another order, start or direction. The tolerance
+and this measure are VectorCraft's own. A near-matched glyph may differ from its line by the tolerance in size, turn
+and place; an exact glyph keeps the exact limits unless the line's first glyph, whose size and turn the line takes, is
+a near match. The line also splits before a near-matched glyph, or a glyph of a line whose first glyph is one, that
+the type would draw further from its shape than the tolerance by the same measure (its own leftover distance together
+with the change of size and turn) or with its center further away than its origin may be. Each entry of `fonts` in the result has a `score`, from 1 when every glyph of the line is exact down to 0
+at a leftover distance of 0.05. A compound path that holds several
+glyphs, such as a word made into one compound path, is split into groups of contours (a contour with the contours
+inside it) in path order, and runs of up to three groups are matched, the longest first among those after which the
+remaining groups can still all be matched, so an i's stem and dot become one i. A group whose contours run the other
+way round, as Make Compound Path leaves some of them, still matches exactly. Exact matches of the whole shape come
+first, then exact matches of its groups, then near matches of the whole shape, then near matches of its groups. The
+compound becomes type only when every one of its glyphs does; otherwise it stays as it is and is reported once in
+`unmatched` when another shape of the selection becomes type, and the command returns an error when no shape does. A
+glyph also has to paint the area the shape paints under the shape's fill rule: a compound filled by the nonzero rule
+whose inner contour runs the same way as its outer one paints its center, so a ring glyph does not replace it. A shape with a counter narrower than three times the
+outline tolerance across in some direction, turned or not, cannot be checked this way and stays an outline: at `tolerance` 0.05, a
+counter 10 units wide in a 100 by 100 shape, or a 60 by 10 one turned 45 degrees. So does a shape whose outline is too large to check. The glyphs of a compound path that splits into several are set one beside
+another, so a split whose parts overlap where the shape's fill rule leaves the overlap unpainted (two o's on each
+other under the even-odd rule) stays an outline. A split whose parts overlap at all also stays an outline when the
+compound has an opacity below 100%, a blend mode other than Normal, a gradient or pattern fill or a stroke, since the
+glyphs may become separate objects that paint the overlap twice. When the split with the longest runs fails that check, the split with the
+shortest runs is checked, then the other complete splits in order, up to 32 splits per shape for exact matches and 32
+for near matches; when none passes, the shape stays an outline. Glyphs fused into one contour are not split, and a compound path of more than 256 groups, 512 contours
+or 65,536 path elements is matched whole only. One command groups at most 16,384 contours, in selection order; the shapes after them are
+matched whole only. Near matching compares a shape with at most the 256 glyphs closest to it in proportion, in at
+most 50 million point comparisons per shape and 2 billion per command, ranking a glyph by proportion counting as one
+comparison per contour and one more; past them, the glyphs not yet ranked or compared are left out. It looks glyphs up for at most 1,024 distinct shapes and runs per command: every selected shape first, in
+selection order, then the runs of groups of the compound paths. Glyphs close only to the shapes and runs past that
+limit are not looked up. At most 262,144 glyphs are drawn to check whether they could near match, and at most 32,768
+are indexed for it, each face taking an equal share of both; of a face's glyphs, those closest to the selected shapes
+in proportion are indexed.
+
+```json
+{"name":"run_command","arguments":{"command":"type.retype","params":{"tolerance":0.02}}}
+```
 
 `type.createOutlines` (Type › Create Outlines) and `effect.expandAppearance` (when it outlines type, as Expand
 Appearance describes) take an outlined frame of threaded text out of its thread with the text it shows, and the other
@@ -12433,11 +12636,53 @@ on an open path that are not drawn because they fall before the path's start can
 {"name":"run_command","arguments":{"command":"text.touchType","params":{"id":7,"start":1,"dx":10,"dy":4}}}
 ```
 
+## Retype tracking
+
+`type.retype {fonts?}` turns selected outlined text back into point text when its shapes are glyphs of a font the app
+has. A line of three or more exactly matched glyphs (none a near match, see `tolerance`) gets the spacing that most of its gaps share as its tracking, in 1/1000 em. Retype
+tries the value rounded to a whole number first when it is within 0.05 of one, then the value as measured. The font's
+advances and pair kerning are left out of the measure, and word spaces are counted after the tracking. The tracking is
+kept when the tracked type draws the whole line in place, or more of it from its start than untracked type does. When
+untracked type also draws the whole line, for example when gaps are as wide as whole spaces, the line stays untracked
+if the tracking is under one unit or the tracked type would drop a gap one space wide, so `a b c` stays `a b c`.
+Otherwise the tracked type is kept, and only gaps wider than the tracking alone keep spaces (narrower gaps, when
+tracking tighter than a space gives each space a negative advance). Glyphs tracked tighter than a quarter em stay on
+one line as long as each one starts after the one before it. Negative tracking is set only on a line that is opaque,
+uses the Normal blend mode, has a solid fill or none and has no stroke; other tightly spaced lines split into one object
+per glyph. A line splits where its type stops drawing the outlines in place, and the glyphs after the split take the
+tracking their own gaps give. These rules are VectorCraft's own. Each entry of the result's `fonts` list has
+`tracking`.
+
+```json
+{"name":"run_command","arguments":{"command":"type.retype","params":{}}}
+```
+
+## Retype several lines
+
+`type.retype` joins lines that follow each other in paint order (lines split from one compound path do), with the same group, paint, font, size, turn and
+tracking (an untracked line of one or two glyphs takes the tracking of the others), into one type object when each
+line's baseline is the same distance below the one before (between 0.25 and 3 times the size) and the lines line up at their starts, ends or centers. The object is area type with Convert To Area
+Type's frame, its lines separated by line breaks, with left, right or center alignment, checked in that order. Its
+leading is Auto when Auto puts the last baseline in place, else the mean distance between the baselines, to a
+thousandth of a point when that still puts the last baseline in place. Lines with an opacity below 100%, a blend mode
+other than Normal, a gradient or pattern fill, or a stroke stay one object per line. These rules are VectorCraft's own.
+
+Every joined object is laid out and compared with the outlines. When area type would not draw each glyph where its
+outline was, including after Text Wrap objects above it reflow it, or when its frame would reach past the canvas's
+coordinate limit, the lines become one multi-line point type object (one object per line when its bounds would reach
+past that limit). When that also moves a glyph, the lines before that glyph's line stay one object, and the lines
+from that line on are joined again from it. When the Text Wrap objects on the layers Retype changes would copy more
+than 2,000,000 units into the wrap shapes of their area type (one for each anchor, subpath and shape, for each area
+type object below them), Retype does not check the wrap and the lines become multi-line point type. Each entry of
+the result's `texts` list holds an object's lines joined by `\n`, and each entry of its `fonts` list also has
+`leading` (points; null for Auto leading or a single line) and `area`.
+
 ## Retype panel
 
 `type.retypeFonts {count?}` lists the fonts whose glyphs match the selected outlined text. It compares each selected path
 and compound path, inside groups too, with the glyphs of up to 96 loaded fonts, those of the document's live type
-first, by the matching `type.retype` uses, and it counts only exact matches. When two versions of a font are loaded,
+first, by the matching `type.retype` uses, and it counts only exact matches of whole shapes: it does not split a
+compound path into glyphs or take near matches. When two versions of a font are loaded,
 only the version its family and style name gives is compared, which is the version that choosing the font sets. The
 fonts rank by how many shapes each matches, then by the mean distance left after fitting, then by family and style
 name. `count` is a whole number from 1 to 96 (default 10); any other value is an error. The reply is
@@ -13029,7 +13274,8 @@ session and refuses `--connect`. In Safe Mode no plug-in loads or
 runs: `plugin.install`, `plugin.run`, `plugin.reload` and exporters return an error, and a live-effect plug-in draws its
 object's geometry unchanged while the object keeps the effect: `effect.list` gives that effect `skipped: true`, and the
 Appearance panel shows "(Safe Mode)" after its name and the plug-in's id in its tooltip. `effect.expandAppearance` returns an
-error and changes nothing when an object it would expand holds such an effect, in it or in a symbol it places. `vectorcraft` rejects an option it does not know (such as
+error and changes nothing when an object it would expand holds such an effect, in it or in a symbol it places. That includes a
+plain symbol instance in a group or layer with a raster effect, since the group's image draws the symbol's art. `vectorcraft` rejects an option it does not know (such as
 `--safe-mod`) instead of opening it as a file; `--` before a file name that starts with `-` opens it. The web build keeps
 no installed plug-ins from one page load to the next and has no launch marker, so it never offers the choice. `plugin.safeMode` returns `{active, source, disabled,
 pendingItem}`; a command does not turn Safe Mode on or off. `plugin.setEnabled {id | file, enabled}` turns a plug-in on or
@@ -13380,6 +13626,35 @@ a stroke when it has `rect`. With both `rect` and `points`, the command also tou
 
 ```json
 {"name":"run_command","arguments":{"command":"shapeBuilder.merge","params":{"rect":[50,50,200,200]}}}
+```
+
+The Fill Area tool (`fillArea`, in the Live Paint Bucket's group) adds a new closed path of the area under a click
+and leaves the paths around it as they are. Nothing needs to be selected: the visible, unlocked paths on every layer
+bound areas, filled or not, open paths included, and the overlap of two filled shapes is an area of its own. While the
+pointer hovers an area, the tool outlines it in red and the pointer shows the bucket with paint; elsewhere the pointer
+shows the empty bucket, and a click there does nothing. The new path appears on the press and is kept on the release;
+Escape or a canceled touch before the release takes it back. In a document of more than 128 path segments the tool looks
+for the hovered area on another thread, and the outline appears when that search is done. The tool sends `shapeBuilder.copyRegion` with `point`, the Shape Builder's gap
+length (`gap`, 0 with Gap Detection off) and its `openFilledAsClosed`: the two tools share `gapDetection`, `gapLength`
+and `openFilledAsClosed`, so `tool.setOption` on either one sets them for both, and `fillArea` has no other options.
+Double-clicking the Fill Area tool opens the Shape Builder Tool Options (`tool.options {tool: "fillArea"}`, dialog
+`shapeBuilderOptions`).
+The new path takes the current fill, stroke and stroke weight (`fill` and `stroke` override the paints), goes directly
+above the front-most object along the area (one whose outline touches the area's outline, or that covers it) and is
+selected. When a group, Live Paint group, Shaper group or clipping group holds that object, the new path goes above the
+outermost group in its layer, not inside it, and the group keeps its members. In isolation mode only the paths in
+the isolated layer or group bound areas, for the tool's hover and click and for the command (with `ids`, only the
+paths of the listed objects that are in it), and the new path goes inside the isolated layer or group, directly above
+the object in it that holds that path. No area is found while the isolated object is not a layer or group (a path
+or compound path), is a Live Paint group, compound shape, Shaper group, graph, Image Trace result, dimension, flare or
+Objects on Path group, is a layer or group with a live effect or a clipping mask, or lies inside one of these or
+inside an envelope. A point in no enclosed area is the error "Fill Area: no enclosed area under the pointer" and records no undo
+step; a `gap` outside 0 to 72 is an error. It returns `{id, above}`. The command looks for the area among the paths
+near the point first. When the paths together have more than 65,536 segments and the paths near the point do not
+enclose it, the point counts as in no enclosed area.
+
+```json
+{"name":"run_command","arguments":{"command":"shapeBuilder.copyRegion","params":{"point":[50,70],"gap":3}}}
 ```
 
 ## Perspective grid
@@ -13979,8 +14254,11 @@ away); its click on a gradient mesh's line picks the line's two
 ends, and a click inside a patch picks the four points around it. The picked points show filled. Dragging one of them
 moves them all as one undo step (`object.mesh.movePoints`), a click on one of several picked points picks it alone,
 and the arrow keys nudge them by the keyboard increment. The active tool lists them in its options
-(`tool.setOption {}` returns them as `meshPoints: [{id, index}…]`). Switching to the Eyedropper keeps them picked, its
-options list them too, and the Mesh tool, Direct Selection or a Lasso chosen next picks them again. While a selected, editable mesh has
+(`tool.setOption {}` returns them as `meshPoints: [{id, index}…]`). Switching between the Mesh tool, Direct Selection,
+the Lasso, the Polygonal Lasso and the Eyedropper keeps them picked, and so does a Cmd/Ctrl-click with the selection
+tool one of them lends; any other tool, Group Selection included, drops them. A plain Lasso click away from the art
+(`select.none`) unpicks them. The Eyedropper's options list them too.
+While a selected, editable mesh has
 points picked, an Eyedropper click or Shift-click on an image or other art samples the color under the pointer into
 those points alone as `paint.sampleColor {color, stroke: false, ids}` with the meshes that have points picked: one undo
 step, none when the color is unchanged. Other selected objects keep their paint. A click on one of those meshes, and
@@ -14281,11 +14559,13 @@ Tools:
   outside it with a point on it (within a millionth of its radius); it never crosses the first segment, and it
   touches the two segments at different points. The circle is a new ellipse with the current paint, drawn through
   three of its points with `shape.circleThroughPoints` so that Align New Objects to Pixel Grid leaves it in place, one
-  undo step. A circle too small or too large for its three points to give it back in floating point counts as no
-  circle. Shift pressed or let go during a click counts at the release. With no circle the note shows, a click draws
+  undo step. A circle too small or too large for its three points to give it back in floating point, or one that
+  would reach past the canvas (4,000,000 pt from the origin), counts as no circle. Shift pressed or let go during a click counts at the release. With no circle the note shows, a click draws
   nothing and the first segment stays picked; it also stays when drawing the circle fails or the press on the second
-  segment is canceled (a canceled touch). Escape, an edit, Undo or Redo outside the tool, or another document forgets
-  the first segment.
+  segment is canceled (a canceled touch). Escape, an edit, Undo or Redo outside the tool, another document, or a
+  change to the first segment that makes no undo step (a live preview, or one that was canceled) forgets the first
+  segment. The circle is looked for again whenever either segment no longer has the shape it was found on, so a
+  canceled preview does not leave a circle worked out on the previewed paths.
   Option (`tool.setOption`, or a double-click on the tool): `radius` (pt, 0.01 to 1000000, 36). `tool.setOption`
   gives an error for a value outside that range or one that is not a number, and for any other option.
 - **Trim at Crossings Tool** (`trimAtCrossings`): removes stretches of paths between the places where they are crossed,
