@@ -918,7 +918,7 @@
 @msg	glyph {g} is not an alternate of {ch} in {_1} {_2}	გლიფი {g} არ არის სიმბოლოს {ch} ალტერნატივა შრიფტში {_1} {_2}
 @msg	gradient must be "objects" or "mesh"	gradient უნდა იყოს "objects" ან "mesh"
 @msg	grays must be "profile" or "black", not `{g}`	grays უნდა იყოს "profile" ან "black" და არა `{g}`
-@msg	grayscale profiles can't be working spaces yet	ნაცრისფერი გრადაციების პროფილები სამუშაო ფერთა სივრცედ ჯერ ვერ გამოიყენება
+@msg	grayscale profiles can't be working spaces yet	ნაცრისფერი ტონების პროფილები სამუშაო ფერთა სივრცედ ჯერ ვერ გამოიყენება
 @msg	gridColors must be a preset name or two colours	gridColors უნდა იყოს პრესეტის სახელი ან ორი ფერი
 @msg	gridSize must be small, medium or large	gridSize უნდა იყოს small, medium ან large
 @msg	guide {g} is not selected	დამხმარე ხაზი {g} მონიშნული არ არის
@@ -5233,7 +5233,7 @@ antiAlias	Sharp	მკვეთრი
 	With Don't include profiles and a CMYK output intent, every CMYK color is written as DeviceCMYK unless it is converted to a CMYK destination of another profile.	„პროფილების გარეშე“ და CMYK გამოტანის მიზნით ყველა CMYK ფერი DeviceCMYK-ად იწერება, თუ ის სხვა პროფილის CMYK დანიშნულებაში არ გარდაიქმნება.
 	Flattener preset:	გაბრტყელების პრესეტი:
 	General › Thumbnails	ზოგადი › ესკიზები
-	Grayscale images	ნაცრისფერი გამოსახულებები
+	Grayscale images	ნაცრისფერი ტონების გამოსახულებები
 	Include non-printing layers	არაბეჭდვადი შრეების ჩართვა
 	Write pages longer than 200 in at full size in points	200 in-ზე გრძელი გვერდების სრული ზომით, პუნქტებში ჩაწერა
 	Left:	მარცხნივ:
@@ -6321,7 +6321,7 @@ axis	Both	ორივე
 	Auto	ავტომატური
 	Center	ცენტრში
 	Transform in Perspective	პერსპექტივაში გარდაქმნა
-	Grayscale	ნაცრისფერი გრადაციები
+	Grayscale	ნაცრისფერი ტონები
 	High Color	ბევრი ფერი
 	Low Color	ცოტა ფერი
 	Embed	ჩაშენება
@@ -6688,7 +6688,7 @@ font-technology	Variable	ცვლადი
 	Preserve Paths or Preserve Appearance and Overprints for the legacy vector clipboard; VectorCraft stores the choice but does not use it yet.	ტრაექტორიების შენარჩუნება ან იერსახისა და ზედდაბეჭდვების შენარჩუნება ძველი ვექტორული ბუფერისთვის; VectorCraft არჩევანს ინახავს, მაგრამ ჯერ არ იყენებს.
 	Keep Formatting keeps the styles of text copied from VectorCraft type when it is pasted into type; Keep Plain Text gives it the style where it lands.	ფორმატირების შენარჩუნება VectorCraft-ის ტექსტური ობიექტიდან კოპირებული ტექსტის სტილებს ინახავს ტექსტურ ობიექტში ჩასმისას; მხოლოდ ტექსტის შენარჩუნება მას ჩასმის ადგილის სტილს აძლევს.
 	Display All Blacks as Rich Black shows pure CMYK black (black ink alone at 100%) as RGB black on the canvas; Display All Blacks Accurately converts it through the CMYK working space.	ყველა შავის მდიდარ შავად ჩვენება სუფთა CMYK შავს (მხოლოდ შავი მელანი 100%-ზე) ტილოზე RGB შავად აჩვენებს; ყველა შავის ზუსტად ჩვენება მას სამუშაო CMYK სივრცით გარდაქმნის.
-	Output All Blacks as Rich Black draws pure CMYK black as RGB black in RGB and grayscale raster exports and Print as Bitmap; it does not change vector exports, CMYK JPEG, TIFF and PSD, or other printing.	ყველა შავის მდიდარ შავად გამოტანა სუფთა CMYK შავს RGB შავად ხატავს RGB და ნაცრისფერი გრადაციების რასტრულ ექსპორტებში და ბიტმაპად ბეჭდვისას; ის არ ცვლის ვექტორულ ექსპორტებს, CMYK JPEG-ს, TIFF-სა და PSD-ს ან სხვა ბეჭდვას.
+	Output All Blacks as Rich Black draws pure CMYK black as RGB black in RGB and grayscale raster exports and Print as Bitmap; it does not change vector exports, CMYK JPEG, TIFF and PSD, or other printing.	ყველა შავის მდიდარ შავად გამოტანა სუფთა CMYK შავს RGB შავად ხატავს RGB და ნაცრისფერი ტონების რასტრულ ექსპორტებში და ბიტმაპად ბეჭდვისას; ის არ ცვლის ვექტორულ ექსპორტებს, CMYK JPEG-ს, TIFF-სა და PSD-ს ან სხვა ბეჭდვას.
 	On a touch screen, switches to the Touch workspace; turning this off, or losing the touch screen, goes back to the workspace it switched from.	სენსორულ ეკრანზე გადადის სენსორულ სამუშაო სივრცეზე; პარამეტრის გამორთვისას ან სენსორული ეკრანის დაკარგვისას ბრუნდება წინა სამუშაო სივრცეზე.
 	A two-finger tap on the canvas undoes, or switches between selection and drawing tools in the Touch workspace, and a three-finger tap redoes; neither works in Presentation Mode.	ტილოზე ორი თითით შეხება აბრუნებს მოქმედებას, სენსორულ სამუშაო სივრცეში კი მონიშვნისა და ხატვის ხელსაწყოებს შორის გადართავს; სამი თითით შეხება ხელახლა ასრულებს. პრეზენტაციის რეჟიმში არცერთი არ მუშაობს.
 	In paragraphs with Hyphenate on, a listed word breaks only at the hyphens typed in it, or nowhere when it has none, whatever its case; Korean words take no hyphen, and Indian-language words do not break inside a character cluster.	გადატანის ჩართვისას სიის სიტყვა მხოლოდ აკრეფილ დეფისებთან გადაიტანება, ან არსად, თუ არ აქვს, რეგისტრის მიუხედავად; კორეულ სიტყვებს დეფისი არ ემატება, ინდური ენების სიტყვები კი სიმბოლოთა ჯგუფის შიგნით არ გადაიტანება.
@@ -6914,7 +6914,7 @@ font-technology	Variable	ცვლადი
 @msg	`Custom` stands for changed settings: save the preset under another name	`Custom` შეცვლილ პარამეტრებს ნიშნავს: შეინახეთ პრესეტი სხვა სახელით
 @msg	`to` must be "corner" or "smooth"	`to` უნდა იყოს "corner" ან "smooth"
 @msg	`fontHeightReference` must be "emBox", "capHeight", "xHeight" or "icfBox"	`fontHeightReference` უნდა იყოს "emBox", "capHeight", "xHeight" ან "icfBox"
-@msg	BMP files are RGB or grayscale: colorModel rgb or gray	BMP ფაილები RGB-ა ან ნაცრისფერი: colorModel rgb ან gray
+@msg	BMP files are RGB or grayscale: colorModel rgb or gray	BMP ფაილები ან RGB-ია, ან ნაცრისფერი ტონების: colorModel rgb ან gray
 @msg	Blend colors: select at least three objects with filled colours	ფერების შერევა: მონიშნეთ მინიმუმ სამი ობიექტი ფერადი შევსებით
 @msg	Combine Slices: the slices have no bounds	ნაჭრების გაერთიანება: ნაჭრებს საზღვრები არ აქვს
 @msg	Convert to Artboards: selection has no area	სამუშაო დაფებად გარდაქმნა: მონიშნულს ფართობი არ აქვს
@@ -7049,7 +7049,7 @@ font-technology	Variable	ცვლადი
 @msg	`{name}` is a process colour: tints apply to global and spot colours	`{name}` პროცესული ფერია: ტონირება გამოიყენება გლობალურ და სპოტ-ფერებზე
 @msg	`{name}` is no recovery entry name	`{name}` აღდგენის ჩანაწერის სახელი არ არის
 @msg	`{name}` isn't a colour swatch	`{name}` ფერის ნიმუში არ არის
-@msg	a process color can't colorize a grayscale image with transparency: use a spot color, black or white	პროცესული ფერი ვერ გააფერადებს გამჭვირვალობის მქონე ნაცრისფერ გამოსახულებას: გამოიყენეთ სპოტ-ფერი, შავი ან თეთრი
+@msg	a process color can't colorize a grayscale image with transparency: use a spot color, black or white	პროცესული ფერი ვერ გააფერადებს გამჭვირვალობის მქონე ნაცრისფერი ტონების გამოსახულებას: გამოიყენეთ სპოტ-ფერი, შავი ან თეთრი
 @msg	`{path}` must be a bool or an object of bools	`{path}` უნდა იყოს bool ან bool-ების ობიექტი
 @msg	`{s}` is not a colour (#rrggbb or a preset name)	`{s}` ფერი არ არის (#rrggbb ან პრესეტის სახელი)
 @msg	`{tool}` isn't a Liquify tool	`{tool}` გათხევადების ხელსაწყო არ არის
@@ -8375,7 +8375,7 @@ mark-style	Japanese	იაპონური
 	RGB	RGB
 	Rotate View	ხედის შემობრუნება
 	Scissors	მაკრატელი
-	Shades of Gray	ნაცრისფერი გრადაციები
+	Shades of Gray	ნაცრისფერი ტონები
 	Shear:	დახრა:
 	Shift+Click	Shift+დაწკაპუნება
 	Shift+Drag	Shift+გადათრევა
@@ -10388,7 +10388,7 @@ anchor	Points:	წერტილები:
 	Objects with Color Effects	ობიექტები ფერის ეფექტებით
 	RGB Images	RGB გამოსახულებები
 	CMYK Images	CMYK გამოსახულებები
-	Grayscale Images	ნაცრისფერის გრადაციის გამოსახულებები
+	Grayscale Images	ნაცრისფერი ტონების გამოსახულებები
 @msg	`kind` must be spotColors, colorEffects, rgbImages, cmykImages or grayImages	`kind` უნდა იყოს spotColors, colorEffects, rgbImages, cmykImages ან grayImages
 
 # Color Effects add-on: Vector Halftone (Effect › Color Effects).
