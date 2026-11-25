@@ -20,7 +20,7 @@
 	Expand as Wireframes	კარკასებად გაშლა
 	Add art with Add as Single Graphic, or drop art here.	დაამატეთ ნახატი ბრძანებით „ერთ გრაფიკად დამატება“ ან ჩამოაგდეთ ნახატი აქ.
 	Face	მხარე
-	Graphics map onto the Plane, Extrude and Revolve object types.	გრაფიკა თავსდება ობიექტის ტიპებზე „სიბრტყე“, „ამოწევა“ და „ბრუნვა“.
+	Graphics map onto the Plane, Extrude, Revolve and Inflate object types.	გრაფიკა თავსდება ობიექტის ტიპებზე „სიბრტყე“, „ამოწევა“, „ბრუნვა“ და „გაბერვა“.
 	Line Gap	სტრიქონებს შორის ღრეჩო
 	Manage Profiles	პროფილების მართვა
 	Mapped graphics	განთავსებული გრაფიკა
@@ -5996,7 +5996,7 @@ theme	Appearance	იერსახე
 	Data Recovery	მონაცემების აღდგენა
 	Default Language	ნაგულისხმევი ენა
 	Disable Auto Add/Delete	ავტომატური დამატება/წაშლის გამორთვა
-	Delete Removes Anchor Points and Keeps Paths Joined	Delete შლის ღუზის წერტილებს და ინარჩუნებს კონტურებს შეერთებულად
+	Delete Removes Anchor Points and Keeps Paths Joined	Delete შლის საყრდენ წერტილებს და ტრაექტორიებს შეერთებულს ტოვებს
 	Interpolate Control Points When Moving Anchors	სახელურების ინტერპოლაცია საყრდენი წერტილების გადაადგილებისას
 	Display All Blacks Accurately	ყველა შავის ზუსტად ჩვენება
 	Display All Blacks as Rich Black	ყველა შავის მდიდარ შავად ჩვენება
@@ -6532,7 +6532,7 @@ font-technology	Variable	ცვლადი
 	A two-finger rotate gesture on a trackpad rotates the canvas view.	ტრეკპადზე ორი თითით მობრუნების ჟესტი ტილოს ხედს აბრუნებს.
 	Holding a key runs the tool or command in its Hold column in Keyboard Shortcuts; a quick press runs its usual shortcut.	კლავიშის ხანგრძლივი დაჭერა უშვებს ხელსაწყოს ან ბრძანებას კლავიატურის მალსახმობების დაჭერის სვეტიდან; მოკლე დაჭერა უშვებს მის ჩვეულ მალსახმობს.
 	How long, in seconds, a key must be held before its hold shortcut runs instead of its usual shortcut.	რამდენი წამი უნდა იყოს კლავიში დაჭერილი, სანამ ჩვეული მალსახმობის ნაცვლად მისი ხანგრძლივი დაჭერის მალსახმობი გაეშვება.
-	Delete removes the selected anchor points and refits the curve around each one, instead of opening the path there.	Delete შლის არჩეულ ღუზის წერტილებს და თითოეულის გარშემო მრუდს ხელახლა არგებს, ნაცვლად იმისა, რომ იქ კონტური გახსნას.
+	Delete removes the selected anchor points and refits the curve around each one, instead of opening the path there.	Delete შლის მონიშნულ საყრდენ წერტილებს და თითოეულის ირგვლივ მრუდს თავიდან აგებს, ნაცვლად იმისა, რომ იქ ტრაექტორია გახსნას.
 	When you move anchor points, each curve with one moved end keeps its shape relative to its ends.	როცა ღუზის წერტილებს გადაადგილებთ, ყოველი მრუდი, რომლის ერთი ბოლოც გადაადგილდა, ინარჩუნებს ფორმას თავის ბოლოებთან მიმართებით.
 	Holding a tool's shortcut key chooses the tool until you let go, and then the previous tool is chosen again.	სანამ ხელსაწყოს მალსახმობ კლავიშს დაჭერილს გიჭირავთ, ეს ხელსაწყოა არჩეული; კლავიშის აშვების შემდეგ ისევ წინა ხელსაწყო აირჩევა.
 	Shows the bounding box while you move the selection or draw a shape.	აჩვენებს შემომსაზღვრელ ჩარჩოს, სანამ მონიშნულს გადაადგილებთ ან ფიგურას ხატავთ.
@@ -9489,8 +9489,8 @@ axis	Y Axis	Y ღერძი
 @msg	`opacity` must be a number	`opacity` უნდა იყოს რიცხვი
 @msg	`opacity` must be a number from 0 to 100	`opacity` უნდა იყოს რიცხვი 0-დან 100-მდე
 @msg	`opacity` must be true or false	`opacity` უნდა იყოს true ან false
-@msg	type characters have no opacity of their own: add a fill or stroke with the Appearance panel's Add New Fill or Add New Stroke	ტექსტის სიმბოლოებს საკუთარი გაუმჭვირვალობა არ აქვთ: დაამატეთ შევსება ან კონტური იერსახის პანელის ბრძანებით ახალი შევსების დამატება ან ახალი კონტურის დამატება
-@msg	an object selected in a symbol instance has no fill or stroke opacity of its own	სიმბოლოს ეგზემპლარში არჩეულ ობიექტს შევსების ან კონტურის საკუთარი გაუმჭვირვალობა არ აქვს
+@msg	type characters have no opacity of their own: add a fill or stroke with the Appearance panel's Add New Fill or Add New Stroke	ტექსტის სიმბოლოებს საკუთარი გაუმჭვირვალობა არ აქვთ: დაამატეთ შევსება ან კონტური იერსახის პანელის ბრძანებით „ახალი შევსების დამატება“ ან „ახალი კონტურის დამატება“
+@msg	an object selected in a symbol instance has no fill or stroke opacity of its own	სიმბოლოს ეგზემპლარში მონიშნულ ობიექტს შევსების ან კონტურის საკუთარი გაუმჭვირვალობა არ აქვს
 @msg	no target has that fill or stroke to take the opacity	არცერთ სამიზნეს არ აქვს ის შევსება ან კონტური, რომელიც გაუმჭვირვალობას მიიღებს
 @msg	`type` must be "path" or "compound"	`type` უნდა იყოს "path" ან "compound"
 @msg	`unit` must be 1-{MAX_UNIT} printable characters	`unit` უნდა შედგებოდეს 1-{MAX_UNIT} დასაბეჭდი სიმბოლოსგან
@@ -9535,7 +9535,7 @@ axis	Y Axis	Y ღერძი
 @msg	`plates` requires a stop linked to a spot swatch	`plates` მოითხოვს გადასვლის წერტილს, რომელიც სპოტ-ფერის ნიმუშთანაა დაკავშირებული
 @msg	the output	გამოტანა
 @msg	the path has no anchor points	ტრაექტორიას საყრდენი წერტილები არ აქვს
-@msg	compound path {id} has a hidden, locked or guide member, so its members can't be replaced	შედგენილ ტრაექტორიას {id} აქვს დამალული, ჩაკეტილი ან დამხმარე ხაზის წევრი, ამიტომ მისი წევრების ჩანაცვლება შეუძლებელია
+@msg	compound path {id} has a hidden, locked or guide member, so its members can't be replaced	შედგენილ ტრაექტორიას {id} აქვს წევრი, რომელიც დამალულია, ჩაკეტილია ან დამხმარე ხაზია, ამიტომ მისი წევრების ჩანაცვლება შეუძლებელია
 @msg	compound path {id} has a member that isn't a path, so its members can't be replaced	შედგენილ ტრაექტორიას {id} აქვს წევრი, რომელიც ტრაექტორია არ არის, ამიტომ მისი წევრების ჩანაცვლება შეუძლებელია
 @msg	too many anchor points (limit {MAX_ANCHORS})	ძალიან ბევრი საყრდენი წერტილი (ლიმიტი {MAX_ANCHORS})
 @msg	true or false	true ან false
@@ -9626,7 +9626,7 @@ axis	Y Axis	Y ღერძი
 @msg	`inputs` lists `{shown}` twice	`inputs`-ში `{shown}` ორჯერაა ჩამოთვლილი
 @msg	`inputs` needs `api` 2 or later	`inputs`-ს სჭირდება `api` 2 ან უფრო ახალი
 @msg	`inputs` needs the permission `doc.read`	`inputs`-ს სჭირდება ნებართვა `doc.read`
-	Read the objects it is given, and the document's settings, artboards, layers and swatches	მიღებული ობიექტების და დოკუმენტის პარამეტრების, სამუშაო დაფების, შრეებისა და ფერის ნიმუშების წაკითხვა
+	Read the objects it is given, and the document's settings, artboards, layers and swatches	მიღებული ობიექტებისა და დოკუმენტის პარამეტრების, სამუშაო დაფების, შრეებისა და ფერის ნიმუშების წაკითხვა
 @msg	`context` must list distinct sections: settings, artboards, layers or swatches	`context`-ში განსხვავებული სექციები უნდა იყოს: settings, artboards, layers ან swatches
 @msg	`context` is for a filter, or a live effect with `commands`, at `api` 3 or later with the permission `doc.read`	`context` განკუთვნილია ფილტრისთვის ან `commands`-ის მქონე ცოცხალი ეფექტისთვის, `api` 3-ზე ან უფრო ახალზე, ნებართვით `doc.read`
 @msg	the document information the plug-in asks for is too large to hand over: at most {MAX_CONTEXT_ITEMS} artboards, layers and swatches in {MAX_CONTEXT_BYTES} bytes	პლაგინის მიერ მოთხოვნილი დოკუმენტის ინფორმაცია ზედმეტად დიდია გადასაცემად: მაქსიმუმ {MAX_CONTEXT_ITEMS} სამუშაო დაფა, შრე და ფერის ნიმუში {MAX_CONTEXT_BYTES} ბაიტში
@@ -11232,3 +11232,31 @@ font-script	Japanese	იაპონური
 # #5804 native-picked raster editor (draft translations; native review welcome).
 	Edit Original with:	ორიგინალის რედაქტირება პროგრამით:
 file-filter	Applications	აპლიკაციები
+
+# Rows from main without Georgian (2026-11-25)
+@msg	this is a binary DXF file, which can't be read: save it from the CAD app as an ASCII DXF and open that	ეს ორობითი DXF ფაილია და მისი წაკითხვა შეუძლებელია: CAD აპში შეინახეთ ის ASCII DXF-ად და ის გახსენით
+@msg	`fontAxes` must be an object of axis tags and values, such as {"wght"}	`fontAxes` უნდა იყოს ღერძების ტეგებისა და მნიშვნელობების ობიექტი, მაგალითად {"wght"}
+@msg	`items` is a list of {kind, item}	`items` არის {kind, item} ჩანაწერების სია
+@msg	`items` must be a list of {id, points}	`items` უნდა იყოს {id, points} ჩანაწერების სია
+@msg	`items` must be an array of {id, anchors}	`items` უნდა იყოს {id, anchors} ჩანაწერების მასივი
+@msg	artboardLayout must be {layout?, columns?, spacing?, rightToLeft?}	artboardLayout უნდა იყოს {layout?, columns?, spacing?, rightToLeft?}
+@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` is a relative path: give `base`, or an absolute path	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილი `{path}` ცვლადისთვის `{var}` ფარდობითი გზაა: მიუთითეთ `base` ან აბსოლუტური გზა
+@msg	line {line}, column {column}: the graph data file for `{var}` can't be read: {e}	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილის წაკითხვა შეუძლებელია: {e}
+@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` isn't followed: {r}	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილის გზა `{path}` ცვლადისთვის `{var}` არ გაიხსნება: {r}
+@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` is larger than {MAX_GRAPH_DATA_FILE} bytes	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილი `{path}` ცვლადისთვის `{var}` {MAX_GRAPH_DATA_FILE} ბაიტზე დიდია
+@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` gives a graph value longer than {MAX_GRAPH_CSV} bytes	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილი `{path}` ცვლადისთვის `{var}` იძლევა დიაგრამის მნიშვნელობას, რომელიც {MAX_GRAPH_CSV} ბაიტზე გრძელია
+@msg	line {line}, column {column}: the graph data files hold more than {MAX_GRAPH_FILES_TOTAL} bytes in all	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილები სულ {MAX_GRAPH_FILES_TOTAL} ბაიტზე მეტს შეიცავს
+@msg	`base` is empty	`base` ცარიელია
+@msg	each format is an object {format, scale?, suffix?}	თითოეული ფორმატი არის ობიექტი {format, scale?, suffix?}
+@msg	each of `fonts` is {family, style?}; 1 to 1000 of them	`fonts`-ის თითოეული ჩანაწერი არის {family, style?}; 1-დან 1000-მდე ჩანაწერი
+@msg	each of `items` is {kind, item}	`items`-ის თითოეული ჩანაწერი არის {kind, item}
+@msg	files must be {name, dataBase64}	files უნდა იყოს {name, dataBase64}
+@msg	give `matches`: [{kind, name, target}]	მიუთითეთ `matches`: [{kind, name, target}]
+@msg	give color, none, swatch, gradient or opacity	მიუთითეთ color, none, swatch, gradient ან opacity
+@msg	give the settings to change, e.g. {"formats"}]}	მიუთითეთ შესაცვლელი პარამეტრები, მაგ. {"formats"}]}
+@msg	give {key, value} or {values}	მიუთითეთ {key, value} ან {values}
+@msg	missing `map` (rows [{from, to}] or {current})	აკლია `map` (სტრიქონები [{from, to}] ან {current})
+@msg	not an RTF file: it doesn't start with {\\rtf	RTF ფაილი არ არის: არ იწყება {\\rtf-ით
+@msg	quotes must be {double?, single?}	quotes უნდა იყოს {double?, single?}
+@msg	text must be {characterSet?, platform?, removeLineReturns?, removeParagraphReturns?, replaceSpaces?}	text უნდა იყოს {characterSet?, platform?, removeLineReturns?, removeParagraphReturns?, replaceSpaces?}
+@msg	textureImage: give {path} or {name, dataBase64} of an image file, or a texture as effect.list gives it	textureImage: მიუთითეთ გამოსახულების ფაილის {path} ან {name, dataBase64}, ან ტექსტურა ისე, როგორც effect.list იძლევა
