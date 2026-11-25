@@ -20,7 +20,7 @@
 	Expand as Wireframes	კარკასებად გაშლა
 	Add art with Add as Single Graphic, or drop art here.	დაამატეთ ნახატი ბრძანებით „ერთ გრაფიკად დამატება“ ან ჩამოაგდეთ ნახატი აქ.
 	Face	მხარე
-	Graphics map onto the Plane, Extrude, Revolve and Inflate object types.	გრაფიკა თავსდება ობიექტის ტიპებზე „სიბრტყე“, „ამოწევა“, „ბრუნვა“ და „გაბერვა“.
+	Graphics map onto the Plane, Extrude and Revolve object types.	გრაფიკა თავსდება ობიექტის ტიპებზე „სიბრტყე“, „ამოწევა“ და „ბრუნვა“.
 	Line Gap	სტრიქონებს შორის ღრეჩო
 	Manage Profiles	პროფილების მართვა
 	Mapped graphics	განთავსებული გრაფიკა
@@ -43,6 +43,7 @@
 	Select Object on Path	ტრაექტორიაზე ობიექტის მონიშვნა
 	Weather Icons	ამინდის ხატულები
 	Media Controls	მედიის მართვის ელემენტები
+@id	language.name	ქართული
 @msg	'caller', 'callee' and 'arguments' cannot be used on strict mode functions	'caller', 'callee' და 'arguments' მკაცრი რეჟიმის ფუნქციებში ვერ გამოიყენება
 @msg	3D effects require finite coordinates within 100 million points	3D ეფექტებს სჭირდება სასრული კოორდინატები 100 მილიონი პუნქტის ფარგლებში
 @msg	3D effects require one to ten lights	3D ეფექტებს სჭირდება ერთიდან ათამდე სინათლის წყარო
@@ -217,6 +218,8 @@
 @msg	`dataBase64` is larger than the module limit	`dataBase64` მოდულის ლიმიტზე დიდია
 @msg	`dataBase64` is not valid base64	`dataBase64` სწორი base64 არ არის
 @msg	`defaultsOnly` cannot be combined with `ids`, `reverse` or `append`	`defaultsOnly` ვერ გამოიყენება `ids`-თან, `reverse`-თან ან `append`-თან ერთად
+@msg	`defaultsOnly` cannot be combined with `ids`, `id` or `item`	`defaultsOnly` ვერ გამოიყენება `ids`-თან, `id`-თან ან `item`-თან ერთად
+@msg	`defaultsOnly` cannot be combined with `brush`	`defaultsOnly` ვერ გამოიყენება `brush`-თან ერთად
 @msg	`depth` and `childLimit` slice the summary: pass `summary: true`	`depth` და `childLimit` შეჯამებას ზღუდავს: გადაეცით `summary: true`
 @msg	`design` is a design name, or null for plain columns	`design` არის დიზაინის სახელი, ან null — ჩვეულებრივი სვეტებისთვის
 @msg	`design` is a design name, or null for the default marker	`design` არის დიზაინის სახელი, ან null — ნაგულისხმევი მარკერისთვის
@@ -239,7 +242,6 @@
 @msg	`focal` must be an array of [subpath, anchor] pairs	`focal` უნდა იყოს [subpath, anchor] წყვილების მასივი
 @msg	`focal` names [{si}, {ai}], which is not an anchor of the path	`focal` მიუთითებს [{si}, {ai}]-ს, რომელიც ტრაექტორიის საყრდენი წერტილი არ არის
 @msg	`folder` must be an absolute folder path	`folder` უნდა იყოს საქაღალდის აბსოლუტური გზა
-@msg	`fontAxes` must be an object of axis tags and values, such as {"wght"}	`fontAxes` უნდა იყოს ღერძების ტეგებისა და მნიშვნელობების ობიექტი, მაგალითად {"wght"}
 @msg	`fontAxes` must be an object of axis tags and values, such as {{"wght": 650}}	`fontAxes` უნდა იყოს ღერძების ტეგებისა და მნიშვნელობების ობიექტი, მაგალითად {{"wght": 650}}
 @msg	`format` must be a string	`format` უნდა იყოს სტრიქონი
 @msg	`format` must be one of {_1}	`format` უნდა იყოს ერთ-ერთი: {_1}
@@ -267,13 +269,10 @@
 @msg	`index` must be a whole number	`index` უნდა იყოს მთელი რიცხვი
 @msg	`index` must be a whole number or null	`index` უნდა იყოს მთელი რიცხვი ან null
 @msg	`indices` must be a non-empty array of item indices	`indices` უნდა იყოს ელემენტების ინდექსების არაცარიელი მასივი
-@msg	`items` is a list of {kind, item}	`items` არის {kind, item} ჩანაწერების სია
 @msg	`item` needs `index`	`item`-ს სჭირდება `index`
 @msg	`items` is a list of {{kind, item}}	`items` არის {{kind, item}} ჩანაწერების სია
 @msg	`items` is empty	`items` ცარიელია
-@msg	`items` must be a list of {id, points}	`items` უნდა იყოს {id, points} ჩანაწერების სია
 @msg	`items` must be a list of {{id, anchors?}}, not {v}	`items` უნდა იყოს {{id, anchors?}} ჩანაწერების სია და არა {v}
-@msg	`items` must be an array of {id, anchors}	`items` უნდა იყოს {id, anchors} ჩანაწერების მასივი
 @msg	`items` must be a list of {{id, points}}	`items` უნდა იყოს {{id, points}} ჩანაწერების სია
 @msg	`items` must be an array of {{id, anchors}}	`items` უნდა იყოს {{id, anchors}} ჩანაწერების მასივი
 @msg	`items` must be an array of {{id, corners?}}, not {v}	`items` უნდა იყოს {{id, corners?}} ჩანაწერების მასივი და არა {v}
@@ -626,7 +625,6 @@
 @msg	artboard is a 0-based index	artboard არის 0-დან დაწყებული ინდექსი
 @msg	artboard must be a 0-based index	artboard უნდა იყოს 0-დან დაწყებული ინდექსი
 @msg	artboard {i} doesn't print	სამუშაო დაფა {i} არ იბეჭდება
-@msg	artboardLayout must be {layout?, columns?, spacing?, rightToLeft?}	artboardLayout უნდა იყოს {layout?, columns?, spacing?, rightToLeft?}
 @msg	artboardLayout must be {{layout?, columns?, spacing?, rightToLeft?}}	artboardLayout უნდა იყოს {{layout?, columns?, spacing?, rightToLeft?}}
 @msg	artboardLayout.columns must be 1 or more	artboardLayout.columns უნდა იყოს 1 ან მეტი
 @msg	artboardLayout.layout must be gridByRow, gridByColumn, row or column	artboardLayout.layout უნდა იყოს gridByRow, gridByColumn, row ან column
@@ -727,13 +725,6 @@
 @msg	colorModel must be {own} (the document's mode), grayscale or bitmap	colorModel უნდა იყოს {own} (დოკუმენტის რეჟიმი), grayscale ან bitmap
 @msg	colour groups can't go into colour groups	ფერთა ჯგუფები ფერთა ჯგუფებში ვერ მოთავსდება
 @msg	colour, mode and spot apply to solid-colour swatches only	ფერი, რეჟიმი და სპოტ-ფერი მხოლოდ მყარი ფერის ნიმუშებს ეხება
-@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` is a relative path: give `base`, or an absolute path	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილის გზა `{path}` ფარდობითია: მიუთითეთ `base` ან აბსოლუტური გზა
-@msg	line {line}, column {column}: the graph data file for `{var}` can't be read: {e}	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილის წაკითხვა შეუძლებელია: {e}
-@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` isn't followed: {r}	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილი `{path}` არ გაიხსნება: {r}
-@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` is larger than {MAX_GRAPH_DATA_FILE} bytes	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილი `{path}` {MAX_GRAPH_DATA_FILE} ბაიტზე დიდია
-@msg	line {line}, column {column}: the graph data file `{path}` for `{var}` gives a graph value longer than {MAX_GRAPH_CSV} bytes	სტრიქონი {line}, სვეტი {column}: ცვლადის `{var}` დიაგრამის მონაცემთა ფაილი `{path}` იძლევა დიაგრამის მნიშვნელობას, რომელიც {MAX_GRAPH_CSV} ბაიტზე გრძელია
-@msg	line {line}, column {column}: the graph data files hold more than {MAX_GRAPH_FILES_TOTAL} bytes in all	სტრიქონი {line}, სვეტი {column}: დიაგრამის მონაცემთა ფაილები სულ {MAX_GRAPH_FILES_TOTAL} ბაიტზე მეტს შეიცავს
-@msg	`base` is empty	`base` ცარიელია
 @msg	column {column}: `{cell}` is a `%` column of graph data files, which are not read	სვეტი {column}: `{cell}` დიაგრამის მონაცემთა ფაილების `%` სვეტია, ასეთი ფაილები კი არ იკითხება
 @msg	column {column}: `{cell}` names `{name}`, which is a {_1} variable	სვეტი {column}: `{cell}` ასახელებს ცვლადს `{name}`, რომელიც {_1} ტიპისაა
 @msg	column {column}: `{cell}` names no variable	სვეტი {column}: `{cell}` არცერთ ცვლადს არ ასახელებს
@@ -785,13 +776,10 @@
 @msg	dxf scale must be a positive number up to {_1}, not {s}	dxf scale უნდა იყოს დადებითი რიცხვი {_1}-მდე და არა {s}
 @msg	dxf unit `{u}`: a unit such as mm, cm, in or pt	dxf unit `{u}`: მიუთითეთ ერთეული, მაგალითად mm, cm, in ან pt
 @msg	dxf: {e}	dxf: {e}
-@msg	each format is an object {format, scale?, suffix?}	თითოეული ფორმატი არის ობიექტი {format, scale?, suffix?}
 @msg	each format is an object {{format, scale?, suffix?}}	თითოეული ფორმატი არის ობიექტი {{format, scale?, suffix?}}
 @msg	each item needs an id	თითოეულ ელემენტს სჭირდება id
 @msg	each match needs `kind`	თითოეულ დამთხვევას სჭირდება `kind`
 @msg	each match needs a `name`	თითოეულ დამთხვევას სჭირდება `name`
-@msg	each of `fonts` is {family, style?}; 1 to 1000 of them	`fonts`-ის თითოეული ჩანაწერი არის {family, style?}; 1-დან 1000-მდე ჩანაწერი
-@msg	each of `items` is {kind, item}	`items`-ის თითოეული ჩანაწერი არის {kind, item}
 @msg	each of `fonts` is {{family, style?}}; 1 to 1000 of them	`fonts`-ის თითოეული ჩანაწერი არის {{family, style?}}; 1-დან 1000-მდე ჩანაწერი
 @msg	each of `items` is {{id, corners?}} with an object id, not {it}	`items`-ის თითოეული ჩანაწერი არის {{id, corners?}} ობიექტის id-ით და არა {it}
 @msg	each of `items` is {{kind, item}}	`items`-ის თითოეული ჩანაწერი არის {{kind, item}}
@@ -819,7 +807,6 @@
 @msg	featureChanges must be a list of tags	featureChanges უნდა იყოს ტეგების სია
 @msg	features must be a list of tags	features უნდა იყოს ტეგების სია
 @msg	fidelity must be 0..100	fidelity უნდა იყოს 0..100
-@msg	files must be {name, dataBase64}	files უნდა იყოს {name, dataBase64}
 @msg	file name too long to zip: {_1}	ფაილის სახელი zip-ში ჩასამატებლად ზედმეტად გრძელია: {_1}
 @msg	file name too long to zip: {name}	ფაილის სახელი zip-ში ჩასამატებლად ზედმეტად გრძელია: {name}
 @msg	files must be {{name, dataBase64}}	files უნდა იყოს {{name, dataBase64}}
@@ -859,7 +846,6 @@
 @msg	give `id` and `anchors`, or `items`, not both	მიუთითეთ `id` და `anchors`, ან `items`, ორივე არა
 @msg	give `id` or `guide`, not both	მიუთითეთ `id` ან `guide`, ორივე არა
 @msg	give `length` or `to`	მიუთითეთ `length` ან `to`
-@msg	give `matches`: [{kind, name, target}]	მიუთითეთ `matches`: [{kind, name, target}]
 @msg	give `matches`: [{{kind, name, target}}]	მიუთითეთ `matches`: [{{kind, name, target}}]
 @msg	give `name` (or edit a pattern)	მიუთითეთ `name` (ან დაარედაქტირეთ პატერნი)
 @msg	give `name` or `names`	მიუთითეთ `name` ან `names`
@@ -905,13 +891,11 @@
 @msg	give the preset a `name`	პრესეტს მიეცით `name`
 @msg	give the preset a name	პრესეტს სახელი მიეცით
 @msg	give the preset a name (1–64 characters)	პრესეტს სახელი მიეცით (1–64 სიმბოლო)
-@msg	give the settings to change, e.g. {"formats"}]}	მიუთითეთ შესაცვლელი პარამეტრები, მაგ. {"formats"}]}
 @msg	give the settings to change, e.g. {{"formats": [{{"format": "png", "scale": "2x"}}]}}	მიუთითეთ შესაცვლელი პარამეტრები, მაგ. {{"formats": [{{"format": "png", "scale": "2x"}}]}}
 @msg	give the style a name	სტილს სახელი მიეცით
 @msg	give two or more style `names`	მიუთითეთ ორი ან მეტი სტილის `names`
 @msg	give two or more swatches	მიუთითეთ ორი ან მეტი ფერის ნიმუში
 @msg	give x, y, or a handle's length or angle	მიუთითეთ x, y, ან სახელურის სიგრძე ან კუთხე
-@msg	give {key, value} or {values}	მიუთითეთ {key, value} ან {values}
 @msg	give {{key, value}} or {{values}}	მიუთითეთ {{key, value}} ან {{values}}
 @msg	global must be true or false	global უნდა იყოს true ან false
 @msg	glyph {_1} is not drawn for {ch} with the character's style (such as All Caps, Small Caps or a numeral system)	გლიფი {_1} სიმბოლოს {ch} სტილით არ იხატება (მაგალითად, მთავრული, პატარა მთავრული ან ციფრების სისტემა)
@@ -1042,7 +1026,6 @@
 @msg	missing `library`	აკლია `library`
 @msg	missing `library` (see graphicStyle.libraries)	აკლია `library` (იხ. graphicStyle.libraries)
 @msg	missing `library` (see swatch.library.list)	აკლია `library` (იხ. swatch.library.list)
-@msg	missing `map` (rows [{from, to}] or {current})	აკლია `map` (სტრიქონები [{from, to}] ან {current})
 @msg	missing `map` (rows [{{from, to}}] or {{current: new}})	აკლია `map` (სტრიქონები [{{from, to}}] ან {{current: new}})
 @msg	missing `matrix` [a,b,c,d,e,f]	აკლია `matrix` [a,b,c,d,e,f]
 @msg	missing `name` (see gradient.presets.list)	აკლია `name` (იხ. gradient.presets.list)
@@ -1267,7 +1250,6 @@
 @msg	not a swatch library (format `{_1}`)	ეს არ არის ფერის ნიმუშების ბიბლიოთეკა (ფორმატი `{_1}`)
 @msg	not a swatch library: {e}	ეს არ არის ფერის ნიმუშების ბიბლიოთეკა: {e}
 @msg	not a valid SVGZ file: {e}	ეს არ არის სწორი SVGZ ფაილი: {e}
-@msg	not an RTF file: it doesn't start with {\\rtf	RTF ფაილი არ არის: არ იწყება {\\rtf-ით
 @msg	not an action set file ({e})	ეს არ არის მოქმედებების ნაკრების ფაილი ({e})
 @msg	not an action set: the text doesn't start with /version and a number	ეს არ არის მოქმედებების ნაკრები: ტექსტი არ იწყება /version-ით და რიცხვით
 @msg	not an image VectorCraft reads (see document.formats)	ეს არ არის გამოსახულება, რომელსაც VectorCraft კითხულობს (იხ. document.formats)
@@ -1396,7 +1378,6 @@
 @msg	print settings: {e}	ბეჭდვის პარამეტრები: {e}
 @msg	procedures nest too deeply	პროცედურები ზედმეტად ღრმადაა ჩადგმული
 @msg	procedures nested too deeply	პროცედურები ზედმეტად ღრმადაა ჩადგმული
-@msg	quotes must be {double?, single?}	quotes უნდა იყოს {double?, single?}
 @msg	profile colour space {other} is not RGB, CMYK or Gray	პროფილის ფერთა სივრცე {other} არ არის RGB, CMYK ან Gray
 @msg	quotes must be {{double?, single?}}	quotes უნდა იყოს {{double?, single?}}
 @msg	quotes.{k} must be an opening and a closing quote, e.g. "“”"	quotes.{k} უნდა იყოს გამხსნელი და დამხურავი ბრჭყალი, მაგ. "“”"
@@ -1519,7 +1500,6 @@
 @msg	subpaths required when joining the same path	ერთი და იმავე ტრაექტორიის შეერთებისას საჭიროა subpaths
 @msg	swatch exchange version {major}.{minor} isn't supported (only 1.x)	ფერის ნიმუშების გაცვლის ვერსია {major}.{minor} მხარდაჭერილი არ არის (მხოლოდ 1.x)
 @msg	swatchConflict must be "merge" or "add", not {v}	swatchConflict უნდა იყოს "merge" ან "add" და არა {v}
-@msg	text must be {characterSet?, platform?, removeLineReturns?, removeParagraphReturns?, replaceSpaces?}	text უნდა იყოს {characterSet?, platform?, removeLineReturns?, removeParagraphReturns?, replaceSpaces?}
 @msg	table must be true or false	table უნდა იყოს true ან false
 @msg	takes one name	იღებს ერთ სახელს
 @msg	target text transform is collapsed or unrepresentable	სამიზნე ტექსტის გარდაქმნა გადაგვარებულია ან ვერ გამოისახება
@@ -1527,7 +1507,6 @@
 @msg	text transform is collapsed or unrepresentable	ტექსტის გარდაქმნა გადაგვარებულია ან ვერ გამოისახება
 @msg	text.replaceSpaces must be a whole number from 2 to 100	text.replaceSpaces უნდა იყოს მთელი რიცხვი 2-დან 100-მდე
 @msg	text.{key} `{v}`: use "{_1}" or "{_2}"	text.{key} `{v}`: გამოიყენეთ "{_1}" ან "{_2}"
-@msg	textureImage: give {path} or {name, dataBase64} of an image file, or a texture as effect.list gives it	textureImage: მიუთითეთ გამოსახულების ფაილის {path} ან {name, dataBase64}, ან ტექსტურა ისე, როგორც effect.list იძლევა
 @msg	textureImage: give {{path}} or {{name, dataBase64}} of an image file, or a texture as effect.list gives it	textureImage: მიუთითეთ გამოსახულების ფაილის {{path}} ან {{name, dataBase64}}, ან ტექსტურა ისე, როგორც effect.list იძლევა
 @msg	textureImage: {e}	textureImage: {e}
 @msg	that makes more than {MAX_PIECES} slices	ეს {MAX_PIECES}-ზე მეტ ნაჭერს ქმნის
@@ -1733,7 +1712,6 @@
 @msg	the written PDF's metadata can't be edited	ჩაწერილი PDF-ის მეტამონაცემების რედაქტირება შეუძლებელია
 @msg	the {_1} plate can't be read: {e}	ფირფიტის {_1} წაკითხვა შეუძლებელია: {e}
 @msg	the {_1} plate lies outside the file	ფირფიტა {_1} ფაილის გარეთ მდებარეობს
-@msg	this is a binary DXF file, which can't be read: save it from the CAD app as an ASCII DXF and open that	ეს ორობითი DXF ფაილია, რომლის წაკითხვაც ვერ ხერხდება: CAD აპიდან შეინახეთ ASCII DXF-ად და ის გახსენით
 @msg	there are no colour swatches to draw	დასახატი ფერის ნიმუშები არ არის
 @msg	there is already a design named `{name}`	უკვე არსებობს დიზაინი სახელით `{name}`
 @msg	there is already a design named `{to}`	უკვე არსებობს დიზაინი სახელით `{to}`
@@ -2518,6 +2496,9 @@
 	Artboards	სამუშაო დაფები
 	Convert to Artboards	სამუშაო დაფებად გარდაქმნა
 	Rearrange All Artboards…	ყველა სამუშაო დაფის გადალაგება…
+	Rearrange…	გადალაგება…
+	Selected Artboards: {n}	მონიშნული სამუშაო დაფები: {n}
+@msg	Click on the canvas to place the artboards (Esc cancels)	დაწკაპეთ ტილოზე სამუშაო დაფების განსათავსებლად (Esc აუქმებს)
 	Fit to Artwork Bounds	ნახატის საზღვრებზე მორგება
 	Fit to Selected Art	მონიშნულ ნახატზე მორგება
 	Graph	დიაგრამა
@@ -2672,6 +2653,7 @@
 	Fill & Stroke	შევსება და კონტური
 	Fill Color	შევსების ფერი
 	Opacity	გაუმჭვირვალობა
+	Show Opacity	გაუმჭვირვალობის ჩვენება
 	Stroke Color	კონტურის ფერი
 	Fill Gradient	შევსების გრადიენტი
 	Stroke Gradient	კონტურის გრადიენტი
@@ -5560,6 +5542,12 @@ theme	Appearance	იერსახე
 	{width} × {height} px	{width} × {height} px
 	{size} — {file}	{size} — {file}
 	{n} ppi	{n} ppi
+	{format}; {size}; {detail}	{format}; {size}; {detail}
+	{x} × {y} ppi	{x} × {y} ppi
+	resolution unavailable	გარჩევადობა მიუწვდომელია
+	estimated memory {memory}	სავარაუდო მეხსიერება {memory}
+	memory unavailable	მეხსიერება მიუწვდომელია
+	Unknown format	უცნობი ფორმატი
 	{kind}, {instances}	{kind}, {instances}
 	{kind}, {rows} × {cols}	{kind}, {rows} × {cols}
 	{grid}, {instances}	{grid}, {instances}
@@ -6008,6 +5996,7 @@ theme	Appearance	იერსახე
 	Data Recovery	მონაცემების აღდგენა
 	Default Language	ნაგულისხმევი ენა
 	Disable Auto Add/Delete	ავტომატური დამატება/წაშლის გამორთვა
+	Delete Removes Anchor Points and Keeps Paths Joined	Delete შლის ღუზის წერტილებს და ინარჩუნებს კონტურებს შეერთებულად
 	Interpolate Control Points When Moving Anchors	სახელურების ინტერპოლაცია საყრდენი წერტილების გადაადგილებისას
 	Display All Blacks Accurately	ყველა შავის ზუსტად ჩვენება
 	Display All Blacks as Rich Black	ყველა შავის მდიდარ შავად ჩვენება
@@ -6543,6 +6532,7 @@ font-technology	Variable	ცვლადი
 	A two-finger rotate gesture on a trackpad rotates the canvas view.	ტრეკპადზე ორი თითით მობრუნების ჟესტი ტილოს ხედს აბრუნებს.
 	Holding a key runs the tool or command in its Hold column in Keyboard Shortcuts; a quick press runs its usual shortcut.	კლავიშის ხანგრძლივი დაჭერა უშვებს ხელსაწყოს ან ბრძანებას კლავიატურის მალსახმობების დაჭერის სვეტიდან; მოკლე დაჭერა უშვებს მის ჩვეულ მალსახმობს.
 	How long, in seconds, a key must be held before its hold shortcut runs instead of its usual shortcut.	რამდენი წამი უნდა იყოს კლავიში დაჭერილი, სანამ ჩვეული მალსახმობის ნაცვლად მისი ხანგრძლივი დაჭერის მალსახმობი გაეშვება.
+	Delete removes the selected anchor points and refits the curve around each one, instead of opening the path there.	Delete შლის არჩეულ ღუზის წერტილებს და თითოეულის გარშემო მრუდს ხელახლა არგებს, ნაცვლად იმისა, რომ იქ კონტური გახსნას.
 	When you move anchor points, each curve with one moved end keeps its shape relative to its ends.	როცა ღუზის წერტილებს გადაადგილებთ, ყოველი მრუდი, რომლის ერთი ბოლოც გადაადგილდა, ინარჩუნებს ფორმას თავის ბოლოებთან მიმართებით.
 	Holding a tool's shortcut key chooses the tool until you let go, and then the previous tool is chosen again.	სანამ ხელსაწყოს მალსახმობ კლავიშს დაჭერილს გიჭირავთ, ეს ხელსაწყოა არჩეული; კლავიშის აშვების შემდეგ ისევ წინა ხელსაწყო აირჩევა.
 	Shows the bounding box while you move the selection or draw a shape.	აჩვენებს შემომსაზღვრელ ჩარჩოს, სანამ მონიშნულს გადაადგილებთ ან ფიგურას ხატავთ.
@@ -8223,6 +8213,7 @@ arrowhead	Feather	ბუმბული
 @msg	a 3D effect on a group's fill or stroke draws nothing	ჯგუფის შევსებაზე ან კონტურზე 3D ეფექტი არაფერს ხატავს
 @msg	a 3D effect on a group's fill or stroke draws nothing to export	ჯგუფის შევსებაზე ან კონტურზე 3D ეფექტი ექსპორტისთვის არაფერს ხატავს
 @msg	The 3D object is too complex to export	3D ობიექტი ზედმეტად რთულია ექსპორტისთვის
+@msg	The 3D object's mesh is incomplete or holds a value that is not a number	3D ობიექტის ბადე არასრულია ან შეიცავს მნიშვნელობას, რომელიც რიცხვი არ არის
 @msg	feConvolveMatrix's order	feConvolveMatrix-ის order
 @msg	feMorphology's radius	feMorphology-ის radius
 @msg	a blur's stdDeviation	გაბუნდოვნების stdDeviation
@@ -8304,6 +8295,9 @@ file-filter	Swatch libraries	ფერის ნიმუშების ბი�
 file-filter	Flattener presets	გაბრტყელების პრესეტები
 file-filter	PDF presets	PDF-ის პრესეტები
 file-filter	Print presets	ბეჭდვის პრესეტები
+file-filter	Tracing presets	ვექტორიზაციის პრესეტები
+file-filter	Action sets	მოქმედებების ნაკრებები
+file-filter	Composite fonts	კომპოზიტური შრიფტები
 file-filter	Preferences	პარამეტრები
 file-filter	Export presets	ექსპორტის პრესეტები
 file-filter	SVG Compressed	შეკუმშული SVG
@@ -9449,11 +9443,19 @@ axis	Y Axis	Y ღერძი
 @msg	module is {_1} bytes (limit {_2})	მოდული {_1} ბაიტია (ლიმიტი {_2})
 @msg	needs approval: it asks for {0}, which the user grants when installing it on its own	საჭიროებს დამტკიცებას: ითხოვს {0}-ს, რასაც მომხმარებელი მისი ცალკე დაყენებისას აძლევს
 @msg	not JSON: {e}	არ არის JSON: {e}
-@msg	not a WebAssembly binary (missing \0asm header)	არ არის WebAssembly-ის ბინარული ფაილი (აკლია \0asm სათაური)
+@msg	not a WebAssembly binary (missing \\0asm header)	არ არის WebAssembly-ის ბინარული ფაილი (აკლია \\0asm სათაური)
+@msg	a function type exceeds the limit of {MAX_FUNC_TYPE_VALUES} parameters	ფუნქციის ტიპი აჭარბებს {MAX_FUNC_TYPE_VALUES} პარამეტრის ლიმიტს
+@msg	a function type exceeds the limit of {MAX_FUNC_TYPE_VALUES} results	ფუნქციის ტიპი აჭარბებს {MAX_FUNC_TYPE_VALUES} შედეგის ლიმიტს
 @msg	parameter `{k}`: {what}	პარამეტრი `{k}`: {what}
 @msg	parameter `{name}`: {what}	პარამეტრი `{name}`: {what}
 @msg	plug-in parameters must be a JSON object	პლაგინის პარამეტრები JSON ობიექტი უნდა იყოს
 @msg	the module must export its linear memory as `memory`	მოდულმა თავისი წრფივი მეხსიერების ექსპორტი `memory` სახელით უნდა გააკეთოს
+@msg	the module must export `{name}` with the type {signature}	მოდულმა `{name}`-ის ექსპორტი {signature} ტიპით უნდა გააკეთოს
+@msg	the module has more than one `{MANIFEST_SECTION}` custom section	მოდულს ერთზე მეტი `{MANIFEST_SECTION}` მორგებული სექცია აქვს
+@msg	memory budget (the module's initial memory is {initial} bytes, limit {max_memory_bytes})	მეხსიერების ბიუჯეტი (მოდულის საწყისი მეხსიერება {initial} ბაიტია, ზღვარი {max_memory_bytes})
+@msg	the manifest in the `{MANIFEST_SECTION}` custom section must give `abi` as {ABI_VERSION}, the ABI version this host implements	`{MANIFEST_SECTION}` მორგებული სექციის მანიფესტში `abi` უნდა იყოს {ABI_VERSION}, ABI-ის ვერსია, რომელსაც ეს ჰოსტი ახორციელებს
+@msg	table budget (the module defines {count} tables, the largest with {largest} elements; limit {MAX_TABLES} tables of {MAX_TABLE_ELEMENTS} elements)	ცხრილების ბიუჯეტი (მოდული განსაზღვრავს {count} ცხრილს, უდიდესი {largest} ელემენტით; ზღვარი {MAX_TABLES} ცხრილი, თითოეულში {MAX_TABLE_ELEMENTS} ელემენტი)
+@msg	the module's table section could not be read	მოდულის ცხრილების სექციის წაკითხვა ვერ მოხერხდა
 @msg	the objects to change are no longer in the document	შესაცვლელი ობიექტები დოკუმენტში აღარ არის
 @msg	the runtime panicked	გაშვების გარემო ავარიულად შეჩერდა
 @msg	unexpected host trap	ჰოსტის მოულოდნელი ავარიული შეჩერება (trap)
@@ -9461,6 +9463,10 @@ axis	Y Axis	Y ღერძი
 @msg	vc_alloc returned 0 (out of memory)	vc_alloc-მა დააბრუნა 0 (მეხსიერება ამოიწურა)
 @msg	vc_alloc returned a block outside memory	vc_alloc-მა დააბრუნა ბლოკი მეხსიერების გარეთ
 @msg	vc_run returned error code {packed}	vc_run-მა დააბრუნა შეცდომის კოდი {packed}
+@msg	did not finish loading within {secs} s	ჩატვირთვა {secs} წამში არ დასრულდა
+@msg	no thread was left to load it	მის ჩასატვირთად ნაკადი აღარ დარჩა
+@msg	panicked while loading	ჩატვირთვისას ავარიულად შეწყდა
+@msg	panicked while loading: {what}	ჩატვირთვისას ავარიულად შეწყდა: {what}
 @msg	{_1} is not a file	{_1} ფაილი არ არის
 @msg	{_1} is {_2} bytes (limit {_3})	{_1} {_2} ბაიტია (ლიმიტი {_3})
 @msg	{_1} objects (limit {MAX_OBJECTS})	{_1} ობიექტი (ლიმიტი {MAX_OBJECTS})
@@ -9481,6 +9487,11 @@ axis	Y Axis	Y ღერძი
 @msg	`minItems` and `maxItems` must be 0-{MAX_LIST}, `maxItems` at least 1, and the default that many	`minItems` და `maxItems` უნდა იყოს 0-{MAX_LIST}, `maxItems` მინიმუმ 1, ხოლო ნაგულისხმევ მნიშვნელობაში უნდა იყოს ამდენი ელემენტი
 @msg	`name` must be a string	`name` უნდა იყოს სტრიქონი
 @msg	`opacity` must be a number	`opacity` უნდა იყოს რიცხვი
+@msg	`opacity` must be a number from 0 to 100	`opacity` უნდა იყოს რიცხვი 0-დან 100-მდე
+@msg	`opacity` must be true or false	`opacity` უნდა იყოს true ან false
+@msg	type characters have no opacity of their own: add a fill or stroke with the Appearance panel's Add New Fill or Add New Stroke	ტექსტის სიმბოლოებს საკუთარი გაუმჭვირვალობა არ აქვთ: დაამატეთ შევსება ან კონტური იერსახის პანელის ბრძანებით ახალი შევსების დამატება ან ახალი კონტურის დამატება
+@msg	an object selected in a symbol instance has no fill or stroke opacity of its own	სიმბოლოს ეგზემპლარში არჩეულ ობიექტს შევსების ან კონტურის საკუთარი გაუმჭვირვალობა არ აქვს
+@msg	no target has that fill or stroke to take the opacity	არცერთ სამიზნეს არ აქვს ის შევსება ან კონტური, რომელიც გაუმჭვირვალობას მიიღებს
 @msg	`type` must be "path" or "compound"	`type` უნდა იყოს "path" ან "compound"
 @msg	`unit` must be 1-{MAX_UNIT} printable characters	`unit` უნდა შედგებოდეს 1-{MAX_UNIT} დასაბეჭდი სიმბოლოსგან
 @msg	`visibleWhen` lists 1 to {MAX_CONDITION_VALUES} values for `{other}`	`visibleWhen`-ში `{other}`-ისთვის უნდა იყოს 1-დან {MAX_CONDITION_VALUES}-მდე მნიშვნელობა
@@ -9524,6 +9535,8 @@ axis	Y Axis	Y ღერძი
 @msg	`plates` requires a stop linked to a spot swatch	`plates` მოითხოვს გადასვლის წერტილს, რომელიც სპოტ-ფერის ნიმუშთანაა დაკავშირებული
 @msg	the output	გამოტანა
 @msg	the path has no anchor points	ტრაექტორიას საყრდენი წერტილები არ აქვს
+@msg	compound path {id} has a hidden, locked or guide member, so its members can't be replaced	შედგენილ ტრაექტორიას {id} აქვს დამალული, ჩაკეტილი ან დამხმარე ხაზის წევრი, ამიტომ მისი წევრების ჩანაცვლება შეუძლებელია
+@msg	compound path {id} has a member that isn't a path, so its members can't be replaced	შედგენილ ტრაექტორიას {id} აქვს წევრი, რომელიც ტრაექტორია არ არის, ამიტომ მისი წევრების ჩანაცვლება შეუძლებელია
 @msg	too many anchor points (limit {MAX_ANCHORS})	ძალიან ბევრი საყრდენი წერტილი (ლიმიტი {MAX_ANCHORS})
 @msg	true or false	true ან false
 @msg	a number >= {_1}	რიცხვი >= {_1}
@@ -9613,6 +9626,10 @@ axis	Y Axis	Y ღერძი
 @msg	`inputs` lists `{shown}` twice	`inputs`-ში `{shown}` ორჯერაა ჩამოთვლილი
 @msg	`inputs` needs `api` 2 or later	`inputs`-ს სჭირდება `api` 2 ან უფრო ახალი
 @msg	`inputs` needs the permission `doc.read`	`inputs`-ს სჭირდება ნებართვა `doc.read`
+	Read the objects it is given, and the document's settings, artboards, layers and swatches	მიღებული ობიექტების და დოკუმენტის პარამეტრების, სამუშაო დაფების, შრეებისა და ფერის ნიმუშების წაკითხვა
+@msg	`context` must list distinct sections: settings, artboards, layers or swatches	`context`-ში განსხვავებული სექციები უნდა იყოს: settings, artboards, layers ან swatches
+@msg	`context` is for a filter, or a live effect with `commands`, at `api` 3 or later with the permission `doc.read`	`context` განკუთვნილია ფილტრისთვის ან `commands`-ის მქონე ცოცხალი ეფექტისთვის, `api` 3-ზე ან უფრო ახალზე, ნებართვით `doc.read`
+@msg	the document information the plug-in asks for is too large to hand over: at most {MAX_CONTEXT_ITEMS} artboards, layers and swatches in {MAX_CONTEXT_BYTES} bytes	პლაგინის მიერ მოთხოვნილი დოკუმენტის ინფორმაცია ზედმეტად დიდია გადასაცემად: მაქსიმუმ {MAX_CONTEXT_ITEMS} სამუშაო დაფა, შრე და ფერის ნიმუში {MAX_CONTEXT_BYTES} ბაიტში
 @msg	memory budget (object {_1} needs {size} bytes of input, {left} left)	მეხსიერების ბიუჯეტი (ობიექტს {_1} სჭირდება შეყვანის {size} ბაიტი, დარჩენილია {left})
 @msg	object budget (more than {MAX_OBJECTS} read-only objects)	ობიექტების ბიუჯეტი ({MAX_OBJECTS}-ზე მეტი მხოლოდ წასაკითხი ობიექტი)
 @msg	instruction budget	ინსტრუქციების ბიუჯეტი
